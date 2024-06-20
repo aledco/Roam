@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdkoqophekhew"]
+
+[ext_resource type="Script" path="res://structures/tree/tree_cutter/tree_cutter.gd" id="1_cnrck"]
+[ext_resource type="Texture2D" uid="uid://d2vwue3n8s8sx" path="res://structures/tree/tree_cutter/tree_cutter.png" id="2_bl4qp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 27)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wwby"]
+radius = 1.0
+
+[sub_resource type="Curve2D" id="Curve2D_5cncg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 8)
+}
+point_count = 2
+
+[node name="TreeCutter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_cnrck")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bl4qp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 18.5)
+shape = SubResource("RectangleShape2D_fum3s")
+
+[node name="Enter" type="Area2D" parent="."]
+position = Vector2(0, 16)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enter"]
+shape = SubResource("CircleShape2D_5wwby")
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(0, 32)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("CircleShape2D_5wwby")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, 24)
+curve = SubResource("Curve2D_5cncg")

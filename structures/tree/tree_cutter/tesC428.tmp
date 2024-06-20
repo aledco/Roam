@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdkoqophekhew"]
+
+[ext_resource type="Texture2D" uid="uid://hvdn24k5oesl" path="res://structures/test/test.png" id="1_eeh0y"]
+[ext_resource type="Script" path="res://structures/test/test.gd" id="1_nm2ur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(34, 34)
+
+[sub_resource type="Curve2D" id="Curve2D_jg40t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[node name="Test" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_nm2ur")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+texture = ExtResource("1_eeh0y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_fum3s")
+
+[node name="Path2D" type="Path2D" parent="."]
+scale = Vector2(1, 1.13778)
+curve = SubResource("Curve2D_jg40t")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(0, -16)
+rotation = 1.5708
+loop = false

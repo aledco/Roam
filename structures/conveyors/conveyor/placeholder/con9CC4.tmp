@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxmm6hf7ms77k"]
+
+[ext_resource type="Script" path="res://structures/conveyors/conveyor/placeholder/conveyor_placeholder.gd" id="1_fwnv4"]
+[ext_resource type="Texture2D" uid="uid://clvk8o1tmycbj" path="res://structures/conveyors/conveyor/placeholder/conveyor_placeholder.png" id="2_lsf12"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qe6j"]
+atlas = ExtResource("2_lsf12")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlrnn"]
+atlas = ExtResource("2_lsf12")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qe6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlrnn")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 32)
+
+[node name="ConveyorPlaceholder" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_fwnv4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_tg63q")
+animation = &"blink"
+frame_progress = 0.631736
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true

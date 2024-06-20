@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4pkr35js4rot"]
+
+[ext_resource type="Script" path="res://structures/conveyors/curved_conveyor/left/curved_conveyor_left.gd" id="1_4rtc8"]
+[ext_resource type="Texture2D" uid="uid://csdqqhv347ros" path="res://structures/conveyors/curved_conveyor/left/curved_conveyor_left.png" id="2_3mmej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(26, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56gjq"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xg2b"]
+radius = 1.0
+
+[sub_resource type="Curve2D" id="Curve2D_b25um"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0)
+}
+point_count = 3
+
+[node name="CruvedConveyorLeft" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_4rtc8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3mmej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -3)
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true
+
+[node name="Enter" type="Area2D" parent="."]
+position = Vector2(0, -15)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enter"]
+shape = SubResource("CircleShape2D_56gjq")
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(-16, 0)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("CircleShape2D_0xg2b")
+one_way_collision_margin = 0.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_b25um")
