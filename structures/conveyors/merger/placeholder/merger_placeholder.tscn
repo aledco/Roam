@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch12uvb13ubw6"]
+
+[ext_resource type="Script" path="res://structures/conveyors/merger/placeholder/merger_placeholder.gd" id="1_j5dhs"]
+[ext_resource type="Texture2D" uid="uid://bd05gx4mcjn35" path="res://structures/conveyors/merger/placeholder/merger_placeholder.png" id="2_kqbfh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olx4l"]
+atlas = ExtResource("2_kqbfh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr4d4"]
+atlas = ExtResource("2_kqbfh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olx4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr4d4")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(32, 26)
+
+[node name="MergerPlaceholder" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_j5dhs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tg63q")
+animation = &"blink"
+frame_progress = 0.567505
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true

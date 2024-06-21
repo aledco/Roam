@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfg4ssnong1hj"]
+
+[ext_resource type="Script" path="res://structures/in_out_node/output_node/output_node.gd" id="1_dryyd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f28kw"]
+radius = 1.0
+
+[node name="OutputNode" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_dryyd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f28kw")

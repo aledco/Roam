@@ -9,10 +9,13 @@ class_name Structure extends StaticBody2D
 const BUILD_UI = preload("res://ui/build/build_ui.tscn")
 
 var materials: Array[RawMaterial] = []
-var inputs: Array[InOutNode] = []
-var outputs: Array[InOutNode] = []
+var inputs: Array[InputNode] = []
+var outputs: Array[OutputNode] = []
 
 var direction := Vector2i(0, 1)
+
+# TODO add errors to abstract functions
+# TODO comment functions
 
 # BEGIN abstract functions
 func _is_placeholder() -> bool:

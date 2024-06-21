@@ -2,15 +2,11 @@
 
 [ext_resource type="Script" path="res://structures/conveyors/conveyor/conveyor.gd" id="1_0kfhu"]
 [ext_resource type="Texture2D" uid="uid://c6lovmrjtunpj" path="res://structures/conveyors/conveyor/conveyor.png" id="2_gxjv0"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_24j8v"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_atboi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
 size = Vector2(20, 32)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_56gjq"]
-radius = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0xg2b"]
-radius = 1.0
 
 [sub_resource type="Curve2D" id="Curve2D_p7own"]
 _data = {
@@ -31,22 +27,17 @@ texture = ExtResource("2_gxjv0")
 shape = SubResource("RectangleShape2D_fum3s")
 disabled = true
 
-[node name="Enter" type="Area2D" parent="."]
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_24j8v")]
 position = Vector2(0, -15)
-collision_layer = 8
-collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enter"]
-shape = SubResource("CircleShape2D_56gjq")
+[node name="Outputs" type="Node2D" parent="."]
 
-[node name="Exit" type="Area2D" parent="."]
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_atboi")]
 position = Vector2(0, 16)
-collision_layer = 8
-collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
-shape = SubResource("CircleShape2D_0xg2b")
-one_way_collision_margin = 0.0
+[node name="Paths" type="Node2D" parent="."]
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Path2D" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_p7own")

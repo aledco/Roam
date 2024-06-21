@@ -19,10 +19,14 @@ func _ready():
 				"Left Conveyor", 1, 
 				preload("res://structures/conveyors/curved_conveyor/left/placeholder/curved_conveyor_left_placeholder.tscn"),
 				preload("res://structures/conveyors/curved_conveyor/left/curved_conveyor_left.png"), true),
-				StructureModel.create(null, 
+			StructureModel.create(null, 
 				"Splitter", 1, 
 				preload("res://structures/conveyors/splitter/placeholder/splitter_placeholder.tscn"),
-				preload("res://structures/conveyors/splitter/splitter.png"), true)
+				preload("res://structures/conveyors/splitter/splitter.png"), true),
+			StructureModel.create(null, 
+				"Merger", 1, 
+				preload("res://structures/conveyors/merger/placeholder/merger_placeholder.tscn"),
+				preload("res://structures/conveyors/merger/merger.png"), true),
 		],
 	]
 	

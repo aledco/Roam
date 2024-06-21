@@ -10,4 +10,7 @@ func _get_production_material() -> Resource:
 
 func _ready():
 	super._ready()
-	outputs = [InOutNode.create(self, Vector2i(0, 1), 0)]
+	input.setup(self, Vector2i(0, 1), 0)
+	
+	assert(outputs.size() == 1)
+	outputs[0].setup(self, Vector2i(0, 1), 0)

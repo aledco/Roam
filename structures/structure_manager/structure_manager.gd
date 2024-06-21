@@ -27,7 +27,7 @@ func add_structure(structure: Structure):
 
 func _connect_structure(structure: Structure, grid_index: Vector2i):
 	# TODO make this function more readable
-	for input in structure.inputs:	
+	for input in structure.inputs:
 		var prev_index = grid_index + input.local_index - input.get_direction()
 		if prev_index in structure_map:
 			var prev_structure = structure_map[prev_index]

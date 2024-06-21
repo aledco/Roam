@@ -1,5 +1,5 @@
 class_name CurvedConveyorLeft extends Conveyor
 
-func _ready():
-	inputs = [InOutNode.create(self, Vector2i.ZERO, 0)]
-	outputs = [InOutNode.create(self, Vector2i.ZERO, PI/2)]
+func _setup_io():
+	inputs[0].setup(self, Vector2i.ZERO, 0)
+	outputs[0].setup(self, Vector2i.ZERO, PI/2)
