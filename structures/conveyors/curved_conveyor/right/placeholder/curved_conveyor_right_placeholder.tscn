@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://3v0vh7fye5m0"]
 
-[ext_resource type="Script" path="res://structures/conveyors/curved_conveyor/left/placeholder/curved_conveyor_left_placeholder.gd" id="1_5l5ec"]
+[ext_resource type="Script" path="res://structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.gd" id="1_y0hxn"]
 [ext_resource type="Texture2D" uid="uid://ojg2ijgrry5q" path="res://structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.png" id="2_ddnvq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_deind"]
@@ -33,11 +33,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
 size = Vector2(26, 26)
 
-[node name="CurvedConveyorLeftPlaceholder" type="StaticBody2D"]
+[node name="CurvedConveyorRightPlaceholder" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 3
 input_pickable = true
-script = ExtResource("1_5l5ec")
+script = ExtResource("1_y0hxn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tg63q")
