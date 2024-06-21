@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://3v0vh7fye5m0"]
+[gd_scene load_steps=7 format=3 uid="uid://cry6fqcvh6bum"]
 
 [ext_resource type="Script" path="res://structures/conveyors/curved_conveyor/left/placeholder/curved_conveyor_left_placeholder.gd" id="1_r7g1b"]
 [ext_resource type="Texture2D" uid="uid://7tlb7srlvxje" path="res://structures/conveyors/curved_conveyor/left/placeholder/curved_conveyor_left_placeholder.png" id="2_nen1d"]
@@ -45,6 +45,6 @@ animation = &"blink"
 frame_progress = 0.567505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, -3)
+position = Vector2(-3, -3)
 shape = SubResource("RectangleShape2D_fum3s")
 disabled = true

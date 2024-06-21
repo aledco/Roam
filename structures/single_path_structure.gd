@@ -4,7 +4,6 @@ class_name SinglePathStructure extends Structure
 @onready var exit: Area2D = $Exit
 @onready var path: Path2D = $Path2D
 
-var ready_for_production: bool = false
 var speed: float = 32
 
 ## Adds a material to this structures control. The material remains global, but
@@ -25,7 +24,7 @@ func produce():
 
 		var material = materials.pop_front()
 		material.at_exit_node = false
-		connected_structure.add_material(material) # TODO make more elegant
+		connected_structure.add_material(material)
 		outputs[0].material_to_output = false
 
 
