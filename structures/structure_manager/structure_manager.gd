@@ -6,6 +6,7 @@ var structure_map := {}
 
 func _ready():
 	create_struture(TREE, get_structure_position(Vector2(32, -32), Vector2i(1, 2)))
+	create_struture(TREE, get_structure_position(Vector2(-32, -64), Vector2i(1, 2)))
 
 
 func create_struture(resource: Resource, grid_position: Vector2):

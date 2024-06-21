@@ -2,6 +2,7 @@ class_name Merger extends PathedStructure
 
 
 # TODO need to make paths connect and input to an output
+# TODO need to not move materials until it is their turn
 
 func get_grid_size() -> Vector2i:
 	return Conveyor.GRID_SIZE
