@@ -34,10 +34,10 @@ disabled = true
 [node name="Inputs" type="Node2D" parent="."]
 
 [node name="InputNode1" parent="Inputs" instance=ExtResource("3_j411a")]
-position = Vector2(-15, 0)
+position = Vector2(-16, 0)
 
 [node name="InputNode2" parent="Inputs" instance=ExtResource("3_j411a")]
-position = Vector2(15, 0)
+position = Vector2(16, 0)
 
 [node name="Outputs" type="Node2D" parent="."]
 

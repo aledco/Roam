@@ -19,7 +19,7 @@ func _ready():
 	assert(paths.size() == 1)
 	path = paths[0]
 	
-	Clock.one_second_timer.connect(_on_one_second.bind())
+	Clock.interval(2.0, _produce_material.bind())
 
 
 func add_material(material: RawMaterial):
@@ -31,7 +31,7 @@ func add_material(material: RawMaterial):
 	materials.push_back(material)
 
 
-func _on_one_second():
+func _produce_material():
 	if not input.is_full():
 		var material = _get_production_material().instantiate() as RawMaterial
 		add_material(material)

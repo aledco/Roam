@@ -45,6 +45,6 @@ animation = &"blink"
 frame_progress = 0.567505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_fum3s")
 disabled = true

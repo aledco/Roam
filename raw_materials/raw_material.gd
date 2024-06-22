@@ -6,9 +6,11 @@ var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
 
 
-func try_move(speed: float):
+func try_move(speed: float) -> bool:
 	mock_follow_node.progress += speed
 	var velocity := (mock_follow_node.global_position - global_position).normalized() * speed
 	var collision := move_and_collide(velocity, true)
 	if collision == null:
 		move_and_collide(velocity)
+		return true
+	return false
