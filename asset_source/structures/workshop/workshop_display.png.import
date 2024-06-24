@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bloiymd8xnkju"
-path="res://.godot/imported/curved_conveyor_right.png-80712521b13a3679de7fc2cc93b41cf1.ctex"
+uid="uid://dfm1kyv4dg62t"
+path="res://.godot/imported/workshop_display.png-18b868a4b1732bca8c2dd394d200b383.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/conveyors/curved_conveyor_right/curved_conveyor_right.png"
-dest_files=["res://.godot/imported/curved_conveyor_right.png-80712521b13a3679de7fc2cc93b41cf1.ctex"]
+source_file="res://asset_source/structures/workshop/workshop_display.png"
+dest_files=["res://.godot/imported/workshop_display.png-18b868a4b1732bca8c2dd394d200b383.ctex"]
 
 [params]
 

@@ -1,8 +1,5 @@
 class_name Structure extends StaticBody2D
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
 @onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
 @onready var material_node := get_node("/root/World/Materials")
 
@@ -44,9 +41,8 @@ func _create_build_ui():
 	var build_ui := BUILD_UI.instantiate() as BuildUI;
 	add_child(build_ui)
 	build_ui.create_structure_selections(build_list)
-	var structure_size := collision_shape_2d.shape.get_rect().size
 	var ui_size := build_ui.get_ui_size()
-	build_ui.set_position(Vector2(-structure_size.x / 2, -structure_size.y)  - ui_size)
+	build_ui.set_position(position - ui_size)
 
 
 func _input_event(viewport, event, shape_idx):

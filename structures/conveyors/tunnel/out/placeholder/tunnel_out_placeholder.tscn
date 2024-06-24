@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqysd84i1dvqj"]
+
+[ext_resource type="Script" path="res://structures/conveyors/tunnel/out/placeholder/tunnel_out_placeholder.gd" id="1_bd2h6"]
+[ext_resource type="Texture2D" uid="uid://ctf75ci4hoq62" path="res://structures/conveyors/tunnel/out/placeholder/tunnel_out_placeholder.png" id="2_14fhy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jwhp"]
+atlas = ExtResource("2_14fhy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyrax"]
+atlas = ExtResource("2_14fhy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jwhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyrax")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 32)
+
+[node name="TunnelOutPlaceholder" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_bd2h6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tg63q")
+animation = &"blink"
+frame_progress = 0.631736
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true

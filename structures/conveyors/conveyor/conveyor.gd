@@ -16,4 +16,3 @@ func _ready():
 	assert(inputs.size() == 1)
 	assert(outputs.size() == 1)
 	_setup_io()
-

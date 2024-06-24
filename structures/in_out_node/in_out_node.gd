@@ -6,6 +6,8 @@ var angle: float
 
 var connection: InOutNode
 
+var can_connect: bool = true
+
 func setup(parent_structure: Structure, local_index: Vector2i, angle: float):
 	self.parent_structure = parent_structure
 	self.local_index = local_index

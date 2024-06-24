@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://gqeyaeq7p4n"]
+
+[ext_resource type="Script" path="res://structures/conveyors/tunnel/in/tunnel_in.gd" id="1_1p0pf"]
+[ext_resource type="Texture2D" uid="uid://b70fdfvhe4lk6" path="res://structures/conveyors/tunnel/in/tunnel_in.png" id="2_4n1t5"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_36msr"]
+[ext_resource type="PackedScene" uid="uid://cbfuabnd5fdkc" path="res://structures/conveyors/tunnel/tunnel.tscn" id="3_ma0fj"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_kcld4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 32)
+
+[sub_resource type="Curve2D" id="Curve2D_p7own"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 16)
+}
+point_count = 2
+
+[node name="TunnelIn" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_1p0pf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4n1t5")
+
+[node name="Tunnel" parent="." instance=ExtResource("3_ma0fj")]
+position = Vector2(0, 6)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_36msr")]
+position = Vector2(0, -15)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_kcld4")]
+position = Vector2(0, 16)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_p7own")

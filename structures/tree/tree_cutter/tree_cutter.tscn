@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_3ur6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
-size = Vector2(20, 27)
+size = Vector2(20, 11)
 
 [sub_resource type="Curve2D" id="Curve2D_5cncg"]
 _data = {
@@ -24,7 +24,7 @@ script = ExtResource("1_cnrck")
 texture = ExtResource("2_bl4qp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 18.5)
+position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_fum3s")
 
 [node name="Inputs" type="Node2D" parent="."]

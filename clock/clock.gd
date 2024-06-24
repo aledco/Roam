@@ -13,7 +13,7 @@ func _start_timer(time: float, timer: String):
 func interval(time: float, callback: Callable):
 	if time in timers:
 		var sig = timers[time]
-		timer_callbacks[sig].apppend(callback)
+		timer_callbacks[sig].append(callback)
 	else:
 		timers[time] = "timer_" + str(time)
 		timer_callbacks[timers[time]] = [callback]

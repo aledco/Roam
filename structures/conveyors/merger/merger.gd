@@ -1,4 +1,4 @@
-class_name Merger extends PathedStructure
+class_name Merger extends MultiInputPathedStructure
 
 func get_grid_size() -> Vector2i:
 	return Conveyor.GRID_SIZE
@@ -18,22 +18,6 @@ func _ready():
 	outputs[0].setup(self, Vector2i.ZERO, 0)
 
 
-func add_material(material: RawMaterial):
-	material.mock_follow_node = PathFollow2D.new()
-	material.mock_follow_node.loop = false
-	var input := _get_input(material)
-	# TODO input is null when merger is placed late
-	input.path.add_child(material.mock_follow_node)
-	materials.push_back(material)
-
-
-func _get_input(material: RawMaterial) -> InputNode:
-	for input in inputs:
-		if material in input.get_overlapping_bodies():
-			return input
-	return null
-
-
 func _physics_process(delta):
 	for material in materials:
 		if material.at_exit_node:
@@ -46,3 +30,4 @@ func _physics_process(delta):
 		else:
 			output.material_to_output = true
 			material.at_exit_node = true
+

@@ -27,10 +27,16 @@ func _ready():
 				"Merger", 1, 
 				preload("res://structures/conveyors/merger/placeholder/merger_placeholder.tscn"),
 				preload("res://structures/conveyors/merger/merger.png"), true),
+			StructureModel.create(null, 
+				"Tunnel", 1, 
+				preload("res://structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.tscn"),
+				preload("res://structures/conveyors/tunnel/in/tunnel_in_display.png"), true),
+			StructureModel.create(null, 
+				"Workshop", 1, 
+				preload("res://structures/workshop/placeholder/workshop_placeholder.tscn"),
+				preload("res://structures/workshop/workshop_display.png"), true),
 		],
 	]
-	
-	var s = models[0][0].structure
 	
 	for x in range(models.size()):
 		for y in range(models[x].size()):

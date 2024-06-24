@@ -79,6 +79,7 @@ rotate={
 2d_physics/layer_2="STRUCTURES"
 2d_physics/layer_3="MATERIALS"
 2d_physics/layer_4="MATERIAL_SENSORS"
+2d_physics/layer_5="UNDERGROUND_MATERIALS"
 
 [physics]
 

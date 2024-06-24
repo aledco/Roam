@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ynrjf0u4t4aj"
-path="res://.godot/imported/curved_conveyor_left.png-3d6f738545e080cd516af3a9ad360b79.ctex"
+uid="uid://c1hkewydgnput"
+path="res://.godot/imported/tunnel_in.png-7e52b26300c79cfd1da02110585a5474.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/conveyors/curved_conveyor_left/curved_conveyor_left.png"
-dest_files=["res://.godot/imported/curved_conveyor_left.png-3d6f738545e080cd516af3a9ad360b79.ctex"]
+source_file="res://asset_source/structures/conveyors/tunnel/in/tunnel_in.png"
+dest_files=["res://.godot/imported/tunnel_in.png-7e52b26300c79cfd1da02110585a5474.ctex"]
 
 [params]
 

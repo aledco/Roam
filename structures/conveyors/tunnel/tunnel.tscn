@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbfuabnd5fdkc"]
+
+[ext_resource type="Texture2D" uid="uid://bbt2m83ti62l5" path="res://structures/conveyors/tunnel/tunnel.png" id="1_3umfw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry358"]
+size = Vector2(26, 20)
+
+[node name="Tunnel" type="StaticBody2D"]
+z_index = 2
+collision_layer = 2
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3umfw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ry358")
