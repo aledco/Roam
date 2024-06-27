@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://s5sadl5pcot2"]
+
+[ext_resource type="Script" path="res://ui/build/build_ui.gd" id="1_2shav"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpyir"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+
+[node name="BuildUI" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2shav")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 102.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dpyir")
+vertical_scroll_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3

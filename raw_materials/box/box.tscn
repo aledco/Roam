@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://jc8x6hsm4bdn"]
+
+[ext_resource type="Script" path="res://raw_materials/box/box.gd" id="1_fbxts"]
+[ext_resource type="Texture2D" uid="uid://kkwd23tdcn7n" path="res://raw_materials/box/box.png" id="2_0ftco"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
+size = Vector2(16, 16)
+
+[node name="Box" type="AnimatableBody2D"]
+collision_layer = 4
+collision_mask = 4
+sync_to_physics = false
+script = ExtResource("1_fbxts")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0ftco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a00yc")

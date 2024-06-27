@@ -31,7 +31,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
-size = Vector2(20, 32)
+size = Vector2(64, 96)
 
 [node name="WorkshopPlaceholder" type="StaticBody2D"]
 collision_layer = 2

@@ -16,7 +16,6 @@ func get_ui_size() -> Vector2:
 
 func set_model(model: StructureModel) -> void:
 	self.model = model
-	var s = model.structure
 	
 	texture.texture = model.image
 	texture.scale = Vector2(32, 32) / model.image.get_size()

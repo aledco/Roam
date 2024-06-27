@@ -1,6 +1,6 @@
 class_name Workshop extends MultiInputPathedStructure
 
-const WOOD = preload("res://raw_materials/wood/wood.tscn")
+const BOX = preload("res://raw_materials/box/box.tscn")
 
 const NO_SENSOR_STATUS = 0
 const WAITING_SENSOR_STATUS = 1
@@ -14,13 +14,23 @@ var production_sensors: Array[Area2D] = []
 var waiting_sensors: Array[Area2D] = []
 var materials_for_production: Array[RawMaterial] = []
 
+var current_material_id = Box.MATERIAL_ID
+var current_material: Resource = BOX
+
 static var GRID_SIZE: Vector2i = Vector2i(2, 3)
 
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
-func _get_allowed_materials() -> Array:
-	return [Wood.MATERIAL_ID]
+func _get_material_list() -> Array[MaterialModel]:
+	return [
+		MaterialModel.create(self, "Box", Box.MATERIAL_ID, preload("res://raw_materials/box/box.png"))
+	]
+
+func set_current_material(material_id: int) -> void:
+	current_material_id = material_id
+	current_material = RawMaterial.get_material_by_id(material_id)
+
 
 func _setup_io():
 	assert(inputs.size() == 2)
@@ -51,7 +61,7 @@ func produce():
 			mat.queue_free()
 		materials_for_production.clear()
 		
-		var new_mat := WOOD.instantiate() as RawMaterial
+		var new_mat := current_material.instantiate() as RawMaterial
 		material_node.add_child(new_mat)
 		new_mat.mock_follow_node = PathFollow2D.new()
 		new_mat.mock_follow_node.loop = false
@@ -87,7 +97,7 @@ func _get_sensor_status(material: RawMaterial) -> int:
 		var production_bodies = production_sensors[i].get_overlapping_bodies()
 		var waiting_bodies = waiting_sensors[i].get_overlapping_bodies()
 		if material in waiting_bodies and \
-				(production_bodies.size() > 0 or material.get_material_id() not in _get_allowed_materials()):
+				(production_bodies.size() > 0 or material.get_material_id() not in RawMaterial.get_materials_for_production(current_material_id)):
 			return WAITING_SENSOR_STATUS
 		if material in production_bodies:
 			return READY_FOR_PRODUCTION_SENSOR_STATUS

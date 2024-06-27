@@ -1,6 +1,5 @@
 class_name MultiInputPathedStructure extends PathedStructure
 
-
 func add_material(material: RawMaterial):
 	material.mock_follow_node = PathFollow2D.new()
 	material.mock_follow_node.loop = false

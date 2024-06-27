@@ -16,7 +16,7 @@ func create_structure_selections(structures: Array[StructureModel]) -> void:
 
 
 func _create_structure_ui(model: StructureModel):
-	var structure_ui = STRUCTURE_UI.instantiate() as StructureUI
+	var structure_ui = STRUCTURE_UI.instantiate()
 	container.add_child(structure_ui)
 	structure_ui.set_model(model)
 	structure_ui.set_root_ui_node(self)

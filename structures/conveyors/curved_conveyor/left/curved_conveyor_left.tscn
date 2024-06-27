@@ -10,9 +10,9 @@ size = Vector2(26, 26)
 
 [sub_resource type="Curve2D" id="Curve2D_b25um"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, -16, 0)
 }
-point_count = 3
+point_count = 4
 
 [node name="CruvedConveyorLeft" type="StaticBody2D"]
 collision_layer = 2
