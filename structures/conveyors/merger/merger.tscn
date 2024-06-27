@@ -42,7 +42,7 @@ position = Vector2(16, 0)
 [node name="Outputs" type="Node2D" parent="."]
 
 [node name="OutputNode" parent="Outputs" instance=ExtResource("4_q0ru8")]
-position = Vector2(0, 16)
+position = Vector2(0, 15)
 
 [node name="Paths" type="Node2D" parent="."]
 
