@@ -31,6 +31,9 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.is_action_released("left_click"):
 		_create_structure()
+	elif event is InputEventKey and event.is_action_pressed("escape"):
+		queue_free()
+		
 	if _can_rotate() and event.is_action_pressed("rotate"):
 		rotate(-PI/2)
 		direction = Vector2i(direction.y, -direction.x)
@@ -42,7 +45,7 @@ func _create_structure():
 	structure.set_position(position)
 	structure.set_direction(direction)
 	structure_manager.add_structure(structure)
-	queue_free()
+	#queue_free()
 
 
 func _calculate_position_from_mouse() -> Vector2:

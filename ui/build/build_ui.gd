@@ -1,7 +1,8 @@
-class_name BuildUI extends Control
+class_name BuildUI extends CanvasLayer
 
-@onready var main_container = $ScrollContainer
-@onready var container = $ScrollContainer/Container
+@onready var control: Control = $Control
+@onready var main_container: Container = $Control/ScrollContainer
+@onready var container: Container = $Control/ScrollContainer/Container
 
 
 const STRUCTURE_UI = preload("res://ui/build/structure_ui.tscn")
@@ -24,6 +25,6 @@ func _create_structure_ui(model: StructureModel):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		var evLocal = make_input_local(event)
-		if !Rect2(Vector2(0,0), main_container.size).has_point(evLocal.position):
+		var ev_local = control.make_input_local(event)
+		if !Rect2(Vector2(0,0), main_container.size).has_point(ev_local.position):
 			queue_free()

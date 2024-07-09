@@ -6,3 +6,11 @@ func get_grid_size() -> Vector2i:
 
 func _get_structure() -> Resource:
 	return preload("res://structures/workshop/workshop.tscn")
+
+static func get_model() -> StructureModel:
+	return StructureModel.create(
+		null, 
+		"Workshop",
+		1, 
+		preload("res://structures/workshop/placeholder/workshop_placeholder.tscn"),
+		preload("res://structures/workshop/workshop_display.png"))

@@ -57,8 +57,8 @@ func _create_build_ui():
 	add_child(build_ui)
 	build_ui.create_structure_selections(build_list)
 	var ui_size := build_ui.get_ui_size()
-	build_ui.set_position(position - ui_size)
-
+	var pos = position - ui_size / 2
+	#build_ui.position = position
 
 func _create_material_select_ui():
 	var material_list := _get_material_list()

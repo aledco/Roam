@@ -25,3 +25,12 @@ func _create_structure():
 	tunnel_out_placeholder.tunnel_in = structure
 	
 	queue_free()
+
+
+static func get_model() -> StructureModel:
+	return StructureModel.create(
+		null, 
+		"Tunnel", 
+		1, 
+		preload("res://structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.tscn"),
+		preload("res://structures/conveyors/tunnel/in/tunnel_in.png"))

@@ -36,11 +36,9 @@ func _create_structure():
 	if model.parent:
 		model.parent.queue_free()
 		structure.set_position(model.parent.position)
+		structure_manager.add_structure(structure)
 	else:
 		var player := get_node("/root/World/Player") as Node2D
 		structure.set_position(player.position)
-	
-	if not model.is_placeholder:
-		structure_manager.add_structure(structure)
 	
 	ui_root.hide()

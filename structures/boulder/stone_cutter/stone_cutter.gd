@@ -14,3 +14,12 @@ func _ready():
 	
 	assert(outputs.size() == 1)
 	outputs[0].setup(self, Vector2i(0, 1), 0)
+
+
+static func get_model(parent: Structure) -> StructureModel:
+	return StructureModel.create(
+		parent, 
+		"Stone Cutter", 
+		1, 
+		preload("res://structures/boulder/stone_cutter/stone_cutter.tscn"), 
+		preload("res://structures/boulder/stone_cutter/stone_cutter.png"))
