@@ -1,18 +1,14 @@
 class_name StructureManager extends Node2D
 
-const TREE = preload("res://structures/tree/tree.tscn")
-
 var structure_map := {}
+var tile_map_ids
 
-func _ready():
-	create_struture(TREE, get_structure_position(Vector2(32, -32), Vector2i(1, 2)))
-	create_struture(TREE, get_structure_position(Vector2(-32, -64), Vector2i(1, 2)))
-
-
-func create_struture(resource: Resource, grid_position: Vector2):
+func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vector2i):
 	var structure = resource.instantiate() as Structure
 	add_child(structure)
-	structure.set_position(grid_position)
+	var grid_position = get_grid_position(grid_index)
+	var structure_position = get_structure_position(grid_position, grid_size)
+	structure.set_position(structure_position)
 	add_structure(structure)
 
 
@@ -86,7 +82,7 @@ func _connect_structure(structure: Structure, grid_index: Vector2i):
 func can_place_structure(grid_index: Vector2i, grid_size: Vector2i):
 	for x in range(grid_index.x, grid_index.x + grid_size.x):
 		for y in range(grid_index.y, grid_index.y + grid_size.y):
-			if Vector2i(x, y) in structure_map:
+			if Vector2i(x, y) in structure_map or (tile_map_ids != null and Vector2i(x, y) in tile_map_ids and tile_map_ids[Vector2i(x, y)] == 4):
 				return false
 	return true
 
@@ -98,6 +94,11 @@ static func get_next_grid_multiple(x: Variant) -> Variant:
 		_:
 			return int(x / 32) * 32
 
+
+static func get_grid_index(position: Vector2, grid_size: Vector2i) -> Vector2i:
+	var x := int((position.x - ((grid_size.x  * 32) / 2)) / 32)
+	var y := int((position.y - ((grid_size.y  * 32) / 2)) / 32)
+	return Vector2i(x, y)
 
 static func get_structure_position(grid_position: Vector2, grid_size: Vector2i) -> Vector2:
 	var x := grid_position.x + grid_size.x * 16

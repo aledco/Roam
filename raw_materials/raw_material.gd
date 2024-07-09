@@ -3,11 +3,14 @@ class_name RawMaterial extends AnimatableBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sensor: Area2D = $Sensor
+@onready var player := get_node("/root/World/Player") as Player
 
 static var MATERIAL_SIZE = 16
 
 static var MATERIALS_COLLISION_LAYER = 3
 static var UNDERGROUND_COLLISION_LAYER = 5
+
+var parent: Structure = null
 
 var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
@@ -35,9 +38,23 @@ static func get_materials_for_production(material_id: int) -> Array[int]:
 			return []
 
 
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.is_action_released("left_click") and not player.inventory.is_full(get_material_id()):
+			var index = parent.materials.find(self)
+			parent.materials.remove_at(index)
+			player.inventory.add_material(self)
+			queue_free()
+
+
 func get_material_id() -> int:
 	push_error("abstract function")
 	return -1
+
+
+func get_material_image() -> Texture2D:
+	push_error("abstract function")
+	return null
 
 
 func try_move(speed: float) -> bool:

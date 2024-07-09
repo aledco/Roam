@@ -10,7 +10,7 @@ func _get_structure() -> Resource:
 
 func _is_placeholder() -> bool:
 	return true
-
+ 
 
 func _can_rotate() -> bool:
 	return true
@@ -27,7 +27,7 @@ func _process(delta):
 	if structure_manager.can_place_structure(grid_index, get_grid_size()):
 		position = StructureManager.get_structure_position(grid_position, get_grid_size())
 
-
+ 
 func _input(event):
 	if event is InputEventMouseButton and event.is_action_released("left_click"):
 		_create_structure()
@@ -52,5 +52,3 @@ func _calculate_position_from_mouse() -> Vector2:
 	if absolute_position.y < 0:
 		absolute_position.y -= 32
 	return absolute_position
-
-

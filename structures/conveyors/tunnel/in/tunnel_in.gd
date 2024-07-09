@@ -12,6 +12,7 @@ func set_tunnel_out(tunnel: TunnelOut):
 
 
 func add_material(material: RawMaterial):
+	material.parent = self
 	material.mock_follow_node = PathFollow2D.new()
 	material.mock_follow_node.loop = false
 	paths[path_index].add_child(material.mock_follow_node)

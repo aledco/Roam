@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvrohfglsff0x"]
+
+[ext_resource type="Script" path="res://ui/inventory/inventory.gd" id="1_q2ilw"]
+[ext_resource type="PackedScene" uid="uid://bwpe30yr34eyt" path="res://ui/inventory/inventory_slot.tscn" id="2_4p6th"]
+
+[node name="Inventory" type="CanvasLayer"]
+script = ExtResource("1_q2ilw")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Container" type="GridContainer" parent="Control"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 275.0
+offset_right = 445.0
+offset_bottom = 295.0
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 10
+
+[node name="InventorySlot" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="Control/Container" instance=ExtResource("2_4p6th")]
+layout_mode = 2

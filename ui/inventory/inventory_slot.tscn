@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwpe30yr34eyt"]
+
+[ext_resource type="Script" path="res://ui/inventory/inventory_slot.gd" id="1_yoook"]
+[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/m3x6.ttf" id="2_cxkol"]
+
+[node name="InventorySlot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yoook")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(10, 10)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 21.0
+offset_bottom = 24.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_cxkol")
+bbcode_enabled = true
+scroll_active = false

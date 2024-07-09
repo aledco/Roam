@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://kbb7vb4wgiwr"]
+
+[ext_resource type="Script" path="res://structures/boulder/stone_cutter/stone_cutter.gd" id="1_x5f63"]
+[ext_resource type="Texture2D" uid="uid://dpxi50vhn6a0t" path="res://structures/boulder/stone_cutter/stone_cutter.png" id="2_xeuwa"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_hs736"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_cy0nk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xapkb"]
+radius = 28.0
+height = 60.0
+
+[sub_resource type="Curve2D" id="Curve2D_5cncg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 8)
+}
+point_count = 2
+
+[node name="StoneCutter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_x5f63")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xeuwa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 1)
+shape = SubResource("CapsuleShape2D_xapkb")
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_hs736")]
+position = Vector2(-16, 16)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_cy0nk")]
+position = Vector2(-16, 32)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+position = Vector2(-16, 24)
+curve = SubResource("Curve2D_5cncg")

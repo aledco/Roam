@@ -43,4 +43,4 @@ func _create_structure():
 	if not model.is_placeholder:
 		structure_manager.add_structure(structure)
 	
-	ui_root.queue_free()
+	ui_root.hide()

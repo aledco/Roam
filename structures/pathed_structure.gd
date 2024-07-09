@@ -22,6 +22,7 @@ func _ready():
 ## Adds a material to this structures control. The material remains global, but
 ## this structure is now in control of its movement.
 func add_material(material: RawMaterial):
+	material.parent = self
 	material.mock_follow_node = PathFollow2D.new()
 	material.mock_follow_node.loop = false
 	paths[path_index].add_child(material.mock_follow_node)

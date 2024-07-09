@@ -23,6 +23,7 @@ func _ready():
 
 
 func add_material(material: RawMaterial):
+	material.parent = self
 	material_node.add_child(material)
 	material.mock_follow_node = PathFollow2D.new()
 	material.mock_follow_node.loop = false

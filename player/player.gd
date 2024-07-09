@@ -6,18 +6,34 @@ const BUILD_MENU = preload("res://ui/build/build_menu.tscn")
 
 enum State { Idle, Run }
 
+@onready var inventory: Inventory = $Inventory
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var current_state = State.Idle
+@onready var camera_2d: Camera2D = $Camera2D
 
 var build_menu: BuildMenu = null
+var map_active: bool = false
+var direction := Vector2i(0, 1)
 
+func _ready():
+	build_menu = BUILD_MENU.instantiate() as BuildMenu
+	add_child(build_menu)
+	build_menu.hide()
+
+		
 func _process(delta):
-	if Input.is_action_just_pressed("menu"):
-		if is_instance_valid(build_menu):
-			build_menu.queue_free()
+	player_menus()
+
+
+func player_menus():
+	if Input.is_action_just_pressed("build_menu"):
+		build_menu.visible = not build_menu.visible
+	if Input.is_action_just_pressed("map"): # TODO better map system
+		if map_active:
+			camera_2d.zoom = Vector2.ONE
 		else:
-			build_menu = BUILD_MENU.instantiate() as BuildMenu
-			add_child(build_menu)
+			camera_2d.zoom *= Vector2(0.05, 0.05)
+		map_active = not map_active
 
 
 func _physics_process(delta):
@@ -46,6 +62,11 @@ func player_run():
 		current_state = State.Run
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+	
+	if abs(velocity.x) > abs(velocity.y):
+		direction = Vector2i(sign(velocity.x), 0)
+	else:
+		direction = Vector2i(0, sign(velocity.y))
 
 
 func player_animations():

@@ -1,7 +1,12 @@
 class_name Structure extends StaticBody2D
 
-@onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
-@onready var material_node := get_node("/root/World/Materials")
+var structure_manager: StructureManager:
+	get:
+		return get_node("/root/World/StructureManager") as StructureManager
+
+var material_node: Node2D:
+	get: 
+		return get_node("/root/World/Materials")
 
 const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
 const MATERIAL_SELECT_UI: Resource = preload("res://ui/material_select/material_select_ui.tscn")
@@ -31,6 +36,10 @@ func get_grid_size() -> Vector2i:
 	return Vector2i.ZERO
 
 func produce():
+	pass
+	
+
+func add_material(material: RawMaterial):
 	pass
 # END abstract functions
 
@@ -79,14 +88,7 @@ func get_grid_index() -> Vector2i:
 	Gets the top left index of the structure.
 	"""
 	var grid_size := get_grid_size()
-	var x := int((position.x - ((grid_size.x  * 32) / 2)) / 32)
-	var y := int((position.y - ((grid_size.y  * 32) / 2)) / 32)
-	return Vector2i(x, y)
-
-
-func add_material(material: RawMaterial):
-	material.reparent(self)
-	material.set_position(Vector2.ZERO)
+	return StructureManager.get_grid_index(position, grid_size)
 
 
 func set_direction(new_direction: Vector2i):
