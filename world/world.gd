@@ -53,11 +53,13 @@ var STRUCTURE_PROB_MAP = [
 var tile_map_ids = {}
 
 func _ready():
+	seed(world_seed)
 	_generate_tile_map()
 	_generate_structures()
+	randomize()
 
 
-func _generate_tile_map(): # TODO generate lakes
+func _generate_tile_map():
 	var noise := _create_noise()
 	_generate_world_core(noise)
 	_generate_land_outline()
