@@ -19,7 +19,8 @@ func _ready():
 			SplitterPlaceholder.get_model(),
 			MergerPlaceholder.get_model(),
 			TunnelInPlaceholder.get_model(),
-			WorkshopPlaceholder.get_model(),
+			Workshop1Placeholder.get_model(),
+			Workshop2Placeholder.get_model(),
 			StoragePlaceholder.get_model()
 		],
 	]

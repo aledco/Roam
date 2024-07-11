@@ -21,22 +21,56 @@ static func get_material_by_id(material_id: int) -> Resource:
 	match material_id:
 		Wood.MATERIAL_ID:
 			return preload("res://raw_materials/wood/wood.tscn")
+		Stone.MATERIAL_ID:
+			return preload("res://raw_materials/stone/stone.tscn")
 		Box.MATERIAL_ID:
 			return preload("res://raw_materials/box/box.tscn")
+		Plank.MATERIAL_ID:
+			return preload("res://raw_materials/plank/plank.tscn")
 		_:
 			push_error("material has not been registered")
 			return null
 
 
 ## Gets the ids of the materials needed to produce the given material.
-static func get_materials_for_production(material_id: int) -> Array[int]:
+static func get_materials_for_production(material_id: int) -> Array:
 	match material_id:
 		Wood.MATERIAL_ID:
 			return []
+		Stone.MATERIAL_ID:
+			return []
 		Box.MATERIAL_ID:
-			return [Wood.MATERIAL_ID]
+			return [[Plank.MATERIAL_ID, 2]]
+		Plank.MATERIAL_ID:
+			return [[Wood.MATERIAL_ID, 2]]
 		_:
 			push_error("material has not been registered")
+			return []
+
+
+## Determines if a material is an ingredient for another.
+static func is_ingredient(ingredient: int, product: int) -> bool:
+	var materials_needed = get_materials_for_production(product)
+	for config in materials_needed:
+		if ingredient == config[0]:
+			return true
+	return false
+
+
+static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialModel]:
+	match workshop.get_num_inputs():
+		1:
+			return [
+				Plank.get_model(workshop)
+			]
+		2:
+			return [
+				Box.get_model(workshop)
+			]
+		3:
+			return []
+		_:
+			push_error("workshop has not been registered")
 			return []
 
 

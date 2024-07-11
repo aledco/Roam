@@ -25,5 +25,5 @@ func set_root_ui_node(root: Node):
 
 
 func _set_material():
-	model.parent.set_current_material(model.material_id)
+	model.parent.set_current_material(model)
 	ui_root.queue_free()

@@ -33,7 +33,7 @@ func player_input():
 		if map_active:
 			camera_2d.zoom = Vector2.ONE
 		else:
-			camera_2d.zoom *= Vector2(0.05, 0.05)
+			camera_2d.zoom *= Vector2(0.1, 0.1)
 		map_active = not map_active
 
 
