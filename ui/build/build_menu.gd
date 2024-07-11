@@ -1,8 +1,14 @@
-class_name BuildMenu extends CanvasLayer
+class_name BuildMenu extends BaseUI
 
 const STRUCTURE_UI = preload("res://ui/build/structure_ui.tscn")
 
 @onready var container = $Control/Container
+
+func get_size() -> Vector2:
+	return container.size
+
+func destroy():
+	hide()
 
 func _ready():
 	var models := [
@@ -13,7 +19,8 @@ func _ready():
 			SplitterPlaceholder.get_model(),
 			MergerPlaceholder.get_model(),
 			TunnelInPlaceholder.get_model(),
-			WorkshopPlaceholder.get_model()
+			WorkshopPlaceholder.get_model(),
+			StoragePlaceholder.get_model()
 		],
 	]
 	
@@ -27,3 +34,4 @@ func _create_structure_ui(model: StructureModel):
 	container.add_child(structure_ui)
 	structure_ui.set_model(model)
 	structure_ui.set_root_ui_node(self)
+

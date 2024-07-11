@@ -1,6 +1,6 @@
 class_name Inventory extends CanvasLayer
 
-@onready var container: GridContainer = $Control/Container
+@onready var container: Container = $Control/Container
 
 const INVENTORY_SLOT = preload("res://ui/inventory/inventory_slot.tscn")
 

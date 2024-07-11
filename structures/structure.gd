@@ -27,19 +27,16 @@ func _is_placeholder() -> bool:
 func _get_build_list() -> Array[StructureModel]:
 	return []
 
-
-func _get_material_list() -> Array[MaterialModel]:
-	return []
-
-
 func get_grid_size() -> Vector2i:
 	return Vector2i.ZERO
 
 func produce():
 	pass
-	
 
 func add_material(material: RawMaterial):
+	pass
+
+func _create_special_ui():
 	pass
 # END abstract functions
 
@@ -56,20 +53,6 @@ func _create_build_ui():
 	var build_ui := BUILD_UI.instantiate() as BuildUI;
 	add_child(build_ui)
 	build_ui.create_structure_selections(build_list)
-	var ui_size := build_ui.get_ui_size()
-	var pos = position - ui_size / 2
-	#build_ui.position = position
-
-func _create_material_select_ui():
-	var material_list := _get_material_list()
-	if material_list == []:
-		return
-	
-	var material_select_ui := MATERIAL_SELECT_UI.instantiate() as MaterialSelectUI
-	add_child(material_select_ui)
-	material_select_ui.create_material_selections(material_list)
-	var ui_size := material_select_ui.get_ui_size()
-	material_select_ui.set_position(position - ui_size)
 
 
 func _input_event(viewport, event, shape_idx):
@@ -77,10 +60,11 @@ func _input_event(viewport, event, shape_idx):
 		return
 	
 	if event is InputEventMouseButton:
+		SignalManager.structure_clicked.emit()
 		if event.is_action_released("left_click"):
 			_create_build_ui()
 		elif event.is_action_released("right_click"):
-			_create_material_select_ui()
+			_create_special_ui()
 
 
 func get_grid_index() -> Vector2i:

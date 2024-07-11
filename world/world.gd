@@ -154,6 +154,8 @@ func _generate_borders():
 				for coords in water_directions:
 					var static_body = StaticBody2D.new()
 					borders_node.add_child(static_body)
+					static_body.collision_layer = 6
+					static_body.collision_mask = 1
 					static_body.name = "Wall" + str(wall_id)
 					wall_id += 1
 					

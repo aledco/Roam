@@ -22,11 +22,6 @@ static var GRID_SIZE: Vector2i = Vector2i(2, 3)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
-func _get_material_list() -> Array[MaterialModel]:
-	return [
-		MaterialModel.create(self, "Box", Box.MATERIAL_ID, preload("res://raw_materials/box/box.png"))
-	]
-
 func set_current_material(material_id: int) -> void:
 	current_material_id = material_id
 	current_material = RawMaterial.get_material_by_id(material_id)
@@ -54,8 +49,24 @@ func _ready():
 	_setup_io()
 
 
+func _get_material_list() -> Array[MaterialModel]:
+	return [
+		MaterialModel.create(self, "Box", Box.MATERIAL_ID, preload("res://raw_materials/box/box.png"))
+	]
+
+
+func _create_special_ui():
+	var material_list := _get_material_list()
+	if material_list == []:
+		return
+	
+	var material_select_ui := MATERIAL_SELECT_UI.instantiate() as MaterialSelectUI
+	add_child(material_select_ui)
+	material_select_ui.create_material_selections(material_list)
+
+
 func produce():
-	if materials_for_production.size() == 2 and full_sensor.get_overlapping_bodies().is_empty():
+	if materials_for_production.size() == 		2 and full_sensor.get_overlapping_bodies().is_empty():
 		for mat in materials_for_production:
 			materials.remove_at(materials.find(mat))
 			mat.queue_free()
@@ -65,9 +76,16 @@ func produce():
 		material_node.add_child(new_mat)
 		new_mat.mock_follow_node = PathFollow2D.new()
 		new_mat.mock_follow_node.loop = false
+		new_mat.parent = self
 		paths[2].add_child(new_mat.mock_follow_node)
 		new_mat.global_position = new_mat.mock_follow_node.global_position
-		materials.push_back(new_mat)
+		var index = 0
+		for material in materials:
+			if material.get_material_id() == new_mat.get_material_id():
+				index += 1
+			else:
+				break
+		materials.insert(index, new_mat)
 	
 	super.produce()
 

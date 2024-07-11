@@ -10,10 +10,6 @@ class_name StructureUI extends Control
 var model: StructureModel
 var ui_root: Node
 
-func get_ui_size() -> Vector2:
-	return panel.size
-
-
 func set_model(model: StructureModel) -> void:
 	self.model = model
 	

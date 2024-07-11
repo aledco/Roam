@@ -16,6 +16,7 @@ var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
 var is_moving: bool = false
 
+## Gets the material resource by material id.
 static func get_material_by_id(material_id: int) -> Resource:
 	match material_id:
 		Wood.MATERIAL_ID:
@@ -27,6 +28,7 @@ static func get_material_by_id(material_id: int) -> Resource:
 			return null
 
 
+## Gets the ids of the materials needed to produce the given material.
 static func get_materials_for_production(material_id: int) -> Array[int]:
 	match material_id:
 		Wood.MATERIAL_ID:
@@ -38,6 +40,7 @@ static func get_materials_for_production(material_id: int) -> Array[int]:
 			return []
 
 
+## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click") and not player.inventory.is_full(get_material_id()):
@@ -47,16 +50,19 @@ func _input_event(viewport, event, shape_idx):
 			queue_free()
 
 
+## Gets the material id.
 func get_material_id() -> int:
 	push_error("abstract function")
 	return -1
 
 
+## Gets the material image.
 func get_material_image() -> Texture2D:
 	push_error("abstract function")
 	return null
 
 
+## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
 	mock_follow_node.progress += speed
 	var velocity := (mock_follow_node.global_position - global_position).normalized() * speed
@@ -72,6 +78,7 @@ func try_move(speed: float) -> bool:
 		return false
 
 
+## Aligns the materials sensor using its velocity.
 func _align_sensor(velocity: Vector2):
 	if abs(velocity.x) > abs(velocity.y):
 		if velocity.x < 0:
@@ -85,14 +92,17 @@ func _align_sensor(velocity: Vector2):
 			sensor.rotation = PI / 2
 
 
+## Determines if a collision with another material should halt movement.
 func _is_collision_blocking(collision: KinematicCollision2D) -> bool:
 	return collision.get_collider() in sensor.get_overlapping_bodies()
 
 
+## Called when the material enters a tunnel.
 func start_tunnel():
 	set_collision_mask_value(UNDERGROUND_COLLISION_LAYER, true)
 
 
+## Toggles the material in and out of the underground state.
 func toggle_underground(underground: bool):
 	sprite_2d.visible = not underground
 	if underground:
@@ -104,6 +114,7 @@ func toggle_underground(underground: bool):
 		set_collision_mask_value(MATERIALS_COLLISION_LAYER, true)
 
 
+## Called when the material exits a tunnel.
 func finish_tunnel():
 	set_collision_layer_value(UNDERGROUND_COLLISION_LAYER, false)
 	set_collision_mask_value(UNDERGROUND_COLLISION_LAYER, false)

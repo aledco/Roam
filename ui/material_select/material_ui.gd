@@ -8,10 +8,6 @@ class_name MaterialUI extends Control
 var model: MaterialModel
 var ui_root: Node
 
-func get_ui_size() -> Vector2:
-	return panel.size
-
-
 func set_model(model: MaterialModel) -> void:
 	self.model = model
 	

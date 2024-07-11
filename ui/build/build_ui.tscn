@@ -17,6 +17,7 @@ offset_right = 390.0
 offset_bottom = 115.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
 offset_right = 60.0
 offset_bottom = 102.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dpyir")

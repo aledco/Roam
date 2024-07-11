@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/material_select/material_ui.gd" id="1_b4rns"]
 [ext_resource type="Texture2D" uid="uid://d2ro8icnjkoxt" path="res://raw_materials/wood/wood.png" id="2_2c087"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/m3x6.ttf" id="3_cpqv4"]
+[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_cpqv4"]
 
 [node name="MaterialUI" type="Control"]
 custom_minimum_size = Vector2(50, 50)

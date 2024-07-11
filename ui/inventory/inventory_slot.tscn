@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwpe30yr34eyt"]
 
 [ext_resource type="Script" path="res://ui/inventory/inventory_slot.gd" id="1_yoook"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/m3x6.ttf" id="2_cxkol"]
+[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="2_aqgtu"]
 
 [node name="InventorySlot" type="Control"]
 layout_mode = 3
@@ -33,6 +33,6 @@ offset_top = 9.0
 offset_right = 21.0
 offset_bottom = 24.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_cxkol")
+theme_override_fonts/normal_font = ExtResource("2_aqgtu")
 bbcode_enabled = true
 scroll_active = false

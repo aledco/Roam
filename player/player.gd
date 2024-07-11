@@ -22,10 +22,11 @@ func _ready():
 
 		
 func _process(delta):
-	player_menus()
+	player_input()
 
 
-func player_menus():
+## Manages player input such as opening the build menu or map.
+func player_input():
 	if Input.is_action_just_pressed("build_menu"):
 		build_menu.visible = not build_menu.visible
 	if Input.is_action_just_pressed("map"): # TODO better map system
@@ -43,10 +44,12 @@ func _physics_process(delta):
 	player_animations()
 
 
+## Sets the player in an idle state.
 func player_idle():
 	current_state = State.Idle
 
 
+## Controls player movement.
 func player_run():
 	var x_direction := Input.get_axis("move_left", "move_right")
 	var y_direction := Input.get_axis("move_up", "move_down")
@@ -69,6 +72,7 @@ func player_run():
 		direction = Vector2i(0, sign(velocity.y))
 
 
+## Manages player animations.
 func player_animations():
 	match current_state:
 		State.Idle:

@@ -5,6 +5,9 @@ class_name StructurePlaceholder extends Structure
 # BEGIN abstract functions
 func _get_structure() -> Resource:
 	return null
+	
+func _destroy_after_placement() -> bool:
+	return false
 # END abstract functions
 
 
@@ -18,6 +21,7 @@ func _can_rotate() -> bool:
 
 func _ready():
 	animated_sprite_2d.play("blink")
+	SignalManager.structure_clicked.connect(queue_free)
 
 
 func _process(delta):
@@ -29,14 +33,18 @@ func _process(delta):
 
  
 func _input(event):
-	if event is InputEventMouseButton and event.is_action_released("left_click"):
-		_create_structure()
-	elif event is InputEventKey and event.is_action_pressed("escape"):
-		queue_free()
-		
-	if _can_rotate() and event.is_action_pressed("rotate"):
-		rotate(-PI/2)
-		direction = Vector2i(direction.y, -direction.x)
+	if event is InputEventMouseButton:
+		if event.is_action_released("left_click"):
+			_create_structure()
+			if _destroy_after_placement():
+				queue_free()
+	elif event is InputEventKey:
+		if _can_rotate() and event.is_action_pressed("rotate"):
+			rotate(-PI/2)
+			direction = Vector2i(direction.y, -direction.x)
+		if event.is_action_pressed("escape") or event.is_action_pressed("build_menu"):
+			queue_free()
+	
 
 
 func _create_structure():
@@ -45,7 +53,6 @@ func _create_structure():
 	structure.set_position(position)
 	structure.set_direction(direction)
 	structure_manager.add_structure(structure)
-	#queue_free()
 
 
 func _calculate_position_from_mouse() -> Vector2:
