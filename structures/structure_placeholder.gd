@@ -21,8 +21,18 @@ func _can_rotate() -> bool:
 
 func _ready():
 	animated_sprite_2d.play("blink")
-	SignalManager.structure_clicked.connect(queue_free) # TODO only if structure doesnt match
+	SignalManager.structure_clicked.connect(_on_structure_clicked)
 	SignalManager.delete_mode_enabled.connect(queue_free)
+
+
+func _on_structure_clicked(structure: Structure):
+	var resource := _get_structure()
+	var rpath = resource.resource_path
+	var rname = rpath.split("/")[-1].replace(".tscn", "")
+	var spath = structure.get_script().resource_path
+	var sname = spath.split("/")[-1].replace(".gd", "")
+	if rname != sname:
+		queue_free()
 
 
 func _process(delta):

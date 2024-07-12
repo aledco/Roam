@@ -70,7 +70,7 @@ func _input_event(viewport, event, shape_idx):
 		return
 	
 	if event is InputEventMouseButton:
-		SignalManager.structure_clicked.emit()
+		SignalManager.structure_clicked.emit(self)
 		if event.is_action_released("left_click"):
 			if StructureManager.get_delete_mode():
 				structure_manager.remove_structure(self)
