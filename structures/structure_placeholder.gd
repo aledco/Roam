@@ -21,7 +21,8 @@ func _can_rotate() -> bool:
 
 func _ready():
 	animated_sprite_2d.play("blink")
-	SignalManager.structure_clicked.connect(queue_free)
+	SignalManager.structure_clicked.connect(queue_free) # TODO only if structure doesnt match
+	SignalManager.delete_mode_enabled.connect(queue_free)
 
 
 func _process(delta):
@@ -31,7 +32,7 @@ func _process(delta):
 	if structure_manager.can_place_structure(grid_index, get_grid_size()):
 		position = StructureManager.get_structure_position(grid_position, get_grid_size())
 
- 
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click"):
@@ -44,7 +45,6 @@ func _input(event):
 			direction = Vector2i(direction.y, -direction.x)
 		if event.is_action_pressed("escape") or event.is_action_pressed("build_menu"):
 			queue_free()
-	
 
 
 func _create_structure():
@@ -52,6 +52,7 @@ func _create_structure():
 	get_parent().add_child(structure)
 	structure.set_position(position)
 	structure.set_direction(direction)
+	structure.delay_input()
 	structure_manager.add_structure(structure)
 
 

@@ -5,8 +5,8 @@ class_name BuildUI extends BaseUI
 
 const STRUCTURE_UI = preload("res://ui/build/structure_ui.tscn")
 
-func get_size() -> Vector2:
-	return main_container.size
+func get_rect() -> Rect2:
+	return main_container.get_rect()
 
 
 func create_structure_selections(structures: Array[StructureModel]) -> void:

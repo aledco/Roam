@@ -1,5 +1,16 @@
 class_name StructureManager extends Node2D
 
+static var _delete_mode: bool
+static func set_delete_mode(delete_mode: bool):
+	_delete_mode = delete_mode
+	if _delete_mode:
+		Input.set_custom_mouse_cursor(preload("res://ui/cursor/shovel.png"))
+		SignalManager.delete_mode_enabled.emit()
+	else:
+		Input.set_custom_mouse_cursor(null)
+static func get_delete_mode() -> bool:
+	return _delete_mode
+
 var structure_map := {}
 var tile_map_ids
 
@@ -19,11 +30,25 @@ func _add_structure_to_map(structure: Structure, grid_index: Vector2i):
 			structure_map[Vector2i(x, y)] = structure
 
 
+func _remove_structure_from_map(structure: Structure, grid_index: Vector2i):
+	var grid_size = structure.get_grid_size()
+	for x in range(grid_index.x, grid_index.x + grid_size.x):
+		for y in range(grid_index.y, grid_index.y + grid_size.y):
+			structure_map.erase(Vector2i(x, y))
+
+
 func add_structure(structure: Structure):
 	var grid_index = structure.get_grid_index()
 	_add_structure_to_map(structure, grid_index)
 	_connect_structure(structure, grid_index)
 
+
+func remove_structure(structure: Structure):
+	var grid_index = structure.get_grid_index()
+	_disconnect_structure(structure, grid_index)
+	_remove_structure_from_map(structure, grid_index)
+	structure.destroy()
+	
 
 func add_tunnel(tunnel_node: Node2D):
 	var tunnel_in = tunnel_node.get_child(0) as TunnelIn
@@ -77,6 +102,15 @@ func _connect_outputs(structure: Structure, grid_index: Vector2i):
 func _connect_structure(structure: Structure, grid_index: Vector2i):
 	_connect_inputs(structure, grid_index)
 	_connect_outputs(structure, grid_index)
+
+
+func _disconnect_structure(structure: Structure, grid_index: Vector2i):
+	for input in structure.inputs:
+		if is_instance_valid(input.connection):
+			input.connection.connection = null
+	for output in structure.outputs:
+		if is_instance_valid(output.connection):
+			output.connection.connection = null
 
 
 func can_place_structure(grid_index: Vector2i, grid_size: Vector2i):

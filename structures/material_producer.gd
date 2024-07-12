@@ -1,7 +1,11 @@
 class_name MaterialProducer extends PathedStructure
 
+
 var input: InputNode
 var path: Path2D
+
+var time: float = 2.0
+var interval_id: int
 
 # BEGIN abstract functions
 func _get_production_material() -> Resource:
@@ -19,8 +23,12 @@ func _ready():
 	assert(paths.size() == 1)
 	path = paths[0]
 	
-	Clock.interval(2.0, _produce_material.bind())
+	interval_id = Clock.interval(2.0, _produce_material.bind())
 
+
+func destroy():
+	Clock.remove_interval(time, interval_id)
+	super.destroy()
 
 func add_material(material: RawMaterial):
 	material.parent = self

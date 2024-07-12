@@ -21,8 +21,8 @@ color = Color(0.194349, 0.194349, 0.194349, 1)
 
 [node name="Container" type="GridContainer" parent="Control"]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 10.0
-offset_right = 570.0
-offset_bottom = 310.0
-columns = 10
+offset_left = 79.0
+offset_top = 18.0
+offset_right = 561.0
+offset_bottom = 285.0
+columns = 9

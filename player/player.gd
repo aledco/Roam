@@ -28,13 +28,20 @@ func _process(delta):
 ## Manages player input such as opening the build menu or map.
 func player_input():
 	if Input.is_action_just_pressed("build_menu"):
+		StructureManager.set_delete_mode(false)
 		build_menu.visible = not build_menu.visible
-	if Input.is_action_just_pressed("map"): # TODO better map system
+	elif Input.is_action_just_pressed("map"):
+		StructureManager.set_delete_mode(false)
 		if map_active:
 			camera_2d.zoom = Vector2.ONE
 		else:
 			camera_2d.zoom *= Vector2(0.1, 0.1)
 		map_active = not map_active
+	elif Input.is_action_just_pressed("delete"):
+		StructureManager.set_delete_mode(not StructureManager.get_delete_mode())
+	elif Input.is_action_just_pressed("escape"):
+		StructureManager.set_delete_mode(false)
+	
 
 
 func _physics_process(delta):

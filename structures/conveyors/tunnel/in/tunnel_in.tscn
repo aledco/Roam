@@ -16,8 +16,8 @@ _data = {
 point_count = 2
 
 [node name="TunnelIn" type="StaticBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 64
+collision_mask = 0
 input_pickable = true
 script = ExtResource("1_1p0pf")
 
@@ -30,7 +30,6 @@ rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fum3s")
-disabled = true
 
 [node name="Inputs" type="Node2D" parent="."]
 

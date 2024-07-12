@@ -5,8 +5,8 @@ class_name MaterialSelectUI extends BaseUI
 
 const MATERIAL_UI = preload("res://ui/material_select/material_ui.tscn")
 
-func get_size() -> Vector2:
-	return main_container.size
+func get_rect() -> Rect2:
+	return main_container.get_rect()
 
 
 func create_material_selections(materials: Array[MaterialModel]) -> void:

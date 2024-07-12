@@ -10,6 +10,7 @@ var path_index: int = 0
 var speed: float = 32
 
 
+
 func _ready():
 	for node in inputs_node.get_children():
 		inputs.append(node as InputNode)

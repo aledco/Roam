@@ -17,4 +17,3 @@ func _setup_io():
 	inputs[1].setup(self, Vector2i(1, 0), 0)
 	inputs[1].path = paths[1]
 	outputs[0].setup(self, Vector2i(1, 2), 0)
-

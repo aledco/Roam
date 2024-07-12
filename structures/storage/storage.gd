@@ -2,7 +2,8 @@ class_name Storage extends PathedStructure
 
 const STORAGE_UI = preload("res://ui/inventory/storage_ui.tscn")
 
-var end_node: OutputNode
+@onready var end_node: OutputNode = $EndNode
+
 var storage: StorageUI
 
 func get_grid_size() -> Vector2i:
@@ -11,10 +12,7 @@ func get_grid_size() -> Vector2i:
 
 func _ready():
 	super._ready()
-	assert(len(outputs) == 1)
-	end_node = outputs[0]
 	end_node.setup(self, Vector2i.ZERO, 0)
-	outputs.clear()
 	
 	assert(inputs.size() == 1)
 	assert(paths.size() == 1)

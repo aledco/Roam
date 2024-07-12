@@ -19,26 +19,26 @@ const N_GENERATED_TILES = 5
 var STRUCTURE_PROB_MAP = [
 	{
 		"data": {
-			"resource": load("res://structures/tree/tree.tscn"),
-			"grid_size": Vector2i(1, 2)
+		"resource": load("res://structures/tree/tree.tscn"),
+		"grid_size": Vector2i(1, 2)
 		},
 		"probs": {
-			0: 0.05,
-			1: 0.05,
-			2: 0.01,
-			3: 0.01
+			0: 0.25,
+			1: 0.25,
+			2: 0.05,
+			3: 0.05
 		}
 	},
 	{
-		"data": {
-			"resource": load("res://structures/boulder/boulder.tscn"),
-			"grid_size": Vector2i(2, 2)
-		},
+	"data": {
+		"resource": load("res://structures/boulder/boulder.tscn"),
+		"grid_size": Vector2i(2, 2)
+	},
 		"probs": {
-			0: 0.005,
-			1: 0.005,
-			2: 0.03,
-			3: 0.01
+			0: 0.025,
+			1: 0.025,
+			2: 0.15,
+			3: 0.05
 		}
 	}
 ]
@@ -60,13 +60,13 @@ func _ready():
 
 
 func _generate_tile_map():
-	var noise := _create_noise()
+	var noise := _create_noise_for_tilemap()
 	_generate_world_core(noise)
 	_generate_land_outline()
 	_fill_ocean()
 	_generate_borders()
 
-func _create_noise() -> FastNoiseLite:
+func _create_noise_for_tilemap() -> FastNoiseLite:
 	var noise := FastNoiseLite.new()
 	noise.seed = world_seed
 	noise.noise_type = FastNoiseLite.TYPE_CELLULAR
@@ -162,7 +162,6 @@ func _generate_borders():
 					var collision_shape = CollisionShape2D.new()
 					static_body.add_child(collision_shape)
 					var shape = RectangleShape2D.new()
-					var is_half_wall: bool
 					if coords.x != 0:
 						shape.size = Vector2(16, 0)
 					else:
@@ -179,13 +178,19 @@ func _generate_borders():
 
 
 func _generate_structures():
+	var noise := _create_noise_for_structures()
 	structure_manager.tile_map_ids = tile_map_ids
+	
+	
 	for x in range(-size, size):
 		for y in range(-size, size):
 			if _is_water(x, y) or x == 0 and y == 0:
 				continue
 			
 			var tile_id = tile_map_ids[Vector2i(x, y)]
+			if not _is_time_to_place(noise, x, y):
+				continue
+			
 			for config in STRUCTURE_PROB_MAP:
 				var structure_data = config["data"]
 				var grid_index = StructureManager.get_grid_index(Vector2(x, y) * 32, structure_data["grid_size"])
@@ -194,3 +199,19 @@ func _generate_structures():
 				
 				if randf() < config["probs"][tile_id]:
 					structure_manager.create_structure(structure_data["resource"], grid_index, structure_data["grid_size"])
+					break
+
+
+func _create_noise_for_structures() -> FastNoiseLite:
+	var noise := FastNoiseLite.new()
+	noise.seed = world_seed + 1
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.fractal_type = FastNoiseLite.FRACTAL_RIDGED     
+	noise.frequency = 0.02
+	return noise
+
+func _is_time_to_place(noise: FastNoiseLite, x: int, y: int) -> bool:
+	var rand = abs(noise.get_noise_2d(x, y)) * 10
+	if rand > 3:
+		return true
+	return false

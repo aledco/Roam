@@ -34,10 +34,10 @@ shape = SubResource("RectangleShape2D_itsdn")
 [node name="InputNode" parent="Inputs" instance=ExtResource("3_bsffx")]
 position = Vector2(0, -16)
 
-[node name="Outputs" type="Node2D" parent="."]
-
-[node name="OutputNode" parent="Outputs" instance=ExtResource("4_s4ydc")]
+[node name="EndNode" parent="." instance=ExtResource("4_s4ydc")]
 position = Vector2(0, 6)
+
+[node name="Outputs" type="Node2D" parent="."]
 
 [node name="Paths" type="Node2D" parent="."]
 

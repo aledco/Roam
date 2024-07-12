@@ -1,5 +1,7 @@
 class_name Structure extends StaticBody2D
 
+@export var STRUCTURE_ID: int = 0
+
 var structure_manager: StructureManager:
 	get:
 		return get_node("/root/World/StructureManager") as StructureManager
@@ -17,8 +19,7 @@ var outputs: Array[OutputNode] = []
 
 var direction := Vector2i(0, 1)
 
-# TODO add errors to abstract functions
-# TODO comment functions
+var _input_disabled: bool = false
 
 # BEGIN abstract functions
 func _is_placeholder() -> bool:
@@ -40,6 +41,10 @@ func _create_special_ui():
 	pass
 # END abstract functions
 
+func destroy():
+	for material in materials:
+		material.queue_free()
+	queue_free()
 
 func _process(delta):
 	produce()
@@ -55,14 +60,22 @@ func _create_build_ui():
 	build_ui.create_structure_selections(build_list)
 
 
+func delay_input():
+	_input_disabled = true
+	Clock.invoke(0.5, func(): _input_disabled = false)
+
+
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder():
+	if _is_placeholder() or _input_disabled:
 		return
 	
 	if event is InputEventMouseButton:
 		SignalManager.structure_clicked.emit()
 		if event.is_action_released("left_click"):
-			_create_build_ui()
+			if StructureManager.get_delete_mode():
+				structure_manager.remove_structure(self)
+			else:
+				_create_build_ui()
 		elif event.is_action_released("right_click"):
 			_create_special_ui()
 
