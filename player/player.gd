@@ -75,8 +75,10 @@ func player_run():
 	
 	if abs(velocity.x) > abs(velocity.y):
 		direction = Vector2i(sign(velocity.x), 0)
+		animated_sprite_2d.flip_h = sign(velocity.x) == -1
 	else:
 		direction = Vector2i(0, sign(velocity.y))
+		animated_sprite_2d.flip_h = false
 
 
 ## Manages player animations.
@@ -85,4 +87,10 @@ func player_animations():
 		State.Idle:
 			animated_sprite_2d.play("idle")
 		State.Run:
-			animated_sprite_2d.play("run")
+			match direction:
+				Vector2i(0, 1):
+					animated_sprite_2d.play("run_front")
+				Vector2i(0, -1):
+					animated_sprite_2d.play("run_back")
+				_:
+					animated_sprite_2d.play("run_side")
