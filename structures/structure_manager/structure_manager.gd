@@ -113,9 +113,11 @@ func _disconnect_structure(structure: Structure, grid_index: Vector2i):
 			output.connection.connection = null
 
 
-func can_place_structure(grid_index: Vector2i, grid_size: Vector2i):
+func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_center: bool = false):
 	for x in range(grid_index.x, grid_index.x + grid_size.x):
 		for y in range(grid_index.y, grid_index.y + grid_size.y):
+			if invalidate_center and x == 0 and y == 0:
+				return false
 			if Vector2i(x, y) in structure_map or (tile_map_ids != null and Vector2i(x, y) in tile_map_ids and tile_map_ids[Vector2i(x, y)] == 4):
 				return false
 	return true

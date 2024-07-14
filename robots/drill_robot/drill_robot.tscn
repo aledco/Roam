@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://c3hudxmbb21w8"]
+
+[ext_resource type="Texture2D" uid="uid://74bcu3u88nkf" path="res://robots/drill_robot/drill_robot.png" id="1_hcyb8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f6wg"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cai0r"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afgoc"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wrng"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8ho0"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpahj"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjt5k"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e55js"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b526d"]
+atlas = ExtResource("1_hcyb8")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiqtc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f6wg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cai0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afgoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wrng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8ho0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpahj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjt5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e55js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b526d")
+}],
+"loop": true,
+"name": &"drill",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqoqd"]
+size = Vector2(10, 24)
+
+[node name="DrillRobot" type="StaticBody2D"]
+position = Vector2(0, -16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uiqtc")
+animation = &"drill"
+autoplay = "drill"
+frame_progress = 0.158693
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_rqoqd")

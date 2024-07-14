@@ -1,6 +1,6 @@
 class_name BoulderStructure extends Structure
 
-static var GRID_SIZE = Vector2i(2, 2)
+static var GRID_SIZE = Vector2i(1, 1)
 
 func _get_build_list() -> Array[StructureModel]:
 	return [

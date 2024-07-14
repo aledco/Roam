@@ -32,7 +32,7 @@ var STRUCTURE_PROB_MAP = [
 	{
 	"data": {
 		"resource": load("res://structures/boulder/boulder.tscn"),
-		"grid_size": Vector2i(2, 2)
+		"grid_size": Vector2i(1, 1)
 	},
 		"probs": {
 			0: 0.025,
@@ -184,7 +184,7 @@ func _generate_structures():
 	
 	for x in range(-size, size):
 		for y in range(-size, size):
-			if _is_water(x, y) or x == 0 and y == 0:
+			if _is_water(x, y) or (abs(x) <= 1 and abs(y) <= 1):
 				continue
 			
 			var tile_id = tile_map_ids[Vector2i(x, y)]
@@ -194,7 +194,7 @@ func _generate_structures():
 			for config in STRUCTURE_PROB_MAP:
 				var structure_data = config["data"]
 				var grid_index = StructureManager.get_grid_index(Vector2(x, y) * 32, structure_data["grid_size"])
-				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"]):
+				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"], true):
 					continue
 				
 				if randf() < config["probs"][tile_id]:
