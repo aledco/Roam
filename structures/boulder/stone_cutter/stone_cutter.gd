@@ -19,7 +19,7 @@ func _ready():
 static func get_model(parent: Structure) -> StructureModel:
 	return StructureModel.create(
 		parent, 
-		"Stone Cutter", 
+		"Drill", 
 		1, 
 		preload("res://structures/boulder/stone_cutter/stone_cutter.tscn"), 
-		preload("res://structures/boulder/stone_cutter/stone_cutter.png"))
+		preload("res://robots/drill_robot/drill_robot_display.png"))
