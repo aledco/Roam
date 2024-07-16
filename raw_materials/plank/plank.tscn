@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwknrqunioua2"]
 
 [ext_resource type="Script" path="res://raw_materials/plank/plank.gd" id="1_1v5a0"]
-[ext_resource type="Texture2D" uid="uid://b0sq3pmsujpev" path="res://raw_materials/plank/plank.png" id="2_mauj5"]
+[ext_resource type="Texture2D" uid="uid://divxkjfuxd7jn" path="res://raw_materials/plank/plank.png" id="2_mauj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
 size = Vector2(16, 16)

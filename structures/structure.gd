@@ -39,6 +39,13 @@ func add_material(material: RawMaterial):
 
 func _create_special_ui():
 	pass
+
+func _can_saw() -> bool:
+	return false
+
+func _can_drill() -> bool:
+	return false
+
 # END abstract functions
 
 func destroy():
@@ -57,7 +64,7 @@ func _create_build_ui():
 	
 	var build_ui := BUILD_UI.instantiate() as BuildUI;
 	add_child(build_ui)
-	build_ui.create_structure_selections(build_list)
+	build_ui.create_structure_selections(build_list, _can_saw(), _can_drill())
 
 
 func delay_input():

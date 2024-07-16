@@ -20,6 +20,7 @@ func _ready():
 		TunnelInPlaceholder.get_model(),
 		Workshop1Placeholder.get_model(),
 		Workshop2Placeholder.get_model(),
+		Workshop3Placeholder.get_model(),
 		StoragePlaceholder.get_model(),
 	]
 	

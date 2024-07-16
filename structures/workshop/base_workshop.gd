@@ -58,7 +58,7 @@ func produce():
 			mat.queue_free()
 		materials_for_production.clear()
 		
-		var new_mat := current_material.resource.instantiate() as RawMaterial
+		var new_mat := RawMaterialManager.instantiate_material(current_material.material_id)
 		material_node.add_child(new_mat)
 		new_mat.mock_follow_node = PathFollow2D.new()
 		new_mat.mock_follow_node.loop = false

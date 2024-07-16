@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csvq22fgo1biu"
-path="res://.godot/imported/idle_player_front.png-65467ec690dc0352630fa898e047213c.ctex"
+uid="uid://di67lf0ybkhf2"
+path="res://.godot/imported/drill_player_display.png-3d50e271ffff319db8bae1e79610f8a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/front/idle_player_front.png"
-dest_files=["res://.godot/imported/idle_player_front.png-65467ec690dc0352630fa898e047213c.ctex"]
+source_file="res://player/display/drill_player_display.png"
+dest_files=["res://.godot/imported/drill_player_display.png-3d50e271ffff319db8bae1e79610f8a6.ctex"]
 
 [params]
 

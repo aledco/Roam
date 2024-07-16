@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Clock="*res://clock/clock.gd"
 SignalManager="*res://signal/signal_manager.gd"
+RawMaterialManager="*res://raw_materials/raw_material_manager.gd"
 
 [display]
 

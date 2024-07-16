@@ -45,4 +45,4 @@ position = Vector2(0, 24)
 curve = SubResource("Curve2D_5cncg")
 
 [node name="SawRobot" parent="." instance=ExtResource("5_sjqxp")]
-position = Vector2(-12, 0)
+position = Vector2(-12, 16)

@@ -8,8 +8,8 @@ var time: float = 2.0
 var interval_id: int
 
 # BEGIN abstract functions
-func _get_production_material() -> Resource:
-	return null
+func _get_production_material_id() -> int:
+	return -1
 # END abstract functions
 
 
@@ -42,5 +42,5 @@ func add_material(material: RawMaterial):
 
 func _produce_material():
 	if not input.is_full():
-		var material = _get_production_material().instantiate() as RawMaterial
+		var material = RawMaterialManager.instantiate_material(_get_production_material_id())
 		add_material(material)

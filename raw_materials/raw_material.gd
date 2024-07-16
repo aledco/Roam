@@ -16,41 +16,10 @@ var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
 var is_moving: bool = false
 
-## Gets the material resource by material id.
-static func get_material_by_id(material_id: int) -> Resource:
-	match material_id:
-		Wood.MATERIAL_ID:
-			return preload("res://raw_materials/wood/wood.tscn")
-		Stone.MATERIAL_ID:
-			return preload("res://raw_materials/stone/stone.tscn")
-		Box.MATERIAL_ID:
-			return preload("res://raw_materials/box/box.tscn")
-		Plank.MATERIAL_ID:
-			return preload("res://raw_materials/plank/plank.tscn")
-		_:
-			push_error("material has not been registered")
-			return null
-
-
-## Gets the ids of the materials needed to produce the given material.
-static func get_materials_for_production(material_id: int) -> Array:
-	match material_id:
-		Wood.MATERIAL_ID:
-			return []
-		Stone.MATERIAL_ID:
-			return []
-		Box.MATERIAL_ID:
-			return [[Plank.MATERIAL_ID, 2]]
-		Plank.MATERIAL_ID:
-			return [[Wood.MATERIAL_ID, 2]]
-		_:
-			push_error("material has not been registered")
-			return []
-
 
 ## Determines if a material is an ingredient for another.
 static func is_ingredient(ingredient: int, product: int) -> bool:
-	var materials_needed = get_materials_for_production(product)
+	var materials_needed = RawMaterialManager.get_material_ingredients(product)
 	for config in materials_needed:
 		if ingredient == config[0]:
 			return true
@@ -58,30 +27,29 @@ static func is_ingredient(ingredient: int, product: int) -> bool:
 
 
 static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialModel]:
-	match workshop.get_num_inputs():
-		1:
-			return [
-				Plank.get_model(workshop)
-			]
-		2:
-			return [
-				Box.get_model(workshop)
-			]
-		3:
-			return []
-		_:
-			push_error("workshop has not been registered")
-			return []
+	var models: Array[MaterialModel] = []
+	for mat_id in RawMaterialManager.material_ids:
+		if RawMaterialManager.get_amount_of_ingredients(mat_id) == workshop.get_num_inputs():
+			models.append(RawMaterialManager.get_model(mat_id, workshop))
+	return models
 
 
 ## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.is_action_released("left_click") and not player.inventory.is_full(get_material_id()):
+		if event.is_action_released("left_click"):
+			add_to_player_inventory(true, false)
+
+func add_to_player_inventory(remove_from_materials=false, destroy_if_full=true):
+	if not player.inventory.is_full(get_material_id()):
+		if remove_from_materials:
 			var index = parent.materials.find(self)
 			parent.materials.remove_at(index)
-			player.inventory.add_material(self)
-			queue_free()
+		
+		player.inventory.add_material(self)
+		queue_free()
+	elif destroy_if_full:
+		queue_free()
 
 
 ## Gets the material id.
@@ -98,6 +66,9 @@ func get_material_image() -> Texture2D:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
+	if not mock_follow_node:
+		return false
+	
 	mock_follow_node.progress += speed
 	var velocity := (mock_follow_node.global_position - global_position).normalized() * speed
 	_align_sensor(velocity)

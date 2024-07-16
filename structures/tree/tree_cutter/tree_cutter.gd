@@ -4,8 +4,8 @@ func get_grid_size() -> Vector2i:
 	return Vector2i(1, 2)
 
 
-func _get_production_material() -> Resource:
-	return preload("res://raw_materials/wood/wood.tscn")
+func _get_production_material_id() -> int:
+	return Wood.MATERIAL_ID
 
 
 func _ready():

@@ -4,8 +4,8 @@ func get_grid_size() -> Vector2i:
 	return BoulderStructure.GRID_SIZE
 
 
-func _get_production_material() -> Resource:
-	return preload("res://raw_materials/stone/stone.tscn")
+func _get_production_material_id()-> int:
+	return Stone.MATERIAL_ID
 
 
 func _ready():

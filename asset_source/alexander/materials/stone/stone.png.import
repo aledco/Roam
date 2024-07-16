@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkuecchfsf6eb"
-path="res://.godot/imported/run_player_side.png-c2a91c22fa37a03aa91dd6e619682a9c.ctex"
+uid="uid://dqnb7s2s65sb1"
+path="res://.godot/imported/stone.png-01832baf7d73ea7e778e287ec5e24950.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/side/run_player_side.png"
-dest_files=["res://.godot/imported/run_player_side.png-c2a91c22fa37a03aa91dd6e619682a9c.ctex"]
+source_file="res://asset_source/alexander/materials/stone/stone.png"
+dest_files=["res://.godot/imported/stone.png-01832baf7d73ea7e778e287ec5e24950.ctex"]
 
 [params]
 
