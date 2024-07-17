@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://3p55b2mdd8dh"]
+
+[ext_resource type="Script" path="res://structures/iron_deposit/iron_deposit.gd" id="1_yg3f1"]
+[ext_resource type="Texture2D" uid="uid://f303ysqleqsl" path="res://structures/iron_deposit/iron_deposit.png" id="2_nyelc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxr5i"]
+radius = 14.0357
+
+[node name="IronDeposit" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_yg3f1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nyelc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qxr5i")

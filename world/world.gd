@@ -40,6 +40,42 @@ var STRUCTURE_PROB_MAP = [
 			2: 0.15,
 			3: 0.05
 		}
+	},
+	{
+	"data": {
+		"resource": load("res://structures/iron_deposit/iron_deposit.tscn"),
+		"grid_size": Vector2i(1, 1)
+	},
+		"probs": {
+			0: 0.025,
+			1: 0.025,
+			2: 0.15,
+			3: 0.05
+		}
+	},
+	{
+	"data": {
+		"resource": load("res://structures/copper_deposit/copper_deposit.tscn"),
+		"grid_size": Vector2i(1, 1)
+	},
+		"probs": {
+			0: 0.025,
+			1: 0.025,
+			2: 0.15,
+			3: 0.05
+		}
+	},
+	{
+	"data": {
+		"resource": load("res://structures/coal_deposit/coal_deposit.tscn"),
+		"grid_size": Vector2i(1, 1)
+	},
+		"probs": {
+			0: 0.025,
+			1: 0.025,
+			2: 0.15,
+			3: 0.05
+		}
 	}
 ]
 

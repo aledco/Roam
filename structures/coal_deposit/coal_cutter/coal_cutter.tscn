@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://o5n2nsb6n7wi"]
+
+[ext_resource type="Script" path="res://structures/coal_deposit/coal_cutter/coal_cutter.gd" id="1_2hb3c"]
+[ext_resource type="Texture2D" uid="uid://4er240ejlgn7" path="res://structures/coal_deposit/coal_cutter/coal_cutter.png" id="2_cqh14"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_dfokl"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_fjae5"]
+[ext_resource type="PackedScene" uid="uid://c3hudxmbb21w8" path="res://robots/drill_robot/drill_robot.tscn" id="5_6djwn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_00n34"]
+radius = 14.0
+
+[sub_resource type="Curve2D" id="Curve2D_5cncg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 8)
+}
+point_count = 2
+
+[node name="CoalCutter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_2hb3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cqh14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_00n34")
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_dfokl")]
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_fjae5")]
+position = Vector2(0, 17)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+position = Vector2(0, 9)
+curve = SubResource("Curve2D_5cncg")
+
+[node name="DrillRobot" parent="." instance=ExtResource("5_6djwn")]
+position = Vector2(-15, 10)

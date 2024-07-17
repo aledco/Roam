@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmolbtxrubdb"]
+
+[ext_resource type="Script" path="res://structures/iron_deposit/iron_cutter/iron_cutter.gd" id="1_fgfq8"]
+[ext_resource type="Texture2D" uid="uid://bprpctvd5iddq" path="res://structures/iron_deposit/iron_cutter/iron_cutter.png" id="2_100m8"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_2hud6"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_whfvq"]
+[ext_resource type="PackedScene" uid="uid://c3hudxmbb21w8" path="res://robots/drill_robot/drill_robot.tscn" id="5_vv8na"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_00n34"]
+radius = 14.0
+
+[sub_resource type="Curve2D" id="Curve2D_5cncg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 8)
+}
+point_count = 2
+
+[node name="IronCutter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_fgfq8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_100m8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_00n34")
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_2hud6")]
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_whfvq")]
+position = Vector2(0, 17)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+position = Vector2(0, 9)
+curve = SubResource("Curve2D_5cncg")
+
+[node name="DrillRobot" parent="." instance=ExtResource("5_vv8na")]
+position = Vector2(-15, 10)
