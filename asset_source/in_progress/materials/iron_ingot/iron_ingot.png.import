@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwx63f7yuo84w"
-path="res://.godot/imported/furnace_placeholder.png-bd5723fc8033456dd3785554fd9479aa.ctex"
+uid="uid://bnnii3nemb5l3"
+path="res://.godot/imported/iron_ingot.png-0306ee7c25a885d56ca202b7599c378d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/workshop/furnace/placeholder/furnace_placeholder.png"
-dest_files=["res://.godot/imported/furnace_placeholder.png-bd5723fc8033456dd3785554fd9479aa.ctex"]
+source_file="res://asset_source/in_progress/materials/iron_ingot/iron_ingot.png"
+dest_files=["res://.godot/imported/iron_ingot.png-0306ee7c25a885d56ca202b7599c378d.ctex"]
 
 [params]
 

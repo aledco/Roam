@@ -32,6 +32,11 @@ func _ready():
 			item = dir.get_next()
 	material_configs.sort_custom(func(a, b): return a.material_script.MATERIAL_ID < b.material_script.MATERIAL_ID)
 	material_ids.sort()
+	
+	for i in range(len(material_ids)):
+		for j in range(len(material_ids)):
+			if i != j:
+				assert(material_ids[i] != material_ids[j], "Duplicate Material Id: " + str(material_ids[i]))
 
 
 ## Gets the ids of the materials needed to produce the given material.

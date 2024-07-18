@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://mx6w1doqujpt"]
+
+[ext_resource type="Script" path="res://raw_materials/copper_ingot/copper_ingot.gd" id="1_8jqwy"]
+[ext_resource type="Texture2D" uid="uid://cmchbtuwblsgw" path="res://raw_materials/copper_ingot/copper_ingot.png" id="2_7ldqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
+size = Vector2(4, 32)
+
+[node name="CopperIngot" type="AnimatableBody2D"]
+collision_layer = 4
+collision_mask = 4
+input_pickable = true
+sync_to_physics = false
+script = ExtResource("1_8jqwy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7ldqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a00yc")
+
+[node name="Sensor" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
+position = Vector2(9, 0)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_y1lbs")

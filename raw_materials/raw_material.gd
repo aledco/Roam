@@ -26,11 +26,6 @@ static func is_ingredient(ingredient: int, product: int) -> bool:
 	return false
 
 
-## Determines if a material is a fuel source.
-static func is_fuel(material_id: int) -> bool:
-	return material_id == Coal.MATERIAL_ID
-
-
 static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialModel]:
 	var models: Array[MaterialModel] = []
 	for mat_id in RawMaterialManager.material_ids:
@@ -68,6 +63,20 @@ func get_material_image() -> Texture2D:
 	push_error("abstract function")
 	return null
 
+
+func is_fuel() -> bool:
+	return false
+
+func is_smeltable() -> bool:
+	return false
+
+func _get_smelted_material_id() -> int:
+	push_error("abstract function")
+	return -1
+	
+func get_smelted_material() -> RawMaterial:
+	var mat_id = _get_smelted_material_id()
+	return RawMaterialManager.instantiate_material(mat_id)
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:

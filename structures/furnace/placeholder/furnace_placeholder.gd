@@ -7,13 +7,13 @@ func _destroy_after_placement() -> bool:
 	return true
 
 func _get_structure() -> Resource:
-	return preload("res://structures/workshop/furnace/furnace.tscn")
+	return preload("res://structures/furnace/furnace.tscn")
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Workshop",
 		1, 
-		preload("res://structures/workshop/furnace/placeholder/furnace_placeholder.tscn"),
-		preload("res://structures/workshop/furnace/furnace_display.png"))
+		preload("res://structures/furnace/placeholder/furnace_placeholder.tscn"),
+		preload("res://structures/furnace/furnace_display.png"))
 

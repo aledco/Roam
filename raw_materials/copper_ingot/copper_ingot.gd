@@ -1,8 +1,8 @@
-class_name Coal extends RawMaterial
+class_name CopperIngot extends RawMaterial
 
-static var MATERIAL_ID = 7
-static var NAME = "Coal"
-static var IMAGE = preload("res://raw_materials/coal/coal.png")
+static var MATERIAL_ID = 10
+static var NAME = "Copper Ingot"
+static var IMAGE = preload("res://raw_materials/copper_ingot/copper_ingot.png")
 static var INGREDIENTS = []
 
 static func get_model(parent: Structure) -> MaterialModel:
@@ -17,6 +17,3 @@ func get_material_id() -> int:
 
 func get_material_image() -> Texture2D:
 	return IMAGE
-
-func is_fuel() -> bool:
-	return true

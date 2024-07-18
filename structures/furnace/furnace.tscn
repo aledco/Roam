@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cdcx4olsvy4xn"]
 
-[ext_resource type="Script" path="res://structures/workshop/furnace/furnace.gd" id="1_e16nq"]
-[ext_resource type="Texture2D" uid="uid://0dxixv6bvmvq" path="res://structures/workshop/furnace/furnace_conveyors.png" id="2_5ua2y"]
-[ext_resource type="Texture2D" uid="uid://dolmd3qtjs1tp" path="res://structures/workshop/furnace/furnace_structures.png" id="3_jrtal"]
-[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_23vq5"]
-[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_8fiy7"]
+[ext_resource type="Script" path="res://structures/furnace/furnace.gd" id="1_ox1fs"]
+[ext_resource type="Texture2D" uid="uid://0dxixv6bvmvq" path="res://structures/furnace/furnace_conveyors.png" id="2_hpnul"]
+[ext_resource type="Texture2D" uid="uid://dolmd3qtjs1tp" path="res://structures/furnace/furnace_structures.png" id="3_w1y6w"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_swe3p"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_258ym"]
 
 [sub_resource type="Curve2D" id="Curve2D_edtng"]
 _data = {
@@ -30,29 +30,29 @@ radius = 1.0
 [node name="Furnace" type="StaticBody2D"]
 collision_layer = 2
 input_pickable = true
-script = ExtResource("1_e16nq")
+script = ExtResource("1_ox1fs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_5ua2y")
+texture = ExtResource("2_hpnul")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 z_index = 2
-texture = ExtResource("3_jrtal")
+texture = ExtResource("3_w1y6w")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-32, 32, -32, -33, -1, -48, 3, -48, 32, -33, 32, 32, 24, 32, 24, 22, 19, 16, 13, 16, 8, 22, 8, 32)
 
 [node name="Inputs" type="Node2D" parent="."]
 
-[node name="InputNode1" parent="Inputs" instance=ExtResource("4_23vq5")]
+[node name="InputNode1" parent="Inputs" instance=ExtResource("4_swe3p")]
 position = Vector2(-16, -48)
 
-[node name="InputNode2" parent="Inputs" instance=ExtResource("4_23vq5")]
+[node name="InputNode2" parent="Inputs" instance=ExtResource("4_swe3p")]
 position = Vector2(16, -48)
 
 [node name="Outputs" type="Node2D" parent="."]
 
-[node name="OutputNode" parent="Outputs" instance=ExtResource("5_8fiy7")]
+[node name="OutputNode" parent="Outputs" instance=ExtResource("5_258ym")]
 position = Vector2(16, 48)
 
 [node name="Paths" type="Node2D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfnm8ao4th6u2"]
 
-[ext_resource type="Script" path="res://structures/workshop/furnace/placeholder/furnace_placeholder.gd" id="1_4eko0"]
-[ext_resource type="Texture2D" uid="uid://dwx63f7yuo84w" path="res://structures/workshop/furnace/placeholder/furnace_placeholder.png" id="2_7k1ik"]
+[ext_resource type="Script" path="res://structures/furnace/placeholder/furnace_placeholder.gd" id="1_4eko0"]
+[ext_resource type="Texture2D" uid="uid://dwx63f7yuo84w" path="res://structures/furnace/placeholder/furnace_placeholder.png" id="2_7k1ik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwpqf"]
 atlas = ExtResource("2_7k1ik")
