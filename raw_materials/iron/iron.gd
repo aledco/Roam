@@ -5,6 +5,8 @@ static var NAME = "Iron"
 static var IMAGE = preload("res://raw_materials/iron/iron.png")
 static var INGREDIENTS = []
 
+# TODO add smelt target
+
 static func get_model(parent: Structure) -> MaterialModel:
 	return MaterialModel.create(
 		parent, 

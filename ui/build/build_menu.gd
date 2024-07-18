@@ -21,6 +21,7 @@ func _ready():
 		Workshop1Placeholder.get_model(),
 		Workshop2Placeholder.get_model(),
 		Workshop3Placeholder.get_model(),
+		FurnacePlaceholder.get_model(),
 		StoragePlaceholder.get_model(),
 	]
 	

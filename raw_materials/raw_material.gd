@@ -26,6 +26,11 @@ static func is_ingredient(ingredient: int, product: int) -> bool:
 	return false
 
 
+## Determines if a material is a fuel source.
+static func is_fuel(material_id: int) -> bool:
+	return material_id == Coal.MATERIAL_ID
+
+
 static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialModel]:
 	var models: Array[MaterialModel] = []
 	for mat_id in RawMaterialManager.material_ids:

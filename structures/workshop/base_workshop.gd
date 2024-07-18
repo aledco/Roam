@@ -96,6 +96,10 @@ func _physics_process(delta):
 			material.at_exit_node = true
 
 
+func _material_is_valid(material_id: int) -> bool:
+	return RawMaterial.is_ingredient(material_id, current_material.material_id)
+
+
 func _get_sensor_status(material: RawMaterial) -> int:
 	var mat_id = material.get_material_id()
 	if mat_id == current_material.material_id:
@@ -105,8 +109,7 @@ func _get_sensor_status(material: RawMaterial) -> int:
 		var production_bodies = production_sensors[i].get_overlapping_bodies()
 		var waiting_bodies = waiting_sensors[i].get_overlapping_bodies()
 		if material in waiting_bodies and \
-				((production_bodies.size() > 0 and material not in production_bodies) or \
-				not RawMaterial.is_ingredient(mat_id, current_material.material_id)):
+				((production_bodies.size() > 0 and material not in production_bodies) or not _material_is_valid(mat_id)):
 			return WAITING_SENSOR_STATUS
 		if material in production_bodies:
 			return READY_FOR_PRODUCTION_SENSOR_STATUS
