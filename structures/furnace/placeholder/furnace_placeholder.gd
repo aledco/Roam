@@ -12,7 +12,7 @@ func _get_structure() -> Resource:
 static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
-		"Workshop",
+		"Furnace",
 		1, 
 		preload("res://structures/furnace/placeholder/furnace_placeholder.tscn"),
 		preload("res://structures/furnace/furnace_display.png"))

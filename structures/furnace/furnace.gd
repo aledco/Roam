@@ -84,27 +84,25 @@ func _physics_process(delta):
 					if material in waiting_materials:
 						waiting_materials.remove_at(waiting_materials.find(material))
 					if material not in materials_for_production:
-						materials_for_production.append(material)
-
-						
+						materials_for_production.append(material)	
 		else:
 			output.material_to_output = true
 			material.at_exit_node = true
 
 
 func _material_is_valid(material: RawMaterial) -> bool:
-	if material.is_fuel() or material.is_smeltable():
-		if len(waiting_materials) == 0 or material in waiting_materials:
-			return true
-			
-		var waiting = waiting_materials[0]
-		if waiting.is_fuel() and material.is_fuel():
-			return false
-		elif waiting.is_smeltable() and material.is_smeltable():
-			return false
-		else:
-			return true
-	return false
+	return material.is_fuel() or material.is_smeltable()
+		#if len(waiting_materials) == 0 or material in waiting_materials:
+			#return true
+			#
+		#var waiting = waiting_materials[0]
+		#if waiting.is_fuel() and material.is_fuel():
+			#return false
+		#elif waiting.is_smeltable() and material.is_smeltable():
+			#return false
+		#else:
+			#return true
+	#return false
 
 func _get_sensor_status(material: RawMaterial) -> int:
 	var mat_id = material.get_material_id()
