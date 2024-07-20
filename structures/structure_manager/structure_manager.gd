@@ -38,6 +38,7 @@ func _remove_structure_from_map(structure: Structure, grid_index: Vector2i):
 
 
 func add_structure(structure: Structure):
+	add_child(structure)
 	var grid_index = structure.get_grid_index()
 	_add_structure_to_map(structure, grid_index)
 	_connect_structure(structure, grid_index)
@@ -48,7 +49,12 @@ func remove_structure(structure: Structure):
 	_disconnect_structure(structure, grid_index)
 	_remove_structure_from_map(structure, grid_index)
 	structure.destroy()
-	
+
+
+func update_structure_outputs(structure: Structure):
+	var grid_index = structure.get_grid_index()
+	_connect_outputs(structure, grid_index)
+
 
 func add_tunnel(tunnel_node: Node2D):
 	var tunnel_in = tunnel_node.get_child(0) as TunnelIn

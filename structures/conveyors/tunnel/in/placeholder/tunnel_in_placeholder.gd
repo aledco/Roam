@@ -8,7 +8,7 @@ func _get_structure() -> Resource:
 	return preload("res://structures/conveyors/tunnel/in/tunnel_in.tscn")
 
 
-func _create_structure():
+func _create_structure_from_placeholder():
 	tunnel_node = Node2D.new()
 	get_parent().add_child(tunnel_node)
 	tunnel_node.set_position(Vector2.ZERO)

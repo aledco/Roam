@@ -11,7 +11,7 @@ func _can_rotate() -> bool:
 	return false
 
 
-func _create_structure():
+func _create_structure_from_placeholder():
 	var structure := _get_structure().instantiate() as TunnelOut
 	tunnel_node.add_child(structure)
 	structure.set_position(position)

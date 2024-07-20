@@ -10,6 +10,7 @@ var material_node: Node2D:
 	get: 
 		return get_node("/root/World/Materials")
 
+
 const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
 const MATERIAL_SELECT_UI: Resource = preload("res://ui/material_select/material_select_ui.tscn")
 
