@@ -8,6 +8,8 @@ func add_material(material: RawMaterial):
 	# sometimes add_material gets called before the input areas are ready, and don't detect the material
 	while input == null:
 		await get_tree().create_timer(.2).timeout
+		if not is_instance_valid(material):
+			return
 		input = _get_input(material)
 	input.path.add_child(material.mock_follow_node)
 	materials.push_back(material)

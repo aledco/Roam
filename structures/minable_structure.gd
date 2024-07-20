@@ -22,11 +22,11 @@ func get_robot_position() -> Vector2:
 func get_player_position() -> Vector2:
 	return to_global(get_robot_position())
 
-func begin_mining():
+func begin_player_mining():
 	is_player_mining = true
 	interval_id = Clock.interval(2.0, _produce_material.bind())
 
-func end_mining():
+func end_player_mining():
 	is_player_mining = false
 	Clock.remove_interval(time, interval_id)
 	interval_id = -1
@@ -37,7 +37,7 @@ func destroy():
 	super.destroy()
 
 
-func _place_robot(): # TODO except robot type as param
+func _place_robot():
 	_create_outputs()
 	
 	var robot: Node2D
@@ -58,7 +58,6 @@ func _create_output(x: int, y: int, angle: float, position: Vector2):
 	var output = OUTPUT_NODE.instantiate() as OutputNode
 	outputs_node.add_child(output)
 	output.position = position
-	print(x, " ", y, " ", position)
 	output.setup(self, Vector2i(x, y), angle)
 	outputs.append(output)
 

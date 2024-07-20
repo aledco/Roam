@@ -19,6 +19,8 @@ var materials_for_production: Array[RawMaterial] = []
 
 var waiting_materials = []
 
+var fuel: int = 0
+
 func _setup_io():
 	assert(inputs.size() == 2)
 	assert(outputs.size() == 1)
@@ -41,12 +43,36 @@ func _ready():
 	_setup_io()
 
 
+func _insert_material(material: RawMaterial):
+	var index = 0
+	for mat in materials:
+		if mat.get_material_id() == material.get_material_id():
+			index += 1
+		else:
+			break
+	materials.insert(index, material)
+
+
 func produce():
-	if materials_for_production.size() == len(inputs) and full_sensor.get_overlapping_bodies().is_empty():
+	if full_sensor.get_overlapping_bodies().is_empty():
 		for mat in materials_for_production:
-			materials.remove_at(materials.find(mat))
-			
-			if mat.is_smeltable():
+			if not is_instance_valid(mat):
+				materials_for_production.remove_at(materials_for_production.find(mat))
+				continue
+			if mat.is_fuel():
+				var mat_fuel = mat.get_fuel_value()
+				if mat_fuel > fuel:
+					fuel = mat_fuel
+				materials.remove_at(materials.find(mat))
+				materials_for_production.remove_at(materials_for_production.find(mat))
+				mat.queue_free()
+
+		for mat in materials_for_production:
+			if mat.is_smeltable() and fuel > 0:
+				materials.remove_at(materials.find(mat))
+				
+				fuel -= 1
+				
 				var new_mat = mat.get_smelted_material()
 				material_node.add_child(new_mat)
 				new_mat.mock_follow_node = PathFollow2D.new()
@@ -54,16 +80,11 @@ func produce():
 				new_mat.parent = self
 				paths[-1].add_child(new_mat.mock_follow_node)
 				new_mat.global_position = new_mat.mock_follow_node.global_position
-				var index = 0
-				for material in materials:
-					if material.get_material_id() == new_mat.get_material_id():
-						index += 1
-					else:
-						break
-				materials.insert(index, new_mat)
 				
-			mat.queue_free()
-		materials_for_production.clear()
+				_insert_material(new_mat)
+				
+				materials_for_production.remove_at(materials_for_production.find(mat))
+				mat.queue_free()
 	super.produce()
 
 
@@ -91,18 +112,7 @@ func _physics_process(delta):
 
 
 func _material_is_valid(material: RawMaterial) -> bool:
-	return material.is_fuel() or material.is_smeltable()
-		#if len(waiting_materials) == 0 or material in waiting_materials:
-			#return true
-			#
-		#var waiting = waiting_materials[0]
-		#if waiting.is_fuel() and material.is_fuel():
-			#return false
-		#elif waiting.is_smeltable() and material.is_smeltable():
-			#return false
-		#else:
-			#return true
-	#return false
+	return material.is_fuel() or (material.is_smeltable() and fuel > 0)
 
 func _get_sensor_status(material: RawMaterial) -> int:
 	var mat_id = material.get_material_id()

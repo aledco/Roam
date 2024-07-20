@@ -64,8 +64,11 @@ func get_material_image() -> Texture2D:
 	return null
 
 
+func get_fuel_value() -> int:
+	return 0
+
 func is_fuel() -> bool:
-	return false
+	return get_fuel_value() > 0
 
 func is_smeltable() -> bool:
 	return false

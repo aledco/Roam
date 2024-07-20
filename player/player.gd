@@ -52,7 +52,7 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 		
 	if is_mining:
 		collision_shape_2d.disabled = false
-		minable_structure.end_mining()
+		minable_structure.end_player_mining()
 		is_mining = false
 	
 	if not ignore_map and map_active:
@@ -127,7 +127,7 @@ func _mine(target: MinableStructure, state: State):
 	minable_structure = target
 	collision_shape_2d.disabled = true
 	global_position = target.get_player_position()
-	target.begin_mining()
+	target.begin_player_mining()
 	
 func saw(target: MinableStructure):
 	_mine(target, State.Saw)
