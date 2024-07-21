@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx8yvpwdyvry"
-path="res://.godot/imported/tileset.png-781317dbeac795ab5fa88723bddea64c.ctex"
+uid="uid://djbryiy4hv3x2"
+path="res://.godot/imported/test_workshop.png-2a7e034f1379e685d7d7d846629eb17c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tileset/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-781317dbeac795ab5fa88723bddea64c.ctex"]
+source_file="res://tests/test_workshop/test_workshop.png"
+dest_files=["res://.godot/imported/test_workshop.png-2a7e034f1379e685d7d7d846629eb17c.ctex"]
 
 [params]
 

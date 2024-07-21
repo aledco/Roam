@@ -128,6 +128,12 @@ func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_c
 				return false
 	return true
 
+## Rotates the grid size by the direction vector. It was decided
+## at the beggining of development that <0, 1> is the default direction,
+## so that means leave grid_size alone.
+#func _rotate_grid_size(grid_size: Vector2i, direction: Vector2i)
+	#if direction == Vector2i(0, 1):
+		#return grid_size
 
 static func get_next_grid_multiple(x: Variant) -> Variant:
 	match typeof(x):	

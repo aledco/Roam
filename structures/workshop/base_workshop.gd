@@ -51,10 +51,19 @@ func _create_special_ui():
 
 func produce():
 	if materials_for_production.size() == len(inputs) and full_sensor.get_overlapping_bodies().is_empty():
+		var is_valid = true
 		for mat in materials_for_production:
 			materials.remove_at(materials.find(mat))
+			if not is_instance_valid(mat):
+				is_valid = false
+				continue
+			if not RawMaterial.is_ingredient(mat.get_material_id(), current_material.material_id):
+				is_valid = false
 			mat.queue_free()
 		materials_for_production.clear()
+		
+		if not is_valid:
+			return
 		
 		var new_mat := RawMaterialManager.instantiate_material(current_material.material_id)
 		material_node.add_child(new_mat)
