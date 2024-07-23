@@ -6,6 +6,10 @@ var structure_manager: StructureManager:
 	get:
 		return get_node("/root/World/StructureManager") as StructureManager
 
+var player: Player:
+	get: 
+		return get_node("/root/World/Player") as Player
+
 var material_node: Node2D:
 	get: 
 		return get_node("/root/World/Materials")
@@ -49,6 +53,7 @@ func _can_drill() -> bool:
 
 # END abstract functions
 
+
 func destroy():
 	for material in materials:
 		material.queue_free()
@@ -74,7 +79,7 @@ func delay_input():
 
 
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder() or _input_disabled:
+	if _is_placeholder() or _input_disabled or player.is_placing:
 		return
 	
 	if event is InputEventMouseButton:
@@ -92,8 +97,7 @@ func get_grid_index() -> Vector2i:
 	"""
 	Gets the top left index of the structure.
 	"""
-	var grid_size := get_grid_size()
-	return StructureManager.get_grid_index(position, grid_size)
+	return StructureManager.get_grid_index(self)
 
 
 func set_direction(new_direction: Vector2i):

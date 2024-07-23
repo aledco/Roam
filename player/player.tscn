@@ -154,7 +154,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"drill",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,7 +233,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"saw",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhxj1"]
@@ -247,9 +247,8 @@ script = ExtResource("1_ai5bn")
 z_index = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_lvmtr")
-animation = &"idle"
+animation = &"drill"
 autoplay = "idle"
-frame_progress = 0.396237
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
