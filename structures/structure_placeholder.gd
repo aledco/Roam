@@ -43,29 +43,15 @@ func destroy():
 
 
 func get_grid_position() -> Vector2:
-	var absolute_position := _calculate_position_from_mouse()
-	var grid_position := StructureManager.get_next_grid_multiple(absolute_position) as Vector2
+	var mouse_grid_index = structure_manager.get_mouse_grid_index()
+	var grid_position = mouse_grid_index * 32
 	return grid_position
-
-
-func get_grid_index_from_position(grid_position: Vector2) -> Vector2i:
-	var grid_size = get_grid_size()
-	if direction.y == 1:
-		pass
-	elif direction.y == -1:
-		grid_position.x += (grid_size.x - 1) * 32
-		grid_position.y += (grid_size.y - 1) * 32
-	elif direction.x == 1:
-		grid_position.y += (grid_size.x - 1) * 32
-	elif direction.x == -1:
-		grid_position.x += (grid_size.x - 1) * 32
-	return Vector2i(grid_position / 32)
 
 
 func _process(delta):
 	var grid_position := get_grid_position()
 	position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
-	var grid_index = get_grid_index_from_position(grid_position)
+	var grid_index = get_grid_index()
 	is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), false, direction)
 	if is_valid:
 		animated_sprite_2d.self_modulate = TRANPARENT
@@ -82,7 +68,7 @@ func _input(event):
 		if StructureManager.DEBUG_GRID and event.is_action_released("right_click"):
 			var gp = get_grid_position()
 			print(self.name, ".grid_position ", gp)
-			print(self.name, ".grid_index ", get_grid_index_from_position(gp))
+			print(self.name, ".grid_index ", get_grid_index())
 	elif event is InputEventKey:
 		if _can_rotate() and event.is_action_pressed("rotate"):
 			rotate(-PI/2)
@@ -97,12 +83,3 @@ func _create_structure_from_placeholder() -> Structure:
 	structure.delay_input()
 	structure_manager.add_structure(structure)
 	return structure
-
-
-func _calculate_position_from_mouse() -> Vector2:
-	var absolute_position := get_global_mouse_position()
-	if absolute_position.x < 0:
-		absolute_position.x -= 32
-	if absolute_position.y < 0:
-		absolute_position.y -= 32
-	return absolute_position

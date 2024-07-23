@@ -33,3 +33,4 @@ func remove_interval(time: float, index: int):
 func invoke(time: float, callback: Callable):
 	await get_tree().create_timer(time).timeout
 	callback.call()
+

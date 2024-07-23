@@ -25,9 +25,8 @@ func _create_structure_from_placeholder() -> Structure:
 
 
 func calculate_position():
-	var absolute_position := _calculate_position_from_mouse()
-	var grid_position := StructureManager.get_next_grid_multiple(absolute_position) as Vector2
-	var tunnel_in_grid_position = tunnel_in.get_grid_index() * 32
+	var grid_position := get_grid_position()
+	var tunnel_in_grid_position = Vector2(tunnel_in.get_grid_index() * 32)
 	var mult = Vector2(abs(tunnel_in.direction))
 	var offset = tunnel_in_grid_position * Vector2(mult.y, mult.x)
 	if _sum_vec(grid_position * Vector2(tunnel_in.direction)) <= _sum_vec(tunnel_in_grid_position * Vector2(tunnel_in.direction)):

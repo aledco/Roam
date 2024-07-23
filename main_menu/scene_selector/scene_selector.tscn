@@ -5,21 +5,21 @@
 [ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_am0s6"]
 
 [node name="SceneSelector" type="Control"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_fe3i7")
 
 [node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 50.0
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 51.0
+offset_right = 50.0
+offset_bottom = 50.0
 
 [node name="Texture" type="TextureRect" parent="Panel/Button"]
 layout_mode = 0

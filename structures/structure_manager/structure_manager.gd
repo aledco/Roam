@@ -1,34 +1,23 @@
 class_name StructureManager extends Node2D
 
-static var DEBUG_GRID = true
+static var DEBUG_GRID = false
 const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
 var debug_info = null
 
 func _process(delta):
 	if DEBUG_GRID:
-		var mouse_pos = get_global_mouse_position()
-		if mouse_pos.x < 0:
-			mouse_pos.x -= 32
-		if mouse_pos.y < 0:
-			mouse_pos.y -= 32
-		
-		if debug_info != null and debug_info.position == mouse_pos:
-			return
-		
 		if debug_info != null:
 			debug_info.queue_free()
 		
+		var mouse_index = get_mouse_grid_index()
 		
-		
-		var grid_position := StructureManager.get_next_grid_multiple(mouse_pos) as Vector2
-		var grid_index = Vector2i(grid_position / 32)
-		
+		var grid_position = mouse_index * 32
 		debug_info = GRID_DEBUG_INFO.instantiate()
 		add_child(debug_info)
+		debug_info.global_position = get_global_mouse_position()
 		var label := debug_info.get_child(0) as RichTextLabel
-		label.text = "[center]<%s, %s>[/center]" % [grid_index.x, grid_index.y]
-		
-		debug_info.global_position = mouse_pos
+		label.text = "[center]<%s, %s>[/center]" % [mouse_index.x, mouse_index.y]
+
 
 static var _delete_mode: bool
 
@@ -184,6 +173,12 @@ func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_c
 	return true
 
 
+## Gets the grid index of the mouse.
+func get_mouse_grid_index() -> Vector2i:
+	var mouse_pos = get_global_mouse_position()
+	return get_grid_index_of_position(mouse_pos)
+
+
 ## Gets the next multiple of 32.
 static func get_next_grid_multiple(x: Variant) -> Variant:
 	match typeof(x):	
@@ -193,40 +188,27 @@ static func get_next_grid_multiple(x: Variant) -> Variant:
 			return int(x / 32) * 32
 
 
+## Gets the grid index of any position. 
+static func get_grid_index_of_position(pos: Vector2) -> Vector2i:
+	var round_down = func(x: int):
+		var r = abs(x) % 32
+		if r == 0:
+			return x
+		
+		if x < 0:
+			return -(abs(x) - abs(r) + 32)
+		else:
+			return x - r
+
+	return Vector2i(round_down.call(int(pos.x)) / 32, round_down.call(int(pos.y)) / 32)
+
+
 ## Gets the grid index of a structure, taking the structures direciton into account.
 ## The grid index of a structure is the index of the grid cell that the unrotated top left
 ## corner of the structure occupies.
 static func get_grid_index(structure: Structure) -> Vector2i:
 	var grid_position = get_grid_position(structure.position, structure.get_grid_size(), structure.direction)
 	return Vector2i(grid_position / 32)
-
-	#var grid_size = structure.get_grid_size()
-	#var structure_position = structure.position
-	#if grid_size.y > grid_size.x and structure.direction.x != 0:
-		#structure_position += Vector2(16, -16)
-	#elif grid_size.x > grid_size.y and structure.direction.y != 0:
-		#structure_position += Vector2(16, -16) # TODO this may not be right
-	#
-	## TODO need to fix this
-	#match structure.direction:
-		#Vector2i(0, 1):
-			#var x := int((structure_position.x - ((grid_size.x * 32) / 2)) / 32)
-			#var y := int((structure_position.y - ((grid_size.y * 32) / 2)) / 32)
-			#return Vector2i(x, y)
-		#Vector2i(0, -1):
-			#var x := int((structure_position.x + ((grid_size.x * 32) / 2)) / 32)
-			#var y := int((structure_position.y + ((grid_size.y * 32) / 2)) / 32)
-			#return Vector2i(x, y)
-		#Vector2i(1, 0):
-			#var x := int((structure_position.x - ((grid_size.x * 32) / 2)) / 32)
-			#var y := int((structure_position.y + ((grid_size.y * 32) / 2)) / 32)
-			#return Vector2i(x, y)
-		#Vector2i(-1, 0):
-			#var x := int((structure_position.x + ((grid_size.x * 32) / 2)) / 32)
-			#var y := int((structure_position.y - ((grid_size.y * 32) / 2)) / 32)
-			#return Vector2i(x, y)
-		#_:
-			#return Vector2i.ZERO
 
 
 ## Gets the structure position from the grid position.
@@ -245,20 +227,21 @@ static func get_structure_position(grid_position: Vector2, grid_size: Vector2i, 
 ## Gets the grid position from the structure position.
 ## Undos get_structure_position().
 static func get_grid_position(structure_position: Vector2, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)) -> Vector2:
-	var x: float
-	var y: float
-	if direction.y == 1:  # TODO make match stmt
-		x = structure_position.x - grid_size.x * 16
-		y = structure_position.y - grid_size.y * 16
-	elif direction.y == -1:
-		x = structure_position.x + (grid_size.x - 2) * 16
-		y = structure_position.y + (grid_size.y - 2) * 16
-	elif direction.x == 1:
-		x = structure_position.x - grid_size.y * 16
-		y = structure_position.y + (grid_size.x - 2) * 16
-	elif direction.x == -1:
-		x = structure_position.x + (grid_size.y - 2) * 16
-		y = structure_position.y - grid_size.x * 16
+	var x := structure_position.x
+	var y := structure_position.y
+	match direction:
+		Vector2i(0, 1):
+			x -= grid_size.x * 16
+			y -= grid_size.y * 16
+		Vector2i(0, -1):
+			x += (grid_size.x - 2) * 16
+			y += (grid_size.y - 2) * 16
+		Vector2i(1, 0):
+			x -= grid_size.y * 16
+			y += (grid_size.x - 2) * 16
+		Vector2i(-1, 0):
+			x += (grid_size.y - 2) * 16
+			y -= grid_size.x * 16
 	return Vector2(x, y)
 
 
