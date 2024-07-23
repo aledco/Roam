@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bprpctvd5iddq"
-path="res://.godot/imported/iron_cutter.png-bd99e6421dcd87acd84c9799d9b74cc9.ctex"
+uid="uid://cqldkpjiwit47"
+path="res://.godot/imported/half_conveyor.png-91464fbc88a39f0a058eb369c433e569.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/iron_deposit/iron_cutter/iron_cutter.png"
-dest_files=["res://.godot/imported/iron_cutter.png-bd99e6421dcd87acd84c9799d9b74cc9.ctex"]
+source_file="res://asset_source/in_progress/structures/conveyors/half_conveyor/half_conveyor.png"
+dest_files=["res://.godot/imported/half_conveyor.png-91464fbc88a39f0a058eb369c433e569.ctex"]
 
 [params]
 

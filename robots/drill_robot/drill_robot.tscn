@@ -77,6 +77,7 @@ animations = [{
 size = Vector2(10, 24)
 
 [node name="DrillRobot" type="StaticBody2D"]
+z_index = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)

@@ -5,6 +5,7 @@ const SPEED = 100.0
 const BUILD_MENU = preload("res://ui/build/build_menu.tscn")
 
 enum State { Idle, Run, Saw, Drill }
+enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode, Escape }
 
 @onready var inventory: Inventory = $Inventory
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -13,6 +14,7 @@ enum State { Idle, Run, Saw, Drill }
 @onready var camera_2d: Camera2D = $Camera2D
 
 var build_menu: BuildMenu = null
+var is_placing: bool = false
 var map_active: bool = false
 var is_mining: bool = false
 var minable_structure: MinableStructure
@@ -31,9 +33,11 @@ func _process(delta):
 ## Manages player input such as opening the build menu or map.
 func player_input():
 	if Input.is_action_just_pressed("build_menu"):
+		SignalManager.player_input.emit(InputType.BuildMenu)
 		escape()
 		build_menu.visible = not build_menu.visible
 	elif Input.is_action_just_pressed("map"):
+		SignalManager.player_input.emit(InputType.Map)
 		escape(true)
 		if map_active:
 			camera_2d.zoom = Vector2.ONE
@@ -41,9 +45,11 @@ func player_input():
 			camera_2d.zoom *= Vector2(0.1, 0.1)
 		map_active = not map_active
 	elif Input.is_action_just_pressed("delete"):
+		SignalManager.player_input.emit(InputType.DeleteMode)
 		escape(true, true)
 		StructureManager.set_delete_mode(not StructureManager.get_delete_mode())
 	elif Input.is_action_just_pressed("escape"):
+		SignalManager.player_input.emit(InputType.Escape)
 		escape()
 
 
@@ -52,13 +58,15 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 		
 	if is_mining:
 		collision_shape_2d.disabled = false
-		minable_structure.end_mining()
+		minable_structure.end_player_mining()
 		is_mining = false
 	
 	if not ignore_map and map_active:
 		camera_2d.zoom = Vector2.ONE
 	if not ignore_delete_mode:
 		StructureManager.set_delete_mode(false)
+	
+	is_placing = false
 
 
 func _physics_process(delta):
@@ -127,7 +135,7 @@ func _mine(target: MinableStructure, state: State):
 	minable_structure = target
 	collision_shape_2d.disabled = true
 	global_position = target.get_player_position()
-	target.begin_mining()
+	target.begin_player_mining()
 	
 func saw(target: MinableStructure):
 	_mine(target, State.Saw)

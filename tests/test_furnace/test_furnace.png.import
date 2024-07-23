@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpxi50vhn6a0t"
-path="res://.godot/imported/stone_cutter.png-d7f1995c4b889be5acf3e263046f3781.ctex"
+uid="uid://dwacoaeu48qmx"
+path="res://.godot/imported/test_furnace.png-c1411beeb91078767e408c1f1a141d70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/boulder/stone_cutter/stone_cutter.png"
-dest_files=["res://.godot/imported/stone_cutter.png-d7f1995c4b889be5acf3e263046f3781.ctex"]
+source_file="res://tests/test_furnace/test_furnace.png"
+dest_files=["res://.godot/imported/test_furnace.png-c1411beeb91078767e408c1f1a141d70.ctex"]
 
 [params]
 

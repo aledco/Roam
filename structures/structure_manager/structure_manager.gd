@@ -1,55 +1,98 @@
 class_name StructureManager extends Node2D
 
+static var DEBUG_GRID = false
+const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
+var debug_info = null
+
+func _process(delta):
+	if DEBUG_GRID:
+		if debug_info != null:
+			debug_info.queue_free()
+		
+		var mouse_index = get_mouse_grid_index()
+		
+		var grid_position = mouse_index * 32
+		debug_info = GRID_DEBUG_INFO.instantiate()
+		add_child(debug_info)
+		debug_info.global_position = get_global_mouse_position()
+		var label := debug_info.get_child(0) as RichTextLabel
+		label.text = "[center]<%s, %s>[/center]" % [mouse_index.x, mouse_index.y]
+
+
 static var _delete_mode: bool
-static func set_delete_mode(delete_mode: bool):
+
+static func set_delete_mode(delete_mode: bool) -> bool:
 	_delete_mode = delete_mode
 	if _delete_mode:
 		Input.set_custom_mouse_cursor(preload("res://ui/cursor/shovel.png"))
-		SignalManager.delete_mode_enabled.emit()
 	else:
 		Input.set_custom_mouse_cursor(null)
+	return _delete_mode
+
 static func get_delete_mode() -> bool:
 	return _delete_mode
 
 var structure_map := {}
 var tile_map_ids
 
+
+## Creates a structure from the structure resource, grid_index, and grid_size.
 func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vector2i):
 	var structure = resource.instantiate() as Structure
 	add_child(structure)
-	var grid_position = get_grid_position(grid_index)
+	var grid_position = grid_index * 32
 	var structure_position = get_structure_position(grid_position, grid_size)
 	structure.set_position(structure_position)
 	add_structure(structure)
 
-
+## Adds a structure to the structure map.
 func _add_structure_to_map(structure: Structure, grid_index: Vector2i):
-	var grid_size = structure.get_grid_size()
-	for x in range(grid_index.x, grid_index.x + grid_size.x):
-		for y in range(grid_index.y, grid_index.y + grid_size.y):
+	var rotated_grid_size = rotate_grid_size(structure.get_grid_size(), structure.direction)
+	if StructureManager.DEBUG_GRID:
+		print("_add_structure_to_map: rotated_grid_size = ", rotated_grid_size)
+	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
+		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
 			structure_map[Vector2i(x, y)] = structure
+			if StructureManager.DEBUG_GRID:
+				print("\t(x, y) = ", Vector2i(x, y))
 
 
+## Removes a structure from the structure map.
 func _remove_structure_from_map(structure: Structure, grid_index: Vector2i):
-	var grid_size = structure.get_grid_size()
-	for x in range(grid_index.x, grid_index.x + grid_size.x):
-		for y in range(grid_index.y, grid_index.y + grid_size.y):
+	var rotated_grid_size = rotate_grid_size(structure.get_grid_size(), structure.direction)
+	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
+		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
 			structure_map.erase(Vector2i(x, y))
 
 
+## Adds a structure.
 func add_structure(structure: Structure):
+	add_child(structure)
 	var grid_index = structure.get_grid_index()
+	if StructureManager.DEBUG_GRID:
+		print("add_structure: ", structure.name, ".grid_index = ", grid_index)
+		print("add_structure: ", structure.name, ".grid_size = ", structure.get_grid_size())
+		print("add_structure: ", structure.name, ".direction = ", structure.direction)
+		print("add_structure: ", structure.name, ".position = ", structure.position)
 	_add_structure_to_map(structure, grid_index)
 	_connect_structure(structure, grid_index)
 
 
+## Removes a structure.
 func remove_structure(structure: Structure):
 	var grid_index = structure.get_grid_index()
 	_disconnect_structure(structure, grid_index)
 	_remove_structure_from_map(structure, grid_index)
 	structure.destroy()
-	
 
+
+## Updates the structures outputs.
+func update_structure_outputs(structure: Structure):
+	var grid_index = structure.get_grid_index()
+	_connect_outputs(structure, grid_index)
+
+## Adds a tunnel conveyor. This needs a special function because tunnel input/outputs
+## are more complicated than usual.
 func add_tunnel(tunnel_node: Node2D):
 	var tunnel_in = tunnel_node.get_child(0) as TunnelIn
 	var tunnel_out = tunnel_node.get_child(1) as TunnelOut
@@ -65,45 +108,49 @@ func add_tunnel(tunnel_node: Node2D):
 	tunnel_out.inputs[0].can_connect = false
 
 
+## Connects the inputs of a structure to outputs around it.
 func _connect_inputs(structure: Structure, grid_index: Vector2i):
 	for input in structure.inputs:
 		if not input.can_connect:
 			continue
-		var prev_index = grid_index + input.local_index - input.get_direction()
-		if prev_index in structure_map:
+		var prev_index = grid_index + input.get_local_index() - input.get_direction()
+		if prev_index in structure_map:	
 			var prev_structure = structure_map[prev_index]
 			for output in prev_structure.outputs:
 				if not output.can_connect:
 					continue
-				var next_index = prev_structure.get_grid_index() + output.local_index + output.get_direction()
-				if next_index == grid_index + input.local_index:
+				var next_index = prev_structure.get_grid_index() + output.get_local_index() + output.get_direction()
+				if next_index == grid_index + input.get_local_index():
 					input.connection = output
 					output.connection = input
 					break
 
 
+## Connects the outputs of a structure to inputs around it.
 func _connect_outputs(structure: Structure, grid_index: Vector2i):
 	for output in structure.outputs:
 		if not output.can_connect:
 			continue
-		var next_index = grid_index + output.local_index + output.get_direction()
+		var next_index = grid_index + output.get_local_index() + output.get_direction()
 		if next_index in structure_map:
 			var next_structure = structure_map[next_index]
 			for input in next_structure.inputs:
 				if not input.can_connect:
 					continue
-				var prev_index = next_structure.get_grid_index() + input.local_index - input.get_direction()
-				if prev_index == grid_index + output.local_index:
+				var prev_index = next_structure.get_grid_index() + input.get_local_index() - input.get_direction()
+				if prev_index == grid_index + output.get_local_index():
 					input.connection = output
 					output.connection = input
 					break
 
 
+## Connects a structure to those around it.
 func _connect_structure(structure: Structure, grid_index: Vector2i):
 	_connect_inputs(structure, grid_index)
 	_connect_outputs(structure, grid_index)
 
 
+## Disconnects a structure from those around it.
 func _disconnect_structure(structure: Structure, grid_index: Vector2i):
 	for input in structure.inputs:
 		if is_instance_valid(input.connection):
@@ -113,9 +160,12 @@ func _disconnect_structure(structure: Structure, grid_index: Vector2i):
 			output.connection.connection = null
 
 
-func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_center: bool = false):
-	for x in range(grid_index.x, grid_index.x + grid_size.x):
-		for y in range(grid_index.y, grid_index.y + grid_size.y):
+## Determines if a structure with the provided grid size can be placed in the provided
+## grid index.
+func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_center: bool = false, direction: Vector2i = Vector2i(0, 1)):
+	var rotated_grid_size = rotate_grid_size(grid_size, direction)
+	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
+		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
 			if invalidate_center and x == 0 and y == 0:
 				return false
 			if Vector2i(x, y) in structure_map or (tile_map_ids != null and Vector2i(x, y) in tile_map_ids and tile_map_ids[Vector2i(x, y)] == 4):
@@ -123,6 +173,13 @@ func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_c
 	return true
 
 
+## Gets the grid index of the mouse.
+func get_mouse_grid_index() -> Vector2i:
+	var mouse_pos = get_global_mouse_position()
+	return get_grid_index_of_position(mouse_pos)
+
+
+## Gets the next multiple of 32.
 static func get_next_grid_multiple(x: Variant) -> Variant:
 	match typeof(x):	
 		TYPE_VECTOR2:
@@ -131,16 +188,73 @@ static func get_next_grid_multiple(x: Variant) -> Variant:
 			return int(x / 32) * 32
 
 
-static func get_grid_index(position: Vector2, grid_size: Vector2i) -> Vector2i:
-	var x := int((position.x - ((grid_size.x  * 32) / 2)) / 32)
-	var y := int((position.y - ((grid_size.y  * 32) / 2)) / 32)
-	return Vector2i(x, y)
+## Gets the grid index of any position. 
+static func get_grid_index_of_position(pos: Vector2) -> Vector2i:
+	var round_down = func(x: int):
+		var r = abs(x) % 32
+		if r == 0:
+			return x
+		
+		if x < 0:
+			return -(abs(x) - abs(r) + 32)
+		else:
+			return x - r
 
-static func get_structure_position(grid_position: Vector2, grid_size: Vector2i) -> Vector2:
+	return Vector2i(round_down.call(int(pos.x)) / 32, round_down.call(int(pos.y)) / 32)
+
+
+## Gets the grid index of a structure, taking the structures direciton into account.
+## The grid index of a structure is the index of the grid cell that the unrotated top left
+## corner of the structure occupies.
+static func get_grid_index(structure: Structure) -> Vector2i:
+	var grid_position = get_grid_position(structure.position, structure.get_grid_size(), structure.direction)
+	return Vector2i(grid_position / 32)
+
+
+## Gets the structure position from the grid position.
+## Structure position is the actual position of the structure, while grid position is just
+## the grid index multiplied by 32. Takes the structures rotation into account.
+static func get_structure_position(grid_position: Vector2, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)) -> Vector2:
 	var x := grid_position.x + grid_size.x * 16
 	var y := grid_position.y + grid_size.y * 16
+	if grid_size.y > grid_size.x and direction.x != 0:
+		return Vector2(x + 16 * (grid_size.y - grid_size.x), y - 16)
+	elif grid_size.x > grid_size.y and direction.y != 0:
+		return Vector2(x + 16, y - 16 * (grid_size.x - grid_size.y)) # TODO this may not be right
 	return Vector2(x, y)
 
 
-static func get_grid_position(grid_index: Vector2i) -> Vector2:
-	return Vector2(grid_index * 32)
+## Gets the grid position from the structure position.
+## Undos get_structure_position().
+static func get_grid_position(structure_position: Vector2, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)) -> Vector2:
+	var x := structure_position.x
+	var y := structure_position.y
+	match direction:
+		Vector2i(0, 1):
+			x -= grid_size.x * 16
+			y -= grid_size.y * 16
+		Vector2i(0, -1):
+			x += (grid_size.x - 2) * 16
+			y += (grid_size.y - 2) * 16
+		Vector2i(1, 0):
+			x -= grid_size.y * 16
+			y += (grid_size.x - 2) * 16
+		Vector2i(-1, 0):
+			x += (grid_size.y - 2) * 16
+			y -= grid_size.x * 16
+	return Vector2(x, y)
+
+
+## Rotates the grid size.
+static func rotate_grid_size(grid_size: Vector2i, direction: Vector2i) -> Vector2i:
+	match direction:
+		Vector2i(0, 1):
+			return grid_size
+		Vector2i(0, -1):
+			return -grid_size
+		Vector2i(1, 0):
+			return Vector2i(grid_size.y, -grid_size.x)
+		Vector2i(-1, 0):
+			return Vector2i(-grid_size.y, grid_size.x)
+		_: 
+			return grid_size

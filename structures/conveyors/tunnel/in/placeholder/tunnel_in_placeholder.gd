@@ -7,8 +7,10 @@ var tunnel_node: Node2D
 func _get_structure() -> Resource:
 	return preload("res://structures/conveyors/tunnel/in/tunnel_in.tscn")
 
+func _destroy_after_placement() -> bool:
+	return true
 
-func _create_structure():
+func _create_structure_from_placeholder() -> Structure:
 	tunnel_node = Node2D.new()
 	get_parent().add_child(tunnel_node)
 	tunnel_node.set_position(Vector2.ZERO)
@@ -24,8 +26,7 @@ func _create_structure():
 	tunnel_out_placeholder.tunnel_node = tunnel_node
 	tunnel_out_placeholder.tunnel_in = structure
 	
-	queue_free()
-
+	return structure
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(

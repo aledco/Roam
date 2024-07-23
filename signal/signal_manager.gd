@@ -1,4 +1,4 @@
 extends Node
 
 signal structure_clicked(structure: Structure)
-signal delete_mode_enabled
+signal player_input(input_type: Player.InputType)

@@ -229,7 +229,7 @@ func _generate_structures():
 			
 			for config in STRUCTURE_PROB_MAP:
 				var structure_data = config["data"]
-				var grid_index = StructureManager.get_grid_index(Vector2(x, y) * 32, structure_data["grid_size"])
+				var grid_index = Vector2i(x, y)
 				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"], true):
 					continue
 				

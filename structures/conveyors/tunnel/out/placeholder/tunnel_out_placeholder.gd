@@ -10,21 +10,23 @@ func _get_structure() -> Resource:
 func _can_rotate() -> bool:
 	return false
 
+func _destroy_after_placement() -> bool:
+	return true
 
-func _create_structure():
+
+func _create_structure_from_placeholder() -> Structure:
 	var structure := _get_structure().instantiate() as TunnelOut
 	tunnel_node.add_child(structure)
 	structure.set_position(position)
 	structure.set_direction(direction)
 	structure.set_tunnel_in(tunnel_in)
 	structure_manager.add_tunnel(tunnel_node)
-	queue_free()
+	return structure
 
 
 func calculate_position():
-	var absolute_position := _calculate_position_from_mouse()
-	var grid_position := StructureManager.get_next_grid_multiple(absolute_position) as Vector2
-	var tunnel_in_grid_position = StructureManager.get_grid_position(tunnel_in.get_grid_index())
+	var grid_position := get_grid_position()
+	var tunnel_in_grid_position = Vector2(tunnel_in.get_grid_index() * 32)
 	var mult = Vector2(abs(tunnel_in.direction))
 	var offset = tunnel_in_grid_position * Vector2(mult.y, mult.x)
 	if _sum_vec(grid_position * Vector2(tunnel_in.direction)) <= _sum_vec(tunnel_in_grid_position * Vector2(tunnel_in.direction)):
@@ -39,7 +41,7 @@ func calculate_position():
 		grid_position = grid_position * mult + offset
 	var grid_index = Vector2i(grid_position / 32)
 	if structure_manager.can_place_structure(grid_index, get_grid_size()):
-		position = StructureManager.get_structure_position(grid_position, get_grid_size())
+		position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
 
 
 func _process(delta):

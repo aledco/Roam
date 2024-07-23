@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://tv66isof16ao"]
+
+[ext_resource type="Texture2D" uid="uid://jx8yvpwdyvry" path="res://tile_map/tile_set.png" id="1_fulcn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gagr4"]
+texture = ExtResource("1_fulcn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kuxsg"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_gagr4")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_kuxsg")
+format = 2
+layer_0/name = "Ground"

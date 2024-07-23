@@ -20,3 +20,4 @@ func get_material_id() -> int:
 
 func get_material_image() -> Texture2D:
 	return IMAGE
+ 

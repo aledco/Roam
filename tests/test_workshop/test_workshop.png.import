@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2vwue3n8s8sx"
-path="res://.godot/imported/tree_cutter.png-b7a333e12a40555efbba6448f54e3d05.ctex"
+uid="uid://djbryiy4hv3x2"
+path="res://.godot/imported/test_workshop.png-2a7e034f1379e685d7d7d846629eb17c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/tree/tree_cutter/tree_cutter.png"
-dest_files=["res://.godot/imported/tree_cutter.png-b7a333e12a40555efbba6448f54e3d05.ctex"]
+source_file="res://tests/test_workshop/test_workshop.png"
+dest_files=["res://.godot/imported/test_workshop.png-2a7e034f1379e685d7d7d846629eb17c.ctex"]
 
 [params]
 

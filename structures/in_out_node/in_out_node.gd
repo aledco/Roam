@@ -23,6 +23,21 @@ func get_direction() -> Vector2i:
 	return Vector2i(direction)
 
 
+func get_local_index() -> Vector2i:
+	match parent_structure.direction:
+		Vector2i(0, 1):
+			return local_index
+		Vector2i(0, -1):
+			return -local_index
+		Vector2i(1, 0):
+			return Vector2i(local_index.y, -local_index.x)
+		Vector2i(-1, 0):
+			return Vector2i(-local_index.y, local_index.x)
+		_:
+			return local_index
+	
+	return Vector2i(local_index.y, local_index.x)
+
 func get_connected_structure() -> Structure:
 	if connection == null:
 		return null

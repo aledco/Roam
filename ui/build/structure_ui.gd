@@ -35,14 +35,16 @@ func set_root_ui_node(root: Node):
 
 
 func _create_structure():
-	var structure = model.structure.instantiate()
-	structure_manager.add_child(structure)
-	if model.parent:
-		model.parent.queue_free()
-		structure.set_position(model.parent.position)
-		structure_manager.add_structure(structure)
-	else:
-		var player := get_node("/root/World/Player") as Node2D
-		structure.set_position(player.position)
+	if model.structure_resource:
+		var structure = model.structure_resource.instantiate()
+		structure_manager.add_child(structure)
+		if model.parent:
+			model.parent.queue_free()
+			structure.set_position(model.parent.position)
+			structure_manager.add_structure(structure)
+		else:
+			var player := get_node("/root/World/Player") as Node2D
+			structure.set_position(player.position)
 	
+	model.on_selected.call()
 	ui_root.hide()
