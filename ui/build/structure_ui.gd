@@ -12,21 +12,8 @@ var ui_root: Node
 
 func set_model(model: StructureModel) -> void:
 	self.model = model
-	
 	texture.texture = model.image
-	var size := model.image.get_size()
-	if size.x > size.y:	
-		texture.scale = Vector2(32, size.y / (size.x / 32)) / size
-		texture.position = (panel.size / 2) - Vector2(texture.size.x / 1.5, texture.size.y / 4)
-	elif size.y > size.x:	
-		texture.scale = Vector2(size.x / (size.y / 32), 32) / size
-		texture.position = (panel.size / 2) - Vector2(texture.size.x / 4, texture.size.y / 1.5)
-	else:
-		texture.scale = Vector2(32, 32) / size
-	
-	text.clear()
 	text.text = "[center]%s[/center]" % model.name
-	
 	button.pressed.connect(_create_structure)
 
 

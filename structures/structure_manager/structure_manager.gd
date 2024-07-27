@@ -4,6 +4,10 @@ static var DEBUG_GRID = false
 const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
 var debug_info = null
 
+var player: Player:
+	get: 
+		return get_node("/root/World/Player") as Player
+
 func _process(delta):
 	if DEBUG_GRID:
 		if debug_info != null:
@@ -162,16 +166,37 @@ func _disconnect_structure(structure: Structure, grid_index: Vector2i):
 
 ## Determines if a structure with the provided grid size can be placed in the provided
 ## grid index.
-func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, invalidate_center: bool = false, direction: Vector2i = Vector2i(0, 1)):
+func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)):
 	var rotated_grid_size = rotate_grid_size(grid_size, direction)
+	var player_indices = get_player_grid_indices()
 	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
 		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
-			if invalidate_center and x == 0 and y == 0:
-				return false
 			if Vector2i(x, y) in structure_map or (tile_map_ids != null and Vector2i(x, y) in tile_map_ids and tile_map_ids[Vector2i(x, y)] == 4):
+				return false
+			if Vector2i(x, y) in player_indices:
 				return false
 	return true
 
+
+func get_player_grid_indices() -> Array[Vector2i]:
+	var indices: Array[Vector2i] = []
+	
+	var top_left := player.position + Vector2(-8, -32)
+	var top_right := player.position + Vector2(8, -32)
+	var bottom_left := player.position + Vector2(-8, 0)
+	var bottom_right := player.position + Vector2(8, 0)
+	
+	var crossing_right := int(bottom_right.x) % 32 != 0
+	var crossing_down := int(bottom_right.y) % 32 != 0
+	
+	indices.append(get_grid_index_of_position(top_left))
+	if crossing_right:
+		indices.append(get_grid_index_of_position(top_right))
+	if crossing_down:
+		indices.append(get_grid_index_of_position(bottom_left))
+	if crossing_right and crossing_down:
+		indices.append(get_grid_index_of_position(bottom_right))
+	return indices
 
 ## Gets the grid index of the mouse.
 func get_mouse_grid_index() -> Vector2i:

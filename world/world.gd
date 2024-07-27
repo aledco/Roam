@@ -14,13 +14,13 @@ const TILE_ID_MAP = {
 	3: SAND_ID,
 	4: WATER_ID
 }
-const N_GENERATED_TILES = 5
+const N_GENERATED_TILES = len(TILE_ID_MAP)
 
 var STRUCTURE_PROB_MAP = [
 	{
 		"data": {
 		"resource": load("res://structures/tree/tree.tscn"),
-		"grid_size": Vector2i(1, 2)
+		"grid_size": TreeStructure.GRID_SIZE
 		},
 		"probs": {
 			0: 0.25,
@@ -32,7 +32,7 @@ var STRUCTURE_PROB_MAP = [
 	{
 	"data": {
 		"resource": load("res://structures/boulder/boulder.tscn"),
-		"grid_size": Vector2i(1, 1)
+		"grid_size": BoulderStructure.GRID_SIZE
 	},
 		"probs": {
 			0: 0.025,
@@ -44,7 +44,7 @@ var STRUCTURE_PROB_MAP = [
 	{
 	"data": {
 		"resource": load("res://structures/iron_deposit/iron_deposit.tscn"),
-		"grid_size": Vector2i(1, 1)
+		"grid_size": IronDeposit.GRID_SIZE
 	},
 		"probs": {
 			0: 0.025,
@@ -56,7 +56,7 @@ var STRUCTURE_PROB_MAP = [
 	{
 	"data": {
 		"resource": load("res://structures/copper_deposit/copper_deposit.tscn"),
-		"grid_size": Vector2i(1, 1)
+		"grid_size": CopperDeposit.GRID_SIZE
 	},
 		"probs": {
 			0: 0.025,
@@ -68,7 +68,7 @@ var STRUCTURE_PROB_MAP = [
 	{
 	"data": {
 		"resource": load("res://structures/coal_deposit/coal_deposit.tscn"),
-		"grid_size": Vector2i(1, 1)
+		"grid_size": CoalDeposit.GRID_SIZE
 	},
 		"probs": {
 			0: 0.025,
@@ -230,7 +230,7 @@ func _generate_structures():
 			for config in STRUCTURE_PROB_MAP:
 				var structure_data = config["data"]
 				var grid_index = Vector2i(x, y)
-				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"], true):
+				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"]):
 					continue
 				
 				if randf() < config["probs"][tile_id]:

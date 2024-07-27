@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://kkwd23tdcn7n" path="res://raw_materials/box/box.png" id="2_0ftco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
-size = Vector2(4, 32)
+size = Vector2(4, 28)
 
 [node name="Box" type="AnimatableBody2D"]
 collision_layer = 4
@@ -28,6 +28,6 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
-position = Vector2(9, 0)
+position = Vector2(8, 0)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_y1lbs")

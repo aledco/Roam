@@ -51,7 +51,7 @@ func _place_robot():
 	
 	if interval_id != -1:
 		Clock.remove_interval(time, interval_id)
-	interval_id = Clock.interval(2.0, _produce_material.bind())
+	interval_id = Clock.interval(time, _produce_material.bind())
 
 
 func _create_output(x: int, y: int, angle: float, position: Vector2):

@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://divxkjfuxd7jn" path="res://raw_materials/plank/plank.png" id="2_mauj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
-size = Vector2(16, 16)
+size = Vector2(14, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3tf1"]
-size = Vector2(4, 32)
+size = Vector2(4, 26)
 
 [node name="Plank" type="AnimatableBody2D"]
 collision_layer = 4
@@ -20,6 +20,7 @@ script = ExtResource("1_1v5a0")
 texture = ExtResource("2_mauj5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_a00yc")
 
 [node name="Sensor" type="Area2D" parent="."]
@@ -28,6 +29,6 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
-position = Vector2(9, 0)
+position = Vector2(8, -0.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_d3tf1")

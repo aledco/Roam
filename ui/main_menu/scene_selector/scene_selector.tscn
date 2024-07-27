@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://btspoxxlwt8oo"]
 
-[ext_resource type="Script" path="res://main_menu/scene_selector/scene_selector.gd" id="1_fe3i7"]
-[ext_resource type="Texture2D" uid="uid://c6lovmrjtunpj" path="res://structures/conveyors/conveyor/conveyor.png" id="2_q8etc"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_am0s6"]
+[ext_resource type="Script" path="res://ui/main_menu/scene_selector/scene_selector.gd" id="1_pubis"]
+[ext_resource type="Texture2D" uid="uid://bmpo45lu3k71s" path="res://structures/conveyors/conveyor/conveyor_display.png" id="2_titrf"]
+[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_odijo"]
 
 [node name="SceneSelector" type="Control"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_fe3i7")
+script = ExtResource("1_pubis")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -27,14 +27,16 @@ offset_left = 9.0
 offset_top = 3.0
 offset_right = 41.0
 offset_bottom = 35.0
-texture = ExtResource("2_q8etc")
+texture = ExtResource("2_titrf")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Text" type="RichTextLabel" parent="Panel/Button"]
 layout_mode = 0
 offset_top = 34.0
 offset_right = 50.0
 offset_bottom = 47.0
-theme_override_fonts/normal_font = ExtResource("3_am0s6")
+theme_override_fonts/normal_font = ExtResource("3_odijo")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]Test[/center]"

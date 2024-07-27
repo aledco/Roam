@@ -1,9 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4pkr35js4rot"]
+[gd_scene load_steps=12 format=3 uid="uid://c4pkr35js4rot"]
 
 [ext_resource type="Script" path="res://structures/conveyors/curved_conveyor/left/curved_conveyor_left.gd" id="1_4rtc8"]
 [ext_resource type="Texture2D" uid="uid://csdqqhv347ros" path="res://structures/conveyors/curved_conveyor/left/curved_conveyor_left.png" id="2_3mmej"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_l3nkk"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_sg03w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e1r3"]
+atlas = ExtResource("2_3mmej")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0kjm"]
+atlas = ExtResource("2_3mmej")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14lpm"]
+atlas = ExtResource("2_3mmej")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ms6d"]
+atlas = ExtResource("2_3mmej")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04jgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e1r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0kjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14lpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ms6d")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
 size = Vector2(26, 26)
@@ -20,8 +56,10 @@ collision_mask = 0
 input_pickable = true
 script = ExtResource("1_4rtc8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_3mmej")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_04jgy")
+animation = &"roll"
+autoplay = "roll"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, -3)

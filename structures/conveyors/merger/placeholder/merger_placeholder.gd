@@ -10,4 +10,4 @@ static func get_model() -> StructureModel:
 		"Merger", 
 		1, 
 		preload("res://structures/conveyors/merger/placeholder/merger_placeholder.tscn"),
-		preload("res://structures/conveyors/merger/merger.png"))
+		preload("res://structures/conveyors/merger/merger_display.png"))

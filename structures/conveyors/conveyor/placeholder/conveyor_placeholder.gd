@@ -14,4 +14,4 @@ static func get_model() -> StructureModel:
 		"Conveyor",
 		1, 
 		preload("res://structures/conveyors/conveyor/placeholder/conveyor_placeholder.tscn"),
-		preload("res://structures/conveyors/conveyor/conveyor.png"))
+		preload("res://structures/conveyors/conveyor/conveyor_display.png"))

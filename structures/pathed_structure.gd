@@ -7,11 +7,11 @@ class_name PathedStructure extends Structure
 var paths: Array[Path2D] = []
 
 var path_index: int = 0
-var speed: float = 32
-
+var speed: float = 16
 
 
 func _ready():
+	super._ready()
 	for node in inputs_node.get_children():
 		inputs.append(node as InputNode)
 	for node in outputs_node.get_children():
@@ -50,7 +50,7 @@ func produce():
 
 func _physics_process(delta):
 	for material in materials:
-		if material.at_exit_node:
+		if not is_instance_valid(material) or material.at_exit_node:
 			continue
 		
 		var output = _get_output(material)
@@ -58,6 +58,7 @@ func _physics_process(delta):
 			material.try_move(delta * speed)
 		else:
 			output.material_to_output = true
+			material.is_moving = false
 			material.at_exit_node = true
 
 

@@ -30,4 +30,3 @@ func _physics_process(delta):
 		else:
 			output.material_to_output = true
 			material.at_exit_node = true
-

@@ -27,6 +27,7 @@ func _can_rotate() -> bool:
 
 
 func _ready():
+	super._ready()
 	z_index = 5
 	animated_sprite_2d.play("blink")
 	SignalManager.player_input.connect(_on_player_input)
@@ -52,7 +53,7 @@ func _process(delta):
 	var grid_position := get_grid_position()
 	position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
 	var grid_index = get_grid_index()
-	is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), false, direction)
+	is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction)
 	if is_valid:
 		animated_sprite_2d.self_modulate = TRANPARENT
 	else:

@@ -1,6 +1,6 @@
 class_name TestsMenu extends BaseUI
 
-const SCENE_SELECTOR = preload("res://main_menu/scene_selector/scene_selector.tscn")
+const SCENE_SELECTOR = preload("res://ui/main_menu/scene_selector/scene_selector.tscn")
 
 @onready var container: Container = $Control/Container
 

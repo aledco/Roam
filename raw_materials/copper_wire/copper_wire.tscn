@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b67a3ov64nwkq" path="res://raw_materials/copper_wire/copper_wire.png" id="2_lhtov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
-size = Vector2(16, 16)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
-size = Vector2(4, 32)
+size = Vector2(4, 20)
 
 [node name="IronPlate" type="AnimatableBody2D"]
 collision_layer = 4
@@ -28,6 +28,6 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
-position = Vector2(9, 0)
+position = Vector2(6, 0)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_y1lbs")

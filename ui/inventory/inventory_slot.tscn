@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwpe30yr34eyt"]
 
 [ext_resource type="Script" path="res://ui/inventory/inventory_slot.gd" id="1_yoook"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="2_aqgtu"]
+[ext_resource type="FontFile" uid="uid://b7je85taic4et" path="res://ui/fonts/m5x7.ttf" id="3_tr1hf"]
 
 [node name="InventorySlot" type="Control"]
 layout_mode = 3
@@ -28,11 +28,14 @@ position = Vector2(10, 10)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 9.0
-offset_right = 21.0
-offset_bottom = 24.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_aqgtu")
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 21.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_tr1hf")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
+fit_content = true
 scroll_active = false
+text_direction = 2

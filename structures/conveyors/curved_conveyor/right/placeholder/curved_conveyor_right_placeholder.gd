@@ -9,5 +9,5 @@ static func get_model() -> StructureModel:
 		"Right",
 		1, 
 		preload("res://structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.tscn"),
-		preload("res://structures/conveyors/curved_conveyor/right/curved_conveyor_right.png"))
+		preload("res://structures/conveyors/curved_conveyor/right/curved_conveyor_right_display.png"))
 	

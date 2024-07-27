@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://di43bqh4juhlm"]
 
 [ext_resource type="Script" path="res://ui/build/structure_ui.gd" id="1_lgj8h"]
-[ext_resource type="Texture2D" uid="uid://c6lovmrjtunpj" path="res://structures/conveyors/conveyor/conveyor.png" id="3_7swj3"]
+[ext_resource type="Texture2D" uid="uid://bmpo45lu3k71s" path="res://structures/conveyors/conveyor/conveyor_display.png" id="2_r73fv"]
 [ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_ik65c"]
 
 [node name="StructureUI" type="Control"]
@@ -34,7 +34,9 @@ offset_left = 9.0
 offset_top = 3.0
 offset_right = 41.0
 offset_bottom = 35.0
-texture = ExtResource("3_7swj3")
+texture = ExtResource("2_r73fv")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Text" type="RichTextLabel" parent="Panel/Button"]
 layout_mode = 0

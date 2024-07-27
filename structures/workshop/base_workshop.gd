@@ -11,6 +11,7 @@ const READY_FOR_PRODUCTION_SENSOR_STATUS = 2
 var production_sensors: Array[Area2D] = []
 var waiting_sensors: Array[Area2D] = []
 var materials_for_production: Array[RawMaterial] = []
+var materials_for_output: Array[RawMaterial] = []
 
 var current_material: MaterialModel
 
@@ -50,9 +51,15 @@ func _create_special_ui():
 
 
 func produce():
+	for mat in materials_for_production:
+		if not is_instance_valid(mat):
+			materials_for_production.remove_at(materials_for_production.find(mat))
+	
 	if materials_for_production.size() == len(inputs) and full_sensor.get_overlapping_bodies().is_empty():
 		var is_valid = true
 		for mat in materials_for_production:
+			
+			
 			materials.remove_at(materials.find(mat))
 			if not is_instance_valid(mat):
 				is_valid = false
@@ -72,20 +79,25 @@ func produce():
 		new_mat.parent = self
 		paths[-1].add_child(new_mat.mock_follow_node)
 		new_mat.global_position = new_mat.mock_follow_node.global_position
-		var index = 0
-		for material in materials:
-			if material.get_material_id() == new_mat.get_material_id():
-				index += 1
-			else:
-				break
-		materials.insert(index, new_mat)
+		materials_for_output.append(new_mat)
+		_insert_material(new_mat)
 	
 	super.produce()
 
 
+func _insert_material(new_mat: RawMaterial):
+	var index = 0
+	for material in materials:
+		if material.get_material_id() == new_mat.get_material_id():
+			index += 1
+		else:
+			break
+	materials.insert(index, new_mat)
+
+
 func _physics_process(delta):
 	for material in materials:	
-		if material.at_exit_node:
+		if not is_instance_valid(material) or material.at_exit_node:
 			continue
 		
 		var output = _get_output(material)
@@ -94,16 +106,21 @@ func _physics_process(delta):
 				NO_SENSOR_STATUS: 
 					material.try_move(delta * speed)
 				WAITING_SENSOR_STATUS:
-					pass
+					material.is_moving = false
 				READY_FOR_PRODUCTION_SENSOR_STATUS:
+					material.is_moving = false
 					if material not in materials_for_production:
 						materials_for_production.append(material)
 		else:
 			output.material_to_output = true
+			material.is_moving = false
 			material.at_exit_node = true
 
 
 func _get_sensor_status(material: RawMaterial) -> int:
+	if material in materials_for_output:
+		return NO_SENSOR_STATUS
+	
 	var mat_id = material.get_material_id()
 	if mat_id == current_material.material_id:
 		return NO_SENSOR_STATUS

@@ -36,6 +36,7 @@ script = ExtResource("1_ox1fs")
 texture = ExtResource("2_hpnul")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 z_index = 2
 texture = ExtResource("3_w1y6w")
 

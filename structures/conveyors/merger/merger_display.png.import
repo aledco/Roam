@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csekdeldskdem"
-path="res://.godot/imported/half_conveyor_placeholder.png-bd398dbde59f7d608d81a8154a9bcd47.ctex"
+uid="uid://cubc8qyw3kl4w"
+path="res://.godot/imported/merger_display.png-7bd69463c9ef95dfa5f70be53670d176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/half_conveyor/placeholder/half_conveyor_placeholder.png"
-dest_files=["res://.godot/imported/half_conveyor_placeholder.png-bd398dbde59f7d608d81a8154a9bcd47.ctex"]
+source_file="res://structures/conveyors/merger/merger_display.png"
+dest_files=["res://.godot/imported/merger_display.png-7bd69463c9ef95dfa5f70be53670d176.ctex"]
 
 [params]
 

@@ -54,6 +54,9 @@ func _can_drill() -> bool:
 # END abstract functions
 
 
+func _ready():
+	pass
+
 func destroy():
 	for material in materials:
 		material.queue_free()

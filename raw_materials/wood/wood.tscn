@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://raw_materials/wood/wood.gd" id="2_o37bv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3tf1"]
-size = Vector2(4, 32)
+size = Vector2(4, 28)
 
 [node name="Wood" type="AnimatableBody2D"]
 collision_layer = 4
@@ -28,6 +28,6 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
-position = Vector2(9, 0)
+position = Vector2(8, 0)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_d3tf1")

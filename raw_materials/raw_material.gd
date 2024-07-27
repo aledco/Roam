@@ -40,6 +40,7 @@ func _input_event(viewport, event, shape_idx):
 		if event.is_action_released("left_click"):
 			add_to_player_inventory(true, false)
 
+
 func add_to_player_inventory(remove_from_materials=false, destroy_if_full=true):
 	if not player.inventory.is_full(get_material_id()):
 		if remove_from_materials:
