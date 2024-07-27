@@ -13,14 +13,15 @@ config_version=5
 config/name="Roam"
 run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.ico"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-Clock="*res://clock/clock.gd"
-SignalManager="*res://signal/signal_manager.gd"
+Clock="*res://autoload/clock.gd"
+SignalManager="*res://autoload/signal_manager.gd"
 RawMaterialManager="*res://raw_materials/raw_material_manager.gd"
-AnimationManager="*res://animation/animation_manager.gd"
+AnimationManager="*res://autoload/animation_manager.gd"
 
 [display]
 

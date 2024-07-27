@@ -35,8 +35,6 @@ func get_local_index() -> Vector2i:
 			return Vector2i(-local_index.y, local_index.x)
 		_:
 			return local_index
-	
-	return Vector2i(local_index.y, local_index.x)
 
 func get_connected_structure() -> Structure:
 	if connection == null:

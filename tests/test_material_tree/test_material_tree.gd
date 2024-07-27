@@ -2,11 +2,11 @@ extends Node2D
 
 @onready var structure_manager: StructureManager = $StructureManager
 
-const COAL = preload("res://structures/coal_deposit/coal_deposit.tscn")
-const IRON = preload("res://structures/iron_deposit/iron_deposit.tscn")
-const COPPER = preload("res://structures/copper_deposit/copper_deposit.tscn")
-const BOULDER = preload("res://structures/boulder/boulder.tscn")
-const TREE = preload("res://structures/tree/tree.tscn")
+const COAL = preload("res://structures/natural/coal_deposit/coal_deposit.tscn")
+const IRON = preload("res://structures/natural/iron_deposit/iron_deposit.tscn")
+const COPPER = preload("res://structures/natural/copper_deposit/copper_deposit.tscn")
+const BOULDER = preload("res://structures/natural/boulder/boulder.tscn")
+const TREE = preload("res://structures/natural/tree/tree.tscn")
 
 var STRUCTURE_DATA = [
 	{

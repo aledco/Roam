@@ -7,7 +7,7 @@
 size = Vector2(14, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3tf1"]
-size = Vector2(4, 26)
+size = Vector2(4, 32)
 
 [node name="Plank" type="AnimatableBody2D"]
 collision_layer = 4

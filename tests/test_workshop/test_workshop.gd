@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var structure_manager: StructureManager = $StructureManager
 
-const TREE = preload("res://structures/tree/tree.tscn")
+const TREE = preload("res://structures/natural/tree/tree.tscn")
 
 var STRUCTURE_DATA = [
 	{

@@ -43,7 +43,6 @@ var tile_map_ids
 ## Creates a structure from the structure resource, grid_index, and grid_size.
 func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vector2i):
 	var structure = resource.instantiate() as Structure
-	add_child(structure)
 	var grid_position = grid_index * 32
 	var structure_position = get_structure_position(grid_position, grid_size)
 	structure.set_position(structure_position)
@@ -85,7 +84,7 @@ func add_structure(structure: Structure):
 ## Removes a structure.
 func remove_structure(structure: Structure):
 	var grid_index = structure.get_grid_index()
-	_disconnect_structure(structure, grid_index)
+	_disconnect_structure(structure)
 	_remove_structure_from_map(structure, grid_index)
 	structure.destroy()
 
@@ -154,14 +153,22 @@ func _connect_structure(structure: Structure, grid_index: Vector2i):
 	_connect_outputs(structure, grid_index)
 
 
-## Disconnects a structure from those around it.
-func _disconnect_structure(structure: Structure, grid_index: Vector2i):
+func disconnect_inputs(structure: Structure):
 	for input in structure.inputs:
 		if is_instance_valid(input.connection):
 			input.connection.connection = null
+
+
+func disconnect_outputs(structure: Structure):
 	for output in structure.outputs:
 		if is_instance_valid(output.connection):
 			output.connection.connection = null
+
+
+## Disconnects a structure from those around it.
+func _disconnect_structure(structure: Structure):
+	disconnect_inputs(structure)
+	disconnect_outputs(structure)
 
 
 ## Determines if a structure with the provided grid size can be placed in the provided

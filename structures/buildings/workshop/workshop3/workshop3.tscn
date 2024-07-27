@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://x4er8rijp0fp"]
+
+[ext_resource type="Script" path="res://structures/buildings/workshop/workshop3/workshop3.gd" id="1_8vkjt"]
+[ext_resource type="Texture2D" uid="uid://1qvaglkkij5q" path="res://structures/buildings/workshop/workshop3/workshop3_conveyors.png" id="2_un0y3"]
+[ext_resource type="Texture2D" uid="uid://c0xptajhaykij" path="res://structures/buildings/workshop/workshop3/workshop3_structure.png" id="3_dwyg1"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_fy5xq"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_b3put"]
+
+[sub_resource type="Curve2D" id="Curve2D_edtng"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -16, -48, 0, 0, 0, 0, -16, -14)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0vft0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, -48, 0, 0, 0, 0, 16, -14)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0fw4k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, 4, 0, 0, 0, 0, 16, 52)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wnae"]
+radius = 1.0
+
+[node name="Workshop3" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_8vkjt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_un0y3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 2
+texture = ExtResource("3_dwyg1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(48, 32, 48, -25, 3, -40, -3, -40, -48, -25, -48, 32, -8, 32, -8, 22, -3, 16, 3, 16, 8, 22, 8, 32)
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode1" parent="Inputs" instance=ExtResource("4_fy5xq")]
+position = Vector2(-32, -48)
+
+[node name="InputNode2" parent="Inputs" instance=ExtResource("4_fy5xq")]
+position = Vector2(0, -48)
+
+[node name="InputNode3" parent="Inputs" instance=ExtResource("4_fy5xq")]
+position = Vector2(32, -48)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("5_b3put")]
+position = Vector2(0, 48)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D1" type="Path2D" parent="Paths"]
+position = Vector2(-16, 1)
+curve = SubResource("Curve2D_edtng")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+position = Vector2(-16, 1)
+curve = SubResource("Curve2D_0vft0")
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+position = Vector2(16, 0)
+curve = SubResource("Curve2D_0vft0")
+
+[node name="Path2D4" type="Path2D" parent="Paths"]
+position = Vector2(-16, -4)
+curve = SubResource("Curve2D_0fw4k")
+
+[node name="ProductionSensors" type="Node2D" parent="."]
+
+[node name="Sensor1" type="Area2D" parent="ProductionSensors"]
+position = Vector2(-32, -13)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProductionSensors/Sensor1"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="Sensor2" type="Area2D" parent="ProductionSensors"]
+position = Vector2(0, -13)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProductionSensors/Sensor2"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="Sensor3" type="Area2D" parent="ProductionSensors"]
+position = Vector2(32, -14)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProductionSensors/Sensor3"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="WaitingSensors" type="Node2D" parent="."]
+
+[node name="Sensor1" type="Area2D" parent="WaitingSensors"]
+position = Vector2(-32, -28)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaitingSensors/Sensor1"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="Sensor2" type="Area2D" parent="WaitingSensors"]
+position = Vector2(0, -28)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaitingSensors/Sensor2"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="Sensor3" type="Area2D" parent="WaitingSensors"]
+position = Vector2(32, -28)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaitingSensors/Sensor3"]
+shape = SubResource("CircleShape2D_3wnae")
+
+[node name="FullSensor" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FullSensor"]
+shape = SubResource("CircleShape2D_3wnae")

@@ -22,13 +22,13 @@ func _get_slot(material_id: int) -> InventorySlot:
 		var slot := child as InventorySlot
 		if material_id == slot.material_id and not slot.is_full():
 			return slot
-			
+	
 	for child in container.get_children():
 		var slot := child as InventorySlot
 		if slot.is_empty():
 			return slot
-		
-	return null	
+	
+	return null
  
 
 func is_full(material_id: int):

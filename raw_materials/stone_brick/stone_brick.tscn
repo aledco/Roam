@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bkhk1o8dagxv1" path="res://raw_materials/stone_brick/stone_brick.png" id="2_hjgbm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
-size = Vector2(12, 12)
+size = Vector2(12, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
-size = Vector2(4, 24)
+size = Vector2(4, 32)
 
 [node name="StoneBrick" type="AnimatableBody2D"]
 collision_layer = 4

@@ -1,7 +1,6 @@
 class_name RawMaterial extends AnimatableBody2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sensor: Area2D = $Sensor
 @onready var player := get_node("/root/World/Player") as Player
 

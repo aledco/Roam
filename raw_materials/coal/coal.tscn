@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://raw_materials/coal/coal.gd" id="1_b3jlb"]
 [ext_resource type="Texture2D" uid="uid://bwdi33xwbova1" path="res://raw_materials/coal/coal.png" id="2_3y01x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1cqn"]
 size = Vector2(14, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
-size = Vector2(4, 24)
+size = Vector2(4, 32)
 
 [node name="Coal" type="AnimatableBody2D"]
 collision_layer = 4
@@ -20,7 +20,7 @@ script = ExtResource("1_b3jlb")
 texture = ExtResource("2_3y01x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_a00yc")
+shape = SubResource("RectangleShape2D_f1cqn")
 
 [node name="Sensor" type="Area2D" parent="."]
 collision_layer = 8

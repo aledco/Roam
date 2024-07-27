@@ -19,7 +19,7 @@ const N_GENERATED_TILES = len(TILE_ID_MAP)
 var STRUCTURE_PROB_MAP = [
 	{
 		"data": {
-		"resource": load("res://structures/tree/tree.tscn"),
+		"resource": load("res://structures/natural/tree/tree.tscn"),
 		"grid_size": TreeStructure.GRID_SIZE
 		},
 		"probs": {
@@ -31,7 +31,7 @@ var STRUCTURE_PROB_MAP = [
 	},
 	{
 	"data": {
-		"resource": load("res://structures/boulder/boulder.tscn"),
+		"resource": load("res://structures/natural/boulder/boulder.tscn"),
 		"grid_size": BoulderStructure.GRID_SIZE
 	},
 		"probs": {
@@ -43,7 +43,7 @@ var STRUCTURE_PROB_MAP = [
 	},
 	{
 	"data": {
-		"resource": load("res://structures/iron_deposit/iron_deposit.tscn"),
+		"resource": load("res://structures/natural/iron_deposit/iron_deposit.tscn"),
 		"grid_size": IronDeposit.GRID_SIZE
 	},
 		"probs": {
@@ -55,7 +55,7 @@ var STRUCTURE_PROB_MAP = [
 	},
 	{
 	"data": {
-		"resource": load("res://structures/copper_deposit/copper_deposit.tscn"),
+		"resource": load("res://structures/natural/copper_deposit/copper_deposit.tscn"),
 		"grid_size": CopperDeposit.GRID_SIZE
 	},
 		"probs": {
@@ -67,7 +67,7 @@ var STRUCTURE_PROB_MAP = [
 	},
 	{
 	"data": {
-		"resource": load("res://structures/coal_deposit/coal_deposit.tscn"),
+		"resource": load("res://structures/natural/coal_deposit/coal_deposit.tscn"),
 		"grid_size": CoalDeposit.GRID_SIZE
 	},
 		"probs": {
