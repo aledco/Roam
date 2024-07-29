@@ -42,6 +42,9 @@ func produce():
 				continue
 			
 			var connected_structure = output.get_connected_structure()
+			if not connected_structure.can_accept_material(materials[0]):
+				continue
+			
 			var material = materials.pop_front()
 			material.at_exit_node = false
 			connected_structure.add_material(material)

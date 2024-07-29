@@ -53,7 +53,32 @@ func get_amount_of_ingredients(material_id: int) -> int:
 	return count
 
 
-func get_model(material_id: int, parent: BaseWorkshop) -> MaterialModel:
+func has_sufficient_ingredients(material_id: int, ingridents: Array[RawMaterial]) -> Array:
+	var has_enough = func(needed_mat_id: int, needed_mat_amount: int):
+		var count = 0
+		for material in ingridents:
+			if material.get_material_id() == needed_mat_id:
+				count += 1
+		return count >= needed_mat_amount
+	
+	var needed_ingridents = get_material_ingredients(material_id)
+	var used = []
+	for mat_config in needed_ingridents:
+		var needed_mat_id = mat_config[0]
+		var needed_mat_amount = mat_config[1]
+		if not has_enough.call(needed_mat_id, needed_mat_amount):
+			return [false, []]
+		else:
+			for material in ingridents:
+				if material.get_material_id() == needed_mat_id:
+					used.append(material)
+					needed_mat_amount -= 1
+					if needed_mat_amount == 0:
+						break
+	return [true, used]
+
+
+func get_model(material_id: int, parent: Structure) -> MaterialModel:
 	var config := material_configs[material_id - 1]
 	return config.material_script.get_model(parent)
 

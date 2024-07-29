@@ -3,16 +3,17 @@ class_name InOutNode extends Area2D
 var parent_structure: Structure
 var local_index: Vector2i
 var angle: float
+var is_in_and_out: bool
 
 var connection: InOutNode
-
 var can_connect: bool = true
+var path: Path2D
 
-func setup(parent_structure: Structure, local_index: Vector2i, angle: float):
+func setup(parent_structure: Structure, local_index: Vector2i, angle: float, is_in_and_out: bool = false):
 	self.parent_structure = parent_structure
 	self.local_index = local_index
 	self.angle = angle
-
+	self.is_in_and_out = is_in_and_out
 
 func set_connection(node: InOutNode):
 	connection = node

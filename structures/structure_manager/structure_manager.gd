@@ -124,6 +124,8 @@ func _connect_inputs(structure: Structure, grid_index: Vector2i):
 					continue
 				var next_index = prev_structure.get_grid_index() + output.get_local_index() + output.get_direction()
 				if next_index == grid_index + input.get_local_index():
+					if input.is_in_and_out and output.is_in_and_out:
+						break
 					input.connection = output
 					output.connection = input
 					break
@@ -142,16 +144,17 @@ func _connect_outputs(structure: Structure, grid_index: Vector2i):
 					continue
 				var prev_index = next_structure.get_grid_index() + input.get_local_index() - input.get_direction()
 				if prev_index == grid_index + output.get_local_index():
+					if input.is_in_and_out and output.is_in_and_out:
+						break
 					input.connection = output
 					output.connection = input
 					break
-
 
 ## Connects a structure to those around it.
 func _connect_structure(structure: Structure, grid_index: Vector2i):
 	_connect_inputs(structure, grid_index)
 	_connect_outputs(structure, grid_index)
-
+	#_connect_delayed_connections(structure, grid_index)
 
 func disconnect_inputs(structure: Structure):
 	for input in structure.inputs:

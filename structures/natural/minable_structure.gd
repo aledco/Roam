@@ -117,10 +117,16 @@ func _produce_material():
 		
 		var output = outputs[current_output_index]
 		if output.connection and not output.connection.is_full():
+			
 			var material = RawMaterialManager.instantiate_material(_get_production_material_id())
-			material.parent = self
-			material_node.add_child(material)
-			material.global_position = output.global_position
-			output.get_connected_structure().add_material(material)
+			
+			var connected_structure = output.get_connected_structure()
+			if connected_structure.can_accept_material(material):
+				material.parent = self
+				material_node.add_child(material)
+				material.global_position = output.global_position
+				connected_structure.add_material(material)
+			else:
+				material.free()
 		
 		current_output_index = (current_output_index + 1) % len(outputs)

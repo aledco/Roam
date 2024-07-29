@@ -17,7 +17,7 @@ func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
 func _get_production_material_id() -> int:
-	return Box.MATERIAL_ID
+	return Wood.MATERIAL_ID
 
 func _can_saw() -> bool:
 	return true && not is_robot_mining

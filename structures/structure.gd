@@ -21,6 +21,7 @@ const MATERIAL_SELECT_UI: Resource = preload("res://ui/material_select/material_
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
 var outputs: Array[OutputNode] = []
+var connections: Array[Connection] = []
 
 var direction := Vector2i(0, 1)
 
@@ -35,6 +36,9 @@ func _get_build_list() -> Array[StructureModel]:
 
 func get_grid_size() -> Vector2i:
 	return Vector2i.ZERO
+
+func can_accept_material(material: RawMaterial) -> bool:
+	return true
 
 func produce():
 	pass

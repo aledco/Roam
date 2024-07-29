@@ -1,13 +1,18 @@
 class_name RawMaterial extends AnimatableBody2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sensor: Area2D = $Sensor
+@onready var sensor_collision_shape_2d: CollisionShape2D = $Sensor/CollisionShape2D
 @onready var player := get_node("/root/World/Player") as Player
+
+
 
 static var MATERIAL_SIZE = 16
 
 static var MATERIALS_COLLISION_LAYER = 3
 static var UNDERGROUND_COLLISION_LAYER = 5
+static var DISABLED_MATERIAL_COLLISION_LAYER = 8
 
 var parent: Structure = null
 
@@ -30,6 +35,18 @@ static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialMod
 	for mat_id in RawMaterialManager.material_ids:
 		if RawMaterialManager.get_amount_of_ingredients(mat_id) == workshop.get_num_inputs():
 			models.append(RawMaterialManager.get_model(mat_id, workshop))
+	return models
+
+
+static func get_models_for_test_workshop(parent_structure: Structure) -> Dictionary:
+	var models = {}
+	for mat_id in RawMaterialManager.material_ids:
+		var n_ingredients = RawMaterialManager.get_amount_of_ingredients(mat_id)
+		if n_ingredients > 0:
+			if n_ingredients in models:	
+				models[n_ingredients].append(RawMaterialManager.get_model(mat_id, parent_structure))
+			else:
+				models[n_ingredients] = [RawMaterialManager.get_model(mat_id, parent_structure)]
 	return models
 
 
@@ -83,7 +100,7 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	if not mock_follow_node:
+	if not mock_follow_node or mock_follow_node.progress_ratio == 1:
 		return false
 	
 	mock_follow_node.progress += speed
@@ -140,3 +157,14 @@ func toggle_underground(underground: bool):
 func finish_tunnel():
 	set_collision_layer_value(UNDERGROUND_COLLISION_LAYER, false)
 	set_collision_mask_value(UNDERGROUND_COLLISION_LAYER, false)
+
+
+func enable_collision():
+	set_collision_layer_value(MATERIALS_COLLISION_LAYER, true)
+	set_collision_layer_value(DISABLED_MATERIAL_COLLISION_LAYER, false)
+	set_collision_mask_value(MATERIALS_COLLISION_LAYER, true)
+
+func disable_collision():
+	set_collision_layer_value(MATERIALS_COLLISION_LAYER, false)
+	set_collision_layer_value(DISABLED_MATERIAL_COLLISION_LAYER, true)
+	set_collision_mask_value(MATERIALS_COLLISION_LAYER, false)

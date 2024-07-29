@@ -106,6 +106,7 @@ delete={
 2d_physics/layer_5="UNDERGROUND_MATERIALS"
 2d_physics/layer_6="LAND_BORDER"
 2d_physics/layer_7="CONVEYOR"
+2d_physics/layer_8="DISABLED_MATERIAL"
 
 [physics]
 
