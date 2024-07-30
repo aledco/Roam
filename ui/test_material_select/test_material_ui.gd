@@ -4,6 +4,7 @@ class_name TestMaterialUI extends Control
 @onready var button = $Panel/Button
 @onready var texture = $Panel/Button/Texture
 @onready var text = $Panel/Button/Text
+@onready var overlay: ColorRect = $Panel/Overlay
 
 var model: MaterialModel
 var ui_root: Node
@@ -27,3 +28,7 @@ func set_root_ui_node(root: Node):
 func _set_material():
 	model.parent.set_current_material(model)
 	ui_root.queue_free()
+
+func set_selected(selected: bool):
+	overlay.visible = selected
+

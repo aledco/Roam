@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsdqxu7qng3my"
-path="res://.godot/imported/test_workshop_placeholder.png-1adbb25df54166076547ef408321f034.ctex"
+uid="uid://bxcq3c0dk0j75"
+path="res://.godot/imported/workshop.png-89cb21e0a12c736f3790b59bc0b88337.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/buildings/workshop/test_workshop/placeholder/test_workshop_placeholder.png"
-dest_files=["res://.godot/imported/test_workshop_placeholder.png-1adbb25df54166076547ef408321f034.ctex"]
+source_file="res://asset_source/in_progress/structures/workshop/workshop/workshop.png"
+dest_files=["res://.godot/imported/workshop.png-89cb21e0a12c736f3790b59bc0b88337.ctex"]
 
 [params]
 

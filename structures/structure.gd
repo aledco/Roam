@@ -55,6 +55,18 @@ func _can_saw() -> bool:
 func _can_drill() -> bool:
 	return false
 
+func on_input_connected_to(input: InputNode):
+	pass
+
+func on_output_connected_to(output: OutputNode):
+	pass
+
+func on_input_disconnected(input: InputNode):
+	pass
+
+func on_output_disconnected(output: OutputNode):
+	pass
+
 # END abstract functions
 
 

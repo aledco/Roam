@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://vh77xegia7fg"]
+[gd_scene load_steps=5 format=3 uid="uid://vh77xegia7fg"]
 
 [ext_resource type="Script" path="res://ui/test_material_select/test_material_ui.gd" id="1_mh5vl"]
 [ext_resource type="Texture2D" uid="uid://d2ro8icnjkoxt" path="res://raw_materials/wood/wood.png" id="2_bsbli"]
 [ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_fmrlm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em1nf"]
 
 [node name="TestMaterialUI" type="Control"]
 custom_minimum_size = Vector2(50, 50)
@@ -17,16 +19,17 @@ grow_vertical = 2
 script = ExtResource("1_mh5vl")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 50.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.962
+offset_bottom = -0.0240021
+theme_override_styles/panel = SubResource("StyleBoxEmpty_em1nf")
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 51.0
+offset_right = 50.0
+offset_bottom = 50.0
 
 [node name="Texture" type="TextureRect" parent="Panel/Button"]
 layout_mode = 0
@@ -45,3 +48,13 @@ theme_override_fonts/normal_font = ExtResource("3_fmrlm")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]Test[/center]"
+
+[node name="Overlay" type="ColorRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.0980392)

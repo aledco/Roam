@@ -1,10 +1,9 @@
-class_name TestWorkshop extends DelayedConnectionStructure
+class_name Workshop extends DelayedConnectionStructure
 
 const TEST_MATERIAL_SELECT_UI = preload("res://ui/test_material_select/test_material_select_ui.tscn")
+const CONVEYOR_PIECE = preload("res://structures/conveyors/conveyor_piece/conveyor_piece.tscn")
 
-# TODO:
-#	2. material select ui: indicate which one is currently selected
-#	3. dont inheirit from pathed structure
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
@@ -15,6 +14,11 @@ var material_models: Dictionary
 var current_material: MaterialModel
 var materials_for_output: Array[RawMaterial] = []
 var current_output_index = 0
+
+var conveyor_pieces = {}
+
+func _get_conveyor_piece_reference_position() -> Vector2:
+	return Vector2(0, 15)
 
 func set_current_material(material_model: MaterialModel) -> void:
 	current_material = material_model
@@ -33,6 +37,32 @@ func can_accept_material(material: RawMaterial):
 		return false
 	
 	return true
+
+
+func on_input_connected_to(input: InputNode):
+	var conveyor_piece = CONVEYOR_PIECE.instantiate() as Node2D
+	add_child(conveyor_piece)
+	var pos := _get_conveyor_piece_reference_position().rotated(input.angle + PI)
+	conveyor_piece.position = pos
+	conveyor_piece.rotate(input.angle)
+	conveyor_pieces[input] = conveyor_piece
+
+func on_output_connected_to(output: OutputNode):
+	var conveyor_piece = CONVEYOR_PIECE.instantiate() as Node2D
+	add_child(conveyor_piece)
+	var pos := _get_conveyor_piece_reference_position().rotated(output.angle)
+	conveyor_piece.position = pos
+	conveyor_piece.rotate(output.angle)
+	conveyor_pieces[output] = conveyor_piece
+
+func on_input_disconnected(input: InputNode):
+	conveyor_pieces[input].queue_free()
+	conveyor_pieces.erase(input)
+
+func on_output_disconnected(output: OutputNode):
+	conveyor_pieces[output].queue_free()
+	conveyor_pieces.erase(output)
+
 
 func _setup_io():
 	inputs[0].setup(self, Vector2i.ZERO, PI, true)
@@ -63,7 +93,7 @@ func _ready():
 func _create_special_ui():
 	var material_select_ui := TEST_MATERIAL_SELECT_UI.instantiate() as TestMaterialSelectUI
 	add_child(material_select_ui)
-	material_select_ui.create_material_selections(material_models)
+	material_select_ui.create_material_selections(material_models, current_material)
 
 
 func add_material(material: RawMaterial):
@@ -82,9 +112,17 @@ func add_material(material: RawMaterial):
 	materials.push_back(material)
 
 
+func _play_default_animation():
+	animated_sprite_2d.play("default")
+	animated_sprite_2d.animation_looped.disconnect(_play_default_animation)
+
 func produce():
 	if len(materials) == 0:
+		if animated_sprite_2d.animation != "default":
+			animated_sprite_2d.animation_looped.connect(_play_default_animation)
 		return
+	
+	animated_sprite_2d.play("operate")
 	
 	var operational_outputs = outputs.filter(func(output): return output.connection != null)
 	var ingredients: Array[RawMaterial] = []
