@@ -1,6 +1,5 @@
 extends Node
 
-#var MATERIAL_REFERENCES = []
 
 class Config:
 	var scene_path: String

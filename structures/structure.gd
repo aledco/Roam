@@ -16,12 +16,10 @@ var material_node: Node2D:
 
 
 const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
-const MATERIAL_SELECT_UI: Resource = preload("res://ui/material_select/material_select_ui.tscn")
 
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
 var outputs: Array[OutputNode] = []
-var connections: Array[Connection] = []
 
 var direction := Vector2i(0, 1)
 

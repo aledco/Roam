@@ -30,14 +30,6 @@ static func is_ingredient(ingredient: int, product: int) -> bool:
 	return false
 
 
-static func get_models_for_workshop(workshop: BaseWorkshop) -> Array[MaterialModel]:
-	var models: Array[MaterialModel] = []
-	for mat_id in RawMaterialManager.material_ids:
-		if RawMaterialManager.get_amount_of_ingredients(mat_id) == workshop.get_num_inputs():
-			models.append(RawMaterialManager.get_model(mat_id, workshop))
-	return models
-
-
 static func get_models_for_test_workshop(parent_structure: Structure) -> Dictionary:
 	var models = {}
 	for mat_id in RawMaterialManager.material_ids:
