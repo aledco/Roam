@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dolmd3qtjs1tp"
-path="res://.godot/imported/furnace_structures.png-9ea1ea0f4a405d501b2d64c1863adabf.ctex"
+uid="uid://brglqo6gxi5rm"
+path="res://.godot/imported/smoke_start.png-f34e5a76004faabd86ab8fdd513244d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/buildings/furnace/furnace_structures.png"
-dest_files=["res://.godot/imported/furnace_structures.png-9ea1ea0f4a405d501b2d64c1863adabf.ctex"]
+source_file="res://structures/buildings/furnace/smoke/smoke_start.png"
+dest_files=["res://.godot/imported/smoke_start.png-f34e5a76004faabd86ab8fdd513244d4.ctex"]
 
 [params]
 

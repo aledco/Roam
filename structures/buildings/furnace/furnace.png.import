@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0dxixv6bvmvq"
-path="res://.godot/imported/furnace_conveyors.png-8cb9181401e1d1d7028704d0ad2471d7.ctex"
+uid="uid://bajiu1f3fwms4"
+path="res://.godot/imported/furnace.png-88119c5e03e5228e262cc6aa5e535634.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/buildings/furnace/furnace_conveyors.png"
-dest_files=["res://.godot/imported/furnace_conveyors.png-8cb9181401e1d1d7028704d0ad2471d7.ctex"]
+source_file="res://structures/buildings/furnace/furnace.png"
+dest_files=["res://.godot/imported/furnace.png-88119c5e03e5228e262cc6aa5e535634.ctex"]
 
 [params]
 
