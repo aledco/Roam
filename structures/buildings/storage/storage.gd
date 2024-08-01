@@ -1,51 +1,46 @@
-class_name Storage extends PathedStructure
+class_name Storage extends Building
 
-const STORAGE_UI = preload("res://ui/inventory/storage_ui.tscn")
+const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/output_select.tscn")
 
-@onready var end_node: OutputNode = $EndNode
+@onready var storage_ui: StorageUI = $StorageUI
 
-var storage: StorageUI
+var output_selects := {}
 
+static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
-	return Vector2i(1, 1)
+	return GRID_SIZE
 
+func can_accept_material(material: RawMaterial):
+	if storage_ui.is_full(material.get_material_id()):
+		return false
+	return true
 
-func _ready():
-	super._ready()
-	end_node.setup(self, Vector2i.ZERO, 0)
+func on_output_connected_to(output: OutputNode):
+	super.on_output_connected_to(output)
 	
-	assert(inputs.size() == 1)
-	assert(paths.size() == 1)
-	inputs[0].setup(self, Vector2i.ZERO, 0)
-	inputs[0].path = paths[0]
-	
-	storage = STORAGE_UI.instantiate() as StorageUI
-	add_child(storage)
-	storage.hide()
+	var output_select = OUTPUT_SELECT.instantiate() as OutputSelect
+	add_child(output_select)
+	var pos := (_get_conveyor_piece_reference_position()).rotated(output.angle)
+	output_select.position = pos
+	output_select.setup(self)
+	output_selects[output] = output_select
 
+func on_output_disconnected(output: OutputNode):
+	super.on_output_disconnected(output)
+	
+	output_selects[output].queue_free()
+	output_selects.erase(output)
 
 func _create_special_ui():
-	storage.show()
+	storage_ui.show()
 
+func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
+	storage_ui.add_material(material)
+	materials.remove_at(materials.find(material))
+	material.queue_free()
 
-func produce():
-	if materials.size() == 0:
-		return
-	
-	if end_node.material_to_output:
-		var material = materials.pop_front()
-		end_node.material_to_output = false
-		storage.add_material(material)
-		material.queue_free()
+func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
+	pass
 
-
-func _physics_process(delta):
-	for material in materials:
-		if material.at_exit_node or storage.is_full(material.get_material_id()):
-			continue
-		
-		if material in end_node.get_overlapping_bodies():
-			end_node.material_to_output = true
-			material.at_exit_node = true
-		else:
-			material.try_move(delta * speed)
+func get_stored_material_ids() -> Array[int]:
+	return storage_ui.get_stored_material_ids()

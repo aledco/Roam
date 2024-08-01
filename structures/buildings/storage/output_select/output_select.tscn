@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf3hmt2gmt7gv"]
+
+[ext_resource type="Script" path="res://structures/buildings/storage/output_select/output_select.gd" id="1_kag24"]
+
+[node name="OutputSelect" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kag24")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Button"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0.392157, 0.392157, 0.392157, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

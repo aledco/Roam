@@ -4,7 +4,7 @@ class_name InventorySlot extends Control
 @onready var text_label: RichTextLabel = $Panel/RichTextLabel
 @onready var sprite_2d: Sprite2D = $Panel/Sprite2D
 
-var material_id: int = 0
+var material_id: int = -1
 var amount: int = 0
 
 func fill_slot(material: RawMaterial):

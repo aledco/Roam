@@ -1,5 +1,7 @@
 class_name Workshop extends Building
 
+const MATERIAL_SELECT_UI = preload("res://ui/material_select/material_select_ui.tscn")
+
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
@@ -12,9 +14,6 @@ var current_material: MaterialModel
 func set_current_material(material_model: MaterialModel) -> void:
 	current_material = material_model
 
-func _get_conveyor_piece_reference_position() -> Vector2:
-	return Vector2(0, 15)
-
 func _play_default_animation():
 	if animated_sprite_2d.animation != "default":
 		animated_sprite_2d.animation_looped.connect(_play_default_animation_delayed)
@@ -26,29 +25,9 @@ func _play_default_animation_delayed():
 func _play_operate_animation():
 	animated_sprite_2d.play("operate")
 
-func _setup_io():
-	inputs[0].setup(self, Vector2i.ZERO, PI, true)
-	inputs[0].path = paths[0]
-	inputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
-	inputs[1].path = paths[1]
-	inputs[2].setup(self, Vector2i.ZERO, 0, true)
-	inputs[2].path = paths[2]
-	inputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
-	inputs[3].path = paths[3]
-	
-	outputs[0].setup(self, Vector2i.ZERO, PI, true)
-	outputs[0].path = paths[4]
-	outputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
-	outputs[1].path = paths[5]
-	outputs[2].setup(self, Vector2i.ZERO, 0, true)
-	outputs[2].path = paths[6]
-	outputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
-	outputs[3].path = paths[7]
-
-
 func _ready():
 	super._ready()
-	material_models = RawMaterial.get_models_for_test_workshop(self)
+	material_models = RawMaterial.get_models_for_workshop(self)
 	current_material = material_models[1][0]
 
 func _create_special_ui():

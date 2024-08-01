@@ -30,7 +30,7 @@ static func is_ingredient(ingredient: int, product: int) -> bool:
 	return false
 
 
-static func get_models_for_test_workshop(parent_structure: Structure) -> Dictionary:
+static func get_models_for_workshop(parent_structure: Structure) -> Dictionary:
 	var models = {}
 	for mat_id in RawMaterialManager.material_ids:
 		var n_ingredients = RawMaterialManager.get_amount_of_ingredients(mat_id)

@@ -4,8 +4,6 @@ class_name Inventory extends CanvasLayer
 
 const INVENTORY_SLOT = preload("res://ui/inventory/inventory_slot.tscn")
 
-var slots = {}
-
 func add_material(material: RawMaterial):
 	var slot := _get_slot(material.get_material_id())
 	if slot == null:

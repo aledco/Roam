@@ -5,7 +5,7 @@ static var NAME = "Copper Ingot"
 static var IMAGE = preload("res://raw_materials/copper_ingot/copper_ingot.png")
 static var INGREDIENTS = []
 
-static func get_model(parent: Structure) -> MaterialModel:
+static func get_model(parent: Variant) -> MaterialModel:
 	return MaterialModel.create(
 		parent, 
 		NAME, 

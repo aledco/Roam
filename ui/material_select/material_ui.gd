@@ -31,4 +31,3 @@ func _set_material():
 
 func set_selected(selected: bool):
 	overlay.visible = selected
-

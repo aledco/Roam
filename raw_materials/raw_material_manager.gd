@@ -77,7 +77,7 @@ func has_sufficient_ingredients(material_id: int, ingridents: Array[RawMaterial]
 	return [true, used]
 
 
-func get_model(material_id: int, parent: Structure) -> MaterialModel:
+func get_model(material_id: int, parent: Variant) -> MaterialModel:
 	var config := material_configs[material_id - 1]
 	return config.material_script.get_model(parent)
 

@@ -5,7 +5,7 @@ static var NAME = "Plank"
 static var IMAGE = preload("res://raw_materials/plank/plank.png")
 static var INGREDIENTS = [[Wood.MATERIAL_ID, 1]]
 
-static func get_model(parent: Structure) -> MaterialModel:
+static func get_model(parent: Variant) -> MaterialModel:
 	return MaterialModel.create(
 		parent, 
 		NAME, 

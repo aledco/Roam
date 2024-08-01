@@ -1,6 +1,5 @@
 class_name Building extends MultiInputPathedStructure
 
-const MATERIAL_SELECT_UI = preload("res://ui/material_select/material_select_ui.tscn")
 const CONVEYOR_PIECE = preload("res://structures/conveyors/conveyor_piece/conveyor_piece.tscn")
 
 var materials_for_output: Array[RawMaterial] = []
@@ -16,10 +15,7 @@ func _play_operate_animation():
 	pass
 
 func _get_conveyor_piece_reference_position() -> Vector2:
-	return Vector2.ZERO
-
-func _setup_io():
-	pass
+	return Vector2(0, 15)
 
 func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
 	pass
@@ -64,6 +60,24 @@ func on_output_disconnected(output: OutputNode):
 	conveyor_pieces[output].queue_free()
 	conveyor_pieces.erase(output)
 
+func _setup_io():
+	inputs[0].setup(self, Vector2i.ZERO, PI, true)
+	inputs[0].path = paths[0]
+	inputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
+	inputs[1].path = paths[1]
+	inputs[2].setup(self, Vector2i.ZERO, 0, true)
+	inputs[2].path = paths[2]
+	inputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
+	inputs[3].path = paths[3]
+	
+	outputs[0].setup(self, Vector2i.ZERO, PI, true)
+	outputs[0].path = paths[4]
+	outputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
+	outputs[1].path = paths[5]
+	outputs[2].setup(self, Vector2i.ZERO, 0, true)
+	outputs[2].path = paths[6]
+	outputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
+	outputs[3].path = paths[7]
 
 func _ready():
 	super._ready()

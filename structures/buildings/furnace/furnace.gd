@@ -8,9 +8,6 @@ static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
-func _get_conveyor_piece_reference_position() -> Vector2:
-	return Vector2(0, 15)
-
 func _play_default_animation():
 	if smoke.is_active:
 		smoke.dissapate()
@@ -18,29 +15,6 @@ func _play_default_animation():
 func _play_operate_animation():
 	if not smoke.is_active:
 		smoke.start()
-
-func _setup_io():
-	inputs[0].setup(self, Vector2i.ZERO, PI, true)
-	inputs[0].path = paths[0]
-	inputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
-	inputs[1].path = paths[1]
-	inputs[2].setup(self, Vector2i.ZERO, 0, true)
-	inputs[2].path = paths[2]
-	inputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
-	inputs[3].path = paths[3]
-	
-	outputs[0].setup(self, Vector2i.ZERO, PI, true)
-	outputs[0].path = paths[4]
-	outputs[1].setup(self, Vector2i.ZERO, -PI / 2, true)
-	outputs[1].path = paths[5]
-	outputs[2].setup(self, Vector2i.ZERO, 0, true)
-	outputs[2].path = paths[6]
-	outputs[3].setup(self, Vector2i.ZERO, PI / 2, true)
-	outputs[3].path = paths[7]
-
-
-func _ready():
-	super._ready()
 
 func can_accept_material(material: RawMaterial):
 	if not super.can_accept_material(material):
