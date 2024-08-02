@@ -26,7 +26,7 @@ func _process_materials_in_building(processed_materials: Array[RawMaterial], ope
 ### END abstract functions
 
 func can_accept_material(material: RawMaterial):
-	var operational_outputs = outputs.filter(func(output): return output.connection != null)
+	var operational_outputs = _get_operational_outputs()
 	if len(operational_outputs) == 0:
 		return false
 	
@@ -107,7 +107,7 @@ func produce():
 	
 	_play_operate_animation()
 	
-	var operational_outputs = outputs.filter(func(output): return output.connection != null)
+	var operational_outputs = _get_operational_outputs()
 	var processed_materials: Array[RawMaterial] = []
 	for material in materials:
 		if material in materials_for_output:
@@ -134,6 +134,9 @@ func produce():
 			connected_structure.add_material(material)
 			output.material_to_output = false
 
+
+func _get_operational_outputs() -> Array[OutputNode]:
+	return outputs.filter(func(output): return output.connection != null)
 
 func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
 	if current_output_index >= len(operational_outputs):

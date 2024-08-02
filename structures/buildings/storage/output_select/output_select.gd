@@ -1,23 +1,19 @@
-class_name OutputSelect extends Control
+class_name OutputSelect extends StaticBody2D
 
 const OUTPUT_SELECT_UI = preload("res://ui/output_select/output_select_ui.tscn")
-
-@onready var button = $Button
-@onready var texture_rect = $Buton/TextureRect
 
 var storage: Storage
 var current_material: MaterialModel
 
 func set_current_material(model: MaterialModel):
 	current_material = model
-	texture_rect.texture = model.image
-	texture_rect.scale = Vector2(0.5, 0.5)
-
-func _ready():
-	button.pressed.connect(_create_material_select)
 
 func setup(storage: Storage):
 	self.storage = storage
+
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		_create_material_select()
 
 func _create_material_select():
 	var output_select_ui := OUTPUT_SELECT_UI.instantiate() as OutputSelectUI
