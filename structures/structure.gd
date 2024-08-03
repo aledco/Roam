@@ -16,12 +16,10 @@ var material_node: Node2D:
 
 
 const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
-const MATERIAL_SELECT_UI: Resource = preload("res://ui/material_select/material_select_ui.tscn")
 
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
 var outputs: Array[OutputNode] = []
-var connections: Array[Connection] = []
 
 var direction := Vector2i(0, 1)
 
@@ -54,6 +52,18 @@ func _can_saw() -> bool:
 
 func _can_drill() -> bool:
 	return false
+
+func on_input_connected_to(input: InputNode):
+	pass
+
+func on_output_connected_to(output: OutputNode):
+	pass
+
+func on_input_disconnected(input: InputNode):
+	pass
+
+func on_output_disconnected(output: OutputNode):
+	pass
 
 # END abstract functions
 

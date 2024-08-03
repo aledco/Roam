@@ -1,7 +1,7 @@
 class_name StoragePlaceholder extends StructurePlaceholder
 
 func get_grid_size() -> Vector2i:
-	return Vector2i(1, 1)
+	return Storage.GRID_SIZE
 
 func _destroy_after_placement() -> bool:
 	return true
@@ -16,4 +16,4 @@ static func get_model() -> StructureModel:
 		"Storage",
 		1,
 		preload("res://structures/buildings/storage/placeholder/storage_placeholder.tscn"),
-		preload("res://structures/buildings/storage/storage_display.png"))
+		preload("res://structures/buildings/storage/storage.png"))

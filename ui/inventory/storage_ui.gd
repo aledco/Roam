@@ -5,10 +5,8 @@ class_name StorageUI extends Inventory
 func get_size() -> Vector2:
 	return container.size
 
-
 func destroy():
 	hide()
-
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:

@@ -5,7 +5,7 @@ static var NAME = "Reinforced Box"
 static var IMAGE = preload("res://raw_materials/reinforced_box/reinforced_box.png")
 static var INGREDIENTS = [[Box.MATERIAL_ID, 1], [IronPlate.MATERIAL_ID, 2]]
 
-static func get_model(parent: Structure) -> MaterialModel:
+static func get_model(parent: Variant) -> MaterialModel:
 	return MaterialModel.create(
 		parent, 
 		NAME, 

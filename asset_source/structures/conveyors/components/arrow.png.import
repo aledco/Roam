@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://22hn2upe4qba"
-path="res://.godot/imported/arrow.png-c5ec9570cac07de06679a93ab5111abf.ctex"
+path="res://.godot/imported/arrow.png-910327a58b7869fffae866b0de908308.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/conveyors/components/arrow.png"
-dest_files=["res://.godot/imported/arrow.png-c5ec9570cac07de06679a93ab5111abf.ctex"]
+source_file="res://asset_source/in_progress/structures/conveyors/components/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-910327a58b7869fffae866b0de908308.ctex"]
 
 [params]
 

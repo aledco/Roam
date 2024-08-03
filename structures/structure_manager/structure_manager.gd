@@ -111,6 +111,14 @@ func add_tunnel(tunnel_node: Node2D):
 	tunnel_out.inputs[0].can_connect = false
 
 
+func _connect(input: InputNode, output: OutputNode):
+	if input.connection != output:
+		input.connection = output
+		input.parent_structure.on_input_connected_to(input)
+	if output.connection != input:
+		output.connection = input
+		output.parent_structure.on_output_connected_to(output)
+
 ## Connects the inputs of a structure to outputs around it.
 func _connect_inputs(structure: Structure, grid_index: Vector2i):
 	for input in structure.inputs:
@@ -126,8 +134,7 @@ func _connect_inputs(structure: Structure, grid_index: Vector2i):
 				if next_index == grid_index + input.get_local_index():
 					if input.is_in_and_out and output.is_in_and_out:
 						break
-					input.connection = output
-					output.connection = input
+					_connect(input, output)
 					break
 
 
@@ -146,25 +153,27 @@ func _connect_outputs(structure: Structure, grid_index: Vector2i):
 				if prev_index == grid_index + output.get_local_index():
 					if input.is_in_and_out and output.is_in_and_out:
 						break
-					input.connection = output
-					output.connection = input
+					_connect(input, output)
 					break
 
 ## Connects a structure to those around it.
 func _connect_structure(structure: Structure, grid_index: Vector2i):
 	_connect_inputs(structure, grid_index)
 	_connect_outputs(structure, grid_index)
-	#_connect_delayed_connections(structure, grid_index)
 
 func disconnect_inputs(structure: Structure):
 	for input in structure.inputs:
+		input.parent_structure.on_input_disconnected(input)
 		if is_instance_valid(input.connection):
+			input.get_connected_structure().on_output_disconnected(input.connection)
 			input.connection.connection = null
 
 
 func disconnect_outputs(structure: Structure):
 	for output in structure.outputs:
+		output.parent_structure.on_output_disconnected(output)
 		if is_instance_valid(output.connection):
+			output.get_connected_structure().on_input_disconnected(output.connection)
 			output.connection.connection = null
 
 

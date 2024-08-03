@@ -8,7 +8,7 @@ static var INGREDIENTS = [
 	[Processor.MATERIAL_ID, 1]
 ]
 
-static func get_model(parent: Structure) -> MaterialModel:
+static func get_model(parent: Variant) -> MaterialModel:
 	return MaterialModel.create(
 		parent, 
 		NAME, 

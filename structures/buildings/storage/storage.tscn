@@ -1,30 +1,83 @@
-[gd_scene load_steps=8 format=3 uid="uid://6tpcrly6ns7e"]
+[gd_scene load_steps=16 format=3 uid="uid://6tpcrly6ns7e"]
 
 [ext_resource type="Script" path="res://structures/buildings/storage/storage.gd" id="1_fqxak"]
-[ext_resource type="Texture2D" uid="uid://0kx17s2jrpwj" path="res://structures/buildings/storage/storage_conveyor.png" id="2_4lxo3"]
+[ext_resource type="Texture2D" uid="uid://dmtd26fpdrqvd" path="res://structures/buildings/storage/storage.png" id="2_jxa5u"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_bsffx"]
-[ext_resource type="Texture2D" uid="uid://ry1uxk0yag0c" path="res://structures/buildings/storage/storage_top.png" id="3_iv6su"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_s4ydc"]
+[ext_resource type="PackedScene" uid="uid://3dfbggpbn7uc" path="res://ui/inventory/storage_ui.tscn" id="4_usvtd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jxa5u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itsdn"]
 size = Vector2(26, 26)
 
-[sub_resource type="Curve2D" id="Curve2D_t0ajv"]
+[sub_resource type="Curve2D" id="Curve2D_w852b"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 6)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_inbd4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_utxks"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_wgvtd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_2sxr3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_msjsh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jdj82"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_kdbne"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0)
 }
 point_count = 2
 
 [node name="Storage" type="StaticBody2D"]
+collision_layer = 2
 input_pickable = true
 script = ExtResource("1_fqxak")
+STRUCTURE_ID = null
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_4lxo3")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
-texture = ExtResource("3_iv6su")
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_itsdn")
@@ -34,12 +87,54 @@ shape = SubResource("RectangleShape2D_itsdn")
 [node name="InputNode" parent="Inputs" instance=ExtResource("3_bsffx")]
 position = Vector2(0, -16)
 
-[node name="EndNode" parent="." instance=ExtResource("4_s4ydc")]
-position = Vector2(0, 6)
+[node name="InputNode2" parent="Inputs" instance=ExtResource("3_bsffx")]
+position = Vector2(16, 0)
+
+[node name="InputNode3" parent="Inputs" instance=ExtResource("3_bsffx")]
+position = Vector2(0, 16)
+
+[node name="InputNode4" parent="Inputs" instance=ExtResource("3_bsffx")]
+position = Vector2(-16, 0)
 
 [node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_s4ydc")]
+position = Vector2(0, -16)
+
+[node name="OutputNode2" parent="Outputs" instance=ExtResource("4_s4ydc")]
+position = Vector2(16, 0)
+
+[node name="OutputNode3" parent="Outputs" instance=ExtResource("4_s4ydc")]
+position = Vector2(0, 16)
+
+[node name="OutputNode4" parent="Outputs" instance=ExtResource("4_s4ydc")]
+position = Vector2(-16, 0)
 
 [node name="Paths" type="Node2D" parent="."]
 
 [node name="Path2D" type="Path2D" parent="Paths"]
-curve = SubResource("Curve2D_t0ajv")
+curve = SubResource("Curve2D_w852b")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_inbd4")
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_utxks")
+
+[node name="Path2D4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_wgvtd")
+
+[node name="Path2D5" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_2sxr3")
+
+[node name="Path2D6" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_msjsh")
+
+[node name="Path2D7" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_jdj82")
+
+[node name="Path2D8" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_kdbne")
+
+[node name="StorageUI" parent="." instance=ExtResource("4_usvtd")]
+visible = false

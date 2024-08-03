@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy8gqaeypk748"]
+
+[ext_resource type="Texture2D" uid="uid://bvaj2wbyjxbjv" path="res://structures/conveyors/conveyor_piece/conveyor_piece.png" id="1_auibv"]
+[ext_resource type="Script" path="res://structures/conveyors/conveyor_piece/conveyor_piece.gd" id="2_syge7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btl4e"]
+atlas = ExtResource("1_auibv")
+region = Rect2(0, 0, 20, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy4jn"]
+atlas = ExtResource("1_auibv")
+region = Rect2(20, 0, 20, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvpvd"]
+atlas = ExtResource("1_auibv")
+region = Rect2(40, 0, 20, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g00ch"]
+atlas = ExtResource("1_auibv")
+region = Rect2(60, 0, 20, 2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jexnc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btl4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uy4jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvpvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g00ch")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}]
+
+[node name="ConveyorPiece" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jexnc")
+animation = &"roll"
+script = ExtResource("2_syge7")
