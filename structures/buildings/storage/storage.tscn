@@ -69,8 +69,10 @@ _data = {
 point_count = 2
 
 [node name="Storage" type="StaticBody2D"]
+collision_layer = 2
 input_pickable = true
 script = ExtResource("1_fqxak")
+STRUCTURE_ID = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2

@@ -13,8 +13,10 @@ func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
 func _ready():
+	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
-	
+
+
 func can_accept_material(material: RawMaterial):
 	if storage_ui.is_full(material.get_material_id()):
 		return false
@@ -46,26 +48,49 @@ func _process_material_in_building(material: RawMaterial, processed_materials: A
 
 func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
 	pass
-	#if len(operational_outputs) == 0:
-		#return
-	#
-	#var operational_output = get_next_output(operational_outputs)
-	#if operational_output == null:
-		#return
-	#
-	#var new_mat := RawMaterialManager.instantiate_material(current_material.material_id)
-	#material_node.add_child(new_mat)
-	#new_mat.mock_follow_node = PathFollow2D.new()
-	#new_mat.mock_follow_node.loop = false
-	#new_mat.parent = self
-	#new_mat.disable_collision() # TODO skip full outputs
-	#operational_output.path.add_child(new_mat.mock_follow_node)
-	#new_mat.global_position = new_mat.mock_follow_node.global_position
-	#materials_for_output.append(new_mat)
-	#materials.append(new_mat)
 
-func get_stored_material_ids() -> Array[int]:
+func get_stored_material_ids() -> Array:
 	return storage_ui.get_stored_material_ids()
 
+func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
+	if current_output_index >= len(operational_outputs):
+		current_output_index = 0
+	
+	var start = current_output_index
+	while operational_outputs[current_output_index] not in output_selects \
+			or not output_selects[operational_outputs[current_output_index]].current_material \
+			or operational_outputs[current_output_index].connection.is_full():
+		current_output_index = (current_output_index + 1) % len(operational_outputs)
+		if current_output_index == start:
+			return null
+		
+	var output = operational_outputs[current_output_index]
+	current_output_index = (current_output_index + 1) % len(operational_outputs)
+	return output
+
 func _produce_material():
-	pass # TODO remove mat from inventory, add to output
+	var operational_outputs = _get_operational_outputs()
+	if len(operational_outputs) == 0:
+		return
+	
+	var output := get_next_output(operational_outputs)
+	if not output:
+		return
+		
+	var output_select := output_selects[output] as OutputSelect
+	var material_id := output_select.current_material.material_id
+	var success := storage_ui.remove_material(material_id)
+	if not success:
+		return
+	
+	var material = RawMaterialManager.instantiate_material(material_id)
+	material_node.add_child(material)
+	material.parent = self
+	material.mock_follow_node = PathFollow2D.new()
+	material.mock_follow_node.loop = false
+	material.parent = self
+	material.disable_collision()
+	output.path.add_child(material.mock_follow_node)
+	material.global_position = material.mock_follow_node.global_position
+	materials_for_output.append(material)
+	materials.append(material)
