@@ -1,11 +1,23 @@
 class_name Wire extends Line2D
 
+const BLACK := Color(0, 0, 0, 255)
+const RED := Color(2, 0, 0, 2)
+
+const MAX_LENGTH = 5
+
+var structure_manager: StructureManager:
+	get:
+		return get_node("/root/World/StructureManager") as StructureManager
+
+@onready var power_node: PowerNode = $PowerNode
+
 var input: Structure
 var output: Structure
 
 var energy := 0
 
 var is_connecting = false
+var connecting_structure: Structure
 
 func start_connecting(input: Structure, node_pos: Vector2):
 	self.input = input
@@ -15,4 +27,56 @@ func start_connecting(input: Structure, node_pos: Vector2):
 
 func _process(delta):
 	if is_connecting:
-		points[1] = to_local(get_global_mouse_position())
+		_set_wire_end()
+
+func _input(event):
+	if not is_connecting:
+		return
+	
+	if event is InputEventMouseButton:
+		if event.is_action_released("right_click"):
+			if not connecting_structure:
+				return
+			
+			if connecting_structure == power_node:
+				structure_manager.add_structure(power_node, true)
+				power_node.show()
+			else:
+				power_node.queue_free()
+			
+			output = connecting_structure
+			connecting_structure.connect_wire(self)
+			is_connecting = false
+	if event.is_action_released("escape"):
+		queue_free()
+
+
+func _invalid_end():
+	connecting_structure = null
+	points[1] = to_local(get_global_mouse_position())
+	default_color = RED
+	
+func _set_wire_end():
+	# TODO do not allow duplicate connections
+	var start_grid_index = input.get_grid_index()
+	var end_grid_index := structure_manager.get_mouse_grid_index()
+	if Vector2(start_grid_index).distance_to(end_grid_index) > MAX_LENGTH:
+		power_node.hide()
+		_invalid_end()
+		return
+	
+	var success := power_node.set_grid_position(end_grid_index)
+	if success:
+		power_node.show()
+		connecting_structure = power_node
+		points[1] = to_local(power_node.energy_connection_node.global_position)
+		default_color = BLACK
+	else:
+		power_node.hide()
+		var structure := structure_manager.get_structure_at(end_grid_index)
+		if not structure or not structure.can_accept_wire_connection():
+			_invalid_end()
+		else:
+			connecting_structure = structure
+			points[1] = to_local(structure.get_wire_connection_position())
+			default_color = BLACK

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvey4pndocm1w"]
+
+[ext_resource type="Script" path="res://structures/energy/power_node/power_node.gd" id="1_5hb43"]
+[ext_resource type="Texture2D" uid="uid://8q8gsh2pqg3l" path="res://structures/energy/power_node/power_node.png" id="2_gxpbq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gxpbq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o33t"]
+radius = 8.0
+
+[node name="PowerNode" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_5hb43")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8o33t")
+
+[node name="EnergyConnectionNode" type="Node2D" parent="."]

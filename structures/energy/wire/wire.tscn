@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://t2f4m7x5wn7l"]
+[gd_scene load_steps=3 format=3 uid="uid://t2f4m7x5wn7l"]
 
 [ext_resource type="Script" path="res://structures/energy/wire/wire.gd" id="1_0e4kk"]
+[ext_resource type="PackedScene" uid="uid://dvey4pndocm1w" path="res://structures/energy/power_node/power_node.tscn" id="2_juy6b"]
 
 [node name="Wire" type="Line2D"]
 z_index = 6
 width = 2.0
 default_color = Color(0, 0, 0, 1)
 script = ExtResource("1_0e4kk")
+
+[node name="PowerNode" parent="." instance=ExtResource("2_juy6b")]
+visible = false
+z_as_relative = false

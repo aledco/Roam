@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnt3yc0g2dwmv"
-path="res://.godot/imported/node.png-a76ed6c5cfe6fb735460f913cbcb2297.ctex"
+uid="uid://n4fnapif6u8q"
+path="res://.godot/imported/power_node.png-4836126a78e4f7b7d4ad604d82279b44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/energy/node/node/node.png"
-dest_files=["res://.godot/imported/node.png-a76ed6c5cfe6fb735460f913cbcb2297.ctex"]
+source_file="res://asset_source/structures/energy/power_node/power_node.png"
+dest_files=["res://.godot/imported/power_node.png-4836126a78e4f7b7d4ad604d82279b44.ctex"]
 
 [params]
 

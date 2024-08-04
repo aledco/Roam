@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7l4wfex01tc3"]
+[gd_scene load_steps=9 format=3 uid="uid://c7l4wfex01tc3"]
 
 [ext_resource type="Script" path="res://structures/energy/coal_power_plant/coal_power_plant.gd" id="1_4eivm"]
 [ext_resource type="Texture2D" uid="uid://dsjabkuf0wqdo" path="res://structures/energy/coal_power_plant/coal_power_plant.png" id="2_lqyji"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_2e1q7"]
 [ext_resource type="PackedScene" uid="uid://cy8gqaeypk748" path="res://structures/conveyors/conveyor_piece/conveyor_piece.tscn" id="5_3urb5"]
-[ext_resource type="PackedScene" uid="uid://3dfbggpbn7uc" path="res://ui/inventory/storage_ui.tscn" id="5_4qvl8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n7nih"]
 atlas = ExtResource("2_lqyji")
@@ -54,9 +53,6 @@ position = Vector2(0, -16)
 
 [node name="Path2D" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_w852b")
-
-[node name="StorageUI" parent="." instance=ExtResource("5_4qvl8")]
-visible = false
 
 [node name="ConveyorPiece" parent="." instance=ExtResource("5_3urb5")]
 position = Vector2(0, -15)

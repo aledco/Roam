@@ -33,3 +33,4 @@ func _create_special_ui():
 	var wire = WIRE.instantiate() as Wire
 	add_child(wire)
 	wire.start_connecting(self, energy_output_node.position)
+	

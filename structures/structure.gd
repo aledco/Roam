@@ -61,8 +61,17 @@ func on_output_connected_to(output: OutputNode):
 
 func on_input_disconnected(input: InputNode):
 	pass
-
+ 
 func on_output_disconnected(output: OutputNode):
+	pass
+
+func can_accept_wire_connection() -> bool:
+	return false
+
+func get_wire_connection_position() -> Vector2:
+	return Vector2.ZERO
+
+func connect_wire(wire: Wire):
 	pass
 
 # END abstract functions
