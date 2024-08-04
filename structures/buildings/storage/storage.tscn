@@ -72,7 +72,6 @@ point_count = 2
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_fqxak")
-STRUCTURE_ID = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2

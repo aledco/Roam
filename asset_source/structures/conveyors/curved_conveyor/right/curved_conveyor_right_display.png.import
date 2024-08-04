@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmeldw2jc7efa"
-path="res://.godot/imported/curved_conveyor_right_display.png-883d7fb4603f45b743339bfc323169d5.ctex"
+path="res://.godot/imported/curved_conveyor_right_display.png-5c6a1c3545e6a68c9cad1e86c1532f1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/curved_conveyor/right/curved_conveyor_right_display.png"
-dest_files=["res://.godot/imported/curved_conveyor_right_display.png-883d7fb4603f45b743339bfc323169d5.ctex"]
+source_file="res://asset_source/structures/conveyors/curved_conveyor/right/curved_conveyor_right_display.png"
+dest_files=["res://.godot/imported/curved_conveyor_right_display.png-5c6a1c3545e6a68c9cad1e86c1532f1b.ctex"]
 
 [params]
 

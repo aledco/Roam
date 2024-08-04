@@ -1,4 +1,4 @@
-class_name Workshop extends Building
+class_name Workshop extends PoweredBuilding
 
 const MATERIAL_SELECT_UI = preload("res://ui/material_select/material_select_ui.tscn")
 
@@ -53,15 +53,13 @@ func _process_material_in_building(material: RawMaterial, ingredients: Array[Raw
 		material.queue_free()
 
 func _process_materials_in_building(ingredients: Array[RawMaterial], operational_outputs: Array[OutputNode]):
+	if energy == 0 or len(operational_outputs) == 0:
+		return
+
 	var result = RawMaterialManager.has_sufficient_ingredients(current_material.material_id, ingredients)
 	if result[0]:
 		var used = result[1]
-		for material in used:
-			materials.remove_at(materials.find(material))
-			material.queue_free()
-		
-		if len(operational_outputs) == 0:
-			return
+		_remove_all(used)
 		
 		var operational_output = get_next_output(operational_outputs)
 		if operational_output == null:
@@ -72,8 +70,10 @@ func _process_materials_in_building(ingredients: Array[RawMaterial], operational
 		new_mat.mock_follow_node = PathFollow2D.new()
 		new_mat.mock_follow_node.loop = false
 		new_mat.parent = self
-		new_mat.disable_collision() # TODO skip full outputs
+		new_mat.disable_collision()
 		operational_output.path.add_child(new_mat.mock_follow_node)
 		new_mat.global_position = new_mat.mock_follow_node.global_position
 		materials_for_output.append(new_mat)
 		materials.append(new_mat)
+		
+		energy -= 1

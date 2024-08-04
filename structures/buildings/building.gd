@@ -164,3 +164,8 @@ func _get_output(material: RawMaterial):
 		if material in output.get_overlapping_bodies():
 			return output
 	return null
+
+func _remove_all(mats: Array):
+	for material in mats:
+		materials.remove_at(materials.find(material))
+		material.queue_free()

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3n3gxdrf8gkx"
-path="res://.godot/imported/furnace_placeholder.png-cf0e0d721e2584c787abe7a0d7a3cf7a.ctex"
+path="res://.godot/imported/furnace_placeholder.png-759f9902aaeafa25097adc58ed1ee201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/furnace/placeholder/furnace_placeholder.png"
-dest_files=["res://.godot/imported/furnace_placeholder.png-cf0e0d721e2584c787abe7a0d7a3cf7a.ctex"]
+source_file="res://asset_source/structures/furnace/placeholder/furnace_placeholder.png"
+dest_files=["res://.godot/imported/furnace_placeholder.png-759f9902aaeafa25097adc58ed1ee201.ctex"]
 
 [params]
 

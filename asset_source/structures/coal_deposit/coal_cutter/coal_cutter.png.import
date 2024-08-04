@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bylmf3362vedm"
-path="res://.godot/imported/coal_cutter.png-605e5e8c18ac7c7c07925eb6c269b49f.ctex"
+path="res://.godot/imported/coal_cutter.png-457331ab95e0177f02852c876051f86b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/coal_deposit/coal_cutter/coal_cutter.png"
-dest_files=["res://.godot/imported/coal_cutter.png-605e5e8c18ac7c7c07925eb6c269b49f.ctex"]
+source_file="res://asset_source/structures/coal_deposit/coal_cutter/coal_cutter.png"
+dest_files=["res://.godot/imported/coal_cutter.png-457331ab95e0177f02852c876051f86b.ctex"]
 
 [params]
 

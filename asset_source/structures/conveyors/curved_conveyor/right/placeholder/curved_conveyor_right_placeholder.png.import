@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6pqwis230lui"
-path="res://.godot/imported/curved_conveyor_right_placeholder.png-5ee820aa830090e15b13237bf096f071.ctex"
+path="res://.godot/imported/curved_conveyor_right_placeholder.png-1c75277064147f7793f9d01aa028b95e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.png"
-dest_files=["res://.godot/imported/curved_conveyor_right_placeholder.png-5ee820aa830090e15b13237bf096f071.ctex"]
+source_file="res://asset_source/structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.png"
+dest_files=["res://.godot/imported/curved_conveyor_right_placeholder.png-1c75277064147f7793f9d01aa028b95e.ctex"]
 
 [params]
 

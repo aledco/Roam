@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwd8ahgwfd375"
-path="res://.godot/imported/coal.png-28c1b771362ec741afef9ae1ee49d14c.ctex"
+path="res://.godot/imported/coal.png-05fe2ab7ed549df50a4d79050654279d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/materials/coal/coal.png"
-dest_files=["res://.godot/imported/coal.png-28c1b771362ec741afef9ae1ee49d14c.ctex"]
+source_file="res://asset_source/materials/coal/coal.png"
+dest_files=["res://.godot/imported/coal.png-05fe2ab7ed549df50a4d79050654279d.ctex"]
 
 [params]
 

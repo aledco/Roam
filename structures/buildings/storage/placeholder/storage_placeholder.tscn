@@ -31,7 +31,6 @@ collision_layer = 2
 collision_mask = 3
 input_pickable = true
 script = ExtResource("1_bfx33")
-STRUCTURE_ID = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tg63q")

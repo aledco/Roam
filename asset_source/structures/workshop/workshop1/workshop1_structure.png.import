@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbs7uvqch0naj"
-path="res://.godot/imported/workshop1_structure.png-5edece491afe6069f5a8bb74f6304733.ctex"
+path="res://.godot/imported/workshop1_structure.png-377893c98c916a1a8d1497ce44fcce55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/workshop/workshop1/workshop1_structure.png"
-dest_files=["res://.godot/imported/workshop1_structure.png-5edece491afe6069f5a8bb74f6304733.ctex"]
+source_file="res://asset_source/structures/workshop/workshop1/workshop1_structure.png"
+dest_files=["res://.godot/imported/workshop1_structure.png-377893c98c916a1a8d1497ce44fcce55.ctex"]
 
 [params]
 

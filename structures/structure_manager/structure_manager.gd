@@ -69,8 +69,11 @@ func _remove_structure_from_map(structure: Structure, grid_index: Vector2i):
 
 
 ## Adds a structure.
-func add_structure(structure: Structure):
-	add_child(structure)
+func add_structure(structure: Structure, reparent_structure: bool = false):
+	if reparent_structure:
+		structure.reparent(self)
+	else:
+		add_child(structure)
 	var grid_index = structure.get_grid_index()
 	if StructureManager.DEBUG_GRID:
 		print("add_structure: ", structure.name, ".grid_index = ", grid_index)
@@ -80,6 +83,13 @@ func add_structure(structure: Structure):
 	_add_structure_to_map(structure, grid_index)
 	_connect_structure(structure, grid_index)
 
+
+## Gets the structure at the provided index.
+func get_structure_at(grid_index) -> Structure:
+	if grid_index in structure_map:
+		return structure_map[grid_index]
+	else:
+		return null
 
 ## Removes a structure.
 func remove_structure(structure: Structure):

@@ -31,7 +31,7 @@ func _ready():
 	z_index = 5
 	animated_sprite_2d.play("blink")
 	SignalManager.player_input.connect(_on_player_input)
-	player.is_placing = true
+	player.is_busy = true
 
 
 func _on_player_input(input_type: Player.InputType):
@@ -39,7 +39,7 @@ func _on_player_input(input_type: Player.InputType):
 
 
 func destroy():
-	player.is_placing = false
+	player.is_busy = false
 	queue_free()
 
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwlg6jvvithet"
-path="res://.godot/imported/boulder.png-ce592e4a4aa5837d0ea2b30f52242de5.ctex"
+path="res://.godot/imported/boulder.png-3f2e0816d101ce54824fdef2a3b48042.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/boulder/boulder.png"
-dest_files=["res://.godot/imported/boulder.png-ce592e4a4aa5837d0ea2b30f52242de5.ctex"]
+source_file="res://asset_source/structures/boulder/boulder.png"
+dest_files=["res://.godot/imported/boulder.png-3f2e0816d101ce54824fdef2a3b48042.ctex"]
 
 [params]
 

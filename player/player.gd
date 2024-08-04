@@ -5,7 +5,7 @@ const SPEED = 100.0
 const BUILD_MENU = preload("res://ui/build/build_menu.tscn")
 
 enum State { Idle, Run, Saw, Drill }
-enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode, Escape }
+enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode, Escape, None }
 
 @onready var inventory: Inventory = $Inventory
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -14,7 +14,7 @@ enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode
 @onready var camera_2d: Camera2D = $Camera2D
 
 var build_menu: BuildMenu = null
-var is_placing: bool = false
+var is_busy: bool = false
 var map_active: bool = false
 var is_mining: bool = false
 var minable_structure: MinableStructure
@@ -66,7 +66,7 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 	if not ignore_delete_mode:
 		StructureManager.set_delete_mode(false)
 	
-	is_placing = false
+	is_busy = false
 
 
 func _physics_process(delta):

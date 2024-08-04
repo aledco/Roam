@@ -61,8 +61,20 @@ func on_output_connected_to(output: OutputNode):
 
 func on_input_disconnected(input: InputNode):
 	pass
-
+ 
 func on_output_disconnected(output: OutputNode):
+	pass
+
+func can_accept_wire_connection() -> bool:
+	return false
+
+func get_wire_connection_position() -> Vector2:
+	return Vector2.ZERO
+
+func connect_wire(wire: Wire):
+	pass
+
+func send_energy():
 	pass
 
 # END abstract functions
@@ -96,7 +108,7 @@ func delay_input():
 
 
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder() or _input_disabled or player.is_placing:
+	if _is_placeholder() or _input_disabled or player.is_busy:
 		return
 	
 	if event is InputEventMouseButton:

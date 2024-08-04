@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7l4wfex01tc3"]
+
+[ext_resource type="Script" path="res://structures/energy/coal_power_plant/coal_power_plant.gd" id="1_4eivm"]
+[ext_resource type="Texture2D" uid="uid://dsjabkuf0wqdo" path="res://structures/energy/coal_power_plant/coal_power_plant.png" id="2_lqyji"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_2e1q7"]
+[ext_resource type="PackedScene" uid="uid://cy8gqaeypk748" path="res://structures/conveyors/conveyor_piece/conveyor_piece.tscn" id="5_3urb5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7nih"]
+atlas = ExtResource("2_lqyji")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7nih")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o33t"]
+radius = 14.0
+
+[sub_resource type="Curve2D" id="Curve2D_w852b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[node name="CoalPowerPlant" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_4eivm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8o33t")
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_2e1q7")]
+position = Vector2(0, -16)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_w852b")
+
+[node name="ConveyorPiece" parent="." instance=ExtResource("5_3urb5")]
+position = Vector2(0, -15)
+
+[node name="EnergyOutputNode" type="Node2D" parent="."]

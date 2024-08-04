@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc1rhdqduk17c"
-path="res://.godot/imported/merger_display.png-1693bd0fad9909940c4589739c2405b8.ctex"
+path="res://.godot/imported/merger_display.png-cb40567257e7ae7665d614d1e92e3b43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/merger/merger_display.png"
-dest_files=["res://.godot/imported/merger_display.png-1693bd0fad9909940c4589739c2405b8.ctex"]
+source_file="res://asset_source/structures/conveyors/merger/merger_display.png"
+dest_files=["res://.godot/imported/merger_display.png-cb40567257e7ae7665d614d1e92e3b43.ctex"]
 
 [params]
 
