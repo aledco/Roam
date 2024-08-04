@@ -21,6 +21,7 @@ func _ready():
 		WorkshopPlaceholder.get_model(),
 		FurnacePlaceholder.get_model(),
 		StoragePlaceholder.get_model(),
+		CoalPowerPlantPlaceholder.get_model()
 	]
 	
 	for i in range(len(models)):

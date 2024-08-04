@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtx3vacxtyo4t"
-path="res://.godot/imported/tunnel_in_placeholder.png-338172151ab01b3b3da97649c6de4b04.ctex"
+path="res://.godot/imported/tunnel_in_placeholder.png-c8f640d54c4caf4d1c2adec64ea7a740.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.png"
-dest_files=["res://.godot/imported/tunnel_in_placeholder.png-338172151ab01b3b3da97649c6de4b04.ctex"]
+source_file="res://asset_source/structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.png"
+dest_files=["res://.godot/imported/tunnel_in_placeholder.png-c8f640d54c4caf4d1c2adec64ea7a740.ctex"]
 
 [params]
 

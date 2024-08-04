@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnnii3nemb5l3"
-path="res://.godot/imported/iron_ingot.png-0306ee7c25a885d56ca202b7599c378d.ctex"
+path="res://.godot/imported/iron_ingot.png-8d758330491239629b17c836142c7bb7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/materials/iron_ingot/iron_ingot.png"
-dest_files=["res://.godot/imported/iron_ingot.png-0306ee7c25a885d56ca202b7599c378d.ctex"]
+source_file="res://asset_source/materials/iron_ingot/iron_ingot.png"
+dest_files=["res://.godot/imported/iron_ingot.png-8d758330491239629b17c836142c7bb7.ctex"]
 
 [params]
 

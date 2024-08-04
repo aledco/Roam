@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dc63y67ssmlsx"
-path="res://.godot/imported/merger_placeholder.png-be57c393d54157405fdeaef7cc7c3ffe.ctex"
+path="res://.godot/imported/merger_placeholder.png-bf63ee55423a3e46e71aa01745dcfa54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/conveyors/merger/placeholder/merger_placeholder.png"
-dest_files=["res://.godot/imported/merger_placeholder.png-be57c393d54157405fdeaef7cc7c3ffe.ctex"]
+source_file="res://asset_source/structures/conveyors/merger/placeholder/merger_placeholder.png"
+dest_files=["res://.godot/imported/merger_placeholder.png-bf63ee55423a3e46e71aa01745dcfa54.ctex"]
 
 [params]
 

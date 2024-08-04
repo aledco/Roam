@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b86cijcchsina"
-path="res://.godot/imported/reinforced_box.png-c1a1dc6da23a03b9de5d8afc5d313491.ctex"
+path="res://.godot/imported/reinforced_box.png-d45b50140fef1d2290cde49d892d4f8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/materials/reinforced_box/reinforced_box.png"
-dest_files=["res://.godot/imported/reinforced_box.png-c1a1dc6da23a03b9de5d8afc5d313491.ctex"]
+source_file="res://asset_source/materials/reinforced_box/reinforced_box.png"
+dest_files=["res://.godot/imported/reinforced_box.png-d45b50140fef1d2290cde49d892d4f8e.ctex"]
 
 [params]
 

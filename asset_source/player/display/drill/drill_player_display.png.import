@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cedxdj7l3unvu"
-path="res://.godot/imported/drill_player_display.png-c691d7676f426a2f10e1a30df86a6aca.ctex"
+path="res://.godot/imported/drill_player_display.png-f7d398ff1c6a245b439fcbf048d87d09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/player/display/drill/drill_player_display.png"
-dest_files=["res://.godot/imported/drill_player_display.png-c691d7676f426a2f10e1a30df86a6aca.ctex"]
+source_file="res://asset_source/player/display/drill/drill_player_display.png"
+dest_files=["res://.godot/imported/drill_player_display.png-f7d398ff1c6a245b439fcbf048d87d09.ctex"]
 
 [params]
 

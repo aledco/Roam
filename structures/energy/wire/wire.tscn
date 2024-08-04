@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://t2f4m7x5wn7l"]
+
+[ext_resource type="Script" path="res://structures/energy/wire/wire.gd" id="1_0e4kk"]
+
+[node name="Wire" type="Line2D"]
+z_index = 6
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+script = ExtResource("1_0e4kk")

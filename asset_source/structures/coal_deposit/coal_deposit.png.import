@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsfv84b0cif5f"
-path="res://.godot/imported/coal_deposit.png-d44da6568ab269378f8fc7643d31a096.ctex"
+path="res://.godot/imported/coal_deposit.png-600b751ca757b8ba728c2ee2821089f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/structures/coal_deposit/coal_deposit.png"
-dest_files=["res://.godot/imported/coal_deposit.png-d44da6568ab269378f8fc7643d31a096.ctex"]
+source_file="res://asset_source/structures/coal_deposit/coal_deposit.png"
+dest_files=["res://.godot/imported/coal_deposit.png-600b751ca757b8ba728c2ee2821089f6.ctex"]
 
 [params]
 

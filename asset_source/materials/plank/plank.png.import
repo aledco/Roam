@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgwvmwvfbpkte"
-path="res://.godot/imported/plank.png-d765de3a3b3b43dcf31f0334ceba4442.ctex"
+path="res://.godot/imported/plank.png-44e2306381570cc3f20c8cc63a4ec1b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/in_progress/materials/plank/plank.png"
-dest_files=["res://.godot/imported/plank.png-d765de3a3b3b43dcf31f0334ceba4442.ctex"]
+source_file="res://asset_source/materials/plank/plank.png"
+dest_files=["res://.godot/imported/plank.png-44e2306381570cc3f20c8cc63a4ec1b3.ctex"]
 
 [params]
 
