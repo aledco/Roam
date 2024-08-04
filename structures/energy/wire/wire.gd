@@ -1,9 +1,12 @@
 class_name Wire extends Line2D
 
+
 const BLACK := Color(0, 0, 0, 255)
 const RED := Color(2, 0, 0, 2)
 
 const MAX_LENGTH = 5
+
+signal on_destroyed
 
 var structure_manager: StructureManager:
 	get:
@@ -33,15 +36,21 @@ func _destroy_on_input(_input_type):
 		destroy()
 
 func destroy():
+	on_destroyed.emit()
+	if is_connected:
+		WireManager.remove_connection(input, output)
 	queue_free()
-	
+
 func start_connecting(input: Structure, node_pos: Vector2):
 	self.input = input
+	input.on_destroyed.connect(destroy)
+	
 	is_connecting = true
 	player.is_busy = true
 	add_point(node_pos)
 	add_point(to_local(get_global_mouse_position()))
 	SignalManager.player_input.connect(_destroy_on_input)
+
 
 func _process(delta):
 	if is_connecting:
@@ -63,11 +72,17 @@ func _input(event):
 				power_node.queue_free()
 			
 			output = connecting_structure
-			connecting_structure.connect_wire(self)
-			is_connecting = false
-			is_connected = true
-			player.is_busy = false
-			SignalManager.player_input.disconnect(_destroy_on_input)
+			_connect()
+
+
+func _connect():
+	output.on_destroyed.connect(destroy)
+	output.connect_wire(self)
+	WireManager.add_connection(input, output)
+	is_connecting = false
+	is_connected = true
+	player.is_busy = false
+	SignalManager.player_input.disconnect(_destroy_on_input)
 
 
 func _invalid_end():
@@ -76,10 +91,9 @@ func _invalid_end():
 	default_color = RED
 	
 func _set_wire_end():
-	# TODO do not allow duplicate connections
 	var start_grid_index = input.get_grid_index()
 	var end_grid_index := structure_manager.get_mouse_grid_index()
-	if Vector2(start_grid_index).distance_to(end_grid_index) > MAX_LENGTH:
+	if start_grid_index == end_grid_index or Vector2(start_grid_index).distance_to(end_grid_index) > MAX_LENGTH:
 		power_node.hide()
 		_invalid_end()
 		return
@@ -93,7 +107,7 @@ func _set_wire_end():
 	else:
 		power_node.hide()
 		var structure := structure_manager.get_structure_at(end_grid_index)
-		if not structure or not structure.can_accept_wire_connection():
+		if not structure or not structure.can_accept_wire_connection() or WireManager.connected(input, structure):
 			_invalid_end()
 		else:
 			connecting_structure = structure

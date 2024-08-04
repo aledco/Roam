@@ -33,6 +33,7 @@ func get_wire_connection_position() -> Vector2:
 func connect_wire(wire: Wire):
 	can_connect = true
 	input_wires.append(wire)
+	wire.on_destroyed.connect(func(): Helpers.remove(input_wires, wire))
 
 func send_energy():
 	var wire = _get_curent_output()
@@ -57,3 +58,4 @@ func _create_special_ui():
 	add_child(wire)
 	wire.start_connecting(self, energy_connection_node.position)
 	output_wires.append(wire)
+	wire.on_destroyed.connect(func(): Helpers.remove(output_wires, wire))

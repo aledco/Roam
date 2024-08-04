@@ -49,8 +49,7 @@ func _process_material_in_building(material: RawMaterial, ingredients: Array[Raw
 	if RawMaterial.is_ingredient(material_id, current_material.material_id):
 		ingredients.append(material)
 	else:
-		materials.remove_at(materials.find(material))
-		material.queue_free()
+		Helpers.remove_and_free(materials, material)
 
 func _process_materials_in_building(ingredients: Array[RawMaterial], operational_outputs: Array[OutputNode]):
 	if energy == 0 or len(operational_outputs) == 0:
@@ -59,7 +58,8 @@ func _process_materials_in_building(ingredients: Array[RawMaterial], operational
 	var result = RawMaterialManager.has_sufficient_ingredients(current_material.material_id, ingredients)
 	if result[0]:
 		var used = result[1]
-		_remove_all(used)
+		for material in used:
+			Helpers.remove_and_free(materials, material)
 		
 		var operational_output = get_next_output(operational_outputs)
 		if operational_output == null:

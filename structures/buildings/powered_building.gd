@@ -19,6 +19,8 @@ func get_wire_connection_position() -> Vector2:
 
 func connect_wire(wire: Wire):
 	input_wires.append(wire)
+	wire.on_destroyed.connect(func(): Helpers.remove(input_wires, wire))
 
 func send_energy():
 	energy += 1
+

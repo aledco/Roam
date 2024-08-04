@@ -33,28 +33,24 @@ func _process_material_in_building(material: RawMaterial, processed_materials: A
 		var mat_fuel = material.get_fuel_value()
 		if mat_fuel > fuel:
 			fuel = mat_fuel
-		materials.remove_at(materials.find(material))
-		material.queue_free()
+		Helpers.remove_and_free(materials, material)
 	elif material.is_smeltable():
 		if fuel > 0:
 			fuel -= 1
 			processed_materials.append(material)
 		else:
-			materials.remove_at(materials.find(material))
-			material.queue_free()
+			Helpers.remove_and_free(materials, material)
 
 
 func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
 	for material in processed_materials:
 		if len(operational_outputs) == 0:
-			materials.remove_at(materials.find(material))
-			material.queue_free()
+			Helpers.remove_and_free(materials, material)
 			continue
 		
 		var operational_output = get_next_output(operational_outputs)
 		if operational_output == null:
-			materials.remove_at(materials.find(material))
-			material.queue_free()
+			Helpers.remove_and_free(materials, material)
 			continue
 		
 		var new_mat = material.get_smelted_material()
@@ -67,6 +63,4 @@ func _process_materials_in_building(processed_materials: Array[RawMaterial], ope
 		new_mat.global_position = new_mat.mock_follow_node.global_position
 		materials_for_output.append(new_mat)
 		materials.append(new_mat)
-		
-		materials.remove_at(materials.find(material))
-		material.queue_free()
+		Helpers.remove_and_free(materials, material)

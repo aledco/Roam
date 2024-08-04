@@ -52,8 +52,9 @@ func produce():
 
 
 func _physics_process(delta):
-	for material in materials:
-		if not is_instance_valid(material) or material.at_exit_node:
+	var filtered = Helpers.valid(materials)
+	for material in Helpers.valid(materials):
+		if material.at_exit_node:
 			continue
 		
 		var output = _get_output(material)

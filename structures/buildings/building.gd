@@ -109,7 +109,7 @@ func produce():
 	
 	var operational_outputs = _get_operational_outputs()
 	var processed_materials: Array[RawMaterial] = []
-	for material in materials:
+	for material in Helpers.valid(materials):
 		if material in materials_for_output:
 			continue
 		if material.mock_follow_node.progress_ratio == 1:
@@ -165,7 +165,3 @@ func _get_output(material: RawMaterial):
 			return output
 	return null
 
-func _remove_all(mats: Array):
-	for material in mats:
-		materials.remove_at(materials.find(material))
-		material.queue_free()

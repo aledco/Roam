@@ -1,6 +1,7 @@
 class_name Structure extends StaticBody2D
 
-@export var STRUCTURE_ID: int = 0
+
+signal on_destroyed
 
 var structure_manager: StructureManager:
 	get:
@@ -84,7 +85,8 @@ func _ready():
 	pass
 
 func destroy():
-	for material in materials:
+	on_destroyed.emit()
+	for material in Helpers.valid(materials):
 		material.queue_free()
 	queue_free()
 

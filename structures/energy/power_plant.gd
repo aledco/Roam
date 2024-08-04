@@ -21,13 +21,12 @@ func _ready():
 	_setup_io()
 
 func produce():
-	for material in materials:
+	for material in Helpers.valid(materials):
 		if material.mock_follow_node.progress_ratio == 1:
-			materials.remove_at(materials.find(material))
-			material.queue_free()
+			Helpers.remove_and_free(materials, material)
 			energy += _get_energy_rate()
 	
-	for wire in output_wires:
+	for wire in Helpers.valid(output_wires):
 		if energy == 0:
 			break
 		if wire.is_connected:
@@ -40,4 +39,6 @@ func _create_special_ui():
 	var wire = WIRE.instantiate() as Wire
 	add_child(wire)
 	wire.start_connecting(self, energy_output_node.position)
+	wire.on_destroyed.connect(func(): Helpers.remove(output_wires, wire))
 	output_wires.append(wire)
+

@@ -22,6 +22,8 @@ Clock="*res://autoload/clock.gd"
 SignalManager="*res://autoload/signal_manager.gd"
 RawMaterialManager="*res://raw_materials/raw_material_manager.gd"
 AnimationManager="*res://autoload/animation_manager.gd"
+Helpers="*res://autoload/helpers.gd"
+WireManager="*res://autoload/wire_manager.gd"
 
 [display]
 

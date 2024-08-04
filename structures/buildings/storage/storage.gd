@@ -43,8 +43,7 @@ func _create_special_ui():
 
 func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
 	storage_ui.add_material(material)
-	materials.remove_at(materials.find(material))
-	material.queue_free()
+	Helpers.remove_and_free(materials, material)
 
 func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
 	pass
