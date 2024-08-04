@@ -7,6 +7,7 @@ const WIRE = preload("res://structures/energy/wire/wire.tscn")
 
 var input_wires: Array[Wire] = []
 var output_wires: Array[Wire] = []
+var current_output_index := 0
 
 var can_connect := false
 
@@ -32,6 +33,21 @@ func get_wire_connection_position() -> Vector2:
 func connect_wire(wire: Wire):
 	can_connect = true
 	input_wires.append(wire)
+
+func send_energy():
+	var wire = _get_curent_output()
+	if wire:
+		wire.send_energy()
+
+func _get_curent_output() -> Wire:
+	if output_wires.is_empty():
+		return null
+	
+	if current_output_index >= len(output_wires):
+		current_output_index = 0
+	var wire = output_wires[current_output_index]
+	current_output_index = (current_output_index + 1) %  len(output_wires)
+	return wire
 
 func _create_special_ui():
 	if not can_connect:

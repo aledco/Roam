@@ -2,7 +2,6 @@ class_name Inventory extends CanvasLayer
 
 @onready var container: Container = $Control/Container
 
-
 var open_slots: Array[InventorySlot] = []
 var slots = {}
 

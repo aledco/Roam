@@ -9,6 +9,10 @@ var structure_manager: StructureManager:
 	get:
 		return get_node("/root/World/StructureManager") as StructureManager
 
+var player: Player:
+	get:
+		return get_node("/root/World/Player") as Player
+
 @onready var power_node: PowerNode = $PowerNode
 
 var input: Structure
@@ -16,14 +20,28 @@ var output: Structure
 
 var energy := 0
 
-var is_connecting = false
+var is_connecting := false
 var connecting_structure: Structure
 
+var is_connected := false
+
+func send_energy():
+	output.send_energy()
+
+func _destroy_on_input(_input_type):
+	if is_connecting:
+		destroy()
+
+func destroy():
+	queue_free()
+	
 func start_connecting(input: Structure, node_pos: Vector2):
 	self.input = input
 	is_connecting = true
+	player.is_busy = true
 	add_point(node_pos)
 	add_point(to_local(get_global_mouse_position()))
+	SignalManager.player_input.connect(_destroy_on_input)
 
 func _process(delta):
 	if is_connecting:
@@ -47,8 +65,9 @@ func _input(event):
 			output = connecting_structure
 			connecting_structure.connect_wire(self)
 			is_connecting = false
-	if event.is_action_released("escape"):
-		queue_free()
+			is_connected = true
+			player.is_busy = false
+			SignalManager.player_input.disconnect(_destroy_on_input)
 
 
 func _invalid_end():

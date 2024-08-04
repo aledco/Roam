@@ -74,6 +74,9 @@ func get_wire_connection_position() -> Vector2:
 func connect_wire(wire: Wire):
 	pass
 
+func send_energy():
+	pass
+
 # END abstract functions
 
 
@@ -105,7 +108,7 @@ func delay_input():
 
 
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder() or _input_disabled or player.is_placing:
+	if _is_placeholder() or _input_disabled or player.is_busy:
 		return
 	
 	if event is InputEventMouseButton:

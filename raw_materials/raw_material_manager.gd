@@ -61,12 +61,12 @@ func has_sufficient_ingredients(material_id: int, ingridents: Array[RawMaterial]
 		return count >= needed_mat_amount
 	
 	var needed_ingridents = get_material_ingredients(material_id)
-	var used = []
+	var used: Array[RawMaterial] = []
 	for mat_config in needed_ingridents:
 		var needed_mat_id = mat_config[0]
 		var needed_mat_amount = mat_config[1]
 		if not has_enough.call(needed_mat_id, needed_mat_amount):
-			return [false, []]
+			return [false]
 		else:
 			for material in ingridents:
 				if material.get_material_id() == needed_mat_id:

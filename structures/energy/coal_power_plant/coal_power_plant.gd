@@ -5,6 +5,9 @@ static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
+func _get_energy_rate() -> int:
+	return 5
+
 func _ready():
 	super._ready()
 
