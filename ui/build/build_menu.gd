@@ -15,8 +15,6 @@ func _ready():
 		ConveyorPlaceholder.get_model(),
 		CurvedConveyorRightPlaceholder.get_model(),
 		CurvedConveyorLeftPlaceholder.get_model(),
-		SplitterPlaceholder.get_model(),
-		MergerPlaceholder.get_model(),
 		TunnelInPlaceholder.get_model(),
 		WorkshopPlaceholder.get_model(),
 		FurnacePlaceholder.get_model(),

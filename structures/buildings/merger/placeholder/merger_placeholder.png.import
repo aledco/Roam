@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cubc8qyw3kl4w"
-path="res://.godot/imported/merger_display.png-7bd69463c9ef95dfa5f70be53670d176.ctex"
+uid="uid://ne8prbxr78ki"
+path="res://.godot/imported/merger_placeholder.png-71b630571e760b49beab898ee48fb4e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/conveyors/merger/merger_display.png"
-dest_files=["res://.godot/imported/merger_display.png-7bd69463c9ef95dfa5f70be53670d176.ctex"]
+source_file="res://structures/buildings/merger/placeholder/merger_placeholder.png"
+dest_files=["res://.godot/imported/merger_placeholder.png-71b630571e760b49beab898ee48fb4e5.ctex"]
 
 [params]
 

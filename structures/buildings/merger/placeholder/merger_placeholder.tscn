@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bedvgyrpthio"]
+[gd_scene load_steps=5 format=3 uid="uid://bedvgyrpthio"]
 
 [ext_resource type="Script" path="res://structures/buildings/merger/placeholder/merger_placeholder.gd" id="1_7gv8n"]
-[ext_resource type="Texture2D" uid="uid://drs3sigorvvfn" path="res://structures/buildings/storage/placeholder/storage_placeholder.png" id="2_5gpdx"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qshbm"]
-atlas = ExtResource("2_5gpdx")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="Texture2D" uid="uid://ne8prbxr78ki" path="res://structures/buildings/merger/placeholder/merger_placeholder.png" id="2_ltbdv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qshbm")
+"texture": ExtResource("2_ltbdv")
 }],
 "loop": true,
 "name": &"blink",
