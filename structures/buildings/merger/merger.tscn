@@ -16,8 +16,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_itsdn"]
-size = Vector2(26, 26)
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbwyk"]
+radius = 14.0
 
 [sub_resource type="Curve2D" id="Curve2D_w852b"]
 _data = {
@@ -78,7 +78,7 @@ sprite_frames = SubResource("SpriteFrames_xclil")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_itsdn")
+shape = SubResource("CircleShape2D_dbwyk")
 
 [node name="Inputs" type="Node2D" parent="."]
 
