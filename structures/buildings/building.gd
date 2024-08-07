@@ -139,6 +139,9 @@ func _get_operational_outputs() -> Array[OutputNode]:
 	return outputs.filter(func(output): return output.connection != null)
 
 func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
+	if len(operational_outputs) == 0:
+		return null
+	
 	if current_output_index >= len(operational_outputs):
 		current_output_index = 0
 	
