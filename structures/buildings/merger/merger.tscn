@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbr5gx7munn0m"]
+
+[ext_resource type="Script" path="res://structures/buildings/merger/merger.gd" id="1_iikjq"]
+[ext_resource type="Texture2D" uid="uid://cxn32hpao62x4" path="res://structures/buildings/merger/merger.png" id="2_i8v5n"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_ahugs"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_u5rny"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i8v5n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itsdn"]
+size = Vector2(26, 26)
+
+[sub_resource type="Curve2D" id="Curve2D_w852b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_inbd4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_utxks"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_wgvtd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_2sxr3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_msjsh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jdj82"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_kdbne"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0)
+}
+point_count = 2
+
+[node name="Merger" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_iikjq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_itsdn")
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("3_ahugs")]
+position = Vector2(0, -16)
+
+[node name="InputNode2" parent="Inputs" instance=ExtResource("3_ahugs")]
+position = Vector2(16, 0)
+
+[node name="InputNode3" parent="Inputs" instance=ExtResource("3_ahugs")]
+position = Vector2(0, 16)
+
+[node name="InputNode4" parent="Inputs" instance=ExtResource("3_ahugs")]
+position = Vector2(-16, 0)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("4_u5rny")]
+position = Vector2(0, -16)
+
+[node name="OutputNode2" parent="Outputs" instance=ExtResource("4_u5rny")]
+position = Vector2(16, 0)
+
+[node name="OutputNode3" parent="Outputs" instance=ExtResource("4_u5rny")]
+position = Vector2(0, 16)
+
+[node name="OutputNode4" parent="Outputs" instance=ExtResource("4_u5rny")]
+position = Vector2(-16, 0)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_w852b")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_inbd4")
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_utxks")
+
+[node name="Path2D4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_wgvtd")
+
+[node name="Path2D5" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_2sxr3")
+
+[node name="Path2D6" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_msjsh")
+
+[node name="Path2D7" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_jdj82")
+
+[node name="Path2D8" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_kdbne")
