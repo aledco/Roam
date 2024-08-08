@@ -5,12 +5,10 @@ static var GRID_SIZE = Vector2i(1, 2)
 func _get_build_list() -> Array[StructureModel]:
 	if is_robot_mining:
 		return [
-			StructureModel.create(null, "Tree", 1, null, preload("res://structures/natural/tree/tree.png"), _remove_robot.bind())
+			StructureModel.create(null, "Tree", [], null, preload("res://structures/natural/tree/tree.png"), _remove_robot.bind())
 		]
 	else:
-		return [
-			StructureModel.create(null, "Saw", 1, null, preload("res://robots/saw_robot/saw_robot_display.png"), _place_robot.bind())
-		]
+		return [_get_robot_model()]
 
 
 func get_grid_size() -> Vector2i:

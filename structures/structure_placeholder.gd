@@ -66,7 +66,7 @@ func _input(event):
 			_create_structure_from_placeholder()
 			if _destroy_after_placement():
 				destroy()
-		if StructureManager.DEBUG_GRID and event.is_action_released("right_click"):
+		if Debug.debug_grid() and event.is_action_released("right_click"):
 			var gp = get_grid_position()
 			print(self.name, ".grid_position ", gp)
 			print(self.name, ".grid_index ", get_grid_index())

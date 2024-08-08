@@ -1,6 +1,7 @@
 class_name Conveyor extends PathedStructure
 
 static var GRID_SIZE = Vector2i(1, 1)
+static var COST := [[IronIngot.MATERIAL_ID, 1]]
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 

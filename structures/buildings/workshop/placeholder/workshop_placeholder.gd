@@ -10,6 +10,6 @@ static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Workshop",
-		1,
+		Workshop.COST,
 		preload("res://structures/buildings/workshop/placeholder/workshop_placeholder.tscn"),
 		preload("res://structures/buildings/workshop/workshop.png"))

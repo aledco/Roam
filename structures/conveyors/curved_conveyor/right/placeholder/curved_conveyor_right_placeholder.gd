@@ -6,8 +6,8 @@ func _get_structure() -> Resource:
 static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
-		"Right",
-		1, 
+		"Right Conveyor",
+		Conveyor.COST, 
 		preload("res://structures/conveyors/curved_conveyor/right/placeholder/curved_conveyor_right_placeholder.tscn"),
 		preload("res://structures/conveyors/curved_conveyor/right/curved_conveyor_right_display.png"))
 	

@@ -142,3 +142,12 @@ func saw(target: MinableStructure):
 	
 func drill(target: MinableStructure):
 	_mine(target, State.Drill)
+
+func has_material_in_inventory(material_id: int, amount: int = 1) -> bool:
+	return inventory.contains_material(material_id, amount)
+
+func pay_for_structure(cost: Array):
+	for val in cost:
+		var material_id = val[0]
+		var amount = val[1]
+		inventory.remove_material(material_id, amount)

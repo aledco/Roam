@@ -14,6 +14,6 @@ static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Storage",
-		1,
+		Storage.COST,
 		preload("res://structures/buildings/storage/placeholder/storage_placeholder.tscn"),
 		preload("res://structures/buildings/storage/storage.png"))

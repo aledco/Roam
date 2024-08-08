@@ -5,12 +5,10 @@ static var GRID_SIZE = Vector2i(1, 1)
 func _get_build_list() -> Array[StructureModel]:
 	if is_robot_mining:
 		return [
-			StructureModel.create(null, "Coal Deposit", 1, null, preload("res://structures/natural/coal_deposit/coal_deposit.png"), _remove_robot.bind())
+			StructureModel.create(null, "Coal Deposit", [], null, preload("res://structures/natural/coal_deposit/coal_deposit.png"), _remove_robot.bind())
 		]
 	else:
-		return [
-			StructureModel.create(null, "Drill", 1, null, preload("res://robots/drill_robot/drill_robot_display.png"), _place_robot.bind())
-		]
+		return [_get_robot_model()]
 
 
 func get_grid_size() -> Vector2i:

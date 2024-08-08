@@ -130,3 +130,10 @@ func _produce_material():
 				material.free()
 		
 		current_output_index = (current_output_index + 1) % len(outputs)
+
+func _get_robot_model() -> StructureModel:
+	if _can_drill():
+		return StructureModel.create(null, "Drill", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/drill_robot/drill_robot_display.png"), _place_robot.bind())
+	if _can_saw():
+		return StructureModel.create(null, "Saw", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/saw_robot/saw_robot_display.png"), _place_robot.bind())
+	return null
