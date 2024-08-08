@@ -1,5 +1,7 @@
 class_name Workshop extends PoweredBuilding
 
+static var COST := [[Plank.MATERIAL_ID, 10]]
+
 const MATERIAL_SELECT_UI = preload("res://ui/material_select/material_select_ui.tscn")
 
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)

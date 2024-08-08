@@ -1,5 +1,7 @@
 class_name Storage extends Building
 
+static var COST := [[Box.MATERIAL_ID, 5], [IronIngot.MATERIAL_ID, 5]]
+
 const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/output_select.tscn")
 
 @onready var storage_ui: StorageUI = $StorageUI

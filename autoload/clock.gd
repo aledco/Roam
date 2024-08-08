@@ -7,7 +7,8 @@ var timer_callbacks = {}
 func _start_timer(time: float, timer: String):
 	await get_tree().create_timer(time).timeout
 	for callback in timer_callbacks[timer]:
-		callback.call()
+		if callback:
+			callback.call()
 	_start_timer(time, timer)
 
 
@@ -32,5 +33,6 @@ func remove_interval(time: float, index: int):
 ## Invokes the call back after time seconds.
 func invoke(time: float, callback: Callable):
 	await get_tree().create_timer(time).timeout
-	callback.call()
+	if callback:
+		callback.call()
 

@@ -2,14 +2,14 @@ class_name StructureModel extends Object
 
 var parent: Structure
 var name: String
-var cost: int
+var cost: Array
 var structure_resource: Resource
 var image: Texture2D
 var on_selected: Callable
 
 static func create(parent: Structure, 
 					name: String, 
-					cost: int,  
+					cost: Array,  
 					structure_resource: Resource,
 					image: Texture2D,
 					on_selected: Callable = func(): pass) -> StructureModel:

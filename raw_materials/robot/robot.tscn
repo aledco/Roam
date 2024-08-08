@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://vqsbvrnyc1j"]
+
+[ext_resource type="Script" path="res://raw_materials/computer/computer.gd" id="1_v1p1i"]
+[ext_resource type="Texture2D" uid="uid://b3xmasae8ehew" path="res://raw_materials/robot/robot.png" id="2_lfyxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a00yc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1lbs"]
+size = Vector2(4, 32)
+
+[node name="Robot" type="AnimatableBody2D"]
+collision_layer = 4
+collision_mask = 4
+input_pickable = true
+sync_to_physics = false
+script = ExtResource("1_v1p1i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lfyxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a00yc")
+
+[node name="Sensor" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
+position = Vector2(9, 0)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_y1lbs")

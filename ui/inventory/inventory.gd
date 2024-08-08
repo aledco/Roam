@@ -37,20 +37,21 @@ func add_material(material: RawMaterial):
 		slot.increment()
 
 
-func remove_material(material_id: int) -> bool:
-	if material_id not in slots:
+func remove_material(material_id: int, amount: int = 1) -> bool:
+	if not contains_material(material_id, amount):
 		return false
 	
-	var slot := _get_next_open_slot(slots[material_id])
-	if not slot:
-		slot = slots[material_id][0]
-	
-	slot.decrement()
-	if slot.is_empty():
-		slots[material_id].remove_at(slots[material_id].find(slot))
-		if slots[material_id].is_empty():
-			slots.erase(material_id)
-		open_slots.append(slot)
+	while amount > 0:
+		var slot := _get_next_open_slot(slots[material_id])
+		if not slot:
+			slot = slots[material_id][0]
+
+		amount = slot.decrement(amount)
+		if slot.is_empty():
+			slots[material_id].remove_at(slots[material_id].find(slot))
+			if slots[material_id].is_empty():
+				slots.erase(material_id)
+			open_slots.append(slot)
 	return true
 
 
@@ -63,3 +64,15 @@ func is_full(material_id: int):
 
 func get_stored_material_ids() -> Array:
 	return slots.keys() as Array[int]
+
+func contains_material(material_id: int, amount: int = 1) -> bool:
+	if material_id not in slots:
+		return false
+	
+	var found_amount := 0
+	for slot in slots[material_id]:
+		found_amount += slot.amount
+		if found_amount >= amount:
+			return true
+	
+	return false

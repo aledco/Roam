@@ -1,5 +1,7 @@
 class_name Furnace extends Building
 
+static var COST := [[IronIngot.MATERIAL_ID, 5], [StoneBrick.MATERIAL_ID, 5]]
+
 @onready var smoke: Smoke = $Smoke
 
 var fuel := 0

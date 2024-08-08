@@ -12,6 +12,6 @@ static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Conveyor",
-		1, 
+		Conveyor.COST, 
 		preload("res://structures/conveyors/conveyor/placeholder/conveyor_placeholder.tscn"),
 		preload("res://structures/conveyors/conveyor/conveyor_display.png"))

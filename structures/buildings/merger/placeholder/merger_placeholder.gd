@@ -14,6 +14,6 @@ static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Merger",
-		1,
+		Merger.COST,
 		preload("res://structures/buildings/merger/placeholder/merger_placeholder.tscn"),
 		preload("res://structures/buildings/merger/merger.png"))

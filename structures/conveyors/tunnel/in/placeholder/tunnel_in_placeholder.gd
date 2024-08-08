@@ -32,6 +32,6 @@ static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 
 		"Tunnel", 
-		1, 
+		TunnelIn.TUNNEL_COST, 
 		preload("res://structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.tscn"),
 		preload("res://structures/conveyors/tunnel/in/tunnel_in.png"))

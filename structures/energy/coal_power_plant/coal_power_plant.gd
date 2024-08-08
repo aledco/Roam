@@ -1,5 +1,6 @@
 class_name CoalPowerPlant extends PowerPlant
 
+static var COST := [[IronIngot.MATERIAL_ID, 5], [StoneBrick.MATERIAL_ID, 5]]
 
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:

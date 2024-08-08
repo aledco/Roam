@@ -2,48 +2,48 @@
 
 [ext_resource type="Script" path="res://ui/build/structure_ui.gd" id="1_lgj8h"]
 [ext_resource type="Texture2D" uid="uid://bmpo45lu3k71s" path="res://structures/conveyors/conveyor/conveyor_display.png" id="2_r73fv"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_ik65c"]
 
-[node name="StructureUI" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ler5e"]
+
+[node name="StructureUI" type="Panel"]
 custom_minimum_size = Vector2(50, 50)
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -590.0
-offset_bottom = -268.0
+offset_bottom = -270.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ler5e")
 script = ExtResource("1_lgj8h")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="Button" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 51.0
-
-[node name="Texture" type="TextureRect" parent="Panel/Button"]
+[node name="Texture" type="TextureRect" parent="Button"]
 layout_mode = 0
 offset_left = 9.0
-offset_top = 3.0
+offset_top = 9.0
 offset_right = 41.0
-offset_bottom = 35.0
+offset_bottom = 41.0
 texture = ExtResource("2_r73fv")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Text" type="RichTextLabel" parent="Panel/Button"]
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 5
 layout_mode = 0
-offset_top = 34.0
-offset_right = 50.0
-offset_bottom = 47.0
-theme_override_fonts/normal_font = ExtResource("3_ik65c")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]Test[/center]"
+offset_left = 40.0
+offset_top = -10.0
+offset_right = 125.0
+offset_bottom = -10.0
+color = Color(0.118581, 0.118581, 0.118581, 1)
+
+[node name="HoverContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 80.0
+offset_bottom = 20.0

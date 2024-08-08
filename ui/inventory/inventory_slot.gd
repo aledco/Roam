@@ -19,14 +19,22 @@ func increment():
 	text_label.add_text(str(amount))
 
 
-func decrement():
-	amount -= 1
+func decrement(amount_to_remove: int = 1) -> int:
+	var left_to_remove := 0
+	if amount_to_remove > amount:
+		left_to_remove = amount_to_remove - amount
+		amount = 0
+	else:
+		amount -= amount_to_remove
+	
 	text_label.clear()
 	if is_empty():
 		material_id = -1
 		sprite_2d.texture = null
 	else:
 		text_label.add_text(str(amount))
+	
+	return left_to_remove
 
 
 func is_empty() -> bool:

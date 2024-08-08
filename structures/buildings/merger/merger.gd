@@ -1,5 +1,7 @@
 class_name Merger extends Building
 
+static var COST := [[IronIngot.MATERIAL_ID, 10]]
+
 var materials_waiting_for_output: Array[RawMaterial] = []
 var interval_id := -1
 var time := 1

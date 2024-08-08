@@ -1,11 +1,11 @@
-class_name Computer extends RawMaterial
+class_name Robot extends RawMaterial
 
-static var MATERIAL_ID = 15
-static var NAME = "Computer"
-static var IMAGE = preload("res://raw_materials/computer/computer.png")
+static var MATERIAL_ID = 16
+static var NAME = "Robot"
+static var IMAGE = preload("res://raw_materials/robot/robot.png")
 static var INGREDIENTS = [
 	[ReinforcedBox.MATERIAL_ID, 1], 
-	[Processor.MATERIAL_ID, 1]
+	[Computer.MATERIAL_ID, 1]
 ]
 
 static func get_model(parent: Variant) -> MaterialModel:
@@ -20,4 +20,3 @@ func get_material_id() -> int:
 
 func get_material_image() -> Texture2D:
 	return IMAGE
- 

@@ -1,5 +1,10 @@
 class_name TunnelIn extends Conveyor
 
+static var TUNNEL_COST := [
+	[IronIngot.MATERIAL_ID, 1], 
+	[StoneBrick.MATERIAL_ID, 1]
+]
+
 var tunnel_out: TunnelOut
 
 func _setup_io():

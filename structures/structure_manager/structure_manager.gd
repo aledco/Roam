@@ -1,6 +1,5 @@
 class_name StructureManager extends Node2D
 
-static var DEBUG_GRID = false
 const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
 var debug_info = null
 
@@ -9,7 +8,7 @@ var player: Player:
 		return get_node("/root/World/Player") as Player
 
 func _process(delta):
-	if DEBUG_GRID:
+	if Debug.debug_grid():
 		if debug_info != null:
 			debug_info.queue_free()
 		
@@ -51,12 +50,12 @@ func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vecto
 ## Adds a structure to the structure map.
 func _add_structure_to_map(structure: Structure, grid_index: Vector2i):
 	var rotated_grid_size = rotate_grid_size(structure.get_grid_size(), structure.direction)
-	if StructureManager.DEBUG_GRID:
+	if Debug.debug_grid():
 		print("_add_structure_to_map: rotated_grid_size = ", rotated_grid_size)
 	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
 		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
 			structure_map[Vector2i(x, y)] = structure
-			if StructureManager.DEBUG_GRID:
+			if Debug.debug_grid():
 				print("\t(x, y) = ", Vector2i(x, y))
 
 
@@ -75,7 +74,7 @@ func add_structure(structure: Structure, reparent_structure: bool = false):
 	else:
 		add_child(structure)
 	var grid_index = structure.get_grid_index()
-	if StructureManager.DEBUG_GRID:
+	if Debug.debug_grid():
 		print("add_structure: ", structure.name, ".grid_index = ", grid_index)
 		print("add_structure: ", structure.name, ".grid_size = ", structure.get_grid_size())
 		print("add_structure: ", structure.name, ".direction = ", structure.direction)
@@ -173,7 +172,7 @@ func _connect_structure(structure: Structure, grid_index: Vector2i):
 
 func disconnect_inputs(structure: Structure):
 	for input in structure.inputs:
-		input.parent_structure.on_input_disconnected(input)
+		# input.parent_structure.on_input_disconnected(input)
 		if is_instance_valid(input.connection):
 			input.get_connected_structure().on_output_disconnected(input.connection)
 			input.connection.connection = null
@@ -181,7 +180,7 @@ func disconnect_inputs(structure: Structure):
 
 func disconnect_outputs(structure: Structure):
 	for output in structure.outputs:
-		output.parent_structure.on_output_disconnected(output)
+		# output.parent_structure.on_output_disconnected(output)
 		if is_instance_valid(output.connection):
 			output.get_connected_structure().on_input_disconnected(output.connection)
 			output.connection.connection = null

@@ -81,6 +81,9 @@ func get_model(material_id: int, parent: Variant) -> MaterialModel:
 	var config := material_configs[material_id - 1]
 	return config.material_script.get_model(parent)
 
+func get_material_name(material_id: int) -> String:
+	var model = get_model(material_id, null)
+	return model.name # TODO create static name vars 
 
 func instantiate_material(material_id) -> RawMaterial:
 	var config := material_configs[material_id - 1]
