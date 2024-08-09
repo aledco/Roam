@@ -16,7 +16,7 @@ var material_node: Node2D:
 		return get_node("/root/World/Materials")
 
 
-const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
+const BUILD_MENU = preload("res://ui/structure_menu/structure_build_menu/structure_build_menu.tscn")
 
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
@@ -99,7 +99,7 @@ func _create_build_ui():
 	if build_list == []:
 		return
 	
-	var build_ui := BUILD_UI.instantiate() as BuildUI;
+	var build_ui := BUILD_MENU.instantiate() as StructureBuildMenu
 	add_child(build_ui)
 	build_ui.create_structure_selections(build_list, _can_saw(), _can_drill())
 

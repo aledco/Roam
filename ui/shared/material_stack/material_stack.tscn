@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfjty50e0cv2s"]
+
+[ext_resource type="Script" path="res://ui/shared/material_stack/material_stack.gd" id="1_7lx4s"]
+[ext_resource type="PackedScene" uid="uid://bfyuatcmxa7rf" path="res://ui/shared/text_label/text_label.tscn" id="2_5y4oq"]
+
+[node name="MaterialStack" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+script = ExtResource("1_7lx4s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+
+[node name="TextLabel" parent="." instance=ExtResource("2_5y4oq")]
+layout_mode = 0
+anchors_preset = 0

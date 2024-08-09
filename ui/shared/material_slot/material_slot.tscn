@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://foaqb8gs6dr8"]
+
+[ext_resource type="Script" path="res://ui/shared/material_slot/material_slot.gd" id="1_qckgj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eejuu"]
+bg_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="MaterialSlot" type="Panel"]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_right = 0.039
+anchor_bottom = 0.078
+offset_right = 0.039999
+offset_bottom = 0.039999
+theme_override_styles/panel = SubResource("StyleBoxFlat_eejuu")
+script = ExtResource("1_qckgj")

@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://vh77xegia7fg"]
+
+[ext_resource type="Script" path="res://ui/structure_menu/material_select_menu/material_select.gd" id="1_cbf2x"]
+[ext_resource type="Texture2D" uid="uid://d2ro8icnjkoxt" path="res://raw_materials/wood/wood.png" id="2_gegrr"]
+[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_16bfw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em1nf"]
+
+[node name="MaterialSelect" type="Control"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -590.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cbf2x")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.962
+offset_bottom = -0.0240021
+theme_override_styles/panel = SubResource("StyleBoxEmpty_em1nf")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Texture" type="TextureRect" parent="Panel/Button"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 41.0
+offset_bottom = 35.0
+texture = ExtResource("2_gegrr")
+
+[node name="Text" type="RichTextLabel" parent="Panel/Button"]
+layout_mode = 0
+offset_top = 34.0
+offset_right = 50.0
+offset_bottom = 47.0
+theme_override_fonts/normal_font = ExtResource("3_16bfw")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Test[/center]"
+
+[node name="Overlay" type="ColorRect" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.0980392)

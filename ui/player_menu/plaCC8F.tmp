@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://2i61lrgluqhs"]
+
+[ext_resource type="Script" path="res://ui/player_menu/player_menu.gd" id="1_nj8o1"]
+[ext_resource type="PackedScene" uid="uid://d1ltyqo8ld8d4" path="res://ui/player_menu/player_build_menu/player_build_menu.tscn" id="2_5gs8w"]
+
+[node name="PlayerMenu" type="CanvasLayer"]
+script = ExtResource("1_nj8o1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 0
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+
+[node name="PlayerBuildMenu" parent="Control/TabContainer" instance=ExtResource("2_5gs8w")]
+layout_mode = 2

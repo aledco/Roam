@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmtd26fpdrqvd" path="res://structures/buildings/storage/storage.png" id="2_jxa5u"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_bsffx"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_s4ydc"]
-[ext_resource type="PackedScene" uid="uid://3dfbggpbn7uc" path="res://ui/inventory/storage_ui.tscn" id="4_usvtd"]
+[ext_resource type="PackedScene" uid="uid://3dfbggpbn7uc" path="res://ui/structure_menu/storage_ui/storage_ui.tscn" id="5_hagdg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
 animations = [{
@@ -135,5 +135,5 @@ curve = SubResource("Curve2D_jdj82")
 [node name="Path2D8" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_kdbne")
 
-[node name="StorageUI" parent="." instance=ExtResource("4_usvtd")]
+[node name="StorageUI" parent="." instance=ExtResource("5_hagdg")]
 visible = false

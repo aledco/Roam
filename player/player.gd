@@ -2,18 +2,17 @@ class_name Player extends CharacterBody2D
 
 
 const SPEED = 100.0
-const BUILD_MENU = preload("res://ui/build/build_menu.tscn")
 
 enum State { Idle, Run, Saw, Drill }
 enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode, Escape, None }
 
-@onready var inventory: Inventory = $Inventory
+@onready var player_menu: PlayerMenu = $PlayerMenu
+@onready var inventory: Inventory = player_menu.get_inventory()
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var current_state = State.Idle
 @onready var camera_2d: Camera2D = $Camera2D
 
-var build_menu: BuildMenu = null
 var is_busy: bool = false
 var map_active: bool = false
 var is_mining: bool = false
@@ -21,9 +20,7 @@ var minable_structure: MinableStructure
 var direction := Vector2i(0, 1)
 
 func _ready():
-	build_menu = BUILD_MENU.instantiate() as BuildMenu
-	add_child(build_menu)
-	build_menu.hide()
+	pass
 
 		
 func _process(delta):
@@ -35,7 +32,7 @@ func player_input():
 	if Input.is_action_just_pressed("build_menu"):
 		SignalManager.player_input.emit(InputType.BuildMenu)
 		escape()
-		build_menu.visible = not build_menu.visible
+		player_menu.visible = not player_menu.visible
 	elif Input.is_action_just_pressed("map"):
 		SignalManager.player_input.emit(InputType.Map)
 		escape(true)

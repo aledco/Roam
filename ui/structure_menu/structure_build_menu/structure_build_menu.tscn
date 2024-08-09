@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://s5sadl5pcot2"]
+
+[ext_resource type="Script" path="res://ui/structure_menu/structure_build_menu/structure_build_menu.gd" id="1_r5gok"]
+
+[node name="StructureBuildMenu" type="CanvasLayer"]
+script = ExtResource("1_r5gok")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 372.0
+offset_top = 65.0
+offset_right = 466.0
+offset_bottom = 198.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+clip_contents = false
+layout_mode = 0
+offset_top = 32.0
+offset_right = 60.0
+offset_bottom = 134.0
+vertical_scroll_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 92.0
+offset_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Button"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0

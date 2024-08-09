@@ -1,6 +1,6 @@
 class_name OutputSelect extends StaticBody2D
 
-const OUTPUT_SELECT_UI = preload("res://ui/output_select/output_select_ui.tscn")
+const OUTPUT_SELECT_UI = preload("res://ui/structure_menu/output_select/output_select_ui.tscn")
 
 var storage: Storage
 var current_material: MaterialModel
