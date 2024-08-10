@@ -4,7 +4,8 @@ static var COST := [[Box.MATERIAL_ID, 5], [IronIngot.MATERIAL_ID, 5]]
 
 const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/output_select.tscn")
 
-@onready var storage_ui: StorageUI = $StorageUI
+@onready var storage_inventory_menu: StorageInventoryMenu = $StorageInventoryMenu
+@onready var storage_inventory: StorageInventory = storage_inventory_menu.get_storage_inventory()
 
 var output_selects := {}
 var interval_id := -1
@@ -18,9 +19,8 @@ func _ready():
 	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
 
-
 func can_accept_material(material: RawMaterial):
-	if storage_ui.is_full(material.get_material_id()):
+	if storage_inventory.is_full(material.get_material_id()):
 		return false
 	return true
 
@@ -41,17 +41,17 @@ func on_output_disconnected(output: OutputNode):
 	output_selects.erase(output)
 
 func _create_special_ui():
-	storage_ui.show()
+	storage_inventory_menu.show()
 
 func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
-	storage_ui.add_material(material)
+	storage_inventory.add_material(material)
 	Helpers.remove_and_free(materials, material)
 
 func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
 	pass
 
 func get_stored_material_ids() -> Array:
-	return storage_ui.get_stored_material_ids()
+	return storage_inventory.get_stored_material_ids()
 
 func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
 	if current_output_index >= len(operational_outputs):
@@ -80,7 +80,7 @@ func _produce_material():
 		
 	var output_select := output_selects[output] as OutputSelect
 	var material_id := output_select.current_material.material_id
-	var success := storage_ui.remove_material(material_id)
+	var success := storage_inventory.remove_material(material_id)
 	if not success:
 		return
 	

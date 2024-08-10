@@ -13,6 +13,7 @@ config_version=5
 config/name="Roam"
 run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/fullsize=false
 config/icon="res://icon.ico"
 config/windows_native_icon="res://icon.ico"
 
@@ -30,8 +31,8 @@ Debug="*res://autoload/debug.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=320
-window/size/window_width_override=1600
-window/size/window_height_override=800
+window/size/window_width_override=1280
+window/size/window_height_override=640
 window/stretch/mode="viewport"
 
 [dotnet]
@@ -110,6 +111,8 @@ delete={
 2d_physics/layer_6="LAND_BORDER"
 2d_physics/layer_7="CONVEYOR"
 2d_physics/layer_8="DISABLED_MATERIAL"
+2d_physics/layer_9="MATERIAL_SLOT"
+2d_physics/layer_10="MATERIAL_STACK"
 
 [physics]
 

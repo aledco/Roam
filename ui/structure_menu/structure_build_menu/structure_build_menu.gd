@@ -10,7 +10,7 @@ const DRILL_PLAYER_DISPLAY = preload("res://player/display/drill_player_display.
 const SAW_PLAYER_DISPLAY = preload("res://player/display/saw_player_display.png")
 
 func get_rect() -> Rect2:
-	return Rect2(Vector2.ZERO, control.size)
+	return Rect2(Vector2.ZERO, get_root_control().size)
 
 
 func create_structure_selections(structures: Array[StructureModel], can_saw: bool, can_drill: bool) -> void:

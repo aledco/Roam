@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt0pafekegk3i"]
+
+[ext_resource type="Script" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory/storage_inventory.gd" id="1_760al"]
+[ext_resource type="PackedScene" uid="uid://foaqb8gs6dr8" path="res://ui/shared/material_slot/material_slot.tscn" id="1_s6qtt"]
+
+[node name="StorageInventory" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+script = ExtResource("1_760al")
+
+[node name="MaterialSlot" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot2" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot3" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot4" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot5" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot6" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot7" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot8" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot9" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot10" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot11" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot12" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot13" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot14" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot15" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot16" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot17" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot18" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot19" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot20" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot21" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot22" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot23" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot24" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2
+
+[node name="MaterialSlot25" parent="." instance=ExtResource("1_s6qtt")]
+layout_mode = 2

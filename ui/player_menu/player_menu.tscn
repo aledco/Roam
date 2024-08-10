@@ -32,11 +32,10 @@ offset_bottom = 137.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_5scw1")
-current_tab = 1
 
 [node name="Inventory" parent="Control/TabContainer" instance=ExtResource("4_384s6")]
-visible = false
 layout_mode = 2
 
 [node name="Build" parent="Control/TabContainer" instance=ExtResource("2_5gs8w")]
+visible = false
 layout_mode = 2

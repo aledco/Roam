@@ -11,3 +11,6 @@ func destroy():
 
 func get_inventory() -> Inventory:
 	return craft_and_inventory.get_inventory()
+
+func reparent_inventory(new_parent: Node = null):
+	craft_and_inventory.reparent_inventory(new_parent)

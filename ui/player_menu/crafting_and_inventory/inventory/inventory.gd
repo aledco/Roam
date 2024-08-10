@@ -6,7 +6,33 @@ var slots = {}
 func _ready():
 	for child in get_children():
 		var slot := child as MaterialSlot
+		slot.setup(self)
 		open_slots.append(slot)
+
+
+func stack_moved_from(slot: MaterialSlot, material_id: int):
+	if material_id not in slots or slot not in slots[material_id]:
+		push_error("Slot not in inventory")
+		return
+	
+	Helpers.remove(slots[material_id], slot)
+	open_slots.append(slot)
+
+
+func stack_moved_to(slot: MaterialSlot, material_id: int):
+	if slot not in open_slots:
+		push_error("Slot not free")
+		return
+	
+	Helpers.remove(open_slots, slot)
+	if material_id in slots:
+		slots[material_id].append(slot)
+	else:
+		slots[material_id] = [slot]
+
+
+func reparent_stack_for_drag(stack: MaterialStack):
+	stack.reparent(get_parent()) # TODO set parent as root ui node
 
 
 func _get_next_open_slot(slots: Array) -> MaterialSlot:

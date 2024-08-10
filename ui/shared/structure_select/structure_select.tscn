@@ -39,6 +39,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 z_index = 5
 layout_mode = 1
 anchors_preset = -1

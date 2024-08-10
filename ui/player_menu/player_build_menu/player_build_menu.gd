@@ -21,4 +21,4 @@ func _ready():
 		var structure_ui = STRUCTURE_SELECT.instantiate()
 		grid_container.add_child(structure_ui)
 		structure_ui.set_model(model)
-		structure_ui.set_root_ui_node(self)
+		structure_ui.set_root_ui_node(find_parent("PlayerMenu"))
