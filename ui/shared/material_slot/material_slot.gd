@@ -49,6 +49,8 @@ func is_full() -> bool:
 
 ## BEGIN drag and drop code
 
+## TODO instead of updating inventory, update parent node, could be crafting system too.
+
 ## Remove the stack from the slot and update the inventory.
 func remove_stack():
 	if not stack:
