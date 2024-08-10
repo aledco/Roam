@@ -3,12 +3,13 @@
 [ext_resource type="Script" path="res://ui/player_menu/player_menu.gd" id="1_nj8o1"]
 [ext_resource type="PackedScene" uid="uid://d1ltyqo8ld8d4" path="res://ui/player_menu/player_build_menu/player_build_menu.tscn" id="2_5gs8w"]
 [ext_resource type="FontFile" uid="uid://b7je85taic4et" path="res://ui/fonts/m5x7.ttf" id="2_5scw1"]
-[ext_resource type="PackedScene" uid="uid://bqjfoacj7usg8" path="res://ui/player_menu/crafting_and_inventory/crafting_and_inventory_container.tscn" id="4_384s6"]
+[ext_resource type="PackedScene" uid="uid://bqjfoacj7usg8" path="res://ui/player_menu/crafting_and_inventory/crafting_and_inventory_menu.tscn" id="4_384s6"]
 
 [node name="PlayerMenu" type="CanvasLayer"]
 script = ExtResource("1_nj8o1")
 
 [node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(440, 275)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

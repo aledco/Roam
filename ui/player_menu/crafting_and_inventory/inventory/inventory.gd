@@ -6,33 +6,26 @@ var slots = {}
 func _ready():
 	for child in get_children():
 		var slot := child as MaterialSlot
-		slot.setup(self)
+		slot.stack_removed.connect(_on_stack_removed.bind(slot))
+		slot.stack_dropped.connect(_on_stack_dropped.bind(slot))
 		open_slots.append(slot)
 
 
-func stack_moved_from(slot: MaterialSlot, material_id: int):
-	if material_id not in slots or slot not in slots[material_id]:
-		push_error("Slot not in inventory")
-		return
-	
-	Helpers.remove(slots[material_id], slot)
-	open_slots.append(slot)
-
-
-func stack_moved_to(slot: MaterialSlot, material_id: int):
-	if slot not in open_slots:
-		push_error("Slot not free")
-		return
+func _on_stack_dropped(slot: MaterialSlot):
+	assert(slot in open_slots and slot.stack != null)
 	
 	Helpers.remove(open_slots, slot)
+	
+	var material_id = slot.stack.material_id
 	if material_id in slots:
 		slots[material_id].append(slot)
 	else:
 		slots[material_id] = [slot]
 
-
-func reparent_stack_for_drag(stack: MaterialStack):
-	stack.reparent(get_parent()) # TODO set parent as root ui node
+func _on_stack_removed(material_id: int, slot: MaterialSlot):
+	assert(material_id in slots and slot in slots[material_id])
+	Helpers.remove(slots[material_id], slot)
+	open_slots.append(slot)
 
 
 func _get_next_open_slot(slots: Array) -> MaterialSlot:

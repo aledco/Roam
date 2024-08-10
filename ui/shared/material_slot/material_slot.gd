@@ -2,11 +2,10 @@ class_name MaterialSlot extends Panel
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
-var stack: MaterialStack = null
-var inventory: Inventory = null
+signal stack_dropped
+signal stack_removed(material_id: int)
 
-func setup(inventory: Inventory):
-	self.inventory = inventory
+var stack: MaterialStack = null
 
 func get_material_id() -> int:
 	if not stack:
@@ -24,6 +23,7 @@ func set_slot_material(material: RawMaterial):
 	stack = MATERIAL_STACK.instantiate() as MaterialStack
 	add_child(stack)
 	stack.setup(self, material)
+	stack.set_amount(99)
 
 func increment():
 	if not stack:
@@ -56,15 +56,15 @@ func remove_stack():
 	if not stack:
 		return
 	
-	inventory.stack_moved_from(self, stack.material_id)
+	stack_removed.emit(stack.material_id)
 	stack = null
 
 
 ## Add the stack to the slot and update inventory.
-func add_stack(stack_to_add: MaterialStack):
+func add_stack(stack_to_add: MaterialStack) -> bool:
 	if not stack:
 		stack = stack_to_add
-		inventory.stack_moved_to(self, stack.material_id)
+		stack_dropped.emit()
 	else:
 		if stack.material_id == stack_to_add.material_id:
 			if stack.amount + stack_to_add.amount <= MaterialStack.MAX_STACK:
@@ -74,6 +74,8 @@ func add_stack(stack_to_add: MaterialStack):
 				var amount_left = stack.amount + stack_to_add.amount - MaterialStack.MAX_STACK
 				stack.set_amount(MaterialStack.MAX_STACK)
 				stack_to_add.set_amount(amount_left)
+				return true
+	return false
 
 
 ## Determines if the mouse is hovering above the slot.

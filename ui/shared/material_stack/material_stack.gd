@@ -86,9 +86,14 @@ func _split_stack(amount_to_split: int = -1, slot_parent: MaterialSlot = null) -
 
 ## Starts dragging the stack.
 func _start_drag(button_index: int):
+	var base_ui := BaseUI.get_base_ui(self)
+	if not base_ui:
+		return
+	
+	reparent(base_ui)
+	
 	is_dragging = true
 	grabbed_offset = global_position - get_global_mouse_position()
-	slot.inventory.reparent_stack_for_drag(self)
 	slot.remove_stack()
 	area_2d.show()
 	if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
@@ -99,10 +104,16 @@ func _end_drag(button_index: int):
 	var target := _get_drop_target()
 	if target and target.can_drop(self):
 		if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
-			_split_stack(1, target)
+			if target.stack:
+				target.stack.increment()
+				decrement()
+			else:
+				_split_stack(1, target)
 			return
 		else:
-			target.add_stack(self)
+			var stack_still_exists := target.add_stack(self)
+			if stack_still_exists:
+				return
 			slot = target
 	else:
 		slot.add_stack(self)
