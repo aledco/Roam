@@ -69,22 +69,19 @@ func get_material_id() -> int:
 
 ## Gets the material image.
 func get_material_image() -> Texture2D:
-	push_error("abstract function")
-	return null
-
+	return RawMaterialManager.get_material_image(get_material_id())
 
 func get_fuel_value() -> int:
-	return 0
+	return RawMaterialManager.get_material_fuel_value(get_material_id())
 
 func is_fuel() -> bool:
-	return get_fuel_value() > 0
+	return RawMaterialManager.is_material_fuel(get_material_id())
 
 func is_smeltable() -> bool:
-	return false
+	return RawMaterialManager.is_material_smeltable(get_material_id())
 
 func _get_smelted_material_id() -> int:
-	push_error("abstract function")
-	return -1
+	return RawMaterialManager.get_smelt_target_id(get_material_id())
 	
 func get_smelted_material() -> RawMaterial:
 	var mat_id = _get_smelted_material_id()

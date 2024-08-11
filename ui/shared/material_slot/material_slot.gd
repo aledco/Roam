@@ -2,6 +2,8 @@ class_name MaterialSlot extends Panel
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
+signal stack_dragged(stack: MaterialStack)
+signal stack_replaced
 signal stack_dropped
 signal stack_removed(material_id: int)
 
@@ -25,6 +27,13 @@ func set_slot_material(material: RawMaterial):
 	stack.setup(self, material)
 	stack.set_amount(99)
 
+func set_slot_material_by_id(material_id: int, amount: int = 1):
+	if stack:
+		stack.queue_free()
+	stack = MATERIAL_STACK.instantiate() as MaterialStack
+	add_child(stack)
+	stack.setup_alt(self, material_id, RawMaterialManager.get_material_image(material_id), amount)
+
 func increment():
 	if not stack:
 		return
@@ -43,22 +52,37 @@ func is_empty() -> bool:
 
 
 func is_full() -> bool:
+	if stack_dragging:
+		return true
 	if not stack:
 		return false
 	return stack.is_full()
 
+func get_amount() -> int:
+	if not stack:
+		return 0
+	return stack.amount
+
 ## BEGIN drag and drop code
 
-## TODO instead of updating inventory, update parent node, could be crafting system too.
+var detached_stack: MaterialStack
+var stack_dragging := false
 
-## Remove the stack from the slot and update the inventory.
-func remove_stack():
-	if not stack:
-		return
-	
-	stack_removed.emit(stack.material_id)
+func begin_stack_drag():
+	if stack:
+		detached_stack = stack
 	stack = null
+	stack_dragging = true
+	stack_dragged.emit(detached_stack)
 
+func notify_stack_removed():
+	stack_removed.emit(detached_stack.material_id)
+
+func end_stack_drag():
+	stack_dragging = false
+	if not stack:
+		notify_stack_removed()
+	detached_stack = null
 
 ## Add the stack to the slot and update inventory.
 func add_stack(stack_to_add: MaterialStack) -> bool:
@@ -77,6 +101,17 @@ func add_stack(stack_to_add: MaterialStack) -> bool:
 				return true
 	return false
 
+func replace_stack():
+	if not detached_stack:
+		return
+	
+	if stack:
+		stack.set_amount(stack.amount + detached_stack.amount)
+		detached_stack.queue_free()
+	else:
+		stack = detached_stack
+	stack_replaced.emit()
+	end_stack_drag()
 
 ## Determines if the mouse is hovering above the slot.
 func is_mouse_over_slot() -> bool:

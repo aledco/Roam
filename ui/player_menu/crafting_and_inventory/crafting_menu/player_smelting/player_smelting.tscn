@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://drb207e857wi6"]
+[gd_scene load_steps=5 format=3 uid="uid://drb207e857wi6"]
 
 [ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/player_smelting.gd" id="1_81u42"]
-[ext_resource type="PackedScene" uid="uid://foaqb8gs6dr8" path="res://ui/shared/material_slot/material_slot.tscn" id="2_qltw3"]
+[ext_resource type="PackedScene" uid="uid://bfq7k2nlo7gky" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_input_material_slot/smelting_input_material_slot.tscn" id="2_1mng2"]
 [ext_resource type="Texture2D" uid="uid://5d8jp0a6gv4b" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/equals.png" id="3_75238"]
+[ext_resource type="PackedScene" uid="uid://jgqfeq0fc2aa" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_output_material_slot/smelting_output_material_slot.tscn" id="4_vy6na"]
 
 [node name="PlayerSmelting" type="GridContainer"]
 anchors_preset = 15
@@ -13,10 +14,10 @@ grow_vertical = 2
 columns = 4
 script = ExtResource("1_81u42")
 
-[node name="MaterialSlot1" parent="." instance=ExtResource("2_qltw3")]
+[node name="SmeltingInputMaterialSlot1" parent="." instance=ExtResource("2_1mng2")]
 layout_mode = 2
 
-[node name="MaterialSlot2" parent="." instance=ExtResource("2_qltw3")]
+[node name="SmeltingInputMaterialSlot2" parent="." instance=ExtResource("2_1mng2")]
 layout_mode = 2
 
 [node name="Control" type="Control" parent="."]
@@ -39,5 +40,5 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_75238")
 
-[node name="MaterialSlot3" parent="." instance=ExtResource("2_qltw3")]
+[node name="SmeltingOutputMaterialSlot" parent="." instance=ExtResource("4_vy6na")]
 layout_mode = 2

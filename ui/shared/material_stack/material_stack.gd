@@ -22,6 +22,13 @@ func setup(slot: MaterialSlot, material: RawMaterial):
 	texture_rect.texture = material.get_material_image()
 	increment()
 
+func setup_alt(slot: MaterialSlot, material_id: int, material_image: Texture2D, amount: int = 1):
+	assert(amount <= MAX_STACK)
+	self.slot = slot
+	self.material_id = material_id
+	texture_rect.texture = material_image
+	set_amount(amount)
+
 func set_amount(new_amount: int):
 	amount = new_amount
 	text_label.clear()
@@ -32,7 +39,7 @@ func increment():
 		return
 	set_amount(amount + 1)
 
-func decrement(amount_to_remove: int = 1) -> int:
+func decrement(amount_to_remove: int = 1) -> int: # TODO send signal when stack empties
 	var left_to_remove := 0
 	if amount_to_remove > amount:
 		left_to_remove = amount_to_remove - amount
@@ -40,11 +47,11 @@ func decrement(amount_to_remove: int = 1) -> int:
 	else:
 		amount -= amount_to_remove
 	
-	text_label.clear()
 	if is_empty():
-		material_id = -1
-		texture_rect.texture = null
+		slot.notify_stack_removed()
+		queue_free()
 	else:
+		text_label.clear()
 		text_label.add_text(str(amount))
 	
 	return left_to_remove
@@ -94,7 +101,7 @@ func _start_drag(button_index: int):
 	
 	is_dragging = true
 	grabbed_offset = global_position - get_global_mouse_position()
-	slot.remove_stack()
+	slot.begin_stack_drag()
 	area_2d.show()
 	if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
 		_split_stack()
@@ -109,14 +116,19 @@ func _end_drag(button_index: int):
 				decrement()
 			else:
 				_split_stack(1, target)
+			slot.end_stack_drag()
 			return
 		else:
-			var stack_still_exists := target.add_stack(self)
-			if stack_still_exists:
-				return
-			slot = target
+			if slot == target:
+				slot.replace_stack()
+			else:
+				var stack_still_exists := target.add_stack(self)
+				if stack_still_exists:
+					return
+				slot.end_stack_drag()
+				slot = target
 	else:
-		slot.add_stack(self)
+		slot.replace_stack()
 
 	is_dragging = false
 	area_2d.hide()
@@ -128,7 +140,7 @@ func _on_visibility_changed():
 	if not is_visible_in_tree() and is_dragging:
 		is_dragging = false
 		area_2d.hide()
-		slot.add_stack(self)
+		slot.replace_stack()
 		reparent.call_deferred(slot)
 		set_position.call_deferred(Vector2.ZERO)
 

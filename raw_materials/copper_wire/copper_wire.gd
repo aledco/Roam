@@ -4,16 +4,8 @@ static var MATERIAL_ID = 13
 static var NAME = "Copper Wire"
 static var IMAGE = preload("res://raw_materials/copper_wire/copper_wire.png")
 static var INGREDIENTS = [[CopperIngot.MATERIAL_ID, 1]]
-
-static func get_model(parent: Variant) -> MaterialModel:
-	return MaterialModel.create(
-		parent, 
-		NAME, 
-		MATERIAL_ID,
-		IMAGE)
+static var FUEL = 0
+static var SMELT_TARGET_ID = -1
 
 func get_material_id() -> int:
 	return MATERIAL_ID
-
-func get_material_image() -> Texture2D:
-	return IMAGE

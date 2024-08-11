@@ -12,15 +12,16 @@ func _ready():
 
 
 func _on_stack_dropped(slot: MaterialSlot):
-	assert(slot in open_slots and slot.stack != null)
+	assert(slot.stack != null)
 	
-	Helpers.remove(open_slots, slot)
+	if slot in open_slots:
+		var material_id = slot.stack.material_id
+		Helpers.remove(open_slots, slot)
 	
-	var material_id = slot.stack.material_id
-	if material_id in slots:
-		slots[material_id].append(slot)
-	else:
-		slots[material_id] = [slot]
+		if material_id in slots:
+			slots[material_id].append(slot)
+		else:
+			slots[material_id] = [slot]
 
 func _on_stack_removed(material_id: int, slot: MaterialSlot):
 	assert(material_id in slots and slot in slots[material_id])
@@ -64,11 +65,6 @@ func remove_material(material_id: int, amount: int = 1) -> bool:
 			slot = slots[material_id][0]
 
 		amount = slot.decrement(amount)
-		if slot.is_empty():
-			slots[material_id].remove_at(slots[material_id].find(slot))
-			if slots[material_id].is_empty():
-				slots.erase(material_id)
-			open_slots.append(slot)
 	return true
 
 
