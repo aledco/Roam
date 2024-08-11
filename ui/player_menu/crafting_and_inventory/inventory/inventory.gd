@@ -24,9 +24,9 @@ func _on_stack_dropped(slot: MaterialSlot):
 			slots[material_id] = [slot]
 
 func _on_stack_removed(material_id: int, slot: MaterialSlot):
-	assert(material_id in slots and slot in slots[material_id])
-	Helpers.remove(slots[material_id], slot)
-	open_slots.append(slot)
+	if material_id in slots and slot in slots[material_id]:
+		Helpers.remove(slots[material_id], slot)
+		open_slots.append(slot)
 
 
 func _get_next_open_slot(slots: Array) -> MaterialSlot:

@@ -17,14 +17,11 @@ split_offset = 240
 dragger_visibility = 2
 script = ExtResource("1_5lg7m")
 
-[node name="CenterContainer1" type="CenterContainer" parent="."]
+[node name="CraftingMenu" parent="." instance=ExtResource("2_p1gns")]
 layout_mode = 2
 
-[node name="CraftingMenu" parent="CenterContainer1" instance=ExtResource("2_p1gns")]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
 
-[node name="CenterContainer2" type="CenterContainer" parent="."]
-layout_mode = 2
-
-[node name="Inventory" parent="CenterContainer2" instance=ExtResource("2_kkq54")]
+[node name="Inventory" parent="CenterContainer" instance=ExtResource("2_kkq54")]
 layout_mode = 2

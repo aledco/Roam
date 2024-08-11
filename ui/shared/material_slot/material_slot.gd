@@ -25,7 +25,7 @@ func set_slot_material(material: RawMaterial):
 	stack = MATERIAL_STACK.instantiate() as MaterialStack
 	add_child(stack)
 	stack.setup(self, material)
-	stack.set_amount(99)
+	stack.set_amount(99) # TODO remove
 
 func set_slot_material_by_id(material_id: int, amount: int = 1):
 	if stack:
@@ -76,32 +76,40 @@ func begin_stack_drag():
 	stack_dragged.emit(detached_stack)
 
 func notify_stack_removed():
-	stack_removed.emit(detached_stack.material_id)
+	if stack:
+		stack_removed.emit(stack.material_id)
+		stack = null
+	elif detached_stack:
+		stack_removed.emit(detached_stack.material_id)
+		detached_stack = null
 
 func end_stack_drag():
 	stack_dragging = false
 	if not stack:
 		notify_stack_removed()
-	detached_stack = null
 
 ## Add the stack to the slot and update inventory.
 func add_stack(stack_to_add: MaterialStack) -> bool:
 	if not stack:
 		stack = stack_to_add
 		stack_dropped.emit()
+	elif stack.material_id == stack_to_add.material_id:
+		if stack.amount + stack_to_add.amount <= MaterialStack.MAX_STACK:
+			stack.set_amount(stack.amount + stack_to_add.amount)
+			stack_to_add.queue_free()
+		else:
+			var amount_left = stack.amount + stack_to_add.amount - MaterialStack.MAX_STACK
+			stack.set_amount(MaterialStack.MAX_STACK)
+			stack_to_add.set_amount(amount_left)
+			return true
 	else:
-		if stack.material_id == stack_to_add.material_id:
-			if stack.amount + stack_to_add.amount <= MaterialStack.MAX_STACK:
-				stack.set_amount(stack.amount + stack_to_add.amount)
-				stack_to_add.queue_free()
-			else:
-				var amount_left = stack.amount + stack_to_add.amount - MaterialStack.MAX_STACK
-				stack.set_amount(MaterialStack.MAX_STACK)
-				stack_to_add.set_amount(amount_left)
-				return true
+		stack.force_start_drag()
+		stack = stack_to_add
+		stack_dropped.emit()
 	return false
 
 func replace_stack():
+	stack_dragging = false
 	if not detached_stack:
 		return
 	
@@ -121,6 +129,6 @@ func is_mouse_over_slot() -> bool:
 
 ## The stack can be dropped if the slot is empty or the stack is the same material.
 func can_drop(stack_to_drop: MaterialStack) -> bool:
-	return is_empty() or (stack.material_id == stack_to_drop.material_id and not stack.is_full())
+	return is_empty() or (stack.material_id == stack_to_drop.material_id and not stack.is_full()) or stack.material_id != stack_to_drop.material_id
 
 ## END drag and drop code

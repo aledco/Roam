@@ -1,7 +1,6 @@
 class_name SmeltingInputMaterialSlot extends MaterialSlot
 
 var other_input: SmeltingInputMaterialSlot
-var output: SmeltingOutputMaterialSlot
 
 func can_drop(stack: MaterialStack):
 	if not super.can_drop(stack):

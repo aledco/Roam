@@ -1,5 +1,7 @@
 class_name PlayerSmelting extends GridContainer
 
+## TODO add glowing animation to output
+
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
 @onready var input_slot_1: SmeltingInputMaterialSlot = $SmeltingInputMaterialSlot1
@@ -18,11 +20,7 @@ func _ready():
 	output_slot.stack_removed.connect(_on_output_stack_removed)
 	
 	input_slot_1.other_input = input_slot_2
-	input_slot_1.output = output_slot
 	input_slot_2.other_input = input_slot_1
-	input_slot_2.output = output_slot
-	output_slot.input1 = input_slot_1
-	output_slot.input2 = input_slot_2
 
 func _on_input_stack_dropped():
 	if input_slot_1.stack and input_slot_2.stack and not input_slot_1.stack.is_empty() and not input_slot_2.stack.is_empty():

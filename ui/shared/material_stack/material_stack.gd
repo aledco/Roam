@@ -30,6 +30,8 @@ func setup_alt(slot: MaterialSlot, material_id: int, material_image: Texture2D, 
 	set_amount(amount)
 
 func set_amount(new_amount: int):
+	if new_amount > MAX_STACK:
+		return
 	amount = new_amount
 	text_label.clear()
 	text_label.add_text(str(amount))
@@ -49,6 +51,7 @@ func decrement(amount_to_remove: int = 1) -> int: # TODO send signal when stack 
 	
 	if is_empty():
 		slot.notify_stack_removed()
+		slot.stack = null
 		queue_free()
 	else:
 		text_label.clear()
@@ -91,6 +94,10 @@ func _split_stack(amount_to_split: int = -1, slot_parent: MaterialSlot = null) -
 	set_amount(split_amount2)
 	return stack
 
+## Forces a drag.
+func force_start_drag():
+	_start_drag(MOUSE_BUTTON_LEFT)
+
 ## Starts dragging the stack.
 func _start_drag(button_index: int):
 	var base_ui := BaseUI.get_base_ui(self)
@@ -116,7 +123,6 @@ func _end_drag(button_index: int):
 				decrement()
 			else:
 				_split_stack(1, target)
-			slot.end_stack_drag()
 			return
 		else:
 			if slot == target:

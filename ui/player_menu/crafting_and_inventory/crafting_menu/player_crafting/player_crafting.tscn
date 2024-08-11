@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://do1jboxcc31y8"]
+[gd_scene load_steps=5 format=3 uid="uid://do1jboxcc31y8"]
 
-[ext_resource type="PackedScene" uid="uid://foaqb8gs6dr8" path="res://ui/shared/material_slot/material_slot.tscn" id="1_0l73o"]
 [ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/player_crafting.gd" id="1_nwbo7"]
 [ext_resource type="Texture2D" uid="uid://5d8jp0a6gv4b" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/equals.png" id="2_6nj3k"]
+[ext_resource type="PackedScene" uid="uid://dlbrjqphvo0o1" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/crafting_input_material_slot/crafting_input_material_slot.tscn" id="2_uo0rg"]
+[ext_resource type="PackedScene" uid="uid://xxk8k2ta6e0y" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/crafting_output_material_slot/crafting_output_material_slot.tscn" id="4_rnonq"]
 
 [node name="PlayerCrafting" type="GridContainer"]
 anchors_preset = 15
@@ -13,13 +14,13 @@ grow_vertical = 2
 columns = 5
 script = ExtResource("1_nwbo7")
 
-[node name="MaterialSlot1" parent="." instance=ExtResource("1_0l73o")]
+[node name="CraftingInputMaterialSlot1" parent="." instance=ExtResource("2_uo0rg")]
 layout_mode = 2
 
-[node name="MaterialSlot2" parent="." instance=ExtResource("1_0l73o")]
+[node name="CraftingInputMaterialSlot2" parent="." instance=ExtResource("2_uo0rg")]
 layout_mode = 2
 
-[node name="MaterialSlot3" parent="." instance=ExtResource("1_0l73o")]
+[node name="CraftingInputMaterialSlot3" parent="." instance=ExtResource("2_uo0rg")]
 layout_mode = 2
 
 [node name="Control" type="Control" parent="."]
@@ -42,5 +43,5 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_6nj3k")
 
-[node name="MaterialSlot4" parent="." instance=ExtResource("1_0l73o")]
+[node name="CraftingOutputMaterialSlot" parent="." instance=ExtResource("4_rnonq")]
 layout_mode = 2
