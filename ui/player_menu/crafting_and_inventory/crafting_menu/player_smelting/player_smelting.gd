@@ -37,8 +37,6 @@ func _on_input_stack_dragged(stack: MaterialStack):
 		_replace_materials(input_slot_2.stack, stack)
 	
 func _create_output_stack():
-	assert(input_slot_1.stack and input_slot_2.stack and not input_slot_1.stack.is_empty() and not input_slot_2.stack.is_empty())
-	
 	var fuel_stack: MaterialStack
 	var smeltable_stack: MaterialStack
 	if RawMaterialManager.is_material_fuel(input_slot_1.stack.material_id):

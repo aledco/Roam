@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://do1jboxcc31y8"]
+[gd_scene load_steps=6 format=3 uid="uid://do1jboxcc31y8"]
 
-[ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/player_crafting.gd" id="1_nwbo7"]
+[ext_resource type="Theme" uid="uid://c6oye7bbugkso" path="res://ui/theme/main_theme.tres" id="1_ps55j"]
+[ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/player_crafting.gd" id="1_t3kvh"]
 [ext_resource type="Texture2D" uid="uid://5d8jp0a6gv4b" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/equals.png" id="2_6nj3k"]
 [ext_resource type="PackedScene" uid="uid://dlbrjqphvo0o1" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/crafting_input_material_slot/crafting_input_material_slot.tscn" id="2_uo0rg"]
 [ext_resource type="PackedScene" uid="uid://xxk8k2ta6e0y" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/crafting_output_material_slot/crafting_output_material_slot.tscn" id="4_rnonq"]
@@ -11,8 +12,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ps55j")
 columns = 5
-script = ExtResource("1_nwbo7")
+script = ExtResource("1_t3kvh")
 
 [node name="CraftingInputMaterialSlot1" parent="." instance=ExtResource("2_uo0rg")]
 layout_mode = 2
@@ -45,3 +47,11 @@ texture = ExtResource("2_6nj3k")
 
 [node name="CraftingOutputMaterialSlot" parent="." instance=ExtResource("4_rnonq")]
 layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="CraftingOutputMaterialSlot"]
+visible = false
+layout_mode = 0
+offset_left = -46.0
+offset_top = 43.0
+offset_right = -1.0
+offset_bottom = 63.0

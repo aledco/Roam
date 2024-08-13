@@ -41,7 +41,6 @@ static func get_models_for_workshop(parent_structure: Structure) -> Dictionary:
 				models[n_ingredients] = [RawMaterialManager.get_model(mat_id, parent_structure)]
 	return models
 
-
 ## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

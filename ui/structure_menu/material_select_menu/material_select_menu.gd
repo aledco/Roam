@@ -15,7 +15,8 @@ func create_material_selections(material_models: Dictionary, currently_selected:
 	for n_ingredients in material_models.keys():
 		for material in material_models[n_ingredients]:
 			var material_ui := _create_material_ui(material, n_ingredients)
-			material_ui.set_selected(material.material_id == currently_selected.material_id)
+			if currently_selected:
+				material_ui.set_selected(material.material_id == currently_selected.material_id)
 
 
 func _get_container(n_ingredients: int) -> Container:
