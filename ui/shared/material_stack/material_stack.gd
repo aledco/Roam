@@ -41,7 +41,7 @@ func increment():
 		return
 	set_amount(amount + 1)
 
-func decrement(amount_to_remove: int = 1) -> int: # TODO send signal when stack empties
+func decrement(amount_to_remove: int = 1) -> int:
 	var left_to_remove := 0
 	if amount_to_remove > amount:
 		left_to_remove = amount_to_remove - amount
@@ -86,12 +86,13 @@ func _split_stack(amount_to_split: int = -1, slot_parent: MaterialSlot = null) -
 	
 	var stack = MATERIAL_STACK.instantiate() as MaterialStack
 	slot_parent.add_child(stack)
-	slot_parent.add_stack(stack)
 	stack.slot = slot_parent
 	stack.material_id = material_id
 	stack.texture_rect.texture = texture_rect.texture.duplicate()
-	stack.set_amount(split_amount1)
+	
 	set_amount(split_amount2)
+	stack.set_amount(split_amount1)
+	slot_parent.add_stack(stack)
 	return stack
 
 ## Forces a drag.
@@ -164,6 +165,8 @@ func _get_drop_target() -> MaterialSlot:
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		var mouse_event = event as InputEventMouseButton
+		if mouse_event.button_index == MOUSE_BUTTON_MIDDLE:
+			return
 		if is_dragging:
 			_end_drag(mouse_event.button_index)
 			return
@@ -172,6 +175,9 @@ func _gui_input(event: InputEvent):
 		var rect = get_global_rect()
 		if rect.has_point(ev_local.global_position):
 			_start_drag(mouse_event.button_index)
+
+func _input(event):
+	pass
 
 ## Update the stacks position when dragging.
 func _process(delta):

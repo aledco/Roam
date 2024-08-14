@@ -1,5 +1,10 @@
 class_name BaseUI extends CanvasLayer
 
+func _ready():
+	if visible:
+		InputManager.menu_open = true
+	visibility_changed.connect(_on_visibility_changed)
+
 func get_rect() -> Rect2:
 	return Rect2(Vector2.ZERO, Vector2.ZERO)
 
@@ -8,6 +13,12 @@ func get_root_control() -> Control:
 	
 func destroy():
 	queue_free()
+
+func _exit_tree():
+	InputManager.menu_open = false
+
+func _on_visibility_changed():
+	InputManager.menu_open = visible
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:

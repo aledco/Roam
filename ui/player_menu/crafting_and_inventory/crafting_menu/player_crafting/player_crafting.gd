@@ -9,6 +9,8 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var option_button: OptionButton = $CraftingOutputMaterialSlot/OptionButton
 
 var materials_to_replace = {}
+var selected_item_index := 0
+var selected_item_material_id := -1
 
 func _ready():
 	input_slot_1.stack_dropped.connect(_on_input_stack_dropped)
@@ -22,7 +24,7 @@ func _ready():
 	input_slot_3.stack_replaced.connect(_on_input_stack_dragged)
 	output_slot.stack_removed.connect(_on_output_stack_removed)
 	
-	_create_material_select([])
+	option_button.item_selected.connect(_on_item_selected)
 
 func _get_valid_input_slots() -> Array[CraftingInputMaterialSlot]:
 	var slots: Array[CraftingInputMaterialSlot] = []
@@ -34,15 +36,30 @@ func _get_valid_input_slots() -> Array[CraftingInputMaterialSlot]:
 		slots.append(input_slot_3)
 	return slots
 
+func _reset_slots(slots: Array[CraftingInputMaterialSlot]):
+	for slot in slots:
+		if slot.stack in materials_to_replace:
+			slot.stack.set_amount(slot.stack.amount + materials_to_replace[slot.stack])
+			materials_to_replace.erase(slot.stack)
+
 func _on_input_stack_dropped():
 	var valid_slots := _get_valid_input_slots()
 	if not valid_slots.is_empty():
+		_reset_slots(valid_slots)
 		_create_material_select(valid_slots)
+	else:
+		_clear_material_select()
 
 func _on_output_stack_removed(material_id: int):
 	var valid_slots := _get_valid_input_slots()
 	if not valid_slots.is_empty():
+		for slot in valid_slots:
+			if slot.stack in materials_to_replace:
+				materials_to_replace.erase(slot.stack)
+			
 		_create_material_select(valid_slots)
+	else:
+		_clear_material_select()
 
 func _on_input_stack_dragged(stack: MaterialStack):
 	if stack in materials_to_replace:
@@ -51,10 +68,19 @@ func _on_input_stack_dragged(stack: MaterialStack):
 	
 	var valid_slots := _get_valid_input_slots()
 	if not valid_slots.is_empty():
-		_create_material_select(valid_slots) # TODO replace materials if no valid materials to craft
+		_reset_slots(valid_slots)
+		_create_material_select(valid_slots)
+	else:
+		_clear_material_select()
+
+func _clear_material_select():
+	option_button.clear()
+	option_button.hide()
+	output_slot.clear()
 
 func _create_material_select(slots: Array[CraftingInputMaterialSlot]):
 	option_button.clear()
+	output_slot.clear()
 	
 	var ingredients: Array[int] = []
 	for slot in slots:
@@ -67,32 +93,23 @@ func _create_material_select(slots: Array[CraftingInputMaterialSlot]):
 		option_button.show()
 		for model in models:
 			option_button.add_icon_item(model.image, model.name, model.material_id)
+		var selected_item_id = option_button.get_item_id(selected_item_index)
+		if selected_item_id == selected_item_material_id:
+			option_button.select(selected_item_index)
+			_on_item_selected(selected_item_index)
+		else:
+			option_button.select(0)
+			_on_item_selected(0)
 
-#func _create_output_stack():
-	#var fuel_stack: MaterialStack
-	#var smeltable_stack: MaterialStack
-	#if RawMaterialManager.is_material_fuel(input_slot_1.stack.material_id):
-		#fuel_stack = input_slot_1.stack
-	#elif RawMaterialManager.is_material_fuel(input_slot_2.stack.material_id):
-		#fuel_stack = input_slot_2.stack
-	#
-	#if RawMaterialManager.is_material_smeltable(input_slot_1.stack.material_id):
-		#smeltable_stack = input_slot_1.stack
-	#elif RawMaterialManager.is_material_smeltable(input_slot_2.stack.material_id):
-		#smeltable_stack = input_slot_2.stack
-	#
-	#assert(fuel_stack and smeltable_stack)
-	#
-	#var fuel_value := RawMaterialManager.get_material_fuel_value(fuel_stack.material_id)
-	#var smelt_target_id := RawMaterialManager.get_smelt_target_id(smeltable_stack.material_id)
-	#
-	#var amount := fuel_value
-	#if smeltable_stack.amount < amount:
-		#amount = smeltable_stack.amount
-	#
-	#fuel_stack.decrement()
-	#smeltable_stack.decrement(amount)
-	#output_slot.set_slot_material_by_id(smelt_target_id, amount)
-	#
-	#materials_to_replace[fuel_stack] = 1
-	#materials_to_replace[smeltable_stack] = amount
+func _on_item_selected(index: int):
+	var material_id = option_button.get_item_id(index)
+	selected_item_index = index
+	selected_item_material_id = material_id
+	
+	var valid_slots := _get_valid_input_slots()
+	for slot in valid_slots:
+		if slot.stack not in materials_to_replace:
+			slot.decrement()
+			materials_to_replace[slot.stack] = 1
+	
+	output_slot.set_slot_material_by_id(material_id)

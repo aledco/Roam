@@ -110,7 +110,7 @@ func delay_input():
 
 
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder() or _input_disabled or player.is_busy:
+	if _is_placeholder() or _input_disabled or player.is_busy or InputManager.menu_open:
 		return
 	
 	if event is InputEventMouseButton:

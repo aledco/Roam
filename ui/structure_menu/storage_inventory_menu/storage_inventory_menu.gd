@@ -9,7 +9,7 @@ func get_rect() -> Rect2:
 	return tab_container.get_rect()
 	
 func _ready():
-	visibility_changed.connect(_on_visibility_changed)
+	super._ready()
 	SignalManager.player_input.connect(_on_player_input)
 
 func _on_player_input(input):
@@ -20,6 +20,7 @@ func get_storage_inventory() -> StorageInventory:
 	return storage_inventory
 
 func _on_visibility_changed():
+	super._on_visibility_changed()
 	if visible:
 		player.player_menu.reparent_inventory(center_container_2)
 

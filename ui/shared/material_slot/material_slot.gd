@@ -25,7 +25,7 @@ func set_slot_material(material: RawMaterial):
 	stack = MATERIAL_STACK.instantiate() as MaterialStack
 	add_child(stack)
 	stack.setup(self, material)
-	stack.set_amount(99) # TODO remove
+	#stack.set_amount(99) # TODO remove
 
 func set_slot_material_by_id(material_id: int, amount: int = 1):
 	if stack:
@@ -33,6 +33,11 @@ func set_slot_material_by_id(material_id: int, amount: int = 1):
 	stack = MATERIAL_STACK.instantiate() as MaterialStack
 	add_child(stack)
 	stack.setup_alt(self, material_id, RawMaterialManager.get_material_image(material_id), amount)
+
+func clear():
+	if stack:
+		stack.queue_free()
+		stack = null
 
 func increment():
 	if not stack:
@@ -85,7 +90,7 @@ func notify_stack_removed():
 
 func end_stack_drag():
 	stack_dragging = false
-	if not stack:
+	if not stack and detached_stack:
 		notify_stack_removed()
 
 ## Add the stack to the slot and update inventory.

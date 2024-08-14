@@ -35,7 +35,8 @@ func _on_input_stack_dragged(stack: MaterialStack):
 		_replace_materials(input_slot_1.stack, stack)
 	elif input_slot_2.stack:
 		_replace_materials(input_slot_2.stack, stack)
-	
+	output_slot.clear()
+
 func _create_output_stack():
 	var fuel_stack: MaterialStack
 	var smeltable_stack: MaterialStack
