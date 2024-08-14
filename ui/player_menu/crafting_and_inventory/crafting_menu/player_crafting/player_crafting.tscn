@@ -55,3 +55,4 @@ offset_left = -46.0
 offset_top = 43.0
 offset_right = -1.0
 offset_bottom = 63.0
+theme = ExtResource("1_ps55j")
