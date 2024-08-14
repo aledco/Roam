@@ -25,7 +25,6 @@ func set_slot_material(material: RawMaterial):
 	stack = MATERIAL_STACK.instantiate() as MaterialStack
 	add_child(stack)
 	stack.setup(self, material)
-	#stack.set_amount(99) # TODO remove
 
 func set_slot_material_by_id(material_id: int, amount: int = 1):
 	if stack:

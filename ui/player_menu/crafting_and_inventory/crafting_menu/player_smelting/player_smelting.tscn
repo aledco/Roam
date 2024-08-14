@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://drb207e857wi6"]
+[gd_scene load_steps=6 format=3 uid="uid://drb207e857wi6"]
 
 [ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/player_smelting.gd" id="1_81u42"]
 [ext_resource type="PackedScene" uid="uid://bfq7k2nlo7gky" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_input_material_slot/smelting_input_material_slot.tscn" id="2_1mng2"]
 [ext_resource type="Texture2D" uid="uid://5d8jp0a6gv4b" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/equals.png" id="3_75238"]
+[ext_resource type="Texture2D" uid="uid://bwdi33xwbova1" path="res://raw_materials/coal/coal.png" id="3_h6wls"]
 [ext_resource type="PackedScene" uid="uid://jgqfeq0fc2aa" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_output_material_slot/smelting_output_material_slot.tscn" id="4_vy6na"]
 
 [node name="PlayerSmelting" type="GridContainer"]
@@ -17,8 +18,25 @@ script = ExtResource("1_81u42")
 [node name="SmeltingInputMaterialSlot1" parent="." instance=ExtResource("2_1mng2")]
 layout_mode = 2
 
+[node name="Placeholder" type="TextureRect" parent="SmeltingInputMaterialSlot1"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h6wls")
+
 [node name="SmeltingInputMaterialSlot2" parent="." instance=ExtResource("2_1mng2")]
 layout_mode = 2
+input_type = 1
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(40, 40)

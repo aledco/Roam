@@ -9,6 +9,7 @@ func _ready():
 		slot.stack_removed.connect(_on_stack_removed.bind(slot))
 		slot.stack_dropped.connect(_on_stack_dropped.bind(slot))
 		open_slots.append(slot)
+	_sort_open_slots()
 
 
 func _on_stack_dropped(slot: MaterialSlot):
@@ -26,7 +27,7 @@ func _on_stack_dropped(slot: MaterialSlot):
 func _on_stack_removed(material_id: int, slot: MaterialSlot):
 	if material_id in slots and slot in slots[material_id]:
 		Helpers.remove(slots[material_id], slot)
-		open_slots.append(slot)
+		_free_slot(slot)
 
 
 func _get_next_open_slot(slots: Array) -> MaterialSlot:
@@ -91,3 +92,10 @@ func contains_material(material_id: int, amount: int = 1) -> bool:
 			return true
 	
 	return false
+
+func _free_slot(slot: MaterialSlot):
+	open_slots.append(slot)
+	_sort_open_slots()
+
+func _sort_open_slots():
+	open_slots.sort_custom(func(a, b): return a.get_index() < b.get_index())

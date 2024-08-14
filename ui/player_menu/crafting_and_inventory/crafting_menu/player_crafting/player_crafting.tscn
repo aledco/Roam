@@ -49,7 +49,6 @@ texture = ExtResource("2_6nj3k")
 layout_mode = 2
 
 [node name="OptionButton" type="OptionButton" parent="CraftingOutputMaterialSlot"]
-visible = false
 layout_mode = 0
 offset_left = -46.0
 offset_top = 43.0
