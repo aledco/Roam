@@ -1,19 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://xxk8k2ta6e0y"]
 
 [ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/crafting_output_material_slot/crafting_output_material_slot.gd" id="1_uikhw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eejuu"]
-bg_color = Color(0.784314, 0.784314, 0.784314, 1)
+[ext_resource type="Texture2D" uid="uid://bv3n8m4s0pfe6" path="res://ui/shared/material_slot/material_slot.png" id="2_6qjjl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecntn"]
 size = Vector2(40, 40)
 
-[node name="CraftingOutputMaterialSlot" type="Panel"]
+[node name="CraftingOutputMaterialSlot" type="Control"]
 custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_eejuu")
 script = ExtResource("1_uikhw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_6qjjl")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(21, 20)

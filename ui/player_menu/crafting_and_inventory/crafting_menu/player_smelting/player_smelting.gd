@@ -1,12 +1,10 @@
-class_name PlayerSmelting extends GridContainer
-
-## TODO add glowing animation to output
+class_name PlayerSmelting extends Control
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
-@onready var fuel_slot: SmeltingInputMaterialSlot = $SmeltingInputMaterialSlot1
-@onready var smeltable_slot: SmeltingInputMaterialSlot = $SmeltingInputMaterialSlot2
-@onready var output_slot: SmeltingOutputMaterialSlot = $SmeltingOutputMaterialSlot
+@onready var fuel_slot: SmeltingInputMaterialSlot = $HBoxContainer/SmeltingInputMaterialSlot1
+@onready var smeltable_slot: SmeltingInputMaterialSlot = $HBoxContainer/SmeltingInputMaterialSlot2
+@onready var output_slot: SmeltingOutputMaterialSlot = $HBoxContainer/SmeltingOutputMaterialSlot
 
 var smelt_amount := 0
 
@@ -50,4 +48,3 @@ func _create_output_stack():
 		smelt_amount = smeltable_slot.stack.amount
 	
 	output_slot.set_slot_material_by_id(smelt_target_id, smelt_amount)
-

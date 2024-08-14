@@ -1,12 +1,12 @@
-class_name PlayerCrafting extends GridContainer
+class_name PlayerCrafting extends Control
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
-@onready var input_slot_1: CraftingInputMaterialSlot = $CraftingInputMaterialSlot1
-@onready var input_slot_2: CraftingInputMaterialSlot = $CraftingInputMaterialSlot2
-@onready var input_slot_3: CraftingInputMaterialSlot = $CraftingInputMaterialSlot3
-@onready var output_slot: CraftingOutputMaterialSlot = $CraftingOutputMaterialSlot
-@onready var option_button: OptionButton = $CraftingOutputMaterialSlot/OptionButton
+@onready var input_slot_1: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot1
+@onready var input_slot_2: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot2
+@onready var input_slot_3: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot3
+@onready var output_slot: CraftingOutputMaterialSlot = $HBoxContainer/CraftingOutputMaterialSlot
+@onready var option_button: OptionButton = $HBoxContainer/CraftingOutputMaterialSlot/OptionButton
 
 var slots_used_for_output: Array[CraftingInputMaterialSlot] = []
 var selected_item_index := 0

@@ -127,6 +127,8 @@ func player_animations():
 
 
 func _mine(target: MinableStructure, state: State):
+	escape()
+	
 	current_state = state
 	is_mining = true
 	minable_structure = target
