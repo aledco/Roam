@@ -12,7 +12,7 @@ func _ready():
 	_sort_open_slots()
 
 
-func _on_stack_dropped(slot: MaterialSlot):
+func _on_stack_dropped(stack: MaterialStack, slot: MaterialSlot):
 	assert(slot.stack != null)
 	
 	if slot in open_slots:

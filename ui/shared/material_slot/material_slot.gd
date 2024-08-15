@@ -4,7 +4,7 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 
 signal stack_dragged(stack: MaterialStack)
 signal stack_replaced
-signal stack_dropped
+signal stack_dropped(stack: MaterialStack)
 signal stack_removed(material_id: int)
 
 @onready var area_2d: Area2D = $Area2D
@@ -117,7 +117,7 @@ func end_stack_drag():
 func add_stack(stack_to_add: MaterialStack) -> bool:
 	if not stack:
 		stack = stack_to_add
-		stack_dropped.emit()
+		stack_dropped.emit(stack)
 	elif stack.material_id == stack_to_add.material_id:
 		if stack.amount + stack_to_add.amount <= MaterialStack.MAX_STACK:
 			stack.set_amount(stack.amount + stack_to_add.amount)
@@ -130,7 +130,7 @@ func add_stack(stack_to_add: MaterialStack) -> bool:
 	else:
 		stack.force_start_drag()
 		stack = stack_to_add
-		stack_dropped.emit()
+		stack_dropped.emit(stack)
 	return false
 
 func replace_stack():

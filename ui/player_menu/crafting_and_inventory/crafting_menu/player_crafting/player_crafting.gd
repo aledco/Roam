@@ -9,6 +9,7 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var option_button: OptionButton = $HBoxContainer/CraftingOutputMaterialSlot/OptionButton
 
 var slots_used_for_output: Array[CraftingInputMaterialSlot] = []
+var output_stack: MaterialStack
 var selected_item_index := 0
 var selected_item_material_id := -1
 
@@ -21,12 +22,15 @@ func _ready():
 	input_slot_3.stack_replaced.connect(_on_input_stack_dropped)
 	input_slot_1.stack_dragged.connect(_on_input_stack_dragged)
 	input_slot_2.stack_dragged.connect(_on_input_stack_dragged)
-	input_slot_3.stack_replaced.connect(_on_input_stack_dragged)
+	input_slot_3.stack_dragged.connect(_on_input_stack_dragged)
 	output_slot.stack_removed.connect(_on_output_stack_removed)
 	
 	option_button.item_selected.connect(_on_item_selected)
 
-func _on_input_stack_dropped():
+func _on_input_stack_dropped(stack: MaterialStack): # TODO do this for smelting
+	if stack == output_stack:
+		for slot in slots_used_for_output:
+			slot.decrement()
 	_create_material_select()
 
 func _on_input_stack_dragged(stack: MaterialStack):
@@ -35,7 +39,6 @@ func _on_input_stack_dragged(stack: MaterialStack):
 func _on_output_stack_removed(material_id: int):
 	for slot in slots_used_for_output:
 		slot.decrement()
-	
 	_create_material_select()
 
 func _get_valid_input_slots() -> Array[CraftingInputMaterialSlot]:
@@ -51,6 +54,7 @@ func _get_valid_input_slots() -> Array[CraftingInputMaterialSlot]:
 func _create_material_select():
 	option_button.clear()
 	output_slot.clear()
+	output_stack = null
 	slots_used_for_output.clear()
 	
 	var slots := _get_valid_input_slots()
@@ -83,3 +87,4 @@ func _on_item_selected(index: int):
 	selected_item_index = index
 	selected_item_material_id = material_id
 	output_slot.set_slot_material_by_id(material_id)
+	output_stack = output_slot.stack

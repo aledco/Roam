@@ -99,22 +99,25 @@ func has_sufficient_ingredients(material_id: int, ingridents: Array[RawMaterial]
 	return [true, used]
 
 
-func _is_ingredient_valid(ingredients_held: Array[int], ingredients_needed: Array) -> bool:
-	if ingredients_needed.is_empty():
-		return false
+func _are_ingredients_valid(ingredients_held: Array[int], ingredients_needed: Array) -> bool:
+	var ingredients_used := 0
 	for ingredient in ingredients_needed:
 		var ingredient_id = ingredient[0]
 		var ingredient_amount = ingredient[1]
 		if not Helpers.contains_amount(ingredients_held, ingredient_id, ingredient_amount):
 			return false
-	return true
+		else:
+			ingredients_used += ingredient_amount
+	return len(ingredients_held) == ingredients_used
 
 func get_models_from_ingredients(ingredients_held: Array[int]) -> Array[MaterialModel]:
 	var models: Array[MaterialModel] = []
 	for config in material_configs:
 		var material_id = config.material_script.MATERIAL_ID
 		var ingredients_needed = config.material_script.INGREDIENTS
-		if _is_ingredient_valid(ingredients_held, ingredients_needed):
+		if ingredients_needed.is_empty():
+			continue
+		if _are_ingredients_valid(ingredients_held, ingredients_needed):
 			models.append(get_model(material_id, null))
 	return models
 

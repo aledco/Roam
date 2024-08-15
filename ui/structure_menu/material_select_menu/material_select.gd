@@ -18,10 +18,18 @@ func set_model(model: MaterialModel) -> void:
 	texture.texture = model.image
 	texture.scale = Vector2(16, 16) / model.image.get_size()
 	
-	hover_text.add_hover_text(model.name, Color.DARK_SLATE_BLUE)
-	# TODO add ingredients to hover text
+	_add_all_hover_text()
 	
 	button.pressed.connect(_set_material)
+
+
+func _add_all_hover_text():
+	hover_text.add_hover_text(model.name, Color.DARK_SLATE_BLUE)
+	var ingredients = RawMaterialManager.get_material_ingredients(model.material_id)
+	for ingredient in ingredients:
+		var ingredient_id = ingredient[0]
+		var amount = ingredient[1]
+		hover_text.add_hover_text("%s x%s" % [RawMaterialManager.get_material_name(ingredient_id), amount])
 
 
 func set_root_ui_node(root: Node):

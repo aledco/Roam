@@ -24,7 +24,7 @@ func _are_inputs_valid() -> bool:
 	return fuel_slot.stack and smeltable_slot.stack \
 		and not fuel_slot.stack.is_empty() and not smeltable_slot.stack.is_empty()
 
-func _on_input_stack_dropped():
+func _on_input_stack_dropped(stack: MaterialStack):
 	if _are_inputs_valid():
 		_create_output_stack()
 
