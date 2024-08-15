@@ -11,7 +11,6 @@ func can_drop(stack: MaterialStack):
 	
 	match input_type:
 		InputType.Fuel:
-			
 			var is_fuel := RawMaterialManager.is_material_fuel(stack.material_id)
 			if not is_fuel:
 				return false

@@ -6,6 +6,7 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var text_label: RichTextLabel = $TextLabel
 @onready var area_2d: Area2D = $Area2D
+@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 
 var slot: MaterialSlot
 var material_id: int = -1
@@ -15,6 +16,14 @@ func _ready():
 	texture_rect.texture = null
 	text_label.clear()
 	visibility_changed.connect(func(): _on_visibility_changed())
+
+func deactivate_area2d():
+	area_2d.hide()
+	collision_shape_2d.disabled = true
+
+func activate_area2d():
+	area_2d.show()
+	collision_shape_2d.disabled = false
 
 func setup(slot: MaterialSlot, material: RawMaterial):
 	self.slot = slot
@@ -110,13 +119,16 @@ func _start_drag(button_index: int):
 	is_dragging = true
 	grabbed_offset = global_position - get_global_mouse_position()
 	slot.begin_stack_drag()
-	area_2d.show()
+	activate_area2d()
 	if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
 		_split_stack()
 
 ## Ends dragging the stack.
 func _end_drag(button_index: int):
 	var target := _get_drop_target()
+	print("TARGET: ", target)
+	if target:
+		print("CAN_DROP: ", target.can_drop(self))
 	if target and target.can_drop(self):
 		if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
 			if target.stack:
@@ -138,18 +150,21 @@ func _end_drag(button_index: int):
 		slot.replace_stack()
 
 	is_dragging = false
-	area_2d.hide()
+	deactivate_area2d()
 	reparent(slot)
 	position = Vector2.ZERO
 
 ## When stack is hidden, if it is being dragged, set back to the original slot.
 func _on_visibility_changed():
-	if not is_visible_in_tree() and is_dragging:
-		is_dragging = false
-		area_2d.hide()
-		slot.replace_stack()
-		reparent.call_deferred(slot)
-		set_position.call_deferred(Vector2.ZERO)
+	if is_visible_in_tree():
+		activate_area2d()
+	else:
+		deactivate_area2d()
+		if is_dragging:
+			is_dragging = false
+			slot.replace_stack()
+			reparent.call_deferred(slot)
+			set_position.call_deferred(Vector2.ZERO)
 
 
 ## Gets the target slot when dropping the stack.

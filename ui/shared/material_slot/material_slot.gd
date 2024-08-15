@@ -7,7 +7,27 @@ signal stack_replaced
 signal stack_dropped
 signal stack_removed(material_id: int)
 
+@onready var area_2d: Area2D = $Area2D
+@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+
 var stack: MaterialStack = null
+
+func _ready():
+	visibility_changed.connect(_on_visibility_changed)
+
+func _on_visibility_changed():
+	if is_visible_in_tree():
+		activate_area2d()
+	else:
+		deactivate_area2d()
+
+func deactivate_area2d():
+	area_2d.hide()
+	collision_shape_2d.disabled = true
+
+func activate_area2d():
+	area_2d.show()
+	collision_shape_2d.disabled = false
 
 func get_material_id() -> int:
 	if not stack:
@@ -126,14 +146,25 @@ func replace_stack():
 	stack_replaced.emit()
 	end_stack_drag()
 
+static var count = 0
 ## Determines if the mouse is hovering above the slot.
 func is_mouse_over_slot() -> bool:
 	var rect = get_global_rect()
 	var mouse_pos = get_global_mouse_position()
-	return rect.has_point(mouse_pos)
+	print("COUNT: ", count)
+	count += 1
+	print("SIZE: ", size)
+	print("RECT: ", Rect2(Vector2.ZERO, size))
+	print("MOUSE_POS: ", get_local_mouse_position())
+	print("HAS_POINT: ", Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()))
+	print()
+	return Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position())
 
 ## The stack can be dropped if the slot is empty or the stack is the same material.
 func can_drop(stack_to_drop: MaterialStack) -> bool:
-	return is_empty() or (stack.material_id == stack_to_drop.material_id and not stack.is_full()) or stack.material_id != stack_to_drop.material_id
+	print("IS_EMPTY: ", is_empty())
+	return is_empty() \
+		or (stack.material_id == stack_to_drop.material_id and not stack.is_full()) \
+		or stack.material_id != stack_to_drop.material_id
 
 ## END drag and drop code
