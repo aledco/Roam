@@ -22,11 +22,11 @@ func create_material_selections(material_models: Dictionary, currently_selected:
 func _get_container(n_ingredients: int) -> Container:
 	match n_ingredients:
 		1:
-			return _1.get_child(0) as Container
+			return _1.get_child(0).get_child(0) as Container
 		2:
-			return _2.get_child(0) as Container
+			return _2.get_child(0).get_child(0) as Container
 		3:
-			return _3.get_child(0) as Container
+			return _3.get_child(0).get_child(0) as Container
 		_:
 			return null
 

@@ -2,8 +2,7 @@ class_name StructureSelect extends Control
 
 @onready var button: Button = $Button
 @onready var texture: TextureRect = $Button/Texture
-@onready var hover_container: Container = $PanelContainer/MarginContainer/VBoxContainer
-@onready var panel_container: Container = $PanelContainer
+@onready var hover_text: HoverText = $HoverText
 
 @onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
 @onready var player := get_node("/root/World/Player") as Player
@@ -15,41 +14,27 @@ var ui_root: Node
 
 var material_labels = {}
 
+func _ready():
+	hover_text.set_hover_target(button)
+
 func set_model(model: StructureModel) -> void:
 	self.model = model
 	texture.texture = model.image
-	
 	_add_all_hover_text()
-	
 	button.pressed.connect(_create_structure)
-	button.mouse_entered.connect(panel_container.show)
-	button.mouse_exited.connect(panel_container.hide)
-	
 	if Debug.debug_structures():
 		model.cost = []
 
 func _add_all_hover_text():
-	_add_hover_text(model.name, Color.DARK_SLATE_BLUE)
+	hover_text.add_hover_text(model.name, Color.DARK_SLATE_BLUE)
 	if not model.cost:
 		return
 	
 	for val in model.cost:
 		var material_id = val[0]
 		var amount = val[1]
-		material_labels[material_id] = _add_hover_text("%s x%s" % [RawMaterialManager.get_material_name(material_id), amount])
+		material_labels[material_id] = hover_text.add_hover_text("%s x%s" % [RawMaterialManager.get_material_name(material_id), amount])
 
-
-func _add_hover_text(text: String, color: Color = Color.WHITE) -> RichTextLabel:
-	if not text:
-		return null
-	
-	var label = TEXT_LABEL.instantiate() as RichTextLabel
-	hover_container.add_child(label)
-	label.clear()
-	label.push_color(color)
-	label.add_text(text)
-	#scroll_container.size.y += label.get_content_height() + 2
-	return label
 
 func set_root_ui_node(root: Node):
 	ui_root = root

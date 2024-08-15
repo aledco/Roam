@@ -1,13 +1,16 @@
 class_name MaterialSelect extends Control
 
-@onready var panel = $Panel
-@onready var button = $Panel/Button
-@onready var texture = $Panel/Button/Texture
-@onready var text = $Panel/Button/Text
-@onready var overlay: ColorRect = $Panel/Overlay
+@onready var button: Button = $Button
+@onready var texture: TextureRect = $Button/Texture
+@onready var overlay: ColorRect = $Overlay
+@onready var hover_text: HoverText = $HoverText
 
 var model: MaterialModel
 var ui_root: Node
+
+func _ready():
+	hover_text.set_hover_target(button)
+
 
 func set_model(model: MaterialModel) -> void:
 	self.model = model
@@ -15,8 +18,8 @@ func set_model(model: MaterialModel) -> void:
 	texture.texture = model.image
 	texture.scale = Vector2(16, 16) / model.image.get_size()
 	
-	text.clear()
-	text.text = "[center]%s[/center]" % model.name
+	hover_text.add_hover_text(model.name, Color.DARK_SLATE_BLUE)
+	# TODO add ingredients to hover text
 	
 	button.pressed.connect(_set_material)
 
