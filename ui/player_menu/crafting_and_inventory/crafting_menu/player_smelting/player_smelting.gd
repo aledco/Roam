@@ -27,12 +27,16 @@ func _are_inputs_valid() -> bool:
 func _on_input_stack_dropped(stack: MaterialStack):
 	if _are_inputs_valid():
 		_create_output_stack()
+	else:
+		output_slot.clear()
 
 func _on_output_stack_removed(material_id: int):
 	fuel_slot.stack.decrement()
 	smeltable_slot.stack.decrement(smelt_amount)
 	if _are_inputs_valid():
 		_create_output_stack()
+	else:
+		output_slot.clear()
 
 func _on_input_stack_dragged(stack: MaterialStack):
 	output_slot.clear()

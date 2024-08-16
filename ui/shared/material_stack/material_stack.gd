@@ -126,9 +126,6 @@ func _start_drag(button_index: int):
 ## Ends dragging the stack.
 func _end_drag(button_index: int):
 	var target := _get_drop_target()
-	print("TARGET: ", target)
-	if target:
-		print("CAN_DROP: ", target.can_drop(self))
 	if target and target.can_drop(self):
 		if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
 			if target.stack:
@@ -191,8 +188,6 @@ func _gui_input(event: InputEvent):
 		if rect.has_point(ev_local.global_position):
 			_start_drag(mouse_event.button_index)
 
-func _input(event):
-	pass
 
 ## Update the stacks position when dragging.
 func _process(delta):

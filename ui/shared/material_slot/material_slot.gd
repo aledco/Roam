@@ -146,23 +146,14 @@ func replace_stack():
 	stack_replaced.emit()
 	end_stack_drag()
 
-static var count = 0
 ## Determines if the mouse is hovering above the slot.
 func is_mouse_over_slot() -> bool:
-	var rect = get_global_rect()
-	var mouse_pos = get_global_mouse_position()
-	print("COUNT: ", count)
-	count += 1
-	print("SIZE: ", size)
-	print("RECT: ", Rect2(Vector2.ZERO, size))
-	print("MOUSE_POS: ", get_local_mouse_position())
-	print("HAS_POINT: ", Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position()))
-	print()
-	return Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position())
+	var rect = Rect2(Vector2.ZERO, size)
+	var mouse_pos = get_local_mouse_position()
+	return rect.has_point(mouse_pos)
 
 ## The stack can be dropped if the slot is empty or the stack is the same material.
 func can_drop(stack_to_drop: MaterialStack) -> bool:
-	print("IS_EMPTY: ", is_empty())
 	return is_empty() \
 		or (stack.material_id == stack_to_drop.material_id and not stack.is_full()) \
 		or stack.material_id != stack_to_drop.material_id

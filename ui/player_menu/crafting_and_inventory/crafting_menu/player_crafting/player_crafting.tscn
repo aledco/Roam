@@ -67,11 +67,11 @@ texture = ExtResource("3_68bjr")
 [node name="CraftingOutputMaterialSlot" parent="HBoxContainer" instance=ExtResource("4_xu6qa")]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="HBoxContainer/CraftingOutputMaterialSlot"]
+[node name="OptionButton" type="OptionButton" parent="."]
 visible = false
 layout_mode = 0
-offset_left = -46.0
-offset_top = 43.0
-offset_right = -1.0
-offset_bottom = 63.0
+offset_left = 171.0
+offset_top = 57.0
+offset_right = 216.0
+offset_bottom = 77.0
 theme = ExtResource("5_tyhby")

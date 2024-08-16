@@ -6,7 +6,7 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var input_slot_2: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot2
 @onready var input_slot_3: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot3
 @onready var output_slot: CraftingOutputMaterialSlot = $HBoxContainer/CraftingOutputMaterialSlot
-@onready var option_button: OptionButton = $HBoxContainer/CraftingOutputMaterialSlot/OptionButton
+@onready var option_button: OptionButton = $OptionButton
 
 var slots_used_for_output: Array[CraftingInputMaterialSlot] = []
 var output_stack: MaterialStack
@@ -26,8 +26,9 @@ func _ready():
 	output_slot.stack_removed.connect(_on_output_stack_removed)
 	
 	option_button.item_selected.connect(_on_item_selected)
+	option_button.resized.connect(_on_option_button_resized)
 
-func _on_input_stack_dropped(stack: MaterialStack): # TODO do this for smelting
+func _on_input_stack_dropped(stack: MaterialStack):
 	if stack == output_stack:
 		for slot in slots_used_for_output:
 			slot.decrement()
@@ -88,3 +89,6 @@ func _on_item_selected(index: int):
 	selected_item_material_id = material_id
 	output_slot.set_slot_material_by_id(material_id)
 	output_stack = output_slot.stack
+
+func _on_option_button_resized():
+	option_button.position.x = size.x - option_button.size.x
