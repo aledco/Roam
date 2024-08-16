@@ -1,9 +1,10 @@
 class_name StructureBuildMenu extends BaseUI
 
-@onready var main_container: ScrollContainer = $Control/ScrollContainer
-@onready var container: Container = $Control/ScrollContainer/Container
+@onready var container: Container = $Control/PanelContainer/ScrollContainer/MarginContainer/Container
 @onready var button: Button = $Control/Button
 @onready var texture_rect: TextureRect = $Control/Button/TextureRect
+
+# TODO button is broken because not in rect, move button function to special ui
 
 const STRUCTURE_SELECT = preload("res://ui/shared/structure_select/structure_select.tscn")
 const DRILL_PLAYER_DISPLAY = preload("res://player/display/drill_player_display.png")
@@ -16,9 +17,6 @@ func get_rect() -> Rect2:
 func create_structure_selections(structures: Array[StructureModel], can_saw: bool, can_drill: bool) -> void:
 	for structure in structures:
 		_create_structure_ui(structure)
-	if len(structures) == 1:
-		main_container.set_size(main_container.get_size() * Vector2(1, 0.5) - Vector2(10, 0))
-		main_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 	if can_saw or can_drill:
 		button.show()
 		if can_saw:
