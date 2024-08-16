@@ -1,6 +1,5 @@
 class_name Wire extends Line2D
 
-
 const BLACK := Color(0, 0, 0, 255)
 const RED := Color(2, 0, 0, 2)
 
@@ -37,6 +36,7 @@ func _destroy_on_input(_input_type):
 
 func destroy():
 	on_destroyed.emit()
+	player.is_placing_wire = false
 	if is_connected:
 		WireManager.remove_connection(input, output)
 	queue_free()
@@ -46,7 +46,7 @@ func start_connecting(input: Structure, node_pos: Vector2):
 	input.on_destroyed.connect(destroy)
 	
 	is_connecting = true
-	player.is_busy = true
+	player.is_placing_wire = true
 	add_point(node_pos)
 	add_point(to_local(get_global_mouse_position()))
 	SignalManager.player_input.connect(_destroy_on_input)
@@ -81,7 +81,7 @@ func _connect():
 	WireManager.add_connection(input, output)
 	is_connecting = false
 	is_connected = true
-	player.is_busy = false
+	player.is_placing_wire = false
 	SignalManager.player_input.disconnect(_destroy_on_input)
 
 

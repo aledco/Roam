@@ -34,4 +34,4 @@ static func get_model() -> StructureModel:
 		"Tunnel", 
 		TunnelIn.TUNNEL_COST, 
 		preload("res://structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.tscn"),
-		preload("res://structures/conveyors/tunnel/in/tunnel_in.png"))
+		preload("res://structures/conveyors/tunnel/in/tunnel_in_display.png"))

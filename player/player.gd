@@ -13,12 +13,18 @@ enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode
 @onready var current_state = State.Idle
 @onready var camera_2d: Camera2D = $Camera2D
 
-var is_busy: bool = false
 var map_active: bool = false
 var is_mining: bool = false
 var minable_structure: MinableStructure
 var pos_before_mine: Vector2
 var direction := Vector2i(0, 1)
+
+var has_menu_open := false
+var is_placing_structure := false
+var is_placing_wire := false
+
+func is_busy() -> bool:
+	return has_menu_open or is_placing_structure or is_placing_wire or is_mining
 
 func _ready():
 	pass
@@ -64,8 +70,6 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 		camera_2d.zoom = Vector2.ONE
 	if not ignore_delete_mode:
 		StructureManager.set_delete_mode(false)
-	
-	is_busy = false
 
 
 func _physics_process(delta):

@@ -1,5 +1,7 @@
 class_name TunnelIn extends Conveyor
 
+# TODO deleting tunnel should also delete paired tunnel
+
 static var TUNNEL_COST := [
 	[IronIngot.MATERIAL_ID, 1], 
 	[StoneBrick.MATERIAL_ID, 1]

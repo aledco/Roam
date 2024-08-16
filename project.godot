@@ -26,7 +26,6 @@ AnimationManager="*res://autoload/animation_manager.gd"
 Helpers="*res://autoload/helpers.gd"
 WireManager="*res://autoload/wire_manager.gd"
 Debug="*res://autoload/debug.gd"
-InputManager="*res://autoload/input_manager.gd"
 
 [display]
 

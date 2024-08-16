@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gqeyaeq7p4n"]
+[gd_scene load_steps=13 format=3 uid="uid://gqeyaeq7p4n"]
 
 [ext_resource type="Script" path="res://structures/conveyors/tunnel/in/tunnel_in.gd" id="1_1p0pf"]
 [ext_resource type="Texture2D" uid="uid://b70fdfvhe4lk6" path="res://structures/conveyors/tunnel/in/tunnel_in.png" id="2_4n1t5"]
@@ -6,8 +6,44 @@
 [ext_resource type="PackedScene" uid="uid://cbfuabnd5fdkc" path="res://structures/conveyors/tunnel/tunnel.tscn" id="3_ma0fj"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_kcld4"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dto2x"]
+atlas = ExtResource("2_4n1t5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0rgw"]
+atlas = ExtResource("2_4n1t5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18wh1"]
+atlas = ExtResource("2_4n1t5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8gxx"]
+atlas = ExtResource("2_4n1t5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywava"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dto2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0rgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18wh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8gxx")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
-size = Vector2(20, 32)
+size = Vector2(20, 23)
 
 [sub_resource type="Curve2D" id="Curve2D_p7own"]
 _data = {
@@ -21,14 +57,17 @@ collision_mask = 0
 input_pickable = true
 script = ExtResource("1_1p0pf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_4n1t5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ywava")
+animation = &"roll"
+autoplay = "roll"
 
 [node name="Tunnel" parent="." instance=ExtResource("3_ma0fj")]
 position = Vector2(0, 6)
 rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_fum3s")
 
 [node name="Inputs" type="Node2D" parent="."]

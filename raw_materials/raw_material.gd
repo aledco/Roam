@@ -88,7 +88,8 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	if not mock_follow_node or mock_follow_node.progress_ratio == 1:
+	#if not mock_follow_node or mock_follow_node.progress_ratio == 1: # doing this breaks pathing
+	if not mock_follow_node:
 		return false
 	
 	mock_follow_node.progress += speed
@@ -131,7 +132,7 @@ func start_tunnel():
 
 ## Toggles the material in and out of the underground state.
 func toggle_underground(underground: bool):
-	sprite_2d.visible = not underground
+	#sprite_2d.visible = not underground
 	if underground:
 		set_collision_layer_value(UNDERGROUND_COLLISION_LAYER, true)
 		set_collision_layer_value(MATERIALS_COLLISION_LAYER, false)

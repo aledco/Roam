@@ -1,8 +1,15 @@
 class_name BaseUI extends CanvasLayer
 
+var _player: Player
+var player: Player:
+	get:
+		if not _player:
+			_player = get_node("/root/World/Player") as Player
+		return _player
+
 func _ready():
-	if visible:
-		InputManager.menu_open = true
+	if visible and player:
+		player.has_menu_open = true
 	visibility_changed.connect(_on_visibility_changed)
 
 func get_rect() -> Rect2:
@@ -15,10 +22,12 @@ func destroy():
 	queue_free()
 
 func _exit_tree():
-	InputManager.menu_open = false
+	if player:
+		player.has_menu_open = false
 
 func _on_visibility_changed():
-	InputManager.menu_open = visible
+	if player:
+		player.has_menu_open = visible
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
