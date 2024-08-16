@@ -70,6 +70,9 @@ func _create_material_select():
 	
 	if models.is_empty():
 		option_button.hide()
+	elif len(models) == 1:
+		slots_used_for_output = slots
+		_create_output_slot(models.front().material_id)
 	else:
 		option_button.show()
 		slots_used_for_output = slots
@@ -83,12 +86,15 @@ func _create_material_select():
 			option_button.select(0)
 			_on_item_selected(0)
 
+func _create_output_slot(material_id: int):
+	output_slot.set_slot_material_by_id(material_id)
+	output_stack = output_slot.stack
+
 func _on_item_selected(index: int):
 	var material_id = option_button.get_item_id(index)
 	selected_item_index = index
 	selected_item_material_id = material_id
-	output_slot.set_slot_material_by_id(material_id)
-	output_stack = output_slot.stack
+	_create_output_slot(material_id)
 
 func _on_option_button_resized():
 	option_button.position.x = size.x - option_button.size.x

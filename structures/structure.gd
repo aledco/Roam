@@ -101,7 +101,7 @@ func _create_build_ui():
 	
 	var build_ui := BUILD_MENU.instantiate() as StructureBuildMenu
 	add_child(build_ui)
-	build_ui.create_structure_selections(build_list, _can_saw(), _can_drill())
+	build_ui.create_structure_selections(build_list)
 
 
 func delay_input():

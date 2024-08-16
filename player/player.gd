@@ -17,6 +17,7 @@ var is_busy: bool = false
 var map_active: bool = false
 var is_mining: bool = false
 var minable_structure: MinableStructure
+var pos_before_mine: Vector2
 var direction := Vector2i(0, 1)
 
 func _ready():
@@ -56,6 +57,7 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 	if is_mining:
 		collision_shape_2d.disabled = false
 		minable_structure.end_player_mining()
+		global_position = pos_before_mine
 		is_mining = false
 	
 	if not ignore_map and map_active:
@@ -81,6 +83,9 @@ func player_idle():
 
 ## Controls player movement.
 func player_run():
+	if is_mining:
+		return
+	
 	var x_direction := Input.get_axis("move_left", "move_right")
 	var y_direction := Input.get_axis("move_up", "move_down")
 	
@@ -133,12 +138,13 @@ func _mine(target: MinableStructure, state: State):
 	is_mining = true
 	minable_structure = target
 	collision_shape_2d.disabled = true
+	pos_before_mine = global_position
 	global_position = target.get_player_position()
 	target.begin_player_mining()
 	
 func saw(target: MinableStructure):
 	_mine(target, State.Saw)
-	
+
 func drill(target: MinableStructure):
 	_mine(target, State.Drill)
 
