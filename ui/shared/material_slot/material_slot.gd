@@ -3,7 +3,7 @@ class_name MaterialSlot extends Control
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
 signal stack_dragged(stack: MaterialStack)
-signal stack_replaced
+signal stack_replaced(stack: MaterialStack)
 signal stack_dropped(stack: MaterialStack)
 signal stack_removed(material_id: int)
 
@@ -142,7 +142,7 @@ func replace_stack():
 		detached_stack.queue_free()
 	else:
 		stack = detached_stack
-	stack_replaced.emit()
+	stack_replaced.emit(stack)
 	end_stack_drag()
 
 ## Determines if the mouse is hovering above the slot.

@@ -8,6 +8,8 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 
+@onready var player := get_node("/root/World/Player") as Player
+
 var slot: MaterialSlot
 var material_id: int = -1
 var amount: int = 0
@@ -117,6 +119,7 @@ func _start_drag(button_index: int):
 	reparent(base_ui)
 	
 	is_dragging = true
+	player.is_dragging_stack = true
 	grabbed_offset = global_position - get_global_mouse_position()
 	slot.begin_stack_drag()
 	activate_area2d()
@@ -129,6 +132,7 @@ func _end_drag(button_index: int):
 	if target and target.can_drop(self):
 		if button_index == MOUSE_BUTTON_RIGHT and amount > 1:
 			if target.stack:
+				print(target.stack)
 				target.stack.increment()
 				decrement()
 			else:
@@ -147,6 +151,7 @@ func _end_drag(button_index: int):
 		slot.replace_stack()
 
 	is_dragging = false
+	player.is_dragging_stack = false
 	deactivate_area2d()
 	reparent(slot)
 	position = Vector2.ZERO
@@ -159,6 +164,7 @@ func _on_visibility_changed():
 		deactivate_area2d()
 		if is_dragging:
 			is_dragging = false
+			player.is_dragging_stack = false
 			slot.replace_stack()
 			reparent.call_deferred(slot)
 			set_position.call_deferred(Vector2.ZERO)

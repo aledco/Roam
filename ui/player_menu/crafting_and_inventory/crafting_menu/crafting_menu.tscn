@@ -1,28 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://clu47foljfqjo"]
+[gd_scene load_steps=3 format=3 uid="uid://clu47foljfqjo"]
 
-[ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/crafting_menu.gd" id="1_m7bi2"]
 [ext_resource type="PackedScene" uid="uid://cfxj2gwya3qhp" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_crafting/player_crafting.tscn" id="2_rt1n2"]
 [ext_resource type="PackedScene" uid="uid://p7mskuoq5j5m" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/player_smelting.tscn" id="3_2lkfo"]
 
-[node name="CraftingMenu" type="VSplitContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -420.0
-offset_bottom = -45.0
+[node name="CraftingMenu" type="VBoxContainer"]
+custom_minimum_size = Vector2(250, 207)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -110.0
+offset_right = 125.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offset = 120
-dragger_visibility = 2
-script = ExtResource("1_m7bi2")
+theme_override_constants/separation = 21
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(250, 100)
 layout_mode = 2
 
 [node name="PlayerCrafting" parent="CenterContainer" instance=ExtResource("2_rt1n2")]
 layout_mode = 2
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
 
 [node name="PlayerSmelting" parent="CenterContainer2" instance=ExtResource("3_2lkfo")]

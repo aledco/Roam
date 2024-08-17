@@ -1,4 +1,4 @@
-class_name PlayerCrafting extends Control
+class_name PlayerCrafting extends VBoxContainer
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 
@@ -7,6 +7,8 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var input_slot_3: CraftingInputMaterialSlot = $HBoxContainer/CraftingInputMaterialSlot3
 @onready var output_slot: CraftingOutputMaterialSlot = $HBoxContainer/CraftingOutputMaterialSlot
 @onready var option_button: OptionButton = $OptionButton
+
+@onready var crafting_input_material_slot_1 = $VBoxContainer/HBoxContainer/CraftingInputMaterialSlot1
 
 var slots_used_for_output: Array[CraftingInputMaterialSlot] = []
 var output_stack: MaterialStack
@@ -26,7 +28,6 @@ func _ready():
 	output_slot.stack_removed.connect(_on_output_stack_removed)
 	
 	option_button.item_selected.connect(_on_item_selected)
-	option_button.resized.connect(_on_option_button_resized)
 
 func _on_input_stack_dropped(stack: MaterialStack):
 	if stack == output_stack:
@@ -95,6 +96,3 @@ func _on_item_selected(index: int):
 	selected_item_index = index
 	selected_item_material_id = material_id
 	_create_output_slot(material_id)
-
-func _on_option_button_resized():
-	option_button.position.x = size.x - option_button.size.x

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bt0pafekegk3i"]
 
-[ext_resource type="Script" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory/storage_inventory.gd" id="1_760al"]
+[ext_resource type="Script" path="res://ui/shared/inventory/inventory.gd" id="1_3s47u"]
 [ext_resource type="PackedScene" uid="uid://foaqb8gs6dr8" path="res://ui/shared/material_slot/material_slot.tscn" id="1_s6qtt"]
 
 [node name="StorageInventory" type="GridContainer"]
@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 5
-script = ExtResource("1_760al")
+script = ExtResource("1_3s47u")
 
 [node name="MaterialSlot" parent="." instance=ExtResource("1_s6qtt")]
 layout_mode = 2

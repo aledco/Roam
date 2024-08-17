@@ -1,4 +1,4 @@
-class_name PlayerSmelting extends Control
+class_name PlayerSmelting extends VBoxContainer
 
 const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.tscn")
 

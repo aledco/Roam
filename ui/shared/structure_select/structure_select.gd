@@ -7,7 +7,7 @@ class_name StructureSelect extends Control
 @onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
 @onready var player := get_node("/root/World/Player") as Player
 
-const TEXT_LABEL = preload("res://ui/shared/text_label/text_label.tscn")
+const TEXT_LABEL = preload("res://ui/shared/text_label/text_label_small/text_label_small.tscn")
 
 var model: StructureModel
 var ui_root: Node

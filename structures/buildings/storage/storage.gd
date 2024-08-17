@@ -5,7 +5,7 @@ static var COST := [[Box.MATERIAL_ID, 5], [IronIngot.MATERIAL_ID, 5]]
 const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/output_select.tscn")
 
 @onready var storage_inventory_menu: StorageInventoryMenu = $StorageInventoryMenu
-@onready var storage_inventory: StorageInventory = storage_inventory_menu.get_storage_inventory()
+@onready var storage_inventory: Inventory = storage_inventory_menu.get_storage_inventory()
 
 var output_selects := {}
 var interval_id := -1
