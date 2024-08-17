@@ -41,7 +41,6 @@ static func get_models_for_workshop(parent_structure: Structure) -> Dictionary:
 				models[n_ingredients] = [RawMaterialManager.get_model(mat_id, parent_structure)]
 	return models
 
-
 ## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -69,22 +68,19 @@ func get_material_id() -> int:
 
 ## Gets the material image.
 func get_material_image() -> Texture2D:
-	push_error("abstract function")
-	return null
-
+	return RawMaterialManager.get_material_image(get_material_id())
 
 func get_fuel_value() -> int:
-	return 0
+	return RawMaterialManager.get_material_fuel_value(get_material_id())
 
 func is_fuel() -> bool:
-	return get_fuel_value() > 0
+	return RawMaterialManager.is_material_fuel(get_material_id())
 
 func is_smeltable() -> bool:
-	return false
+	return RawMaterialManager.is_material_smeltable(get_material_id())
 
 func _get_smelted_material_id() -> int:
-	push_error("abstract function")
-	return -1
+	return RawMaterialManager.get_smelt_target_id(get_material_id())
 	
 func get_smelted_material() -> RawMaterial:
 	var mat_id = _get_smelted_material_id()
@@ -92,7 +88,8 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	if not mock_follow_node or mock_follow_node.progress_ratio == 1:
+	#if not mock_follow_node or mock_follow_node.progress_ratio == 1: # doing this breaks pathing
+	if not mock_follow_node:
 		return false
 	
 	mock_follow_node.progress += speed

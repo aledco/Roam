@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://csvq22fgo1biu" path="res://player/animations/idle/idle_player_front.png" id="2_v4wss"]
 [ext_resource type="Texture2D" uid="uid://b0xi5e77y1b4l" path="res://player/animations/run/run_player_back.png" id="3_y8wvg"]
 [ext_resource type="Texture2D" uid="uid://dddiue5wpwr2b" path="res://player/animations/run/run_player_front.png" id="4_2c8w4"]
-[ext_resource type="PackedScene" uid="uid://dvrohfglsff0x" path="res://ui/inventory/inventory.tscn" id="4_7lto7"]
 [ext_resource type="Texture2D" uid="uid://bkuecchfsf6eb" path="res://player/animations/run/run_player_side.png" id="5_knscy"]
 [ext_resource type="Texture2D" uid="uid://d37hu5p5p5de5" path="res://player/animations/saw_player.png" id="7_xwfgo"]
+[ext_resource type="PackedScene" uid="uid://2i61lrgluqhs" path="res://ui/player_menu/player_menu.tscn" id="8_h42pe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5qd6l"]
 atlas = ExtResource("2_swxeq")
@@ -256,4 +256,5 @@ shape = SubResource("RectangleShape2D_bhxj1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Inventory" parent="." instance=ExtResource("4_7lto7")]
+[node name="PlayerMenu" parent="." instance=ExtResource("8_h42pe")]
+visible = false

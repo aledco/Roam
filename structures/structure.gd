@@ -16,7 +16,7 @@ var material_node: Node2D:
 		return get_node("/root/World/Materials")
 
 
-const BUILD_UI: Resource = preload("res://ui/build/build_ui.tscn")
+const BUILD_MENU = preload("res://ui/structure_menu/structure_build_menu/structure_build_menu.tscn")
 
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
@@ -99,9 +99,9 @@ func _create_build_ui():
 	if build_list == []:
 		return
 	
-	var build_ui := BUILD_UI.instantiate() as BuildUI;
+	var build_ui := BUILD_MENU.instantiate() as StructureBuildMenu
 	add_child(build_ui)
-	build_ui.create_structure_selections(build_list, _can_saw(), _can_drill())
+	build_ui.create_structure_selections(build_list)
 
 
 func delay_input():
@@ -110,7 +110,7 @@ func delay_input():
 
 
 func _input_event(viewport, event, shape_idx):
-	if _is_placeholder() or _input_disabled or player.is_busy:
+	if _is_placeholder() or _input_disabled or player.is_busy():
 		return
 	
 	if event is InputEventMouseButton:

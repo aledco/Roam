@@ -6,6 +6,7 @@ const RED := Color(2, 0, 0, 2)
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_valid: bool = true
+var has_placed := false
 
 # BEGIN abstract functions
 func _get_structure() -> Resource:
@@ -31,7 +32,7 @@ func _ready():
 	z_index = 5
 	animated_sprite_2d.play("blink")
 	SignalManager.player_input.connect(_on_player_input)
-	player.is_busy = true
+	player.is_placing_structure = true
 
 
 func _on_player_input(input_type: Player.InputType):
@@ -39,7 +40,7 @@ func _on_player_input(input_type: Player.InputType):
 
 
 func destroy():
-	player.is_busy = false
+	player.is_placing_structure = false
 	queue_free()
 
 
@@ -64,6 +65,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click") and is_valid:
 			_create_structure_from_placeholder()
+			has_placed = true
 			if _destroy_after_placement():
 				destroy()
 		if Debug.debug_grid() and event.is_action_released("right_click"):

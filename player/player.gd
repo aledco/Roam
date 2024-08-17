@@ -2,28 +2,32 @@ class_name Player extends CharacterBody2D
 
 
 const SPEED = 100.0
-const BUILD_MENU = preload("res://ui/build/build_menu.tscn")
 
 enum State { Idle, Run, Saw, Drill }
 enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode, Escape, None }
 
-@onready var inventory: Inventory = $Inventory
+@onready var player_menu: PlayerMenu = $PlayerMenu
+@onready var inventory: Inventory = player_menu.get_inventory()
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var current_state = State.Idle
 @onready var camera_2d: Camera2D = $Camera2D
 
-var build_menu: BuildMenu = null
-var is_busy: bool = false
 var map_active: bool = false
 var is_mining: bool = false
 var minable_structure: MinableStructure
+var pos_before_mine: Vector2
 var direction := Vector2i(0, 1)
 
+var has_menu_open := false
+var is_placing_structure := false
+var is_placing_wire := false
+
+func is_busy() -> bool:
+	return has_menu_open or is_placing_structure or is_placing_wire or is_mining
+
 func _ready():
-	build_menu = BUILD_MENU.instantiate() as BuildMenu
-	add_child(build_menu)
-	build_menu.hide()
+	pass
 
 		
 func _process(delta):
@@ -35,7 +39,7 @@ func player_input():
 	if Input.is_action_just_pressed("build_menu"):
 		SignalManager.player_input.emit(InputType.BuildMenu)
 		escape()
-		build_menu.visible = not build_menu.visible
+		player_menu.visible = not player_menu.visible
 	elif Input.is_action_just_pressed("map"):
 		SignalManager.player_input.emit(InputType.Map)
 		escape(true)
@@ -59,14 +63,13 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 	if is_mining:
 		collision_shape_2d.disabled = false
 		minable_structure.end_player_mining()
+		global_position = pos_before_mine
 		is_mining = false
 	
 	if not ignore_map and map_active:
 		camera_2d.zoom = Vector2.ONE
 	if not ignore_delete_mode:
 		StructureManager.set_delete_mode(false)
-	
-	is_busy = false
 
 
 func _physics_process(delta):
@@ -84,6 +87,9 @@ func player_idle():
 
 ## Controls player movement.
 func player_run():
+	if is_mining:
+		return
+	
 	var x_direction := Input.get_axis("move_left", "move_right")
 	var y_direction := Input.get_axis("move_up", "move_down")
 	
@@ -130,16 +136,19 @@ func player_animations():
 
 
 func _mine(target: MinableStructure, state: State):
+	escape()
+	
 	current_state = state
 	is_mining = true
 	minable_structure = target
 	collision_shape_2d.disabled = true
+	pos_before_mine = global_position
 	global_position = target.get_player_position()
 	target.begin_player_mining()
 	
 func saw(target: MinableStructure):
 	_mine(target, State.Saw)
-	
+
 func drill(target: MinableStructure):
 	_mine(target, State.Drill)
 

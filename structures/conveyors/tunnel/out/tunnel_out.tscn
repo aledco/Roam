@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://h8qdtiibcm7h"]
+[gd_scene load_steps=14 format=3 uid="uid://h8qdtiibcm7h"]
 
 [ext_resource type="Script" path="res://structures/conveyors/tunnel/out/tunnel_out.gd" id="1_o60m5"]
 [ext_resource type="Texture2D" uid="uid://b40gs836vknof" path="res://structures/conveyors/tunnel/out/tunnel_out.png" id="2_okbp1"]
@@ -6,8 +6,44 @@
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_ldcsg"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_r125i"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbhhj"]
+atlas = ExtResource("2_okbp1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gryj6"]
+atlas = ExtResource("2_okbp1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00dw4"]
+atlas = ExtResource("2_okbp1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e5qt"]
+atlas = ExtResource("2_okbp1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwttx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbhhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gryj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00dw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e5qt")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
-size = Vector2(20, 32)
+size = Vector2(20, 23)
 
 [sub_resource type="Curve2D" id="Curve2D_p7own"]
 _data = {
@@ -24,13 +60,16 @@ collision_mask = 0
 input_pickable = true
 script = ExtResource("1_o60m5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_okbp1")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dwttx")
+animation = &"roll"
+autoplay = "roll"
 
 [node name="Tunnel" parent="." instance=ExtResource("3_ihnb5")]
 position = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_fum3s")
 
 [node name="Inputs" type="Node2D" parent="."]

@@ -38,4 +38,9 @@ func _process(delta):
 func set_tunnel_in(tunnel: TunnelIn):
 	tunnel_in = tunnel
 	tunnel_in.set_tunnel_out(self)
-	inputs[0].set_position(tunnel_in.outputs[0].position)
+	inputs.front().set_position(tunnel_in.outputs.front().position)
+	
+	var in_point = tunnel_in.paths.front().curve.get_point_position(1)
+	var in_point_global = tunnel_in.to_global(in_point)
+	var in_point_local = to_local(in_point_global)
+	paths.front().curve.set_point_position(0, in_point_local)

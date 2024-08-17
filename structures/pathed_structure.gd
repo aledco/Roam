@@ -9,7 +9,6 @@ var paths: Array[Path2D] = []
 var path_index: int = 0
 var speed: float = 16
 
-
 func _ready():
 	super._ready()
 	for node in inputs_node.get_children():

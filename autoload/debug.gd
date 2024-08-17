@@ -1,6 +1,6 @@
 extends Node
 
-const ENABLED := false
+const ENABLED := true
 const DEBUG_GRID := false
 const DEBUG_STRUCTURES := true
 

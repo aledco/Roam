@@ -90,12 +90,22 @@ func get_structure_at(grid_index) -> Structure:
 	else:
 		return null
 
-## Removes a structure.
-func remove_structure(structure: Structure):
+func _remove_structure(structure: Structure):
 	var grid_index = structure.get_grid_index()
 	_disconnect_structure(structure)
 	_remove_structure_from_map(structure, grid_index)
 	structure.destroy()
+
+## Removes a structure.
+func remove_structure(structure: Structure, force: bool = false):
+	if force or (not structure is TunnelIn and not structure is TunnelOut):
+		_remove_structure(structure)
+	else:
+		var tunnel_node = structure.get_parent()
+		var tunnel_in = tunnel_node.get_child(0) as TunnelIn
+		var tunnel_out = tunnel_node.get_child(1) as TunnelOut
+		_remove_structure(tunnel_in)
+		_remove_structure(tunnel_out)	
 
 
 ## Updates the structures outputs.
@@ -119,6 +129,12 @@ func add_tunnel(tunnel_node: Node2D):
 	tunnel_in.outputs[0].can_connect = false
 	tunnel_out.inputs[0].can_connect = false
 
+
+func remove_tunnel(tunnel_node: Node2D):
+	var tunnel_in = tunnel_node.get_child(0) as TunnelIn
+	var tunnel_out = tunnel_node.get_child(1) as TunnelOut
+	remove_structure(tunnel_in)
+	remove_structure(tunnel_out)
 
 func _connect(input: InputNode, output: OutputNode):
 	if input.connection != output:

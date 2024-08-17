@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://p7mskuoq5j5m"]
+
+[ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/player_smelting.gd" id="1_81u42"]
+[ext_resource type="PackedScene" uid="uid://bfyuatcmxa7rf" path="res://ui/shared/text_label/text_label.tscn" id="2_0tn3r"]
+[ext_resource type="PackedScene" uid="uid://bfq7k2nlo7gky" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_input_material_slot/smelting_input_material_slot.tscn" id="2_1mng2"]
+[ext_resource type="Texture2D" uid="uid://5d8jp0a6gv4b" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/equals.png" id="3_75238"]
+[ext_resource type="Texture2D" uid="uid://bwdi33xwbova1" path="res://raw_materials/coal/coal.png" id="3_h6wls"]
+[ext_resource type="PackedScene" uid="uid://jgqfeq0fc2aa" path="res://ui/player_menu/crafting_and_inventory/crafting_menu/player_smelting/smelting_output_material_slot/smelting_output_material_slot.tscn" id="4_vy6na"]
+
+[node name="PlayerSmelting" type="Control"]
+custom_minimum_size = Vector2(172, 56)
+layout_mode = 3
+anchor_right = 0.268
+anchor_bottom = 0.175
+offset_right = 0.479996
+script = ExtResource("1_81u42")
+
+[node name="TextLabel" parent="." instance=ExtResource("2_0tn3r")]
+custom_minimum_size = Vector2(172, 16)
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.286
+offset_right = 0.0
+offset_bottom = -0.0160007
+text = "[center]Smelting[/center]"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.286
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.0160007
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SmeltingInputMaterialSlot1" parent="HBoxContainer" instance=ExtResource("2_1mng2")]
+layout_mode = 2
+
+[node name="Placeholder" type="TextureRect" parent="HBoxContainer/SmeltingInputMaterialSlot1"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h6wls")
+
+[node name="SmeltingInputMaterialSlot2" parent="HBoxContainer" instance=ExtResource("2_1mng2")]
+layout_mode = 2
+input_type = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_75238")
+
+[node name="SmeltingOutputMaterialSlot" parent="HBoxContainer" instance=ExtResource("4_vy6na")]
+layout_mode = 2

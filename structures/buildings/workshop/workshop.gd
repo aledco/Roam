@@ -2,7 +2,7 @@ class_name Workshop extends PoweredBuilding
 
 static var COST := [[Plank.MATERIAL_ID, 10]]
 
-const MATERIAL_SELECT_UI = preload("res://ui/material_select/material_select_ui.tscn")
+const MATERIAL_SELECT_MENU = preload("res://ui/structure_menu/material_select_menu/material_select_menu.tscn")
 
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
@@ -33,9 +33,9 @@ func _ready():
 	current_material = material_models[1][0]
 
 func _create_special_ui():
-	var material_select_ui := MATERIAL_SELECT_UI.instantiate() as MaterialSelectUI
-	add_child(material_select_ui)
-	material_select_ui.create_material_selections(material_models, current_material)
+	var material_select_menu := MATERIAL_SELECT_MENU.instantiate() as MaterialSelectMenu
+	add_child(material_select_menu)
+	material_select_menu.create_material_selections(material_models, current_material)
 
 func can_accept_material(material: RawMaterial):
 	if not super.can_accept_material(material):

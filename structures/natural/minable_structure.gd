@@ -137,3 +137,9 @@ func _get_robot_model() -> StructureModel:
 	if _can_saw():
 		return StructureModel.create(null, "Saw", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/saw_robot/saw_robot_display.png"), _place_robot.bind())
 	return null
+
+func _create_special_ui():
+	if _can_saw():
+		player.saw(self)
+	elif _can_drill():
+		player.drill(self)

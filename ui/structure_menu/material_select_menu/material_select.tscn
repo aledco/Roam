@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://vh77xegia7fg"]
+
+[ext_resource type="StyleBox" uid="uid://bqxn5mbyr5pj" path="res://ui/shared/select_style_box.tres" id="1_16mg8"]
+[ext_resource type="Script" path="res://ui/structure_menu/material_select_menu/material_select.gd" id="1_cbf2x"]
+[ext_resource type="Texture2D" uid="uid://d2ro8icnjkoxt" path="res://raw_materials/wood/wood.png" id="2_gegrr"]
+[ext_resource type="PackedScene" uid="uid://pqh5o4afs46d" path="res://ui/shared/hover_text/hover_text.tscn" id="4_b8bf7"]
+
+[node name="MaterialSelect" type="Panel"]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = -1
+anchor_right = 0.078
+anchor_bottom = 0.162
+offset_right = 0.079998
+offset_bottom = -1.84
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_16mg8")
+script = ExtResource("1_cbf2x")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.962
+offset_bottom = 1.9
+
+[node name="Texture" type="TextureRect" parent="Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gegrr")
+
+[node name="Overlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0.0980392)
+
+[node name="HoverText" parent="." instance=ExtResource("4_b8bf7")]
+visible = false
+layout_mode = 1
+offset_left = 40.0
+offset_top = -5.0
+offset_right = 84.15
+offset_bottom = 3.45
+grow_horizontal = 1
+grow_vertical = 1

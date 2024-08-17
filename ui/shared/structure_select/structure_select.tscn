@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://di43bqh4juhlm"]
+
+[ext_resource type="Script" path="res://ui/shared/structure_select/structure_select.gd" id="1_20j1k"]
+[ext_resource type="StyleBox" uid="uid://bqxn5mbyr5pj" path="res://ui/shared/select_style_box.tres" id="1_yf1yi"]
+[ext_resource type="Texture2D" uid="uid://bmpo45lu3k71s" path="res://structures/conveyors/conveyor/conveyor_display.png" id="2_tj5wn"]
+[ext_resource type="PackedScene" uid="uid://pqh5o4afs46d" path="res://ui/shared/hover_text/hover_text.tscn" id="4_qj5r7"]
+
+[node name="StructureSelect" type="Panel"]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -590.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_yf1yi")
+script = ExtResource("1_20j1k")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 41.0
+offset_bottom = 41.0
+texture = ExtResource("2_tj5wn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HoverText" parent="." instance=ExtResource("4_qj5r7")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 40.0
+offset_top = -5.0
+offset_right = 115.0
+offset_bottom = 5.0
+grow_horizontal = 1
+grow_vertical = 1

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnjaal7punq14"]
+
+[ext_resource type="Script" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory_menu.gd" id="1_8rj6p"]
+[ext_resource type="PackedScene" uid="uid://bt0pafekegk3i" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory/storage_inventory.tscn" id="1_ile2s"]
+[ext_resource type="FontFile" uid="uid://b7je85taic4et" path="res://ui/fonts/m5x7.ttf" id="2_wxaet"]
+
+[node name="StorageInventoryMenu" type="CanvasLayer"]
+script = ExtResource("1_8rj6p")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -137.5
+offset_right = 220.0
+offset_bottom = 137.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_wxaet")
+
+[node name="Storage" type="HSplitContainer" parent="Control/TabContainer"]
+layout_mode = 2
+split_offset = 220
+
+[node name="CenterContainer2" type="CenterContainer" parent="Control/TabContainer/Storage"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/TabContainer/Storage"]
+layout_mode = 2
+
+[node name="StorageInventory" parent="Control/TabContainer/Storage/CenterContainer" instance=ExtResource("1_ile2s")]
+layout_mode = 2
