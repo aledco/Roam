@@ -7,6 +7,7 @@ class_name MaterialSelect extends Control
 
 var model: MaterialModel
 var ui_root: Node
+var is_selected := false
 
 func _ready():
 	hover_text.set_hover_target(button)
@@ -37,8 +38,15 @@ func set_root_ui_node(root: Node):
 
 
 func _set_material():
-	model.parent.set_current_material(model)
-	ui_root.queue_free()
+	if is_selected:
+		set_selected(false)
+		model.parent.set_current_material(null)
+	else:
+		set_selected(true)
+		model.parent.set_current_material(model)
+		
+	ui_root.destroy()
 
 func set_selected(selected: bool):
+	is_selected = selected
 	overlay.visible = selected

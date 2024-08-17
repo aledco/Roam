@@ -2,6 +2,7 @@ class_name Structure extends StaticBody2D
 
 
 signal on_destroyed
+signal material_added(material: RawMaterial)
 
 var structure_manager: StructureManager:
 	get:
@@ -86,8 +87,7 @@ func _ready():
 
 func destroy():
 	on_destroyed.emit()
-	for material in Helpers.valid(materials):
-		material.queue_free()
+	Helpers.remove_and_free_all(materials)
 	queue_free()
 
 func _process(delta):

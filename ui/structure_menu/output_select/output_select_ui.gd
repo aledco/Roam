@@ -2,12 +2,10 @@ class_name OutputSelectUI extends BaseUI
 
 const MATERIAL_SELECT = preload("res://ui/structure_menu/material_select_menu/material_select.tscn")
 
-@onready var main_container: Container = $Control/ScrollContainer
-@onready var container: Container = $Control/ScrollContainer/Container
+@onready var container: Container = $Control/PanelContainer/ScrollContainer/MarginContainer/Container
 
 func get_rect() -> Rect2:
-	return main_container.get_rect()
-
+	return Rect2(Vector2.ZERO, get_root_control().size)
 
 func create_material_selections(material_models: Array[MaterialModel], currently_selected: MaterialModel) -> void:
 	for material in material_models:
@@ -22,3 +20,8 @@ func _create_material_ui(model: MaterialModel) -> MaterialSelect:
 	material_ui.set_model(model)
 	material_ui.set_root_ui_node(self)
 	return material_ui
+
+func update_material_selections(material_models: Array[MaterialModel], currently_selected: MaterialModel) -> void:
+	for material_select in container.get_children():
+		material_select.queue_free()
+	create_material_selections.call_deferred(material_models, currently_selected)

@@ -50,9 +50,8 @@ func _input_event(viewport, event, shape_idx):
 
 func add_to_player_inventory(remove_from_materials=false, destroy_if_full=true):
 	if not player.inventory.is_full(get_material_id()):
-		if remove_from_materials:
-			var index = parent.materials.find(self)
-			parent.materials.remove_at(index)
+		if remove_from_materials and parent and is_instance_valid(parent):
+			Helpers.remove(parent.materials, self)
 		
 		player.inventory.add_material(self)
 		queue_free()
@@ -88,7 +87,6 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	#if not mock_follow_node or mock_follow_node.progress_ratio == 1: # doing this breaks pathing
 	if not mock_follow_node:
 		return false
 	

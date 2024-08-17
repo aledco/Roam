@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://balvnme0gkci"]
+[gd_scene load_steps=7 format=3 uid="uid://balvnme0gkci"]
 
 [ext_resource type="Script" path="res://structures/energy/coal_power_plant/placeholder/coal_power_plant_placeholder.gd" id="1_2vru1"]
 [ext_resource type="Texture2D" uid="uid://cm5d36n2a2l4q" path="res://structures/energy/coal_power_plant/placeholder/coal_power_plant_placeholder.png" id="2_jjlkl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nrsd"]
+atlas = ExtResource("2_jjlkl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gtyc"]
+atlas = ExtResource("2_jjlkl")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_jjlkl")
+"texture": SubResource("AtlasTexture_7nrsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gtyc")
 }],
 "loop": true,
 "name": &"blink",

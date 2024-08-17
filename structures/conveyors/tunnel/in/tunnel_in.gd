@@ -24,6 +24,7 @@ func add_material(material: RawMaterial):
 	path_index = (path_index + 1) % paths.size()
 	material.start_tunnel()
 	materials.push_back(material)
+	material_added.emit(material)
 
 
 func produce():

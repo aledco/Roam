@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c1bxo31bkjhhe" path="res://structures/buildings/storage/output_select/output_select.png" id="2_ml176"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igdy"]
-size = Vector2(8, 8.5)
+size = Vector2(8, 8)
 
 [node name="OutputSelect" type="StaticBody2D"]
 z_index = 3
@@ -17,5 +17,4 @@ script = ExtResource("1_kag24")
 texture = ExtResource("2_ml176")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_4igdy")

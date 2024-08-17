@@ -13,7 +13,7 @@ func _ready():
 	visibility_changed.connect(_on_visibility_changed)
 
 func get_rect() -> Rect2:
-	return Rect2(Vector2.ZERO, Vector2.ZERO)
+	return get_root_control().get_rect()
 
 func get_root_control() -> Control:
 	return $Control

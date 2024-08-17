@@ -95,9 +95,6 @@ func _create_outputs():
 	for y in range(grid_size.y):
 		_create_output(0, y, PI/2, Vector2(-16, y * 32 - 16 * (grid_size.y-1)))
 		_create_output(grid_size.x - 1, y, -PI/2, Vector2((grid_size.x-1) * 32 + 16, y * 32 - 16 * (grid_size.y-1)))
-
-	for node in outputs_node.get_children():
-		outputs.append(node as OutputNode)
 	
 	structure_manager.update_structure_outputs(self)
 

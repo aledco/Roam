@@ -98,6 +98,7 @@ func add_material(material: RawMaterial):
 		input = _get_input(material)
 	input.path.add_child(material.mock_follow_node)
 	materials.push_back(material)
+	material_added.emit(material)
 
 
 func produce():
@@ -157,7 +158,7 @@ func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
 
 
 func _get_material_to_exit(output: OutputNode):
-	for material in materials_for_output:
+	for material in Helpers.valid(materials_for_output):
 		if material.at_exit_node and material in output.get_overlapping_bodies():
 			return material
 

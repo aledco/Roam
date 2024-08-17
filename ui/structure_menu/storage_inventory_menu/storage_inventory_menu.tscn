@@ -34,7 +34,8 @@ theme_override_fonts/font = ExtResource("2_wxaet")
 
 [node name="Storage" type="HSplitContainer" parent="Control/TabContainer"]
 layout_mode = 2
-split_offset = 220
+split_offset = 200
+dragger_visibility = 2
 
 [node name="CenterContainer2" type="CenterContainer" parent="Control/TabContainer/Storage"]
 layout_mode = 2

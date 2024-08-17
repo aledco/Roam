@@ -11,9 +11,17 @@ func set_current_material(model: MaterialModel):
 func setup(storage: Storage):
 	self.storage = storage
 
+func update():
+	for child in get_children():
+		if child is OutputSelectUI:
+			var output_select_ui = child as OutputSelectUI
+			output_select_ui.update_material_selections(_get_material_models(), current_material)
+	
 func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:
-		_create_material_select()
+	if event is InputEventMouseButton and event.is_pressed():
+		var mouse_event = event as InputEventMouseButton
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+			_create_material_select()
 
 func _create_material_select():
 	var output_select_ui := OUTPUT_SELECT_UI.instantiate() as OutputSelectUI

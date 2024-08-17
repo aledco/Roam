@@ -18,6 +18,17 @@ func get_grid_size() -> Vector2i:
 func _ready():
 	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
+	material_added.connect(_on_material_added)
+
+func _on_material_added(material: RawMaterial):
+	for output in output_selects:
+		output_selects[output].update()
+
+func destroy():
+	if interval_id != -1: # TODO do this for all structures with an interval
+		Clock.remove_interval(time, interval_id)
+		interval_id = -1
+	super.destroy()
 
 func can_accept_material(material: RawMaterial):
 	if storage_inventory.is_full(material.get_material_id()):
