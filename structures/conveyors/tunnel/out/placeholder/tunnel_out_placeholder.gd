@@ -3,6 +3,7 @@ class_name TunnelOutPlaceholder extends ConveyorPlaceholder
 var tunnel_node: Node2D
 var tunnel_in: TunnelIn
 
+
 func _get_structure() -> Resource:
 	return preload("res://structures/conveyors/tunnel/out/tunnel_out.tscn")
 
@@ -13,6 +14,10 @@ func _can_rotate() -> bool:
 func _destroy_after_placement() -> bool:
 	return true
 
+func destroy():
+	if not has_placed:
+		structure_manager.remove_structure(tunnel_in, true)
+	super.destroy()
 
 func _create_structure_from_placeholder() -> Structure:
 	var structure := _get_structure().instantiate() as TunnelOut

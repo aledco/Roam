@@ -132,7 +132,7 @@ func start_tunnel():
 
 ## Toggles the material in and out of the underground state.
 func toggle_underground(underground: bool):
-	#sprite_2d.visible = not underground
+	sprite_2d.visible = not underground
 	if underground:
 		set_collision_layer_value(UNDERGROUND_COLLISION_LAYER, true)
 		set_collision_layer_value(MATERIALS_COLLISION_LAYER, false)

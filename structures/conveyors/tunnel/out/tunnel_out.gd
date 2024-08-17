@@ -44,6 +44,3 @@ func set_tunnel_in(tunnel: TunnelIn):
 	var in_point_global = tunnel_in.to_global(in_point)
 	var in_point_local = to_local(in_point_global)
 	paths.front().curve.set_point_position(0, in_point_local)
-
-func _physics_process(delta):
-	super._physics_process(delta)

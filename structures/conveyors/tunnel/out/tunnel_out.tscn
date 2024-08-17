@@ -43,7 +43,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
-size = Vector2(21, 23)
+size = Vector2(20, 23)
 
 [sub_resource type="Curve2D" id="Curve2D_p7own"]
 _data = {
@@ -69,7 +69,7 @@ autoplay = "roll"
 position = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 4.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_fum3s")
 
 [node name="Inputs" type="Node2D" parent="."]

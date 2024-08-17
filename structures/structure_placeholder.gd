@@ -6,6 +6,7 @@ const RED := Color(2, 0, 0, 2)
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_valid: bool = true
+var has_placed := false
 
 # BEGIN abstract functions
 func _get_structure() -> Resource:
@@ -64,6 +65,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click") and is_valid:
 			_create_structure_from_placeholder()
+			has_placed = true
 			if _destroy_after_placement():
 				destroy()
 		if Debug.debug_grid() and event.is_action_released("right_click"):
