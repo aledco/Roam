@@ -50,12 +50,15 @@ func _get_curent_output() -> Wire:
 	current_output_index = (current_output_index + 1) %  len(output_wires)
 	return wire
 
-func _create_special_ui():
-	if not can_connect:
-		return false
-	
+func create_next_wire():
 	var wire = WIRE.instantiate() as Wire
 	add_child(wire)
 	wire.start_connecting(self, energy_connection_node.position)
 	output_wires.append(wire)
 	wire.on_destroyed.connect(func(): Helpers.remove(output_wires, wire))
+
+func _create_special_ui():
+	if not can_connect:
+		return false
+	
+	create_next_wire()

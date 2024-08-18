@@ -8,8 +8,6 @@ const MATERIAL_STACK = preload("res://ui/shared/material_stack/material_stack.ts
 @onready var output_slot: CraftingOutputMaterialSlot = $HBoxContainer/CraftingOutputMaterialSlot
 @onready var option_button: OptionButton = $OptionButton
 
-@onready var crafting_input_material_slot_1 = $VBoxContainer/HBoxContainer/CraftingInputMaterialSlot1
-
 var slots_used_for_output: Array[CraftingInputMaterialSlot] = []
 var output_stack: MaterialStack
 var selected_item_index := 0

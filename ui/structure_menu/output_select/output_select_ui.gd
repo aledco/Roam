@@ -25,3 +25,6 @@ func update_material_selections(material_models: Array[MaterialModel], currently
 	for material_select in container.get_children():
 		material_select.queue_free()
 	create_material_selections.call_deferred(material_models, currently_selected)
+
+func destroy():
+	hide()

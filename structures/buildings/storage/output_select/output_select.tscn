@@ -1,7 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf3hmt2gmt7gv"]
+[gd_scene load_steps=10 format=3 uid="uid://bf3hmt2gmt7gv"]
 
 [ext_resource type="Script" path="res://structures/buildings/storage/output_select/output_select.gd" id="1_kag24"]
 [ext_resource type="Texture2D" uid="uid://c1bxo31bkjhhe" path="res://structures/buildings/storage/output_select/output_select.png" id="2_ml176"]
+[ext_resource type="Texture2D" uid="uid://bie6d63e7xvc" path="res://structures/buildings/storage/output_select/output_select_hover.png" id="3_kg4j6"]
+[ext_resource type="Texture2D" uid="uid://bdtjvsu5jnafk" path="res://structures/buildings/storage/output_select/output_select_press.png" id="3_vwgos"]
+[ext_resource type="PackedScene" uid="uid://bhg2sbwny8epk" path="res://ui/structure_menu/output_select/output_select_ui.tscn" id="5_o4j1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x72ps"]
+atlas = ExtResource("3_vwgos")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_361hf"]
+atlas = ExtResource("3_vwgos")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i0tdp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ml176")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kg4j6")
+}],
+"loop": false,
+"name": &"hover",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x72ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_361hf")
+}],
+"loop": false,
+"name": &"press",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igdy"]
 size = Vector2(8, 8)
@@ -13,8 +54,14 @@ collision_mask = 0
 input_pickable = true
 script = ExtResource("1_kag24")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ml176")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i0tdp")
+animation = &"press"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_4igdy")
+
+[node name="OutputSelectUI" parent="." instance=ExtResource("5_o4j1g")]
+visible = false

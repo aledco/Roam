@@ -7,15 +7,10 @@ const MAX_LENGTH = 5
 
 signal on_destroyed
 
-var structure_manager: StructureManager:
-	get:
-		return get_node("/root/World/StructureManager") as StructureManager
-
-var player: Player:
-	get:
-		return get_node("/root/World/Player") as Player
-
 @onready var power_node: PowerNode = $PowerNode
+
+@onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
+@onready var player := get_node("/root/World/Player") as Player
 
 var input: Structure
 var output: Structure
@@ -37,6 +32,7 @@ func _destroy_on_input(_input_type):
 func destroy():
 	on_destroyed.emit()
 	player.is_placing_wire = false
+	player.set_placing_wire_delayed(false)
 	if is_connected:
 		WireManager.remove_connection(input, output)
 	queue_free()
@@ -47,6 +43,7 @@ func start_connecting(input: Structure, node_pos: Vector2):
 	
 	is_connecting = true
 	player.is_placing_wire = true
+	player.set_placing_wire_delayed(true)
 	add_point(node_pos)
 	add_point(to_local(get_global_mouse_position()))
 	SignalManager.player_input.connect(_destroy_on_input)
@@ -65,24 +62,26 @@ func _input(event):
 			if not connecting_structure:
 				return
 			
+			output = connecting_structure
 			if connecting_structure == power_node:
 				structure_manager.add_structure(power_node, true)
 				power_node.show()
+				_connect(true)
 			else:
 				power_node.queue_free()
-			
-			output = connecting_structure
-			_connect()
+				_connect(false)
 
 
-func _connect():
+func _connect(is_power_node: bool):
 	output.on_destroyed.connect(destroy)
 	output.connect_wire(self)
 	WireManager.add_connection(input, output)
 	is_connecting = false
 	is_connected = true
-	player.is_placing_wire = false
+	player.set_placing_wire_delayed(false)
 	SignalManager.player_input.disconnect(_destroy_on_input)
+	if is_power_node:
+		power_node.create_next_wire()
 
 
 func _invalid_end():

@@ -165,3 +165,9 @@ func pay_for_structure(cost: Array):
 		var material_id = val[0]
 		var amount = val[1]
 		inventory.remove_material(material_id, amount)
+
+func set_menu_delayed(value: bool):
+	Clock.invoke(0.1, func(): has_menu_open = value)
+
+func set_placing_wire_delayed(value: bool):
+	Clock.invoke(0.1, func(): is_placing_wire = value)

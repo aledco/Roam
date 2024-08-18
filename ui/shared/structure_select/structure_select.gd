@@ -75,12 +75,12 @@ func _create_structure():
 				
 	if model.structure_resource:
 		var structure = model.structure_resource.instantiate()
-		structure_manager.add_child(structure)
 		if model.parent:
 			model.parent.queue_free()
 			structure.set_position(model.parent.position)
 			structure_manager.add_structure(structure)
 		else:
+			structure_manager.add_child(structure)
 			structure.set_position(player.position)
 
 	model.on_selected.call()

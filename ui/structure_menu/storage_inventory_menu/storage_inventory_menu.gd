@@ -1,6 +1,5 @@
 class_name StorageInventoryMenu extends BaseUI
 
-
 @onready var panel_container: Container = $Control/PanelContainer
 @onready var storage_inventory: Inventory = $Control/PanelContainer/Storage/CenterContainer/VBoxContainer/StorageInventory
 @onready var inventory_container: Container = $Control/PanelContainer/Storage/CenterContainer2/VBoxContainer

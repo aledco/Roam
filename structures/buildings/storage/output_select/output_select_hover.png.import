@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp2qp0w1o5uer"
-path="res://.godot/imported/output_select_normal.png-bd3a4e4b4828885ec373a8a8e4b186b9.ctex"
+uid="uid://bie6d63e7xvc"
+path="res://.godot/imported/output_select_hover.png-b4be44cf64182344e593f1d9332e9a48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/buildings/storage/output_select/output_select_normal.png"
-dest_files=["res://.godot/imported/output_select_normal.png-bd3a4e4b4828885ec373a8a8e4b186b9.ctex"]
+source_file="res://structures/buildings/storage/output_select/output_select_hover.png"
+dest_files=["res://.godot/imported/output_select_hover.png-b4be44cf64182344e593f1d9332e9a48.ctex"]
 
 [params]
 
