@@ -5,7 +5,7 @@ const RED := Color(2, 0, 0, 2)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var is_valid: bool = true
+var _is_valid: bool = true
 var has_placed := false
 
 # BEGIN abstract functions
@@ -54,16 +54,22 @@ func _process(delta):
 	var grid_position := get_grid_position()
 	position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
 	var grid_index = get_grid_index()
-	is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction)
-	if is_valid:
+	_is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction)
+	_set_valid_overlay()
+
+
+func _set_valid_overlay():
+	if is_valid():
 		animated_sprite_2d.self_modulate = TRANPARENT
 	else:
 		animated_sprite_2d.self_modulate = RED
 
+func is_valid():
+	return _is_valid
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.is_action_released("left_click") and is_valid:
+		if event.is_action_released("left_click") and is_valid():
 			_create_structure_from_placeholder()
 			has_placed = true
 			if _destroy_after_placement():

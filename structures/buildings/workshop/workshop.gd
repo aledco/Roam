@@ -41,20 +41,22 @@ func can_accept_material(material: RawMaterial):
 	if not super.can_accept_material(material):
 		return false
 	
+	if not current_material:
+		return false
+	
 	var material_id = material.get_material_id()
 	if not RawMaterial.is_ingredient(material_id, current_material.material_id):
 		return false
 	return true
 
 func _process_material_in_building(material: RawMaterial, ingredients: Array[RawMaterial]):
-	var material_id = material.get_material_id()
-	if RawMaterial.is_ingredient(material_id, current_material.material_id):
+	if current_material and RawMaterial.is_ingredient(material.get_material_id(), current_material.material_id):
 		ingredients.append(material)
 	else:
 		Helpers.remove_and_free(materials, material)
 
 func _process_materials_in_building(ingredients: Array[RawMaterial], operational_outputs: Array[OutputNode]):
-	if energy == 0 or len(operational_outputs) == 0:
+	if energy == 0 or len(operational_outputs) == 0 or not current_material:
 		return
 
 	var result = RawMaterialManager.has_sufficient_ingredients(current_material.material_id, ingredients)

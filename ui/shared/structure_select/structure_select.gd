@@ -7,7 +7,7 @@ class_name StructureSelect extends Control
 @onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
 @onready var player := get_node("/root/World/Player") as Player
 
-const TEXT_LABEL = preload("res://ui/shared/text_label/text_label.tscn")
+const TEXT_LABEL = preload("res://ui/shared/text_label/text_label_small/text_label_small.tscn")
 
 var model: StructureModel
 var ui_root: Node
@@ -75,12 +75,12 @@ func _create_structure():
 				
 	if model.structure_resource:
 		var structure = model.structure_resource.instantiate()
-		structure_manager.add_child(structure)
 		if model.parent:
 			model.parent.queue_free()
 			structure.set_position(model.parent.position)
 			structure_manager.add_structure(structure)
 		else:
+			structure_manager.add_child(structure)
 			structure.set_position(player.position)
 
 	model.on_selected.call()

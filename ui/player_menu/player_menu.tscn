@@ -10,31 +10,33 @@ layer = 2
 script = ExtResource("1_nj8o1")
 
 [node name="Control" type="Control" parent="."]
-custom_minimum_size = Vector2(440, 275)
+custom_minimum_size = Vector2(500, 296)
 layout_mode = 3
-anchor_left = 0.156
-anchor_top = 0.07
-anchor_right = 0.844
-anchor_bottom = 0.93
-offset_left = 220.16
-offset_top = 137.6
-offset_right = -220.16
-offset_bottom = -137.6
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -148.0
+offset_right = 250.0
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 
 [node name="TabContainer" type="TabContainer" parent="Control"]
+custom_minimum_size = Vector2(500, 275)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -137.5
-offset_right = 220.0
-offset_bottom = 137.5
+offset_left = -250.0
+offset_top = -148.0
+offset_right = 250.0
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_5scw1")

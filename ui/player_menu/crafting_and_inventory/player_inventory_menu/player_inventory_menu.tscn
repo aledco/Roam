@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvmg5mvg8qkb"]
+
+[ext_resource type="Script" path="res://ui/player_menu/crafting_and_inventory/player_inventory_menu/player_inventory_menu.gd" id="1_r2h8e"]
+[ext_resource type="PackedScene" uid="uid://cykaj2bl414y5" path="res://ui/shared/inventory/inventory.tscn" id="2_5pxff"]
+[ext_resource type="PackedScene" uid="uid://ddrbte7cye2et" path="res://ui/player_menu/crafting_and_inventory/player_inventory_menu/trash_slot/trash_slot.tscn" id="2_w3cqy"]
+
+[node name="PlayerInventoryMenu" type="HBoxContainer"]
+custom_minimum_size = Vector2(216, 172)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -150.0
+offset_right = 91.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r2h8e")
+
+[node name="Inventory" parent="." instance=ExtResource("2_5pxff")]
+layout_mode = 2
+
+[node name="TrashSlot" parent="." instance=ExtResource("2_w3cqy")]
+layout_mode = 2

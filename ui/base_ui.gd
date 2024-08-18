@@ -10,10 +10,11 @@ var player: Player:
 func _ready():
 	if visible and player:
 		player.has_menu_open = true
+		player.set_menu_delayed(true)
 	visibility_changed.connect(_on_visibility_changed)
 
 func get_rect() -> Rect2:
-	return Rect2(Vector2.ZERO, Vector2.ZERO)
+	return get_root_control().get_rect()
 
 func get_root_control() -> Control:
 	return $Control
@@ -23,11 +24,14 @@ func destroy():
 
 func _exit_tree():
 	if player:
-		player.has_menu_open = false
+		player.set_menu_delayed(false)
 
 func _on_visibility_changed():
 	if player:
-		player.has_menu_open = visible
+		if visible:
+			player.has_menu_open = true
+		player.set_menu_delayed(visible)
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/shared/material_stack/material_stack.gd" id="1_7lx4s"]
 [ext_resource type="Texture2D" uid="uid://bwdi33xwbova1" path="res://raw_materials/coal/coal.png" id="2_5rsff"]
-[ext_resource type="PackedScene" uid="uid://bfyuatcmxa7rf" path="res://ui/shared/text_label/text_label.tscn" id="2_5y4oq"]
+[ext_resource type="PackedScene" uid="uid://bfyuatcmxa7rf" path="res://ui/shared/text_label/text_label_small/text_label_small.tscn" id="2_5y4oq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2eiaw"]
 size = Vector2(40, 40)

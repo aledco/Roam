@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp2qp0w1o5uer"
-path="res://.godot/imported/output_select_normal.png-bd3a4e4b4828885ec373a8a8e4b186b9.ctex"
+uid="uid://2hn14c1gh0b1"
+path="res://.godot/imported/trashcan_closed.png-a1cc049735000421788ac70891b4debc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_source/structures/buildings/storage/output_select/output_select_normal.png"
-dest_files=["res://.godot/imported/output_select_normal.png-bd3a4e4b4828885ec373a8a8e4b186b9.ctex"]
+source_file="res://ui/player_menu/crafting_and_inventory/player_inventory_menu/trash_slot/trashcan_closed.png"
+dest_files=["res://.godot/imported/trashcan_closed.png-a1cc049735000421788ac70891b4debc.ctex"]
 
 [params]
 

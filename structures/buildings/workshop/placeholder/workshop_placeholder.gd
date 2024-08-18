@@ -6,6 +6,9 @@ func get_grid_size() -> Vector2i:
 func _get_structure() -> Resource:
 	return preload("res://structures/buildings/workshop/workshop.tscn")
 
+func _destroy_after_placement() -> bool:
+	return true
+
 static func get_model() -> StructureModel:
 	return StructureModel.create(
 		null, 

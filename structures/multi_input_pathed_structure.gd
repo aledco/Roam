@@ -13,6 +13,7 @@ func add_material(material: RawMaterial):
 		input = _get_input(material)
 	input.path.add_child(material.mock_follow_node)
 	materials.push_back(material)
+	material_added.emit(material)
 
 
 func _get_input(material: RawMaterial) -> InputNode:

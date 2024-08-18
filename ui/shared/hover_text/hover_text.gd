@@ -1,6 +1,6 @@
 class_name HoverText extends PanelContainer
 
-const TEXT_LABEL = preload("res://ui/shared/text_label/text_label.tscn")
+const TEXT_LABEL = preload("res://ui/shared/text_label/text_label_small/text_label_small.tscn")
 
 @onready var container: Container  = $MarginContainer/VBoxContainer
 

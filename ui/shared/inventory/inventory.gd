@@ -1,5 +1,7 @@
 class_name Inventory extends GridContainer
 
+# TODO put in shared folder
+
 var open_slots: Array[MaterialSlot] = []
 var slots = {}
 

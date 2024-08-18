@@ -5,7 +5,7 @@ static var COST := [[Box.MATERIAL_ID, 5], [IronIngot.MATERIAL_ID, 5]]
 const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/output_select.tscn")
 
 @onready var storage_inventory_menu: StorageInventoryMenu = $StorageInventoryMenu
-@onready var storage_inventory: StorageInventory = storage_inventory_menu.get_storage_inventory()
+@onready var storage_inventory: Inventory = storage_inventory_menu.get_storage_inventory()
 
 var output_selects := {}
 var interval_id := -1
@@ -18,6 +18,17 @@ func get_grid_size() -> Vector2i:
 func _ready():
 	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
+	material_added.connect(_on_material_added)
+
+func _on_material_added(material: RawMaterial):
+	for output in output_selects:
+		output_selects[output].update()
+
+func destroy():
+	if interval_id != -1: # TODO do this for all structures with an interval
+		Clock.remove_interval(time, interval_id)
+		interval_id = -1
+	super.destroy()
 
 func can_accept_material(material: RawMaterial):
 	if storage_inventory.is_full(material.get_material_id()):

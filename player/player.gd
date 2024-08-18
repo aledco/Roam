@@ -22,9 +22,14 @@ var direction := Vector2i(0, 1)
 var has_menu_open := false
 var is_placing_structure := false
 var is_placing_wire := false
+var is_dragging_stack := false
 
 func is_busy() -> bool:
-	return has_menu_open or is_placing_structure or is_placing_wire or is_mining
+	return has_menu_open \
+		or is_placing_structure \
+		or is_placing_wire \
+		or is_mining \
+		or is_dragging_stack
 
 func _ready():
 	pass
@@ -160,3 +165,9 @@ func pay_for_structure(cost: Array):
 		var material_id = val[0]
 		var amount = val[1]
 		inventory.remove_material(material_id, amount)
+
+func set_menu_delayed(value: bool):
+	Clock.invoke(0.1, func(): has_menu_open = value)
+
+func set_placing_wire_delayed(value: bool):
+	Clock.invoke(0.1, func(): is_placing_wire = value)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctml5p4hm2ogu"]
+
+[ext_resource type="Theme" uid="uid://c6oye7bbugkso" path="res://ui/theme/main_theme.tres" id="1_i4n0g"]
+
+[node name="TextLabel" type="RichTextLabel"]
+clip_contents = false
+custom_minimum_size = Vector2(75, 13)
+offset_right = 75.0
+offset_bottom = 13.0
+theme = ExtResource("1_i4n0g")
+bbcode_enabled = true
+text = "Test"
+fit_content = true
+scroll_active = false

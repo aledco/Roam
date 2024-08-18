@@ -1,6 +1,14 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c6oye7bbugkso"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c6oye7bbugkso"]
 
 [ext_resource type="FontFile" uid="uid://b7je85taic4et" path="res://ui/fonts/m5x7.ttf" id="1_pxi4j"]
 
+[sub_resource type="FontVariation" id="FontVariation_x43n8"]
+base_font = ExtResource("1_pxi4j")
+spacing_top = -1
+
 [resource]
-default_font = ExtResource("1_pxi4j")
+default_font = SubResource("FontVariation_x43n8")
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 5
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5

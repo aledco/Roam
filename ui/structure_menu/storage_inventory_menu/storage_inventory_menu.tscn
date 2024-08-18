@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory_menu.gd" id="1_8rj6p"]
 [ext_resource type="PackedScene" uid="uid://bt0pafekegk3i" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory/storage_inventory.tscn" id="1_ile2s"]
-[ext_resource type="FontFile" uid="uid://b7je85taic4et" path="res://ui/fonts/m5x7.ttf" id="2_wxaet"]
+[ext_resource type="PackedScene" uid="uid://ctml5p4hm2ogu" path="res://ui/shared/text_label/text_label_large/text_label_large.tscn" id="2_6pk0s"]
 
 [node name="StorageInventoryMenu" type="CanvasLayer"]
 script = ExtResource("1_8rj6p")
 
 [node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(500, 296)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,7 +18,8 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(500, 296)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,17 +32,32 @@ offset_right = 220.0
 offset_bottom = 137.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_wxaet")
 
-[node name="Storage" type="HSplitContainer" parent="Control/TabContainer"]
+[node name="Storage" type="HSplitContainer" parent="Control/PanelContainer"]
+custom_minimum_size = Vector2(500, 296)
 layout_mode = 2
-split_offset = 220
+split_offset = 230
+dragger_visibility = 2
 
-[node name="CenterContainer2" type="CenterContainer" parent="Control/TabContainer/Storage"]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Control/TabContainer/Storage"]
+[node name="CenterContainer2" type="CenterContainer" parent="Control/PanelContainer/Storage"]
 layout_mode = 2
 
-[node name="StorageInventory" parent="Control/TabContainer/Storage/CenterContainer" instance=ExtResource("1_ile2s")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/Storage/CenterContainer2"]
+layout_mode = 2
+
+[node name="TextLabel" parent="Control/PanelContainer/Storage/CenterContainer2/VBoxContainer" instance=ExtResource("2_6pk0s")]
+layout_mode = 2
+text = "[center]Inventory[/center]"
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/PanelContainer/Storage"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/Storage/CenterContainer"]
+layout_mode = 2
+
+[node name="TextLabel" parent="Control/PanelContainer/Storage/CenterContainer/VBoxContainer" instance=ExtResource("2_6pk0s")]
+layout_mode = 2
+text = "[center]Storage[/center]"
+
+[node name="StorageInventory" parent="Control/PanelContainer/Storage/CenterContainer/VBoxContainer" instance=ExtResource("1_ile2s")]
 layout_mode = 2

@@ -1,11 +1,11 @@
 class_name RawMaterial extends AnimatableBody2D
 
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sensor: Area2D = $Sensor
 @onready var sensor_collision_shape_2d: CollisionShape2D = $Sensor/CollisionShape2D
 @onready var player := get_node("/root/World/Player") as Player
-
 
 
 static var MATERIAL_SIZE = 16
@@ -50,9 +50,8 @@ func _input_event(viewport, event, shape_idx):
 
 func add_to_player_inventory(remove_from_materials=false, destroy_if_full=true):
 	if not player.inventory.is_full(get_material_id()):
-		if remove_from_materials:
-			var index = parent.materials.find(self)
-			parent.materials.remove_at(index)
+		if remove_from_materials and parent and is_instance_valid(parent):
+			Helpers.remove(parent.materials, self)
 		
 		player.inventory.add_material(self)
 		queue_free()
@@ -88,7 +87,6 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	#if not mock_follow_node or mock_follow_node.progress_ratio == 1: # doing this breaks pathing
 	if not mock_follow_node:
 		return false
 	

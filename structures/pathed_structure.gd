@@ -28,6 +28,7 @@ func add_material(material: RawMaterial):
 	paths[path_index].add_child(material.mock_follow_node)
 	path_index = (path_index + 1) % paths.size()
 	materials.push_back(material)
+	material_added.emit(material)
 
 
 ## Produces the material if it is ready and there is an outgoing structure.
