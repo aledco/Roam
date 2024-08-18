@@ -1,4 +1,4 @@
-class_name TreeStructure extends MinableStructure
+class_name TreeStructure extends NaturalStructure
 
 static var GRID_SIZE = Vector2i(1, 2)
 
@@ -22,3 +22,14 @@ func _can_saw() -> bool:
 
 func get_robot_position() -> Vector2:
 	return Vector2(-12, 16)
+
+static func get_probability_model() -> SpawnProbabilityModel:
+	return SpawnProbabilityModel.create(
+		preload("res://structures/natural/tree/tree.tscn"),
+		GRID_SIZE,
+		{
+			World.DIRT_TILE_ID: 0.25,
+			World.GRASS_TILE_ID: 0.25,
+			World.GRAVEL_TILE_ID: 0.05,
+			World.SAND_TILE_ID: 0.05
+		})

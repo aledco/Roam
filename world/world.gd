@@ -1,88 +1,30 @@
 class_name World extends Node2D
 
-const GROUND_LAYER = 0
-const TILESET_ID = 0
-const GRASS_ID = Vector2i(0, 0)
-const DIRT_ID = Vector2i(1, 0)
-const SAND_ID = Vector2i(2, 0)
-const GRAVEL_ID = Vector2i(3, 0)
-const WATER_ID = Vector2i(4, 0)
-const TILE_ID_MAP = {
-	0: DIRT_ID,
-	1: GRASS_ID,
-	2: GRAVEL_ID,
-	3: SAND_ID,
-	4: WATER_ID
+static var DIRT_TILE_ID := 0
+static var GRASS_TILE_ID := 1
+static var GRAVEL_TILE_ID := 2
+static var SAND_TILE_ID := 3
+static var WATER_TILE_ID := 4
+static var TILE_ID_MAP = {
+	DIRT_TILE_ID: WorldTileType.Dirt,
+	GRASS_TILE_ID: WorldTileType.Grass,
+	GRAVEL_TILE_ID: WorldTileType.Gravel,
+	SAND_TILE_ID: WorldTileType.Sand,
+	WATER_TILE_ID: WorldTileType.Water,
 }
-const N_GENERATED_TILES = len(TILE_ID_MAP)
 
-var STRUCTURE_PROB_MAP = [
-	{
-		"data": {
-		"resource": load("res://structures/natural/tree/tree.tscn"),
-		"grid_size": TreeStructure.GRID_SIZE
-		},
-		"probs": {
-			0: 0.25,
-			1: 0.25,
-			2: 0.05,
-			3: 0.05
-		}
-	},
-	{
-	"data": {
-		"resource": load("res://structures/natural/boulder/boulder.tscn"),
-		"grid_size": BoulderStructure.GRID_SIZE
-	},
-		"probs": {
-			0: 0.025,
-			1: 0.025,
-			2: 0.15,
-			3: 0.05
-		}
-	},
-	{
-	"data": {
-		"resource": load("res://structures/natural/iron_deposit/iron_deposit.tscn"),
-		"grid_size": IronDeposit.GRID_SIZE
-	},
-		"probs": {
-			0: 0.025,
-			1: 0.025,
-			2: 0.15,
-			3: 0.05
-		}
-	},
-	{
-	"data": {
-		"resource": load("res://structures/natural/copper_deposit/copper_deposit.tscn"),
-		"grid_size": CopperDeposit.GRID_SIZE
-	},
-		"probs": {
-			0: 0.025,
-			1: 0.025,
-			2: 0.15,
-			3: 0.05
-		}
-	},
-	{
-	"data": {
-		"resource": load("res://structures/natural/coal_deposit/coal_deposit.tscn"),
-		"grid_size": CoalDeposit.GRID_SIZE
-	},
-		"probs": {
-			0: 0.025,
-			1: 0.025,
-			2: 0.15,
-			3: 0.05
-		}
-	}
+var probability_models: Array[SpawnProbabilityModel] = [
+	TreeStructure.get_probability_model(),
+	BoulderStructure.get_probability_model(),
+	IronDeposit.get_probability_model(),
+	CopperDeposit.get_probability_model(),
+	CoalDeposit.get_probability_model()
 ]
 
 @export var world_seed: int = 1
 @export var world_size: int = 100
 
-@onready var tile_map: TileMap = $TileMap
+@onready var world_tile_map: WorldTileMap = $WorldTileMap
 @onready var structure_manager = $StructureManager
 @onready var size = int(world_size / 2)
 
@@ -111,15 +53,15 @@ func _create_noise_for_tilemap() -> FastNoiseLite:
 	return noise
 
 func _set_cell(x: int, y: int, tile_id: int, add_to_map: bool = true):
-	tile_map.set_cell(GROUND_LAYER, Vector2i(x, y), TILESET_ID, TILE_ID_MAP[tile_id])
+	world_tile_map.set_cell(Vector2i(x, y), TILE_ID_MAP[tile_id])
 	if add_to_map:
 		tile_map_ids[Vector2i(x, y)] = tile_id
 
 func _get_tile_id(noise: FastNoiseLite, x: int, y: int) -> int:
-	var rand = abs(noise.get_noise_2d(x, y)) * N_GENERATED_TILES
+	var rand = abs(noise.get_noise_2d(x, y)) * WorldTileType.size()
 	var tile_id = int(rand)
-	if tile_id > (N_GENERATED_TILES-1):
-		tile_id = (N_GENERATED_TILES-1)
+	if tile_id > (WorldTileType.size()-1):
+		tile_id = (WorldTileType.size()-1)
 	return tile_id
 
 func _generate_world_core(noise):
@@ -174,8 +116,8 @@ func _is_water(x: int, y: int):
 
 func _generate_borders():
 	var borders_node = Node2D.new()
-	tile_map.add_child(borders_node)
-	borders_node.name = "Borders"
+	add_child(borders_node)
+	borders_node.name = "WorldBorders"
 	
 	var wall_id = 1
 	for x in range(-size, size):
@@ -207,7 +149,7 @@ func _generate_borders():
 					var offset = Vector2(coords) * Vector2(16, 16)
 					if coords.y == -1:
 						offset.y *= 2
-					static_body.position = tile_map.map_to_local(Vector2i(x, y)) + offset
+					static_body.position = world_tile_map.map_to_local(Vector2i(x, y)) + offset
 					if coords.x != 0:
 						static_body.rotate(PI / 2)
 						static_body.translate(Vector2(0, -8))
@@ -227,14 +169,13 @@ func _generate_structures():
 			if not _is_time_to_place(noise, x, y):
 				continue
 			
-			for config in STRUCTURE_PROB_MAP:
-				var structure_data = config["data"]
+			for model in probability_models:
 				var grid_index = Vector2i(x, y)
-				if not structure_manager.can_place_structure(grid_index, structure_data["grid_size"]):
+				if not structure_manager.can_place_structure(grid_index, model.structure_grid_size):
 					continue
 				
-				if randf() < config["probs"][tile_id]:
-					structure_manager.create_structure(structure_data["resource"], grid_index, structure_data["grid_size"])
+				if randf() < model.probabilities[tile_id]:
+					structure_manager.create_structure(model.structure_resource, grid_index, model.structure_grid_size)
 					break
 
 

@@ -15,7 +15,7 @@ enum InputType { BuildMenu, StructureMenu, StructureSpecialMenu, Map, DeleteMode
 
 var map_active: bool = false
 var is_mining: bool = false
-var minable_structure: MinableStructure
+var minable_structure: NaturalStructure
 var pos_before_mine: Vector2
 var direction := Vector2i(0, 1)
 
@@ -140,7 +140,7 @@ func player_animations():
 			animated_sprite_2d.play("drill")
 
 
-func _mine(target: MinableStructure, state: State):
+func _mine(target: NaturalStructure, state: State):
 	escape()
 	
 	current_state = state
@@ -151,10 +151,10 @@ func _mine(target: MinableStructure, state: State):
 	global_position = target.get_player_position()
 	target.begin_player_mining()
 	
-func saw(target: MinableStructure):
+func saw(target: NaturalStructure):
 	_mine(target, State.Saw)
 
-func drill(target: MinableStructure):
+func drill(target: NaturalStructure):
 	_mine(target, State.Drill)
 
 func has_material_in_inventory(material_id: int, amount: int = 1) -> bool:

@@ -1,4 +1,4 @@
-class_name MinableStructure extends Structure
+class_name NaturalStructure extends Structure
 
 const SAW_ROBOT = preload("res://robots/saw_robot/saw_robot.tscn")
 const DRILL_ROBOT = preload("res://robots/drill_robot/drill_robot.tscn")
