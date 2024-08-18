@@ -35,8 +35,11 @@ static func set_delete_mode(delete_mode: bool) -> bool:
 static func get_delete_mode() -> bool:
 	return _delete_mode
 
+@onready var structure_node = get_node("/root/World/Structures") as Node2D
+
 var structure_map := {}
 var tile_map_ids
+
 
 
 ## Creates a structure from the structure resource, grid_index, and grid_size.
@@ -70,9 +73,9 @@ func _remove_structure_from_map(structure: Structure, grid_index: Vector2i):
 ## Adds a structure.
 func add_structure(structure: Structure, reparent_structure: bool = false):
 	if reparent_structure:
-		structure.reparent(self)
+		structure.reparent(structure_node)
 	else:
-		add_child(structure)
+		structure_node.add_child(structure)
 	var grid_index = structure.get_grid_index()
 	if Debug.debug_grid():
 		print("add_structure: ", structure.name, ".grid_index = ", grid_index)

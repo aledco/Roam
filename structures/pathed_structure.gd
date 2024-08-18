@@ -22,13 +22,9 @@ func _ready():
 ## Adds a material to this structures control. The material remains global, but
 ## this structure is now in control of its movement.
 func add_material(material: RawMaterial):
-	material.parent = self
-	material.mock_follow_node = PathFollow2D.new()
-	material.mock_follow_node.loop = false
+	on_material_enter(material)
 	paths[path_index].add_child(material.mock_follow_node)
 	path_index = (path_index + 1) % paths.size()
-	materials.push_back(material)
-	material_added.emit(material)
 
 
 ## Produces the material if it is ready and there is an outgoing structure.
@@ -45,8 +41,8 @@ func produce():
 			if not connected_structure.can_accept_material(materials[0]):
 				continue
 			
-			var material = materials.pop_front()
-			material.at_exit_node = false
+			var material = materials.front()
+			on_material_exit(material)
 			connected_structure.add_material(material)
 			output.material_to_output = false
 

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bu3obtx1gpwyl" path="res://structures/natural/copper_deposit/copper_deposit.png" id="2_i21bu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxr5i"]
-radius = 14.0357
+radius = 12.0416
 
 [node name="CopperDeposit" type="StaticBody2D"]
 collision_layer = 2
@@ -17,3 +17,5 @@ texture = ExtResource("2_i21bu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qxr5i")
+
+[node name="MaterialNode" type="Node2D" parent="."]

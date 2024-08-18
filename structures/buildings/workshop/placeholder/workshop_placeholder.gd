@@ -11,7 +11,6 @@ func _destroy_after_placement() -> bool:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Workshop",
 		Workshop.COST,
 		preload("res://structures/buildings/workshop/placeholder/workshop_placeholder.tscn"),

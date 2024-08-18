@@ -1,5 +1,6 @@
 class_name RawMaterial extends AnimatableBody2D
 
+signal destroyed(material: RawMaterial)
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -14,12 +15,11 @@ static var MATERIALS_COLLISION_LAYER = 3
 static var UNDERGROUND_COLLISION_LAYER = 5
 static var DISABLED_MATERIAL_COLLISION_LAYER = 8
 
-var parent: Structure = null
+var parent_structure: Structure = null
 
 var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
 var is_moving: bool = false
-
 
 ## Determines if a material is an ingredient for another.
 static func is_ingredient(ingredient: int, product: int) -> bool:
@@ -41,8 +41,14 @@ static func get_models_for_workshop(parent_structure: Structure) -> Dictionary:
 				models[n_ingredients] = [RawMaterialManager.get_model(mat_id, parent_structure)]
 	return models
 
+func destroy():
+	destroyed.emit(self)
+	queue_free()
+
 ## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
+	if not sprite_2d.visible or (parent_structure and not parent_structure.are_materials_grabable()):
+		return
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click"):
 			add_to_player_inventory(true, false)
@@ -50,13 +56,13 @@ func _input_event(viewport, event, shape_idx):
 
 func add_to_player_inventory(remove_from_materials=false, destroy_if_full=true):
 	if not player.inventory.is_full(get_material_id()):
-		if remove_from_materials and parent and is_instance_valid(parent):
-			Helpers.remove(parent.materials, self)
+		if remove_from_materials and parent_structure and is_instance_valid(parent_structure):
+			Helpers.remove(parent_structure.materials, self)
 		
 		player.inventory.add_material(self)
-		queue_free()
+		destroy()
 	elif destroy_if_full:
-		queue_free()
+		destroy()
 
 
 ## Gets the material id.

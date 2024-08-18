@@ -7,13 +7,13 @@
 height = 26.0
 
 [node name="Tunnel" type="StaticBody2D"]
-z_index = 2
 collision_layer = 2
 collision_mask = 3
 input_pickable = true
 script = ExtResource("1_1mnnv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("1_3umfw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

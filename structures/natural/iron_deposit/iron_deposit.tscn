@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://f303ysqleqsl" path="res://structures/natural/iron_deposit/iron_deposit.png" id="2_nyelc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxr5i"]
-radius = 14.0357
+radius = 12.0
 
 [node name="IronDeposit" type="StaticBody2D"]
 collision_layer = 2
@@ -17,3 +17,5 @@ texture = ExtResource("2_nyelc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qxr5i")
+
+[node name="MaterialNode" type="Node2D" parent="."]

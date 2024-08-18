@@ -46,8 +46,14 @@ func _get_curent_output() -> Wire:
 	
 	if current_output_index >= len(output_wires):
 		current_output_index = 0
+	
+	var start = current_output_index
+	while not output_wires[current_output_index].is_connected:
+		current_output_index = (current_output_index + 1) %  len(output_wires)
+		if current_output_index == start:
+			return null
+	
 	var wire = output_wires[current_output_index]
-	current_output_index = (current_output_index + 1) %  len(output_wires)
 	return wire
 
 func create_next_wire():

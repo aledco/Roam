@@ -1,6 +1,4 @@
-extends Node2D
-
-@onready var structure_manager: StructureManager = $StructureManager
+extends World
 
 const COAL = preload("res://structures/natural/coal_deposit/coal_deposit.tscn")
 const IRON = preload("res://structures/natural/iron_deposit/iron_deposit.tscn")
@@ -71,6 +69,6 @@ var STRUCTURE_DATA = [
 	},
 ]
 
-func _ready():
+func _generate_structures():
 	for data in STRUCTURE_DATA:	
 		structure_manager.create_structure(data["resource"], data["grid_index"], data["grid_size"])

@@ -86,7 +86,6 @@ func _input(event):
 
 func _create_structure_from_placeholder() -> Structure:
 	var structure = _get_structure().instantiate() as Structure
-	get_parent().add_child(structure)
 	structure.set_position(position)
 	structure.set_direction(direction)
 	structure.delay_input()

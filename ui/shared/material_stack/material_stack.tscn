@@ -27,20 +27,14 @@ grow_vertical = 2
 texture = ExtResource("2_5rsff")
 
 [node name="TextLabel" parent="." instance=ExtResource("2_5y4oq")]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
 anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_top = 6.0
-offset_right = 40.0
-offset_bottom = 46.0
-grow_horizontal = 0
-grow_vertical = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(1, 1, 1, 1)
+offset_right = 35.32
+offset_bottom = 44.76
 theme_override_font_sizes/normal_font_size = 48
-text = "99"
+text = "88"
 text_direction = 2
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]

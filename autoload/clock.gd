@@ -35,4 +35,3 @@ func invoke(time: float, callback: Callable):
 	await get_tree().create_timer(time).timeout
 	if callback:
 		callback.call()
-

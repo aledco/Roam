@@ -2,41 +2,35 @@
 
 [ext_resource type="Script" path="res://ui/main_menu/scene_selector/scene_selector.gd" id="1_pubis"]
 [ext_resource type="Texture2D" uid="uid://bmpo45lu3k71s" path="res://structures/conveyors/conveyor/conveyor_display.png" id="2_titrf"]
-[ext_resource type="FontFile" uid="uid://bl7nsp4ch70kk" path="res://ui/fonts/m3x6.ttf" id="3_odijo"]
 
-[node name="SceneSelector" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s1fs"]
+
+[node name="SceneSelector" type="Panel"]
 custom_minimum_size = Vector2(50, 50)
-layout_mode = 3
-anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7s1fs")
 script = ExtResource("1_pubis")
 
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(50, 50)
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="Button" type="Button" parent="Panel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 50.0
-
-[node name="Texture" type="TextureRect" parent="Panel/Button"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 3.0
-offset_right = 41.0
-offset_bottom = 35.0
+[node name="Texture" type="TextureRect" parent="Button"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_titrf")
 expand_mode = 1
 stretch_mode = 5
-
-[node name="Text" type="RichTextLabel" parent="Panel/Button"]
-layout_mode = 0
-offset_top = 34.0
-offset_right = 50.0
-offset_bottom = 47.0
-theme_override_fonts/normal_font = ExtResource("3_odijo")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]Test[/center]"

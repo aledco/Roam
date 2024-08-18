@@ -65,6 +65,8 @@ autoplay = "roll"
 position = Vector2(3, -3)
 shape = SubResource("RectangleShape2D_fum3s")
 
+[node name="MaterialNode" type="Node2D" parent="."]
+
 [node name="Inputs" type="Node2D" parent="."]
 
 [node name="InputNode" parent="Inputs" instance=ExtResource("3_tump6")]

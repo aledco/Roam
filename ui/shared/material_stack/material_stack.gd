@@ -45,7 +45,7 @@ func set_amount(new_amount: int):
 		return
 	amount = new_amount
 	text_label.clear()
-	text_label.add_text(str(amount))
+	text_label.text = str(amount)
 
 func increment():
 	if amount + 1 > MAX_STACK:
@@ -66,7 +66,7 @@ func decrement(amount_to_remove: int = 1) -> int:
 		queue_free()
 	else:
 		text_label.clear()
-		text_label.add_text(str(amount))
+		text_label.text = str(amount)
 	
 	return left_to_remove
 

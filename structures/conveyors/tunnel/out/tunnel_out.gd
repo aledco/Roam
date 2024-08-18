@@ -8,6 +8,9 @@ func _setup_io():
 	inputs[0].setup(self, Vector2i.ZERO, 0)
 	outputs[0].setup(self, Vector2i.ZERO, 0)
 
+func on_material_exit(material: RawMaterial):
+	material.finish_tunnel()
+	super.on_material_exit(material)
 
 func produce():
 	if materials.size() == 0:
@@ -22,9 +25,8 @@ func produce():
 			if not connected_structure.can_accept_material(materials[0]):
 				continue
 			
-			var material = materials.pop_front()
-			material.finish_tunnel()
-			material.at_exit_node = false
+			var material = materials.front()
+			on_material_exit(material)
 			connected_structure.add_material(material)
 			output.material_to_output = false
 

@@ -30,7 +30,6 @@ func _create_structure_from_placeholder() -> Structure:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Tunnel", 
 		TunnelIn.TUNNEL_COST, 
 		preload("res://structures/conveyors/tunnel/in/placeholder/tunnel_in_placeholder.tscn"),
