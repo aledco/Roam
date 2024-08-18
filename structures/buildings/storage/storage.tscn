@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_s4ydc"]
 [ext_resource type="PackedScene" uid="uid://bnjaal7punq14" path="res://ui/structure_menu/storage_inventory_menu/storage_inventory_menu.tscn" id="5_ds86e"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itsdn"]
+size = Vector2(26, 26)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
 animations = [{
 "frames": [{
@@ -16,9 +19,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_itsdn"]
-size = Vector2(26, 26)
 
 [sub_resource type="Curve2D" id="Curve2D_w852b"]
 _data = {
@@ -73,13 +73,15 @@ collision_layer = 2
 input_pickable = true
 script = ExtResource("1_fqxak")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 2
-sprite_frames = SubResource("SpriteFrames_xclil")
-autoplay = "default"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_itsdn")
+
+[node name="MaterialNode" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
 
 [node name="Inputs" type="Node2D" parent="."]
 

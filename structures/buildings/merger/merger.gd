@@ -14,6 +14,10 @@ func _ready():
 	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
 
+func _on_material_destroyed(material: RawMaterial):
+	super. _on_material_destroyed(material)
+	Helpers.remove(materials_waiting_for_output, material)
+
 func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
 	if material not in materials_waiting_for_output:
 		materials_waiting_for_output.append(material)

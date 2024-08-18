@@ -10,7 +10,6 @@ func _get_structure() -> Resource:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Conveyor",
 		Conveyor.COST, 
 		preload("res://structures/conveyors/conveyor/placeholder/conveyor_placeholder.tscn"),

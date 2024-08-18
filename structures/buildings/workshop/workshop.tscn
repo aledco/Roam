@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_g5jwx"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_xwhri"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jtbq"]
+size = Vector2(28, 28)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7s7pm"]
 atlas = ExtResource("2_6ur46")
 region = Rect2(0, 0, 32, 32)
@@ -68,9 +71,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jtbq"]
-size = Vector2(28, 28)
-
 [sub_resource type="Curve2D" id="Curve2D_rhli6"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
@@ -124,16 +124,18 @@ collision_layer = 2
 input_pickable = true
 script = ExtResource("1_ulyjc")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3jtbq")
+
+[node name="MaterialNode" type="Node2D" parent="."]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 2
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_yiucp")
 animation = &"operate"
 autoplay = "default"
 frame = 4
 frame_progress = 0.616152
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3jtbq")
 
 [node name="Inputs" type="Node2D" parent="."]
 

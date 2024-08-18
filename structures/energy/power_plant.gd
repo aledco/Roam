@@ -12,6 +12,9 @@ var current_wire_index := 0
 func _get_energy_rate() -> int:
 	return 0
 
+func are_materials_grabable() -> bool:
+	return false
+	
 func _setup_io():
 	inputs[0].setup(self, Vector2i.ZERO, 0)
 	inputs[0].path = paths[0]
@@ -41,4 +44,3 @@ func _create_special_ui():
 	wire.start_connecting(self, energy_output_node.position)
 	wire.on_destroyed.connect(func(): Helpers.remove(output_wires, wire))
 	output_wires.append(wire)
-

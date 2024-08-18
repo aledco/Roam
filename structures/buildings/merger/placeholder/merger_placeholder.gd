@@ -12,7 +12,6 @@ func _get_structure() -> Resource:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Merger",
 		Merger.COST,
 		preload("res://structures/buildings/merger/placeholder/merger_placeholder.tscn"),

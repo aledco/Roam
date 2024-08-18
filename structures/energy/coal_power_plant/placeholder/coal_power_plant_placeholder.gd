@@ -12,7 +12,6 @@ func _get_structure() -> Resource:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Coal Power Plant",
 		CoalPowerPlant.COST,
 		preload("res://structures/energy/coal_power_plant/placeholder/coal_power_plant_placeholder.tscn"),

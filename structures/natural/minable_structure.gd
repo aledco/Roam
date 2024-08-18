@@ -119,7 +119,7 @@ func _produce_material():
 			
 			var connected_structure = output.get_connected_structure()
 			if connected_structure.can_accept_material(material):
-				material.parent = self
+				material.parent_structure = self
 				material_node.add_child(material)
 				material.global_position = output.global_position
 				connected_structure.add_material(material)
@@ -130,9 +130,9 @@ func _produce_material():
 
 func _get_robot_model() -> StructureModel:
 	if _can_drill():
-		return StructureModel.create(null, "Drill", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/drill_robot/drill_robot_display.png"), _place_robot.bind())
+		return StructureModel.create("Drill", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/drill_robot/drill_robot_display.png"), _place_robot.bind())
 	if _can_saw():
-		return StructureModel.create(null, "Saw", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/saw_robot/saw_robot_display.png"), _place_robot.bind())
+		return StructureModel.create("Saw", [[Robot.MATERIAL_ID, 1]], null, preload("res://robots/saw_robot/saw_robot_display.png"), _place_robot.bind())
 	return null
 
 func _create_special_ui():

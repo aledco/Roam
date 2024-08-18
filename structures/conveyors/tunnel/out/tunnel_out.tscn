@@ -65,12 +65,14 @@ sprite_frames = SubResource("SpriteFrames_dwttx")
 animation = &"roll"
 autoplay = "roll"
 
-[node name="Tunnel" parent="." instance=ExtResource("3_ihnb5")]
-position = Vector2(0, -6)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_fum3s")
+
+[node name="MaterialNode" type="Node2D" parent="."]
+
+[node name="Tunnel" parent="." instance=ExtResource("3_ihnb5")]
+position = Vector2(0, -6)
 
 [node name="Inputs" type="Node2D" parent="."]
 

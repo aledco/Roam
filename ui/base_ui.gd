@@ -4,7 +4,10 @@ var _player: Player
 var player: Player:
 	get:
 		if not _player:
-			_player = get_node("/root/World/Player") as Player
+			if has_node("/root/World/Player"):
+				_player = get_node("/root/World/Player") as Player
+			else:
+				_player = null
 		return _player
 
 func _ready():

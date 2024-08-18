@@ -12,7 +12,6 @@ func _get_structure() -> Resource:
 
 static func get_model() -> StructureModel:
 	return StructureModel.create(
-		null, 
 		"Storage",
 		Storage.COST,
 		preload("res://structures/buildings/storage/placeholder/storage_placeholder.tscn"),

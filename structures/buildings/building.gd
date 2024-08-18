@@ -25,6 +25,13 @@ func _process_materials_in_building(processed_materials: Array[RawMaterial], ope
 
 ### END abstract functions
 
+func are_materials_grabable() -> bool:
+	return false
+
+func _on_material_destroyed(material: RawMaterial):
+	super. _on_material_destroyed(material)
+	Helpers.remove(materials_for_output, material)
+
 func can_accept_material(material: RawMaterial):
 	var operational_outputs = _get_operational_outputs()
 	if len(operational_outputs) == 0:
@@ -85,10 +92,7 @@ func _ready():
 
 
 func add_material(material: RawMaterial):
-	material.parent = self
-	material.mock_follow_node = PathFollow2D.new()
-	material.mock_follow_node.loop = false
-	material.disable_collision()
+	on_material_enter(material)
 	var input := _get_input(material)
 	# sometimes add_material gets called before the input areas are ready, and don't detect the material
 	while input == null:
@@ -97,9 +101,15 @@ func add_material(material: RawMaterial):
 			return
 		input = _get_input(material)
 	input.path.add_child(material.mock_follow_node)
-	materials.push_back(material)
-	material_added.emit(material)
 
+func on_material_enter(material: RawMaterial):
+	super.on_material_enter(material)
+	material.disable_collision()
+
+func on_material_exit(material: RawMaterial):
+	materials_for_output.remove_at(materials_for_output.find(material))
+	material.enable_collision()
+	super.on_material_exit(material)
 
 func produce():
 	if len(materials) == 0:
@@ -128,13 +138,9 @@ func produce():
 			if not connected_structure.can_accept_material(material):
 				continue
 			
-			materials.remove_at(materials.find(material))
-			materials_for_output.remove_at(materials_for_output.find(material))
-			material.enable_collision()
-			material.at_exit_node = false
+			on_material_exit(material)
 			connected_structure.add_material(material)
 			output.material_to_output = false
-
 
 func _get_operational_outputs() -> Array[OutputNode]:
 	return outputs.filter(func(output): return output.connection != null)
@@ -168,4 +174,3 @@ func _get_output(material: RawMaterial):
 		if material in output.get_overlapping_bodies():
 			return output
 	return null
-

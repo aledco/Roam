@@ -97,10 +97,9 @@ func _produce_material():
 	
 	var material = RawMaterialManager.instantiate_material(material_id)
 	material_node.add_child(material)
-	material.parent = self
+	material.parent_structure = self
 	material.mock_follow_node = PathFollow2D.new()
 	material.mock_follow_node.loop = false
-	material.parent = self
 	material.disable_collision()
 	output.path.add_child(material.mock_follow_node)
 	material.global_position = material.mock_follow_node.global_position

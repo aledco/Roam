@@ -1,23 +1,14 @@
 class_name Structure extends StaticBody2D
 
+const BUILD_MENU = preload("res://ui/structure_menu/structure_build_menu/structure_build_menu.tscn")
 
 signal on_destroyed
 signal material_added(material: RawMaterial)
+signal material_removed(material: RawMaterial)
 
-var structure_manager: StructureManager:
-	get:
-		return get_node("/root/World/StructureManager") as StructureManager
-
-var player: Player:
-	get: 
-		return get_node("/root/World/Player") as Player
-
-var material_node: Node2D:
-	get: 
-		return get_node("/root/World/Materials")
-
-
-const BUILD_MENU = preload("res://ui/structure_menu/structure_build_menu/structure_build_menu.tscn")
+@onready var structure_manager := get_node("/root/World/StructureManager") as StructureManager
+@onready var player := get_node("/root/World/Player") as Player
+@onready var material_node := get_node("/root/World/Materials") as Node2D
 
 var materials: Array[RawMaterial] = []
 var inputs: Array[InputNode] = []
@@ -79,6 +70,9 @@ func connect_wire(wire: Wire):
 func send_energy():
 	pass
 
+## Override this method to prevent materials from being picked up while owned by the structure.
+func are_materials_grabable() -> bool:
+	return true
 # END abstract functions
 
 
@@ -93,6 +87,24 @@ func destroy():
 func _process(delta):
 	produce()
 
+func on_material_enter(material: RawMaterial):
+	material.parent_structure = self
+	material.mock_follow_node = PathFollow2D.new()
+	material.mock_follow_node.loop = false
+	materials.push_back(material)
+	material_added.emit(material)
+	material.destroyed.connect(_on_material_destroyed)
+
+func on_material_exit(material: RawMaterial):
+	material.destroyed.disconnect(_on_material_destroyed)
+	Helpers.remove(materials, material)
+	material.at_exit_node = false
+	material_removed.emit(material)
+
+## Called when a material owned by the structure is destroyed. Do not touch
+## any properties on the material as it has been freed.
+func _on_material_destroyed(material: RawMaterial):
+	Helpers.remove(materials, material)
 
 func _create_build_ui():
 	var build_list := _get_build_list()

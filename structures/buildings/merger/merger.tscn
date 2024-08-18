@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_ahugs"]
 [ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="4_u5rny"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbwyk"]
+radius = 14.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xclil"]
 animations = [{
 "frames": [{
@@ -15,9 +18,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dbwyk"]
-radius = 14.0
 
 [sub_resource type="Curve2D" id="Curve2D_w852b"]
 _data = {
@@ -72,13 +72,16 @@ collision_layer = 2
 input_pickable = true
 script = ExtResource("1_iikjq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 2
-sprite_frames = SubResource("SpriteFrames_xclil")
-autoplay = "default"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dbwyk")
+
+[node name="MaterialNode" type="Node2D" parent="."]
+z_index = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_xclil")
+autoplay = "default"
 
 [node name="Inputs" type="Node2D" parent="."]
 

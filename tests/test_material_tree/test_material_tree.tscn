@@ -15,4 +15,8 @@ layer_0/tile_data = PackedInt32Array(-1, 0, 0, -262149, 0, 0, -196613, 0, 0, -13
 
 [node name="StructureManager" parent="." instance=ExtResource("4_q2p33")]
 
+[node name="Structures" type="Node2D" parent="."]
+
 [node name="Materials" type="Node2D" parent="."]
+
+[node name="MaterialCovers" type="Node2D" parent="."]

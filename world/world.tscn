@@ -14,4 +14,6 @@ script = ExtResource("1_xn1wq")
 
 [node name="StructureManager" parent="." instance=ExtResource("4_4astp")]
 
+[node name="Structures" type="Node2D" parent="."]
+
 [node name="Materials" type="Node2D" parent="."]

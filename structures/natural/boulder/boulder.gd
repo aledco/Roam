@@ -5,7 +5,7 @@ static var GRID_SIZE = Vector2i(1, 1)
 func _get_build_list() -> Array[StructureModel]:
 	if is_robot_mining:
 		return [
-			StructureModel.create(null, "Boulder", [], null, preload("res://structures/natural/boulder/boulder.png"), _remove_robot.bind())
+			StructureModel.create("Boulder", [], null, preload("res://structures/natural/boulder/boulder.png"), _remove_robot.bind())
 		]
 	else:
 		return [_get_robot_model()]

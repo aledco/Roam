@@ -59,7 +59,7 @@ func _clear_text_colors():
 		label.add_text(text)
 
 
-func _create_structure():
+func _create_structure(): # TODO this function will only be called for structure placeholders at the moment, make that more clear
 	var materials_needed := _get_materials_needed()
 	if materials_needed.is_empty():
 		player.pay_for_structure(model.cost)
@@ -75,13 +75,8 @@ func _create_structure():
 				
 	if model.structure_resource:
 		var structure = model.structure_resource.instantiate()
-		if model.parent:
-			model.parent.queue_free()
-			structure.set_position(model.parent.position)
-			structure_manager.add_structure(structure)
-		else:
-			structure_manager.add_child(structure)
-			structure.set_position(player.position)
+		structure.set_position(player.position)
+		structure_manager.add_child(structure)
 
 	model.on_selected.call()
 	ui_root.hide()

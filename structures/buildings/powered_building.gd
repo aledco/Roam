@@ -23,4 +23,3 @@ func connect_wire(wire: Wire):
 
 func send_energy():
 	energy += 1
-
