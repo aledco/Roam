@@ -1,4 +1,4 @@
-class_name Merger extends Building
+class_name Merger extends PoweredBuilding
 
 static var COST := [[IronIngot.MATERIAL_ID, 10]]
 
@@ -26,7 +26,7 @@ func _process_materials_in_building(processed_materials: Array[RawMaterial], ope
 	pass
 
 func _produce_material():
-	if len(Helpers.valid(materials_waiting_for_output)) == 0:
+	if energy == 0 or len(Helpers.valid(materials_waiting_for_output)) == 0:
 		return
 	
 	var material = Helpers.valid(materials_waiting_for_output)[0]
@@ -45,3 +45,4 @@ func _produce_material():
 	material.mock_follow_node.reparent(output.path)
 	material.mock_follow_node.progress_ratio = 0
 	materials_for_output.append(material)
+	energy -= 1
