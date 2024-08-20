@@ -7,6 +7,7 @@ var current_output_index = 0
 
 var conveyor_pieces = {}
 
+
 ### BEGIN abstract functions
 func _play_default_animation():
 	pass
@@ -129,7 +130,7 @@ func produce():
 	_process_materials_in_building(processed_materials, operational_outputs)
 	
 	for output in operational_outputs:
-		if output.material_to_output:
+		if output.connection and output.has_material_to_output():
 			if output.connection.is_full():
 				continue
 			
@@ -140,7 +141,6 @@ func produce():
 			
 			on_material_exit(material)
 			connected_structure.add_material(material)
-			output.material_to_output = false
 
 func _get_operational_outputs() -> Array[OutputNode]:
 	return outputs.filter(func(output): return output.connection != null)

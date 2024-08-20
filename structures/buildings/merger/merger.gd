@@ -14,6 +14,10 @@ func _ready():
 	super._ready()
 	interval_id = Clock.interval(time, _produce_material.bind())
 
+func destroy():
+	Clock.remove_interval(time, interval_id)
+	super.destroy()
+
 func _on_material_destroyed(material: RawMaterial):
 	super. _on_material_destroyed(material)
 	Helpers.remove(materials_waiting_for_output, material)

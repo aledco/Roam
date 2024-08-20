@@ -13,6 +13,13 @@ func get_grid_size() -> Vector2i:
 var material_models: Dictionary
 var current_material: MaterialModel
 
+var materials_waiting_for_output: Array[RawMaterial] = []
+var interval_id := -1
+var time := 2.0
+
+const MAX_CAPACITY = 6
+var at_max_capacity := false
+
 func set_current_material(material_model: MaterialModel) -> void:
 	current_material = material_model
 
@@ -31,6 +38,15 @@ func _ready():
 	super._ready()
 	material_models = RawMaterial.get_models_for_workshop(self)
 	current_material = material_models[1][0]
+	interval_id = Clock.interval(time, _produce_material.bind())
+
+func destroy():
+	Clock.remove_interval(time, interval_id)
+	super.destroy()
+
+func _on_material_destroyed(material: RawMaterial):
+	super. _on_material_destroyed(material)
+	Helpers.remove(materials_waiting_for_output, material)
 
 func _create_special_ui():
 	var material_select_menu := MATERIAL_SELECT_MENU.instantiate() as MaterialSelectMenu
@@ -47,22 +63,38 @@ func can_accept_material(material: RawMaterial):
 	var material_id = material.get_material_id()
 	if not RawMaterial.is_ingredient(material_id, current_material.material_id):
 		return false
+		
+	if at_max_capacity:
+		return false
 	return true
 
-func _process_material_in_building(material: RawMaterial, ingredients: Array[RawMaterial]):
+func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
 	if current_material and RawMaterial.is_ingredient(material.get_material_id(), current_material.material_id):
-		ingredients.append(material)
+		if material not in materials_waiting_for_output:
+			materials_waiting_for_output.append(material)
+		processed_materials.append(material)
 	else:
 		Helpers.remove_and_free(materials, material)
 
-func _process_materials_in_building(ingredients: Array[RawMaterial], operational_outputs: Array[OutputNode]):
-	if energy == 0 or len(operational_outputs) == 0 or not current_material:
-		return
+func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
+	at_max_capacity = len(processed_materials) > MAX_CAPACITY	
 
-	var result = RawMaterialManager.has_sufficient_ingredients(current_material.material_id, ingredients)
+func _produce_material():
+	if energy == 0 or not current_material or materials_waiting_for_output.is_empty():
+		return
+	
+	var operational_outputs = _get_operational_outputs()
+	if len(operational_outputs) == 0:
+		for material in materials_waiting_for_output:
+			Helpers.remove_and_free(materials, material)
+		materials_waiting_for_output.clear()
+		return
+	
+	var result = RawMaterialManager.has_sufficient_ingredients(current_material.material_id, materials_waiting_for_output)
 	if result[0]:
 		var used = result[1]
 		for material in used:
+			Helpers.remove(materials_waiting_for_output, material)
 			Helpers.remove_and_free(materials, material)
 		
 		var operational_output = get_next_output(operational_outputs)

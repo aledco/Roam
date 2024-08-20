@@ -2,7 +2,6 @@ class_name SceneSeletor extends Control
 
 @onready var button: Button = $Button
 @onready var texture: TextureRect = $Button/Texture
-@onready var text: RichTextLabel = $Button/Text
 
 func set_scene(scene_name: String, scene_path: String, scene_image: Texture2D):
 	texture.texture = scene_image

@@ -24,10 +24,7 @@ var is_moving: bool = false
 ## Determines if a material is an ingredient for another.
 static func is_ingredient(ingredient: int, product: int) -> bool:
 	var materials_needed = RawMaterialManager.get_material_ingredients(product)
-	for config in materials_needed:
-		if ingredient == config[0]:
-			return true
-	return false
+	return materials_needed.any(func(x): return x[0] == ingredient)
 
 
 static func get_models_for_workshop(parent_structure: Structure) -> Dictionary:

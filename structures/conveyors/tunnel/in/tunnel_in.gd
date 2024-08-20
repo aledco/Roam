@@ -34,7 +34,7 @@ func produce():
 		return
 	
 	for output in outputs:
-		if output.connection != null and output.material_to_output:
+		if output.connection != null and output.has_material_to_output():
 			if output.connection.is_full():
 				continue
 			
@@ -45,4 +45,3 @@ func produce():
 			var material = materials.front()
 			on_material_exit(material)
 			connected_structure.add_material(material)
-			output.material_to_output = false

@@ -33,7 +33,7 @@ func produce():
 		return
 	
 	for output in outputs:
-		if output.connection != null and output.material_to_output:
+		if output.connection != null and output.has_material_to_output():
 			if output.connection.is_full():
 				continue
 			
@@ -44,7 +44,6 @@ func produce():
 			var material = materials.front()
 			on_material_exit(material)
 			connected_structure.add_material(material)
-			output.material_to_output = false
 
 
 func _physics_process(delta):
@@ -57,7 +56,6 @@ func _physics_process(delta):
 		if output == null:
 			material.try_move(delta * speed)
 		else:
-			output.material_to_output = true
 			material.is_moving = false
 			material.at_exit_node = true
 
