@@ -6,6 +6,9 @@ var materials_waiting_for_output: Array[RawMaterial] = []
 var interval_id := -1
 var time := 1
 
+const MAX_CAPACITY = 10
+var at_max_capacity := false
+
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
@@ -18,6 +21,13 @@ func destroy():
 	Clock.remove_interval(time, interval_id)
 	super.destroy()
 
+func can_accept_material(material: RawMaterial):
+	if not super.can_accept_material(material):
+		return false
+	if at_max_capacity:
+		return false
+	return true
+
 func _on_material_destroyed(material: RawMaterial):
 	super. _on_material_destroyed(material)
 	Helpers.remove(materials_waiting_for_output, material)
@@ -25,9 +35,10 @@ func _on_material_destroyed(material: RawMaterial):
 func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
 	if material not in materials_waiting_for_output:
 		materials_waiting_for_output.append(material)
+	processed_materials.append(materials)
 
 func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
-	pass
+	at_max_capacity = len(processed_materials) > MAX_CAPACITY	
 
 func _produce_material():
 	if energy == 0 or len(Helpers.valid(materials_waiting_for_output)) == 0:
