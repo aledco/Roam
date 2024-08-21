@@ -68,7 +68,6 @@ shape = SubResource("RectangleShape2D_3jtbq")
 [node name="MaterialNode" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 texture = ExtResource("2_3yr7m")
 
 [node name="Smoke" parent="." instance=ExtResource("3_7vgap")]

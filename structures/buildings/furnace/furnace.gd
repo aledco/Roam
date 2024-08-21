@@ -59,7 +59,7 @@ func _process_materials_in_building(processed_materials: Array[RawMaterial], ope
 		material_node.add_child(new_mat)
 		new_mat.mock_follow_node = PathFollow2D.new()
 		new_mat.mock_follow_node.loop = false
-		new_mat.parent = self
+		new_mat.parent_structure = self
 		new_mat.disable_collision()
 		operational_output.path.add_child(new_mat.mock_follow_node)
 		new_mat.global_position = new_mat.mock_follow_node.global_position
