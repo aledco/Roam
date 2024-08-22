@@ -22,9 +22,15 @@ var connecting_structure: Structure
 
 var is_connected := false
 
-func send_energy():
+func send_energy(energy_sent: int):
 	if output:
-		output.send_energy()
+		output.send_energy(energy_sent)
+
+func energy_needed() -> int:
+	if output:
+		return output.energy_needed()
+	else:
+		return 0
 
 func _destroy_on_input(_input_type):
 	if is_connecting:
