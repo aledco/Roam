@@ -79,7 +79,6 @@ shape = SubResource("CircleShape2D_dbwyk")
 z_index = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
 sprite_frames = SubResource("SpriteFrames_xclil")
 autoplay = "default"
 
