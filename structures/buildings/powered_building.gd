@@ -21,5 +21,11 @@ func connect_wire(wire: Wire):
 	input_wires.append(wire)
 	wire.on_destroyed.connect(func(): Helpers.remove(input_wires, wire))
 
-func send_energy():
-	energy += 1
+func send_energy(energy_sent: int):
+	energy += energy_sent
+
+func energy_needed() -> int:
+	if energy == 0:
+		return 1
+	else:
+		return 0

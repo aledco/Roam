@@ -9,6 +9,9 @@ func get_grid_size() -> Vector2i:
 func _get_energy_rate() -> int:
 	return 5
 
+func _get_max_energy_stored() -> int:
+	return 20
+
 func _ready():
 	super._ready()
 
