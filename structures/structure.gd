@@ -96,9 +96,13 @@ func on_material_enter(material: RawMaterial):
 	material.destroyed.connect(_on_material_destroyed)
 
 func on_material_exit(material: RawMaterial):
-	material.destroyed.disconnect(_on_material_destroyed)
+	if material.destroyed.is_connected(_on_material_destroyed):
+		material.destroyed.disconnect(_on_material_destroyed)
 	Helpers.remove(materials, material)
 	material.at_exit_node = false
+	if material.mock_follow_node and is_instance_valid(material.mock_follow_node):
+		material.mock_follow_node.queue_free()
+		material.mock_follow_node = null
 	material_removed.emit(material)
 
 ## Called when a material owned by the structure is destroyed. Do not touch

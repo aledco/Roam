@@ -91,7 +91,7 @@ func get_smelted_material() -> RawMaterial:
 
 ## Attempts to move the material along a path.
 func try_move(speed: float) -> bool:
-	if not mock_follow_node:
+	if not mock_follow_node or not is_instance_valid(mock_follow_node) or not mock_follow_node.get_parent():
 		return false
 	
 	mock_follow_node.progress += speed

@@ -115,7 +115,7 @@ func add_material(material: RawMaterial):
 	var input := _get_input(material)
 	# sometimes add_material gets called before the input areas are ready, and don't detect the material
 	while input == null:
-		await get_tree().create_timer(.2).timeout
+		await get_tree().create_timer(0.2).timeout
 		if not is_instance_valid(material):
 			return
 		input = _get_input(material)
