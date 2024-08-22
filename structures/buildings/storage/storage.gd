@@ -8,8 +8,6 @@ const OUTPUT_SELECT = preload("res://structures/buildings/storage/output_select/
 @onready var storage_inventory: Inventory = storage_inventory_menu.get_storage_inventory()
 
 var output_selects := {}
-var interval_id := -1
-var time := 2.0
 
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
@@ -17,18 +15,12 @@ func get_grid_size() -> Vector2i:
 
 func _ready():
 	super._ready()
-	interval_id = Clock.interval(time, _produce_material.bind())
 	material_added.connect(_on_material_added)
 
 func _on_material_added(material: RawMaterial):
 	for output in output_selects:
 		output_selects[output].update()
 
-func destroy():
-	if interval_id != -1: # TODO do this for all structures with an interval
-		Clock.remove_interval(time, interval_id)
-		interval_id = -1
-	super.destroy()
 
 func can_accept_material(material: RawMaterial):
 	if storage_inventory.is_full(material.get_material_id()):
@@ -54,12 +46,9 @@ func on_output_disconnected(output: OutputNode):
 func _create_special_ui():
 	storage_inventory_menu.show()
 
-func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
+func _process_material_in_building(material: RawMaterial):
 	storage_inventory.add_material(material)
 	Helpers.remove_and_free(materials, material)
-
-func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
-	pass
 
 func get_stored_material_ids() -> Array:
 	return storage_inventory.get_stored_material_ids()
@@ -80,7 +69,10 @@ func get_next_output(operational_outputs: Array[OutputNode]) -> OutputNode:
 	current_output_index = (current_output_index + 1) % len(operational_outputs)
 	return output
 
-func _produce_material():
+func _get_interval_time() -> float:
+	return 2.0
+
+func _timed_action():
 	var operational_outputs = _get_operational_outputs()
 	if len(operational_outputs) == 0:
 		return

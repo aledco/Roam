@@ -47,7 +47,6 @@ func produce():
 
 
 func _physics_process(delta):
-	var filtered = Helpers.valid(materials)
 	for material in Helpers.valid(materials):
 		if material.at_exit_node:
 			continue

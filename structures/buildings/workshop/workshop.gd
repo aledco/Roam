@@ -14,11 +14,6 @@ var material_models: Dictionary
 var current_material: MaterialModel
 
 var materials_waiting_for_output: Array[RawMaterial] = []
-var interval_id := -1
-var time := 2.0
-
-const MAX_CAPACITY = 6
-var at_max_capacity := false
 
 func set_current_material(material_model: MaterialModel) -> void:
 	current_material = material_model
@@ -38,11 +33,7 @@ func _ready():
 	super._ready()
 	material_models = RawMaterial.get_models_for_workshop(self)
 	current_material = material_models[1][0]
-	interval_id = Clock.interval(time, _produce_material.bind())
 
-func destroy():
-	Clock.remove_interval(time, interval_id)
-	super.destroy()
 
 func _on_material_destroyed(material: RawMaterial):
 	super. _on_material_destroyed(material)
@@ -63,23 +54,22 @@ func can_accept_material(material: RawMaterial):
 	var material_id = material.get_material_id()
 	if not RawMaterial.is_ingredient(material_id, current_material.material_id):
 		return false
-		
-	if at_max_capacity:
-		return false
 	return true
 
-func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
+func _process_material_in_building(material: RawMaterial):
 	if current_material and RawMaterial.is_ingredient(material.get_material_id(), current_material.material_id):
 		if material not in materials_waiting_for_output:
 			materials_waiting_for_output.append(material)
-		processed_materials.append(material)
 	else:
 		Helpers.remove_and_free(materials, material)
 
-func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
-	at_max_capacity = len(processed_materials) > MAX_CAPACITY	
+func _get_max_capacity() -> int:
+	return 6
 
-func _produce_material():
+func _get_interval_time() -> float:
+	return 2.0
+
+func _timed_action():
 	if energy == 0 or not current_material or materials_waiting_for_output.is_empty():
 		return
 	

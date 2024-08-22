@@ -1,0 +1,127 @@
+[gd_scene load_steps=15 format=3 uid="uid://f0h3djwyfkby"]
+
+[ext_resource type="Script" path="res://structures/buildings/furnace/furnace.gd" id="1_1vaqf"]
+[ext_resource type="Texture2D" uid="uid://bajiu1f3fwms4" path="res://structures/buildings/furnace/furnace.png" id="2_3yr7m"]
+[ext_resource type="PackedScene" uid="uid://7ki2ji1ra1ph" path="res://structures/buildings/furnace/smoke/smoke.tscn" id="3_7vgap"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="4_nmf65"]
+[ext_resource type="PackedScene" uid="uid://dfg4ssnong1hj" path="res://structures/in_out_node/output_node/output_node.tscn" id="5_ybks7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jtbq"]
+size = Vector2(28, 28)
+
+[sub_resource type="Curve2D" id="Curve2D_rhli6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_pu5ex"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_lv7qe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_1pjij"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_nhvyu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_mh5ao"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_gucpd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_vm0au"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0)
+}
+point_count = 2
+
+[node name="Furnace" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_1vaqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3jtbq")
+
+[node name="MaterialNode" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3yr7m")
+
+[node name="Smoke" parent="." instance=ExtResource("3_7vgap")]
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("4_nmf65")]
+position = Vector2(0, -16)
+
+[node name="InputNode2" parent="Inputs" instance=ExtResource("4_nmf65")]
+position = Vector2(16, 0)
+
+[node name="InputNode3" parent="Inputs" instance=ExtResource("4_nmf65")]
+position = Vector2(0, 16)
+
+[node name="InputNode4" parent="Inputs" instance=ExtResource("4_nmf65")]
+position = Vector2(-16, 0)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="OutputNode" parent="Outputs" instance=ExtResource("5_ybks7")]
+position = Vector2(0, -16)
+
+[node name="OutputNode2" parent="Outputs" instance=ExtResource("5_ybks7")]
+position = Vector2(16, 0)
+
+[node name="OutputNode3" parent="Outputs" instance=ExtResource("5_ybks7")]
+position = Vector2(0, 16)
+
+[node name="OutputNode4" parent="Outputs" instance=ExtResource("5_ybks7")]
+position = Vector2(-16, 0)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_rhli6")
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_pu5ex")
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_lv7qe")
+
+[node name="Path2D4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_1pjij")
+
+[node name="Path2D5" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_nhvyu")
+
+[node name="Path2D6" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_mh5ao")
+
+[node name="Path2D7" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_gucpd")
+
+[node name="Path2D8" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_vm0au")

@@ -5,8 +5,11 @@ const CONVEYOR_PIECE = preload("res://structures/conveyors/conveyor_piece/convey
 var materials_for_output: Array[RawMaterial] = []
 var current_output_index = 0
 
+var at_max_capacity := false
+
 var conveyor_pieces = {}
 
+var interval_id := -1
 
 ### BEGIN abstract functions
 func _play_default_animation():
@@ -18,12 +21,17 @@ func _play_operate_animation():
 func _get_conveyor_piece_reference_position() -> Vector2:
 	return Vector2(0, 15)
 
-func _process_material_in_building(material: RawMaterial, processed_materials: Array[RawMaterial]):
+func _process_material_in_building(material: RawMaterial):
 	pass
 
-func _process_materials_in_building(processed_materials: Array[RawMaterial], operational_outputs: Array[OutputNode]):
+func _get_interval_time() -> float:
+	return -1
+
+func _timed_action():
 	pass
 
+func _get_max_capacity() -> int:
+	return -1
 ### END abstract functions
 
 func are_materials_grabable() -> bool:
@@ -41,6 +49,8 @@ func can_accept_material(material: RawMaterial):
 	if operational_outputs.all(func(output): return output.connection.is_full()):
 		return false
 	
+	if at_max_capacity:
+		return false
 	return true
 
 
@@ -90,7 +100,15 @@ func _setup_io():
 func _ready():
 	super._ready()
 	_setup_io()
+	
+	var interval_time := _get_interval_time()
+	if interval_time != -1:
+		interval_id = Clock.interval(interval_time, _timed_action)
 
+func destroy():
+	if interval_id != -1:
+		Clock.remove_interval(_get_interval_time(), interval_id)
+	super.destroy()
 
 func add_material(material: RawMaterial):
 	on_material_enter(material)
@@ -120,15 +138,18 @@ func produce():
 	_play_operate_animation()
 	
 	var operational_outputs = _get_operational_outputs()
-	var processed_materials: Array[RawMaterial] = []
+	var material_in_center: Array[RawMaterial] = []
 	for material in Helpers.valid(materials):
 		if material in materials_for_output:
 			continue
 		if material.mock_follow_node.progress_ratio == 1:
-			_process_material_in_building(material, processed_materials)
+			material_in_center.append(material)
+			_process_material_in_building(material)
 	
-	_process_materials_in_building(processed_materials, operational_outputs)
-	
+	var max_capacity := _get_max_capacity()
+	if max_capacity != -1:
+		at_max_capacity = len(material_in_center) > max_capacity
+
 	for output in operational_outputs:
 		if output.connection and output.has_material_to_output():
 			if output.connection.is_full():

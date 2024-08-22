@@ -11,15 +11,16 @@ signal destroyed(material: RawMaterial)
 
 static var MATERIAL_SIZE = 16
 
-static var MATERIALS_COLLISION_LAYER = 3
-static var UNDERGROUND_COLLISION_LAYER = 5
-static var DISABLED_MATERIAL_COLLISION_LAYER = 8
+static var MATERIALS_COLLISION_LAYER = 4
+static var UNDERGROUND_COLLISION_LAYER = 16
+static var DISABLED_MATERIAL_COLLISION_LAYER = 128
 
 var parent_structure: Structure = null
 
 var at_exit_node: bool = false
 var mock_follow_node: PathFollow2D
 var is_moving: bool = false
+var collision_enabled := true
 
 ## Determines if a material is an ingredient for another.
 static func is_ingredient(ingredient: int, product: int) -> bool:
@@ -96,15 +97,15 @@ func try_move(speed: float) -> bool:
 	mock_follow_node.progress += speed
 	var velocity := (mock_follow_node.global_position - global_position).normalized() * speed
 	_align_sensor(velocity)
-	var collision := move_and_collide(velocity, true)
-	if collision == null or not _is_collision_blocking(collision):
-		move_and_collide(velocity)
-		is_moving = true
-		return true
-	else:
-		mock_follow_node.progress -= speed
-		is_moving = false
-		return false
+	if collision_enabled:
+		var collision := move_and_collide(velocity, true)
+		if collision and _is_collision_blocking(collision):
+			mock_follow_node.progress -= speed
+			is_moving = false
+			return false
+	move_and_collide(velocity)
+	is_moving = true
+	return true
 
 
 ## Aligns the materials sensor using its velocity.
@@ -150,11 +151,13 @@ func finish_tunnel():
 
 
 func enable_collision():
+	collision_enabled = true
 	set_collision_layer_value(MATERIALS_COLLISION_LAYER, true)
 	set_collision_layer_value(DISABLED_MATERIAL_COLLISION_LAYER, false)
 	set_collision_mask_value(MATERIALS_COLLISION_LAYER, true)
 
 func disable_collision():
+	collision_enabled = false
 	set_collision_layer_value(MATERIALS_COLLISION_LAYER, false)
 	set_collision_layer_value(DISABLED_MATERIAL_COLLISION_LAYER, true)
 	set_collision_mask_value(MATERIALS_COLLISION_LAYER, false)
