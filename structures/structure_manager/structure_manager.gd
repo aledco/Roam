@@ -1,46 +1,13 @@
 class_name StructureManager extends Node2D
 
-const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
-var debug_info = null
-
 var player: Player:
 	get: 
 		return get_node("/root/World/Player") as Player
-
-func _process(delta):
-	if Debug.debug_grid():
-		if debug_info != null:
-			debug_info.queue_free()
-		
-		var mouse_index = get_mouse_grid_index()
-		
-		var grid_position = mouse_index * 32
-		debug_info = GRID_DEBUG_INFO.instantiate()
-		add_child(debug_info)
-		debug_info.global_position = get_global_mouse_position()
-		var label := debug_info.get_child(0) as RichTextLabel
-		label.text = "[center]<%s, %s>[/center]" % [mouse_index.x, mouse_index.y]
-
-
-static var _delete_mode: bool
-
-static func set_delete_mode(delete_mode: bool) -> bool:
-	_delete_mode = delete_mode
-	if _delete_mode:
-		Input.set_custom_mouse_cursor(preload("res://ui/cursor/shovel.png"))
-	else:
-		Input.set_custom_mouse_cursor(null)
-	return _delete_mode
-
-static func get_delete_mode() -> bool:
-	return _delete_mode
 
 @onready var structure_node = get_node("/root/World/Structures") as Node2D
 
 var structure_map := {}
 var tile_map_ids
-
-
 
 ## Creates a structure from the structure resource, grid_index, and grid_size.
 func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vector2i):
@@ -330,3 +297,20 @@ static func rotate_grid_size(grid_size: Vector2i, direction: Vector2i) -> Vector
 			return Vector2i(-grid_size.y, grid_size.x)
 		_: 
 			return grid_size
+
+## For debugging only
+const GRID_DEBUG_INFO = preload("res://structures/structure_manager/grid_debug_info.tscn")
+var debug_info = null
+func _process(delta):
+	if Debug.debug_grid():
+		if debug_info != null:
+			debug_info.queue_free()
+		
+		var mouse_index = get_mouse_grid_index()
+		
+		var grid_position = mouse_index * 32
+		debug_info = GRID_DEBUG_INFO.instantiate()
+		add_child(debug_info)
+		debug_info.global_position = get_global_mouse_position()
+		var label := debug_info.get_child(0) as RichTextLabel
+		label.text = "[center]<%s, %s>[/center]" % [mouse_index.x, mouse_index.y]

@@ -5,8 +5,12 @@ static var GRID_SIZE = Vector2i(1, 1)
 func _get_build_list() -> Array[StructureModel]:
 	if is_robot_mining:
 		return [
-			StructureModel.create("Boulder", [], null, preload("res://structures/natural/boulder/boulder.png"), _remove_robot.bind())
-		]
+			StructureModel.create(
+				"Boulder", 
+				[], 
+				null,
+				load("res://structures/natural/boulder/boulder.png"),
+				 _remove_robot.bind())]
 	else:
 		return [_get_robot_model()]
 
@@ -25,7 +29,7 @@ func get_robot_position() -> Vector2:
 
 static func get_probability_model() -> SpawnProbabilityModel:
 	return SpawnProbabilityModel.create(
-		preload("res://structures/natural/boulder/boulder.tscn"),
+		func(): return preload("res://structures/natural/boulder/boulder.tscn"),
 		GRID_SIZE,
 		{
 			World.DIRT_TILE_ID: 0.025,

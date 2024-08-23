@@ -4,6 +4,8 @@ const SAW_ROBOT = preload("res://robots/saw_robot/saw_robot.tscn")
 const DRILL_ROBOT = preload("res://robots/drill_robot/drill_robot.tscn")
 const OUTPUT_NODE = preload("res://structures/in_out_node/output_node/output_node.tscn")
 
+@export var variant_id: int = 1
+
 var time: float = 2.0
 var interval_id: int = -1
 
@@ -18,9 +20,11 @@ var is_robot_mining: bool = false
 func _get_production_material_id() -> int:
 	return -1
 
-
 func get_robot_position() -> Vector2:
 	return Vector2.ZERO
+
+func _get_number_of_variants() -> int:
+	return 1
 
 func get_player_position() -> Vector2:
 	return to_global(get_robot_position())

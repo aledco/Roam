@@ -1,0 +1,3 @@
+- Add glowing animation to furnace instead of smoke, add smoke to the power plant
+- Add notes to repo
+- Make clock code better

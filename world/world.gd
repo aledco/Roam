@@ -175,7 +175,7 @@ func _generate_structures():
 					continue
 				
 				if randf() < model.probabilities[tile_id]:
-					structure_manager.create_structure(model.structure_resource, grid_index, model.structure_grid_size)
+					structure_manager.create_structure(model.get_structure_resource(), grid_index, model.structure_grid_size)
 					break
 
 

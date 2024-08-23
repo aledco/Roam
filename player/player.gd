@@ -21,8 +21,10 @@ var direction := Vector2i(0, 1)
 
 var has_menu_open := false
 var is_placing_structure := false
+var is_deleting_structure := false
 var is_placing_wire := false
 var is_dragging_stack := false
+
 
 func is_busy() -> bool:
 	return has_menu_open \
@@ -47,22 +49,26 @@ func player_input():
 		player_menu.visible = not player_menu.visible
 	elif Input.is_action_just_pressed("map"):
 		SignalManager.player_input.emit(InputType.Map)
-		escape(true)
-		if map_active:
-			camera_2d.zoom = Vector2.ONE
+		if not map_active:
+			escape()
+			map_active = true
+			camera_2d.zoom *= Vector2(0.1, 0.1)	
 		else:
-			camera_2d.zoom *= Vector2(0.1, 0.1)
-		map_active = not map_active
+			escape()
 	elif Input.is_action_just_pressed("delete"):
 		SignalManager.player_input.emit(InputType.DeleteMode)
-		escape(true, true)
-		StructureManager.set_delete_mode(not StructureManager.get_delete_mode())
+		if not is_deleting_structure:
+			escape()
+			is_deleting_structure = true
+			Input.set_custom_mouse_cursor(preload("res://ui/cursor/shovel.png"))
+		else:
+			escape()
 	elif Input.is_action_just_pressed("escape"):
 		SignalManager.player_input.emit(InputType.Escape)
 		escape()
 
 
-func escape(ignore_map = false, ignore_delete_mode = false):
+func escape():
 	current_state = State.Idle
 		
 	if is_mining:
@@ -71,10 +77,12 @@ func escape(ignore_map = false, ignore_delete_mode = false):
 		global_position = pos_before_mine
 		is_mining = false
 	
-	if not ignore_map and map_active:
+	if map_active:
 		camera_2d.zoom = Vector2.ONE
-	if not ignore_delete_mode:
-		StructureManager.set_delete_mode(false)
+		map_active = false
+	
+	is_deleting_structure = false
+	Input.set_custom_mouse_cursor(null)
 
 
 func _physics_process(delta):

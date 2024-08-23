@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_xn1wq"]
 [ext_resource type="PackedScene" uid="uid://b0yffrvg6bhei" path="res://player/player.tscn" id="2_ixsok"]
-[ext_resource type="PackedScene" uid="uid://tv66isof16ao" path="res://world_tile_map/world_tile_map.tscn" id="2_yhtfk"]
+[ext_resource type="PackedScene" uid="uid://tv66isof16ao" path="res://world/world_tile_map/world_tile_map.tscn" id="2_yhtfk"]
 [ext_resource type="PackedScene" uid="uid://woq508sggg71" path="res://structures/structure_manager/structure_manager.tscn" id="4_4astp"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_xn1wq")
+world_size = 1000
 
 [node name="WorldTileMap" parent="." instance=ExtResource("2_yhtfk")]
 

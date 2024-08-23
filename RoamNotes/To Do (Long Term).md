@@ -1,0 +1,12 @@
+- Recreate player sprite and animations
+- Recreate all art
+- Add music and sound effects
+- Create player tools and weapons
+- Add upgrade station
+- Add battle droids
+- Create game story and cutscenes
+- Add a tutorial
+- Create game saves
+- Add pause functionality
+- Add world biomes
+	- Winter, tropical, rivers

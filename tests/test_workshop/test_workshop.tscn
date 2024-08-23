@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tests/test_workshop/test_workshop.gd" id="1_2b2t0"]
 [ext_resource type="PackedScene" uid="uid://woq508sggg71" path="res://structures/structure_manager/structure_manager.tscn" id="1_28boh"]
-[ext_resource type="PackedScene" uid="uid://tv66isof16ao" path="res://world_tile_map/world_tile_map.tscn" id="1_n8fwt"]
+[ext_resource type="PackedScene" uid="uid://tv66isof16ao" path="res://world/world_tile_map/world_tile_map.tscn" id="1_n8fwt"]
 [ext_resource type="PackedScene" uid="uid://b0yffrvg6bhei" path="res://player/player.tscn" id="2_8mtur"]
 
 [node name="World" type="Node2D"]
