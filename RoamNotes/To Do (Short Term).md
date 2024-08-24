@@ -1,4 +1,3 @@
-- Make viewport 1 to 1, double size of everything
 - Player mining
 	- Add animation to tell player they got a material when mining
 	- Have players hold right click to mine?

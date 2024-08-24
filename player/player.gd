@@ -31,7 +31,8 @@ func is_busy() -> bool:
 		or is_placing_structure \
 		or is_placing_wire \
 		or is_mining \
-		or is_dragging_stack
+		or is_dragging_stack \
+		or map_active
 
 func _ready():
 	pass

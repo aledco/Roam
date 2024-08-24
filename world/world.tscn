@@ -7,7 +7,6 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_xn1wq")
-world_size = 1000
 
 [node name="WorldTileMap" parent="." instance=ExtResource("2_yhtfk")]
 
