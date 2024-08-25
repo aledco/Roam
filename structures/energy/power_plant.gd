@@ -14,7 +14,13 @@ func _get_energy_rate() -> int:
 
 func are_materials_grabable() -> bool:
 	return false
-	
+
+func _play_operate_animation():
+	pass
+
+func _stop_operate_animation():
+	pass
+
 func _setup_io():
 	inputs[0].setup(self, Vector2i.ZERO, 0)
 	inputs[0].path = paths[0]
@@ -28,6 +34,11 @@ func produce():
 		if material.mock_follow_node.progress_ratio == 1:
 			Helpers.remove_and_free(materials, material)
 			energy += _get_energy_rate()
+	
+	if energy > 0:
+		_play_operate_animation()
+	else:
+		_stop_operate_animation()
 	
 	for wire in Helpers.valid(output_wires):
 		if energy == 0:

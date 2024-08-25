@@ -1,12 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7l4wfex01tc3"]
+[gd_scene load_steps=16 format=3 uid="uid://c7l4wfex01tc3"]
 
 [ext_resource type="Script" path="res://structures/energy/coal_power_plant/coal_power_plant.gd" id="1_4eivm"]
 [ext_resource type="Texture2D" uid="uid://dsjabkuf0wqdo" path="res://structures/energy/coal_power_plant/coal_power_plant.png" id="2_lqyji"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_2e1q7"]
+[ext_resource type="Texture2D" uid="uid://bnrp7c5ie1x3g" path="res://structures/energy/coal_power_plant/coal_power_plant_smoke.png" id="4_2htwd"]
 [ext_resource type="PackedScene" uid="uid://cy8gqaeypk748" path="res://structures/conveyors/conveyor_piece/conveyor_piece.tscn" id="5_3urb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8o33t"]
 radius = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wpfi"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqgp1"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44cir"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88lx1"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvbue"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eklke"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60xrk"]
+atlas = ExtResource("4_2htwd")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k4tch"]
 animations = [{
@@ -16,6 +45,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wpfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqgp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44cir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88lx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvbue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eklke")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_60xrk")
+}],
+"loop": true,
+"name": &"smoke",
 "speed": 5.0
 }]
 
@@ -41,7 +96,9 @@ shape = SubResource("CircleShape2D_8o33t")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_k4tch")
+animation = &"smoke"
 autoplay = "default"
+frame_progress = 0.348589
 
 [node name="Inputs" type="Node2D" parent="."]
 
