@@ -1,1 +1,1 @@
-- Make clock code better
+- Work on energy system
