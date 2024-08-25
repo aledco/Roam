@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dvey4pndocm1w" path="res://structures/energy/power_node/power_node.tscn" id="2_juy6b"]
 
 [node name="Wire" type="Line2D"]
-z_index = 6
+z_index = 2
 width = 2.0
 default_color = Color(0, 0, 0, 1)
 script = ExtResource("1_0e4kk")

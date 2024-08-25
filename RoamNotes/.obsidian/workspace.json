@@ -1,0 +1,195 @@
+{
+  "main": {
+    "id": "dbe01c2b9997510b",
+    "type": "split",
+    "children": [
+      {
+        "id": "20c9a529c4419a96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1b32b7b5c4851110",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To Do (Short Term).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "62a4bba101b27f7e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To Do (Today).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b823890ae6b55beb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To Do (Long Term).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "fd623436e24baa54",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To Do (Today).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "da7c2ea264c0627c",
+    "type": "split",
+    "children": [
+      {
+        "id": "71806d6fc53d60d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d56f44457339f92e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b98e0c0d2fdefd0d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c2fc4fc141e1f11d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "39dd0cc3a5eb0b84",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ad3bcc8120544e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18872e6069ce6ecc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "To Do (Today).md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d9d832786c20c9f5",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "To Do (Today).md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ad04bef5b689c73c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "398f07de4c4843d1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "To Do (Today).md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "fd623436e24baa54",
+  "lastOpenFiles": [
+    "To Do (Short Term).md",
+    "To Do (Today).md",
+    "To Do (Long Term).md",
+    "Bugs.md",
+    "Untitled",
+    "Welcome.md"
+  ]
+}

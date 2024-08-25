@@ -6,14 +6,31 @@ static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
+@onready var smoke_animated_sprite: AnimatedSprite2D = $SmokeAnimatedSprite
+var smoke_animation_active := false
+
 func _get_energy_rate() -> int:
 	return 5
 
+func _play_operate_animation():
+	if not smoke_animation_active:
+		smoke_animation_active = true
+		smoke_animated_sprite.play("smoke")
+		if smoke_animated_sprite.animation_looped.is_connected(_on_smoke_looped):
+			smoke_animated_sprite.animation_looped.disconnect(_on_smoke_looped)
+
+func _stop_operate_animation():
+	if smoke_animation_active:
+		smoke_animation_active = false
+		smoke_animated_sprite.animation_looped.connect(_on_smoke_looped)
+
+func _on_smoke_looped():
+	smoke_animated_sprite.play("default")
+	if smoke_animated_sprite.animation_looped.is_connected(_on_smoke_looped):
+		smoke_animated_sprite.animation_looped.disconnect(_on_smoke_looped)
+
 func _get_max_energy_stored() -> int:
 	return 20
-
-func _ready():
-	super._ready()
 
 func can_accept_material(material: RawMaterial):
 	if material.get_material_id() != Coal.MATERIAL_ID:

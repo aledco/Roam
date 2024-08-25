@@ -25,7 +25,7 @@ func get_robot_position() -> Vector2:
 
 static func get_probability_model() -> SpawnProbabilityModel:
 	return SpawnProbabilityModel.create(
-		preload("res://structures/natural/tree/tree.tscn"),
+		func(): return preload("res://structures/natural/tree/tree.tscn"),
 		GRID_SIZE,
 		{
 			World.DIRT_TILE_ID: 0.25,

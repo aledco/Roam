@@ -2,24 +2,23 @@ class_name Furnace extends Building
 
 static var COST := [[IronIngot.MATERIAL_ID, 5], [StoneBrick.MATERIAL_ID, 5]]
 
-@onready var smoke: Smoke = $Smoke
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var glow_animation_frame_count := animated_sprite_2d.sprite_frames.get_frame_count("glow")
 
 var fuel := 0
 var is_full := false
 
 var materials_waiting_for_output: Array[RawMaterial] = []
 
+var glow_interval_id := -1
+const glow_interval_time := 2.0
+var glow_animation_active := false
+
+
 static var GRID_SIZE: Vector2i = Vector2i(1, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
-func _play_default_animation():
-	if smoke.is_active:
-		smoke.dissapate()
-
-func _play_operate_animation():
-	if not smoke.is_active:
-		smoke.start()
 
 func can_accept_material(material: RawMaterial):
 	if not super.can_accept_material(material):
@@ -41,6 +40,7 @@ func _process_material_in_building(material: RawMaterial):
 		if mat_fuel > fuel:
 			fuel = mat_fuel
 		Helpers.remove_and_free(materials, material)
+		
 	elif material.is_smeltable():
 		if fuel > 0 and material not in materials_waiting_for_output:
 			fuel -= 1
@@ -54,6 +54,7 @@ func _get_interval_time() -> float:
 
 func _timed_action():
 	if materials_waiting_for_output.is_empty():
+		_stop_glow_animation()
 		return
 	
 	var operational_outputs = _get_operational_outputs()
@@ -61,11 +62,13 @@ func _timed_action():
 		for material in materials_waiting_for_output:
 			Helpers.remove(materials_waiting_for_output, material)
 			Helpers.remove_and_free(materials, material)
+		_stop_glow_animation()
 		return
 	
 	var operational_output = get_next_output(operational_outputs)
 	if operational_output == null:
 		is_full = true
+		_stop_glow_animation()
 		return
 	is_full = false
 	
@@ -82,3 +85,23 @@ func _timed_action():
 	materials_for_output.append(new_mat)
 	materials.append(new_mat)
 	Helpers.remove_and_free(materials, material)
+	
+	_play_glow_animation()
+
+func _play_glow_animation():
+	if not glow_animation_active:
+		glow_animation_active = true
+		animated_sprite_2d.animation = "glow"
+		animated_sprite_2d.stop()
+	elif animated_sprite_2d.frame < glow_animation_frame_count - 1:
+		animated_sprite_2d.frame += 1
+
+func _stop_glow_animation():
+	if not glow_animation_active:
+		return
+	
+	if animated_sprite_2d.frame == 0:
+		glow_animation_active = false
+		animated_sprite_2d.play("default")
+	else:
+		animated_sprite_2d.frame -= 1

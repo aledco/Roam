@@ -4,6 +4,8 @@ const SAW_ROBOT = preload("res://robots/saw_robot/saw_robot.tscn")
 const DRILL_ROBOT = preload("res://robots/drill_robot/drill_robot.tscn")
 const OUTPUT_NODE = preload("res://structures/in_out_node/output_node/output_node.tscn")
 
+@export var variant_id: int = 1
+
 var time: float = 2.0
 var interval_id: int = -1
 
@@ -18,9 +20,11 @@ var is_robot_mining: bool = false
 func _get_production_material_id() -> int:
 	return -1
 
-
 func get_robot_position() -> Vector2:
 	return Vector2.ZERO
+
+func _get_number_of_variants() -> int:
+	return 1
 
 func get_player_position() -> Vector2:
 	return to_global(get_robot_position())
@@ -31,12 +35,12 @@ func begin_player_mining():
 
 func end_player_mining():
 	is_player_mining = false
-	Clock.remove_interval(time, interval_id)
+	Clock.remove_interval(interval_id)
 	interval_id = -1
 
 func destroy():
 	if interval_id != -1:
-		Clock.remove_interval(time, interval_id)
+		Clock.remove_interval(interval_id)
 	super.destroy()
 
 
@@ -52,7 +56,7 @@ func _place_robot():
 	robot.set_position(get_robot_position())
 	
 	if interval_id != -1:
-		Clock.remove_interval(time, interval_id)
+		Clock.remove_interval(interval_id)
 	interval_id = Clock.interval(time, _produce_material.bind())
 	
 	is_robot_mining = true
@@ -68,7 +72,7 @@ func _remove_robot():
 	
 	outputs_node.queue_free()
 	robot.queue_free()
-	Clock.remove_interval(time, interval_id)
+	Clock.remove_interval(interval_id)
 
 
 func _create_output(x: int, y: int, angle: float, position: Vector2):

@@ -135,7 +135,7 @@ func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		SignalManager.structure_clicked.emit(self)
 		if event.is_action_released("left_click"):
-			if StructureManager.get_delete_mode():
+			if player.is_deleting_structure:
 				structure_manager.remove_structure(self)
 			else:
 				_create_build_ui()

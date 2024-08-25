@@ -1,0 +1,29 @@
+- Player mining
+	- Add animation to tell player they got a material when mining
+	- Have players hold right click to mine?
+		- Need some way of making it more interactive
+	- When player mining, there should be a minigame that players play to get materials, like hitting weak points
+- Make player interaction better that just left and right clicks, maybe key presses when looking at a structure instead
+- Add variations of trees and rocks
+- Conveyors
+	- Instead of placing curved conveyors, make straight conveyors curve when a conveyor is placed to the side
+	- Add a way to know that a conveyor is connected to a natural structure
+- Make structure generation better
+- When placing structures, make blinking arrows for all structures
+- Perfect world generation
+- Add cost to building a PowerNode
+- Add an energy system
+	- Need water mill to create energy to power systems
+	- Need to charge player to regain health
+	- More powerful energy generators like coal/nuclear plants 
+		- Add uranium
+	- Add electricity animations to wires and power nodes
+- Add gold
+	- Add a gold structure that depletes after mining a certain amount
+	- Add gold coins made from gold ingots
+	- Upgrades cost gold coins
+	- Gold coins can also be given by merchants in exchange for materials
+- Add day/night cycle
+	- Enemies are stronger in the night
+	- Power lights to light up the world
+	- Create a sleeping chamber to sleep through the night

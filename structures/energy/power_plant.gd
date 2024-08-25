@@ -17,7 +17,13 @@ func _get_max_energy_stored() -> int:
 
 func are_materials_grabable() -> bool:
 	return false
-	
+
+func _play_operate_animation():
+	pass
+
+func _stop_operate_animation():
+	pass
+
 func _setup_io():
 	inputs[0].setup(self, Vector2i.ZERO, 0)
 	inputs[0].path = paths[0]
@@ -35,15 +41,19 @@ func produce():
 				energy = _get_max_energy_stored()
 	
 	if energy > 0:
-		for wire in Helpers.valid(output_wires):
-			if wire.is_connected:
-				var wire_energy_needed = wire.energy_needed()
-				if energy > wire_energy_needed:
-					wire.send_energy(wire_energy_needed)
-					energy -= wire_energy_needed
-				else:
-					wire.send_energy(energy)
-					energy = 0
+		_play_operate_animation()
+	else:
+		_stop_operate_animation()
+	
+	for wire in Helpers.valid(output_wires):
+		if wire.is_connected:
+			var wire_energy_needed = wire.energy_needed()
+			if energy > wire_energy_needed:
+				wire.send_energy(wire_energy_needed)
+				energy -= wire_energy_needed
+			else:
+				wire.send_energy(energy)
+				energy = 0
 
 	super.produce()
 
