@@ -1,1 +1,1 @@
-- 
+- Structure placeholder can't handle Vector(3, 1) grid size 

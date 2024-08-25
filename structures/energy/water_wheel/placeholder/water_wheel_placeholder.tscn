@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8ctui1ivxsgd"]
+
+[ext_resource type="Script" path="res://structures/energy/water_wheel/placeholder/water_wheel_placeholder.gd" id="1_cyd0p"]
+[ext_resource type="Texture2D" uid="uid://cude6frr1w10g" path="res://structures/energy/water_wheel/placeholder/water_wheel_placeholder.png" id="2_lttts"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lttts")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(32, 32)
+
+[node name="WaterWheelPlaceholder" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_cyd0p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tg63q")
+animation = &"blink"
+frame_progress = 0.631736
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true

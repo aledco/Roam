@@ -14,7 +14,8 @@ func _ready():
 		FurnacePlaceholder.get_model(),
 		StoragePlaceholder.get_model(),
 		MergerPlaceholder.get_model(),
-		CoalPowerPlantPlaceholder.get_model()
+		CoalPowerPlantPlaceholder.get_model(),
+		WaterWheelPlaceholder.get_model()
 	]
 	
 	for model in models:

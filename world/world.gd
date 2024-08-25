@@ -36,7 +36,13 @@ func _ready():
 	_generate_structures()
 	randomize()
 
+func get_tile_at_grid_index(grid_index: Vector2i) -> Variant:
+	if grid_index in tile_map_ids:
+		var tile_id = tile_map_ids[grid_index]
+		return TILE_ID_MAP[tile_id]
+	return WorldTileType.Water
 
+## BEGIN World Generation
 func _generate_tile_map():
 	var noise := _create_noise_for_tilemap()
 	_generate_world_core(noise)
@@ -105,14 +111,14 @@ func _is_land(x: int, y: int):
 	if vec not in tile_map_ids:
 		return false
 	var tile_id = tile_map_ids[vec]
-	return tile_id <= 3
+	return tile_id != WATER_TILE_ID
 
 func _is_water(x: int, y: int):
 	var vec = Vector2i(x, y)
 	if vec not in tile_map_ids:
 		return true
 	var tile_id = tile_map_ids[vec]
-	return tile_id == 4
+	return tile_id == WATER_TILE_ID
 
 func _generate_borders():
 	var borders_node = Node2D.new()
@@ -158,8 +164,6 @@ func _generate_borders():
 func _generate_structures():
 	var noise := _create_noise_for_structures()
 	structure_manager.tile_map_ids = tile_map_ids
-	
-	
 	for x in range(-size, size):
 		for y in range(-size, size):
 			if _is_water(x, y) or (abs(x) <= 1 and abs(y) <= 1):
@@ -192,3 +196,4 @@ func _is_time_to_place(noise: FastNoiseLite, x: int, y: int) -> bool:
 	if rand > 3:
 		return true
 	return false
+## END World Generation

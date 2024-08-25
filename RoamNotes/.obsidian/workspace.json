@@ -8,42 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1b32b7b5c4851110",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "To Do (Short Term).md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "62a4bba101b27f7e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "To Do (Today).md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b823890ae6b55beb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "To Do (Long Term).md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "fd623436e24baa54",
             "type": "leaf",
             "state": {
@@ -55,8 +19,7 @@
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,9 +149,9 @@
   "active": "fd623436e24baa54",
   "lastOpenFiles": [
     "To Do (Short Term).md",
+    "Bugs.md",
     "To Do (Today).md",
     "To Do (Long Term).md",
-    "Bugs.md",
     "Untitled",
     "Welcome.md"
   ]
