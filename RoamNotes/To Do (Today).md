@@ -1,4 +1,1 @@
-- Add smoke to the power plant
 - Make clock code better
-- Work on tileset some more
-	- Clean up asset source

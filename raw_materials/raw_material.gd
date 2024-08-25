@@ -45,7 +45,7 @@ func destroy():
 
 ## Handles the event when a player clicks on the material.
 func _input_event(viewport, event, shape_idx):
-	if not sprite_2d.visible or (parent_structure and is_instance_valid(parent_structure) and not parent_structure.are_materials_grabable()):
+	if not sprite_2d.visible or (parent_structure and is_instance_valid(parent_structure) and not parent_structure.are_materials_grabable()) or player.is_busy():
 		return
 	if event is InputEventMouseButton:
 		if event.is_action_released("left_click"):

@@ -35,10 +35,23 @@ func connect_wire(wire: Wire):
 	input_wires.append(wire)
 	wire.on_destroyed.connect(func(): Helpers.remove(input_wires, wire))
 
-func send_energy():
-	var wire = _get_curent_output()
-	if wire:
-		wire.send_energy()
+func send_energy(energy_sent: int):
+	for wire in output_wires:
+		if wire.is_connected:
+			var wire_energy_needed = wire.energy_needed()
+			if energy_sent > wire_energy_needed:
+				wire.send_energy(wire_energy_needed)
+				energy_sent -= wire_energy_needed
+			else:
+				wire.send_energy(energy_sent)
+				energy_sent = 0
+
+func energy_needed():
+	var needed := 0
+	for wire in output_wires:
+		if wire.is_connected:
+			needed += wire.energy_needed()
+	return needed
 
 func _get_curent_output() -> Wire:
 	if output_wires.is_empty():

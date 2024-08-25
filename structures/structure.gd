@@ -67,8 +67,11 @@ func get_wire_connection_position() -> Vector2:
 func connect_wire(wire: Wire):
 	pass
 
-func send_energy():
+func send_energy(energy: int):
 	pass
+
+func energy_needed() -> int:
+	return 0
 
 ## Override this method to prevent materials from being picked up while owned by the structure.
 func are_materials_grabable() -> bool:

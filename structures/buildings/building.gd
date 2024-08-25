@@ -107,7 +107,7 @@ func _ready():
 
 func destroy():
 	if interval_id != -1:
-		Clock.remove_interval(_get_interval_time(), interval_id)
+		Clock.remove_interval(interval_id)
 	super.destroy()
 
 func add_material(material: RawMaterial):

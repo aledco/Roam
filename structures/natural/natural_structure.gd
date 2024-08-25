@@ -35,12 +35,12 @@ func begin_player_mining():
 
 func end_player_mining():
 	is_player_mining = false
-	Clock.remove_interval(time, interval_id)
+	Clock.remove_interval(interval_id)
 	interval_id = -1
 
 func destroy():
 	if interval_id != -1:
-		Clock.remove_interval(time, interval_id)
+		Clock.remove_interval(interval_id)
 	super.destroy()
 
 
@@ -56,7 +56,7 @@ func _place_robot():
 	robot.set_position(get_robot_position())
 	
 	if interval_id != -1:
-		Clock.remove_interval(time, interval_id)
+		Clock.remove_interval(interval_id)
 	interval_id = Clock.interval(time, _produce_material.bind())
 	
 	is_robot_mining = true
@@ -72,7 +72,7 @@ func _remove_robot():
 	
 	outputs_node.queue_free()
 	robot.queue_free()
-	Clock.remove_interval(time, interval_id)
+	Clock.remove_interval(interval_id)
 
 
 func _create_output(x: int, y: int, angle: float, position: Vector2):

@@ -12,6 +12,9 @@ var current_wire_index := 0
 func _get_energy_rate() -> int:
 	return 0
 
+func _get_max_energy_stored() -> int:
+	return 0
+
 func are_materials_grabable() -> bool:
 	return false
 
@@ -34,6 +37,8 @@ func produce():
 		if material.mock_follow_node.progress_ratio == 1:
 			Helpers.remove_and_free(materials, material)
 			energy += _get_energy_rate()
+			if energy > _get_max_energy_stored():
+				energy = _get_max_energy_stored()
 	
 	if energy > 0:
 		_play_operate_animation()
@@ -41,11 +46,14 @@ func produce():
 		_stop_operate_animation()
 	
 	for wire in Helpers.valid(output_wires):
-		if energy == 0:
-			break
 		if wire.is_connected:
-			wire.send_energy()
-			energy -= 1
+			var wire_energy_needed = wire.energy_needed()
+			if energy > wire_energy_needed:
+				wire.send_energy(wire_energy_needed)
+				energy -= wire_energy_needed
+			else:
+				wire.send_energy(energy)
+				energy = 0
 
 	super.produce()
 
