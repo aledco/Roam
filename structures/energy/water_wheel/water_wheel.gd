@@ -2,7 +2,7 @@ class_name WaterWheel extends Structure
 
 static var COST := [[Plank.MATERIAL_ID, 10]]
 
-static var GRID_SIZE: Vector2i = Vector2i(1, 1)
+static var GRID_SIZE: Vector2i = Vector2i(2, 1)
 func get_grid_size() -> Vector2i:
 	return GRID_SIZE
 
@@ -34,7 +34,6 @@ func produce():
 			else:
 				wire.send_energy(energy)
 				energy = 0
-
 	super.produce()
 
 func _create_special_ui():

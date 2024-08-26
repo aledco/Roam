@@ -1,1 +1,2 @@
-- Structure placeholder can't handle Vector(3, 1) grid size 
+- Structure placeholder can't handle Vector(3, 1) grid size
+- Shouldnt be able to place structures in water

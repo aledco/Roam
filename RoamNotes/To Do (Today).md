@@ -1,4 +1,6 @@
-- Work on energy systeml
+- Work on energy system
+	- Make water wheel
+		- Prevent more than one water wheel from being in the water
 	- Add uranium plant and material and structure
 	- Add electricity animations
 	- Add a cost to building power nodes

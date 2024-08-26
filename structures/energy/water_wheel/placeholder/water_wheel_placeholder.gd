@@ -11,12 +11,17 @@ func _destroy_after_placement() -> bool:
 func _get_structure() -> Resource:
 	return preload("res://structures/energy/water_wheel/water_wheel.tscn")
 
+func _get_wheel_grid_index() -> Vector2i:
+	var grid_index := get_grid_index()
+	var dir_offset = Vector2i(direction.y, -direction.x)
+	return grid_index + dir_offset
+
 func is_valid():
 	if not super.is_valid():
 		return false
 	
-	var grid_index := get_grid_index()
-	var tile = world.get_tile_at_grid_index(grid_index)
+	var wheel_grid_index := _get_wheel_grid_index()
+	var tile = world.get_tile_at_grid_index(wheel_grid_index)
 	if tile != WorldTileType.Water:
 		return false
 	return true
