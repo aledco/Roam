@@ -29,12 +29,11 @@ input_pickable = true
 script = ExtResource("1_cyd0p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_tg63q")
 animation = &"blink"
 frame_progress = 0.631736
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, 0)
+position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_fum3s")
 disabled = true

@@ -42,6 +42,10 @@ func get_tile_at_grid_index(grid_index: Vector2i) -> Variant:
 		return TILE_ID_MAP[tile_id]
 	return WorldTileType.Water
 
+func is_water_tile(grid_index: Vector2i) -> Variant:
+	var tile = get_tile_at_grid_index(grid_index)
+	return tile == WorldTileType.Water
+	
 ## BEGIN World Generation
 func _generate_tile_map():
 	var noise := _create_noise_for_tilemap()

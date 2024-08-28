@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b446mjejkyuc6" path="res://structures/energy/water_wheel/water_wheel.png" id="3_qtch6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrax7"]
-size = Vector2(47, 28)
+size = Vector2(46, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asjj3"]
 atlas = ExtResource("3_qtch6")
@@ -48,14 +48,13 @@ input_pickable = true
 script = ExtResource("1_rhptt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9.5, 0)
+position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_jrax7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_o586g")
 autoplay = "default"
 frame_progress = 0.980277
 
 [node name="EnergyOutputNode" type="Node2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(-15, 0)

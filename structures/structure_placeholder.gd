@@ -14,6 +14,9 @@ func _get_structure() -> Resource:
 	
 func _destroy_after_placement() -> bool:
 	return false
+
+func _get_indices_allowed_on_water() -> Array[Vector2i]:
+	return []
 # END abstract functions
 
 
@@ -46,7 +49,6 @@ func destroy():
 
 func get_grid_position() -> Vector2:
 	var mouse_grid_index = structure_manager.get_mouse_grid_index()
-	print(mouse_grid_index)
 	var grid_position = mouse_grid_index * 32
 	return grid_position
 
@@ -55,7 +57,7 @@ func _process(delta):
 	var grid_position := get_grid_position()
 	position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
 	var grid_index = get_grid_index()
-	_is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction)
+	_is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction, _get_indices_allowed_on_water())
 	_set_valid_overlay()
 
 
