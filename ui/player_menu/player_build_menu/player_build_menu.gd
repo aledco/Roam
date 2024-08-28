@@ -18,6 +18,9 @@ func _ready():
 		WaterWheelPlaceholder.get_model()
 	]
 	
+	#if Debug.debug_grid():
+		#models.append_array(TestGridPlaceholder.get_models())
+	
 	for model in models:
 		var structure_ui = STRUCTURE_SELECT.instantiate()
 		grid_container.add_child(structure_ui)

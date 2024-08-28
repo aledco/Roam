@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqat2xcmjg1tt"]
+
+[ext_resource type="Script" path="res://structures/conveyors/conveyor/conveyor.gd" id="1_eicy5"]
+[ext_resource type="Texture2D" uid="uid://dya7mu1wq77ui" path="res://structures/test_grid/test_grid_1x2/test_grid_1x2.png" id="2_ycdo1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 32)
+
+[node name="TestGrid1x2" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_eicy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ycdo1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")

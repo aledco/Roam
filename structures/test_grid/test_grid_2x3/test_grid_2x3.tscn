@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4hliewukjf3n"]
+
+[ext_resource type="Script" path="res://structures/test_grid/test_grid_2x3/test_grid_2x3.gd" id="1_g3yr5"]
+[ext_resource type="Texture2D" uid="uid://glvxgy8ri0ku" path="res://structures/test_grid/test_grid_2x3/test_grid_2x3.png" id="2_5m0a1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(20, 32)
+
+[node name="TestGrid2x3" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_g3yr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5m0a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")

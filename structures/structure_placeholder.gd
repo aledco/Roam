@@ -46,6 +46,7 @@ func destroy():
 
 func get_grid_position() -> Vector2:
 	var mouse_grid_index = structure_manager.get_mouse_grid_index()
+	print(mouse_grid_index)
 	var grid_position = mouse_grid_index * 32
 	return grid_position
 
