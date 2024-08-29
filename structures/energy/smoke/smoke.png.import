@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnrp7c5ie1x3g"
-path="res://.godot/imported/coal_power_plant_smoke.png-3723985dcdd9dc01ea961dbb8420957d.ctex"
+path="res://.godot/imported/smoke.png-8fbf9537850a2f514c0efbea356549e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://structures/energy/coal_power_plant/coal_power_plant_smoke.png"
-dest_files=["res://.godot/imported/coal_power_plant_smoke.png-3723985dcdd9dc01ea961dbb8420957d.ctex"]
+source_file="res://structures/energy/smoke/smoke.png"
+dest_files=["res://.godot/imported/smoke.png-8fbf9537850a2f514c0efbea356549e8.ctex"]
 
 [params]
 
