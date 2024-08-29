@@ -1,5 +1,6 @@
 - Work on energy system
-	- Add uranium plant and material and structure
+	- Add uranium plant
 	- Add electricity animations
 	- Add a cost to building power nodes
 - Make curved conveyor pathing smoother
+- Add hover text to material stacks

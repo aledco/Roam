@@ -18,7 +18,8 @@ var probability_models: Array[SpawnProbabilityModel] = [
 	BoulderStructure.get_probability_model(),
 	IronDeposit.get_probability_model(),
 	CopperDeposit.get_probability_model(),
-	CoalDeposit.get_probability_model()
+	CoalDeposit.get_probability_model(),
+	UraniumDeposit.get_probability_model()
 ]
 
 @export var world_seed: int = 1
@@ -167,7 +168,6 @@ func _generate_borders():
 
 func _generate_structures():
 	var noise := _create_noise_for_structures()
-	structure_manager.tile_map_ids = tile_map_ids
 	for x in range(-size, size):
 		for y in range(-size, size):
 			if _is_water(x, y) or (abs(x) <= 1 and abs(y) <= 1):
