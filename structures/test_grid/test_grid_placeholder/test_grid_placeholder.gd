@@ -38,17 +38,22 @@ static func _create_structure(x: int, y: int):
 	Debug.add_child(structure)
 	structure.setup.call_deferred(x, y)
 
+static func _get_model(x: int, y: int):
+	var grid_size_str = "%sx%s" % [x, y]
+	return StructureModel.create(
+		"Test Grid %s" % grid_size_str,
+		[[Wood.MATERIAL_ID, 1]],
+		null,
+		 load("res://structures/test_grid/test_grid_%s/test_grid_%s.png" % [grid_size_str, grid_size_str]),
+		_create_structure.bind(x, y))
+
 static func get_models() -> Array[StructureModel]:
 	var arrays: Array[StructureModel] = []
 	for x in range(1, 4):
 		for y in range(1, 4):
 			if x == 1 and y == 1:
 				continue
-			var grid_size_str = "%sx%s" % [x, y]
-			arrays.append(StructureModel.create(
-				"Test Grid %s" % grid_size_str,
-				[[Wood.MATERIAL_ID, 1]], 
-				null,
-				 load("res://structures/test_grid/test_grid_%s/test_grid_%s.png" % [grid_size_str, grid_size_str]),
-				_create_structure.bind(x, y)))
+			arrays.append(_get_model(x, y))
+	arrays.append(_get_model(1, 4))
+	arrays.append(_get_model(4, 1))
 	return arrays

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvt135bpval6u"]
 
-[ext_resource type="Script" path="res://structures/test_grid/test_grid_3x1/test_grid_3x1.gd" id="1_mo4ck"]
+[ext_resource type="Script" path="res://structures/test_grid/test_grid_3x2/test_grid_3x2.gd" id="1_a1h3j"]
 [ext_resource type="Texture2D" uid="uid://c1mpj67eujpj2" path="res://structures/test_grid/test_grid_3x2/test_grid_3x2.png" id="2_66lp1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
@@ -10,7 +10,7 @@ size = Vector2(20, 32)
 collision_layer = 64
 collision_mask = 0
 input_pickable = true
-script = ExtResource("1_mo4ck")
+script = ExtResource("1_a1h3j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_66lp1")

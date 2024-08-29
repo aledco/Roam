@@ -1,1 +1,0 @@
-- (1X3) structure placing is broken

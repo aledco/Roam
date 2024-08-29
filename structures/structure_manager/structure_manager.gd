@@ -261,10 +261,11 @@ static func get_grid_index(structure: Structure) -> Vector2i:
 static func get_structure_position(grid_position: Vector2, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)) -> Vector2:
 	var x := grid_position.x + grid_size.x * 16
 	var y := grid_position.y + grid_size.y * 16
-	if grid_size.y > grid_size.x and direction.x != 0:
-		return Vector2(x + 16 * (grid_size.y - grid_size.x), y - 16)
-	elif grid_size.x > grid_size.y and direction.x != 0:
-		return Vector2(x - 16, y + 16 * (grid_size.x - grid_size.y))
+	
+	# If the structure is not square and rotated sideways, need to offset position
+	if grid_size.y != grid_size.x and direction.x != 0:
+		var offset = 16 * (grid_size.y - grid_size.x)
+		return Vector2(x + offset, y - offset)
 	return Vector2(x, y)
 
 
