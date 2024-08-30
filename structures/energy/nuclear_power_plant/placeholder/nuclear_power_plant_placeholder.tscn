@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://b78txijlf61us"]
+
+[ext_resource type="Script" path="res://structures/energy/nuclear_power_plant/placeholder/nuclear_power_plant_placeholder.gd" id="1_ukgsq"]
+[ext_resource type="Texture2D" uid="uid://cln2wmxesflnp" path="res://structures/energy/nuclear_power_plant/placeholder/nuclear_power_plant_placeholder.png" id="2_ww1nx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c18kl"]
+atlas = ExtResource("2_ww1nx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueryv"]
+atlas = ExtResource("2_ww1nx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tg63q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c18kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ueryv")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fum3s"]
+size = Vector2(26, 26)
+
+[node name="NuclearPowerPlantPlaceholder" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_ukgsq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tg63q")
+animation = &"blink"
+frame_progress = 0.631736
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fum3s")
+disabled = true

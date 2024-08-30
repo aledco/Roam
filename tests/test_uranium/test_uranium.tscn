@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgb1113s05jcq"]
+
+[ext_resource type="Script" path="res://tests/test_furnace/test_furnace.gd" id="1_uu7wi"]
+[ext_resource type="PackedScene" uid="uid://tv66isof16ao" path="res://world/world_tile_map/world_tile_map.tscn" id="2_1wcfn"]
+[ext_resource type="PackedScene" uid="uid://b0yffrvg6bhei" path="res://player/player.tscn" id="3_lp8i2"]
+[ext_resource type="PackedScene" uid="uid://woq508sggg71" path="res://structures/structure_manager/structure_manager.tscn" id="4_xotxc"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_uu7wi")
+
+[node name="WorldTileMap" parent="." instance=ExtResource("2_1wcfn")]
+
+[node name="Player" parent="." instance=ExtResource("3_lp8i2")]
+
+[node name="StructureManager" parent="." instance=ExtResource("4_xotxc")]
+
+[node name="Structures" type="Node2D" parent="."]
+
+[node name="Materials" type="Node2D" parent="."]

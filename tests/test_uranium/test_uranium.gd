@@ -4,7 +4,6 @@ const COAL = preload("res://structures/natural/coal_deposit/coal_deposit.tscn")
 const IRON = preload("res://structures/natural/iron_deposit/iron_deposit.tscn")
 const COPPER = preload("res://structures/natural/copper_deposit/copper_deposit.tscn")
 const BOULDER = preload("res://structures/natural/boulder/boulder.tscn")
-const URANIUM = preload("res://structures/natural/uranium_deposit/uranium_deposit.tscn")
 
 var STRUCTURE_DATA = [
 	{
@@ -36,21 +35,6 @@ var STRUCTURE_DATA = [
 		"resource": BOULDER,
 		"grid_index": Vector2i(4, -3),
 		"grid_size": BoulderStructure.GRID_SIZE
-	},
-	{
-		"resource": URANIUM,
-		"grid_index": Vector2i(5, -3),
-		"grid_size": UraniumDeposit.GRID_SIZE
-	},
-	{
-		"resource": URANIUM,
-		"grid_index": Vector2i(6, -3),
-		"grid_size": UraniumDeposit.GRID_SIZE
-	},
-	{
-		"resource": URANIUM,
-		"grid_index": Vector2i(7, -3),
-		"grid_size": UraniumDeposit.GRID_SIZE
 	}
 ]
 

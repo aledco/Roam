@@ -94,3 +94,23 @@ func _create_structure_from_placeholder() -> Structure:
 	structure.delay_input()
 	structure_manager.add_structure(structure)
 	return structure
+
+static func get_models() -> Array[StructureModel]:
+	var models: Array[StructureModel] = [
+		ConveyorPlaceholder.get_model(),
+		CurvedConveyorRightPlaceholder.get_model(),
+		CurvedConveyorLeftPlaceholder.get_model(),
+		TunnelInPlaceholder.get_model(),
+		WorkshopPlaceholder.get_model(),
+		FurnacePlaceholder.get_model(),
+		StoragePlaceholder.get_model(),
+		MergerPlaceholder.get_model(),
+		CoalPowerPlantPlaceholder.get_model(),
+		NuclearPowerPlantPlaceholder.get_model(),
+		WaterWheelPlaceholder.get_model(),
+	]
+	
+	if Debug.debug_grid():
+		models.append_array(TestGridPlaceholder.get_models())
+		
+	return models
