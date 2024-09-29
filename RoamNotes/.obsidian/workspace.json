@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "To Do (Today).md",
+                "file": "Bugs.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "To Do (Today).md",
+                "file": "Bugs.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "To Do (Today).md",
+                "file": "Bugs.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "To Do (Today).md"
+                "file": "Bugs.md"
               }
             }
           }
@@ -148,10 +148,10 @@
   },
   "active": "fd623436e24baa54",
   "lastOpenFiles": [
-    "To Do (Short Term).md",
     "To Do (Long Term).md",
     "Bugs.md",
     "To Do (Today).md",
+    "To Do (Short Term).md",
     "Untitled",
     "Welcome.md"
   ]
