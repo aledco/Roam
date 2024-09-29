@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwk534iagi6i3"]
+
+[ext_resource type="Script" path="res://structures/energy/water_wheel/water_wheel.gd" id="1_rhptt"]
+[ext_resource type="Texture2D" uid="uid://b446mjejkyuc6" path="res://structures/energy/water_wheel/water_wheel.png" id="3_qtch6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrax7"]
+size = Vector2(46, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asjj3"]
+atlas = ExtResource("3_qtch6")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwtq6"]
+atlas = ExtResource("3_qtch6")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31cph"]
+atlas = ExtResource("3_qtch6")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v5d3"]
+atlas = ExtResource("3_qtch6")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o586g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asjj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwtq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31cph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v5d3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="WaterWheel" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_rhptt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 0)
+shape = SubResource("RectangleShape2D_jrax7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o586g")
+autoplay = "default"
+frame_progress = 0.980277
+
+[node name="EnergyOutputNode" type="Node2D" parent="."]
+position = Vector2(-15, 0)

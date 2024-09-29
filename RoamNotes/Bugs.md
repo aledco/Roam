@@ -1,1 +1,3 @@
-- 
+- Storage output button not working
+- Power nodes being placed on top of wires
+- Deleting a conveyor doesn't remove all the materials

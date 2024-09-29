@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://q8klooioiook"]
+
+[ext_resource type="Script" path="res://structures/energy/nuclear_power_plant/nuclear_power_plant.gd" id="1_ld4vb"]
+[ext_resource type="PackedScene" uid="uid://cy8gqaeypk748" path="res://structures/conveyors/conveyor_piece/conveyor_piece.tscn" id="2_jghvu"]
+[ext_resource type="Texture2D" uid="uid://b7thw1c07fhm3" path="res://structures/energy/nuclear_power_plant/nuclear_power_plant.png" id="3_12wv8"]
+[ext_resource type="PackedScene" uid="uid://64ejdt3vmnpn" path="res://structures/energy/smoke/smoke.tscn" id="4_d1oqr"]
+[ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="5_0d8b3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o33t"]
+radius = 14.0
+
+[sub_resource type="Curve2D" id="Curve2D_w852b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[node name="NuclearPowerPlant" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_ld4vb")
+
+[node name="ConveyorPiece" parent="." instance=ExtResource("2_jghvu")]
+position = Vector2(0, -15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8o33t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("3_12wv8")
+
+[node name="Smoke" type="Node2D" parent="."]
+
+[node name="Smoke1" parent="Smoke" instance=ExtResource("4_d1oqr")]
+animation = &"default"
+
+[node name="Inputs" type="Node2D" parent="."]
+
+[node name="InputNode" parent="Inputs" instance=ExtResource("5_0d8b3")]
+position = Vector2(0, -16)
+
+[node name="Outputs" type="Node2D" parent="."]
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_w852b")
+
+[node name="EnergyOutputNode" type="Node2D" parent="."]

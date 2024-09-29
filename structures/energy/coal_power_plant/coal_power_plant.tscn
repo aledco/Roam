@@ -1,78 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7l4wfex01tc3"]
+[gd_scene load_steps=8 format=3 uid="uid://c7l4wfex01tc3"]
 
 [ext_resource type="Script" path="res://structures/energy/coal_power_plant/coal_power_plant.gd" id="1_4eivm"]
 [ext_resource type="Texture2D" uid="uid://dsjabkuf0wqdo" path="res://structures/energy/coal_power_plant/coal_power_plant.png" id="2_lqyji"]
 [ext_resource type="PackedScene" uid="uid://bpa5gxxm6qqhy" path="res://structures/in_out_node/input_node/input_node.tscn" id="3_2e1q7"]
-[ext_resource type="Texture2D" uid="uid://bnrp7c5ie1x3g" path="res://structures/energy/coal_power_plant/coal_power_plant_smoke.png" id="4_2htwd"]
+[ext_resource type="PackedScene" uid="uid://64ejdt3vmnpn" path="res://structures/energy/smoke/smoke.tscn" id="4_ef040"]
 [ext_resource type="PackedScene" uid="uid://cy8gqaeypk748" path="res://structures/conveyors/conveyor_piece/conveyor_piece.tscn" id="5_3urb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8o33t"]
 radius = 14.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wpfi"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqgp1"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_44cir"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_88lx1"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bvbue"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eklke"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60xrk"]
-atlas = ExtResource("4_2htwd")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k4tch"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": null
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wpfi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lqgp1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_44cir")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_88lx1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bvbue")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eklke")
-}, {
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_60xrk")
-}],
-"loop": true,
-"name": &"smoke",
-"speed": 5.0
-}]
 
 [sub_resource type="Curve2D" id="Curve2D_w852b"]
 _data = {
@@ -91,16 +26,23 @@ position = Vector2(0, -15)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8o33t")
 
-[node name="MaterialNode" type="Node2D" parent="."]
-
-[node name="SmokeAnimatedSprite" type="AnimatedSprite2D" parent="."]
-z_index = 3
-sprite_frames = SubResource("SpriteFrames_k4tch")
-autoplay = "default"
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture = ExtResource("2_lqyji")
+
+[node name="Smoke" type="Node2D" parent="."]
+
+[node name="Smoke1" parent="Smoke" instance=ExtResource("4_ef040")]
+position = Vector2(-6, 4)
+animation = &"default"
+
+[node name="Smoke2" parent="Smoke" instance=ExtResource("4_ef040")]
+position = Vector2(0, -4)
+animation = &"default"
+
+[node name="Smoke3" parent="Smoke" instance=ExtResource("4_ef040")]
+position = Vector2(6, 4)
+animation = &"default"
 
 [node name="Inputs" type="Node2D" parent="."]
 

@@ -1,1 +1,6 @@
 - Work on energy system
+	- Add electricity animations
+	- Add a cost to building power nodes
+	- Add energy diagnostics
+- Make curved conveyor pathing smoother
+- Add hover text to material stacks

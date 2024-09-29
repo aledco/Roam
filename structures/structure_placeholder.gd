@@ -14,6 +14,9 @@ func _get_structure() -> Resource:
 	
 func _destroy_after_placement() -> bool:
 	return false
+
+func _get_indices_allowed_on_water() -> Array[Vector2i]:
+	return []
 # END abstract functions
 
 
@@ -54,7 +57,7 @@ func _process(delta):
 	var grid_position := get_grid_position()
 	position = StructureManager.get_structure_position(grid_position, get_grid_size(), direction)
 	var grid_index = get_grid_index()
-	_is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction)
+	_is_valid = structure_manager.can_place_structure(grid_index, get_grid_size(), direction, _get_indices_allowed_on_water())
 	_set_valid_overlay()
 
 
@@ -91,3 +94,23 @@ func _create_structure_from_placeholder() -> Structure:
 	structure.delay_input()
 	structure_manager.add_structure(structure)
 	return structure
+
+static func get_models() -> Array[StructureModel]:
+	var models: Array[StructureModel] = [
+		ConveyorPlaceholder.get_model(),
+		CurvedConveyorRightPlaceholder.get_model(),
+		CurvedConveyorLeftPlaceholder.get_model(),
+		TunnelInPlaceholder.get_model(),
+		WorkshopPlaceholder.get_model(),
+		FurnacePlaceholder.get_model(),
+		StoragePlaceholder.get_model(),
+		MergerPlaceholder.get_model(),
+		CoalPowerPlantPlaceholder.get_model(),
+		NuclearPowerPlantPlaceholder.get_model(),
+		WaterWheelPlaceholder.get_model(),
+	]
+	
+	if Debug.debug_grid():
+		models.append_array(TestGridPlaceholder.get_models())
+		
+	return models

@@ -5,9 +5,9 @@ var player: Player:
 		return get_node("/root/World/Player") as Player
 
 @onready var structure_node = get_node("/root/World/Structures") as Node2D
+@onready var world := get_node("/root/World") as World
 
 var structure_map := {}
-var tile_map_ids
 
 ## Creates a structure from the structure resource, grid_index, and grid_size.
 func create_structure(resource: Resource, grid_index: Vector2i, grid_size: Vector2i):
@@ -180,17 +180,22 @@ func _disconnect_structure(structure: Structure):
 
 ## Determines if a structure with the provided grid size can be placed in the provided
 ## grid index.
-func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)):
+func can_place_structure(grid_index: Vector2i, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1), indices_allowed_on_water: Array[Vector2i] = []):
 	var rotated_grid_size = rotate_grid_size(grid_size, direction)
 	var player_indices = get_player_grid_indices()
 	for x in range(grid_index.x, grid_index.x + rotated_grid_size.x, sign(rotated_grid_size.x)):
 		for y in range(grid_index.y, grid_index.y + rotated_grid_size.y, sign(rotated_grid_size.y)):
-			if Vector2i(x, y) in structure_map or (tile_map_ids != null and Vector2i(x, y) in tile_map_ids and tile_map_ids[Vector2i(x, y)] == 4):
-				return false
-			if Vector2i(x, y) in player_indices:
+			var curr_grid_index := Vector2i(x, y)
+			if curr_grid_index in structure_map \
+					or _on_water_illegally(curr_grid_index, indices_allowed_on_water) \
+					or curr_grid_index in player_indices:
 				return false
 	return true
 
+func _on_water_illegally(current_grid_index: Vector2i, indices_allowed_on_water: Array[Vector2i]):
+	if world.is_water_tile(current_grid_index):
+		return current_grid_index not in indices_allowed_on_water
+	return false
 
 func get_player_grid_indices() -> Array[Vector2i]:
 	var indices: Array[Vector2i] = []
@@ -256,10 +261,11 @@ static func get_grid_index(structure: Structure) -> Vector2i:
 static func get_structure_position(grid_position: Vector2, grid_size: Vector2i, direction: Vector2i = Vector2i(0, 1)) -> Vector2:
 	var x := grid_position.x + grid_size.x * 16
 	var y := grid_position.y + grid_size.y * 16
-	if grid_size.y > grid_size.x and direction.x != 0:
-		return Vector2(x + 16 * (grid_size.y - grid_size.x), y - 16)
-	elif grid_size.x > grid_size.y and direction.y != 0:
-		return Vector2(x + 16, y - 16 * (grid_size.x - grid_size.y)) # TODO this may not be right
+	
+	# If the structure is not square and rotated sideways, need to offset position
+	if grid_size.y != grid_size.x and direction.x != 0:
+		var offset = 16 * (grid_size.y - grid_size.x)
+		return Vector2(x + offset, y - offset)
 	return Vector2(x, y)
 
 
