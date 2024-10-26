@@ -1,2 +1,2 @@
 # Roam
-Add later
+A 2D indie video game developed in Godot.
